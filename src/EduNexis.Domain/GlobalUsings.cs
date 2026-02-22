@@ -1,6 +1,5 @@
-global using System;
-global using System.Collections.Generic;
-global using System.Linq;
-global using System.Threading;
-global using System.Threading.Tasks;
 global using EduNexis.Domain.Common;
+global using EduNexis.Domain.Enums;
+global using EduNexis.Domain.Exceptions;
+global using EduNexis.Domain.Interfaces.Repositories;
+global using EduNexis.Domain.Interfaces.Services;

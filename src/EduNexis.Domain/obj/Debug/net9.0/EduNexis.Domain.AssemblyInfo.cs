@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EduNexis.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+26767aff1befb19ccc6a7ebc3e80a8098945a577")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6fdd5aba4e932073407375aea1e4b1ad52c3d46f")]
 [assembly: System.Reflection.AssemblyProductAttribute("EduNexis.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EduNexis.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
