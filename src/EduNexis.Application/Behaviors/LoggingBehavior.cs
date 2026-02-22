@@ -9,8 +9,8 @@ public sealed class LoggingBehavior<TMessage, TResponse>(
 {
     public async ValueTask<TResponse> Handle(
         TMessage message,
-        CancellationToken ct,
-        MessageHandlerDelegate<TMessage, TResponse> next)
+        MessageHandlerDelegate<TMessage, TResponse> next,
+        CancellationToken ct)
     {
         var name = typeof(TMessage).Name;
         logger.LogInformation("[START] {RequestName}", name);

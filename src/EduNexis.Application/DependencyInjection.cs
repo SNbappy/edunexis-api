@@ -1,4 +1,5 @@
 using EduNexis.Application.Behaviors;
+using FluentValidation;
 using Mapster;
 using MapsterMapper;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,11 +11,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        // Mediator — scanned from this assembly
-        services.AddMediator(options =>
-            options.ServiceLifetime = ServiceLifetime.Scoped);
-
-        // Pipeline Behaviors (order matters — logging wraps validation)
+        // Pipeline Behaviors
         services.AddTransient(
             typeof(IPipelineBehavior<,>),
             typeof(LoggingBehavior<,>));
