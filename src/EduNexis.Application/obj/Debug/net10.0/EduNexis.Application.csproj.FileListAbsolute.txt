@@ -1,0 +1,15 @@
+D:\Coding\Projects\edunexis-api\src\EduNexis.Application\bin\Debug\net10.0\EduNexis.Application.deps.json
+D:\Coding\Projects\edunexis-api\src\EduNexis.Application\bin\Debug\net10.0\EduNexis.Application.dll
+D:\Coding\Projects\edunexis-api\src\EduNexis.Application\bin\Debug\net10.0\EduNexis.Application.pdb
+D:\Coding\Projects\edunexis-api\src\EduNexis.Application\bin\Debug\net10.0\EduNexis.Domain.dll
+D:\Coding\Projects\edunexis-api\src\EduNexis.Application\bin\Debug\net10.0\EduNexis.Domain.pdb
+D:\Coding\Projects\edunexis-api\src\EduNexis.Application\obj\Debug\net10.0\EduNexis.Application.csproj.AssemblyReference.cache
+D:\Coding\Projects\edunexis-api\src\EduNexis.Application\obj\Debug\net10.0\EduNexis.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Coding\Projects\edunexis-api\src\EduNexis.Application\obj\Debug\net10.0\EduNexis.Application.AssemblyInfoInputs.cache
+D:\Coding\Projects\edunexis-api\src\EduNexis.Application\obj\Debug\net10.0\EduNexis.Application.AssemblyInfo.cs
+D:\Coding\Projects\edunexis-api\src\EduNexis.Application\obj\Debug\net10.0\EduNexis.Application.csproj.CoreCompileInputs.cache
+D:\Coding\Projects\edunexis-api\src\EduNexis.Application\obj\Debug\net10.0\EduNexis.9EB3D0FA.Up2Date
+D:\Coding\Projects\edunexis-api\src\EduNexis.Application\obj\Debug\net10.0\EduNexis.Application.dll
+D:\Coding\Projects\edunexis-api\src\EduNexis.Application\obj\Debug\net10.0\refint\EduNexis.Application.dll
+D:\Coding\Projects\edunexis-api\src\EduNexis.Application\obj\Debug\net10.0\EduNexis.Application.pdb
+D:\Coding\Projects\edunexis-api\src\EduNexis.Application\obj\Debug\net10.0\ref\EduNexis.Application.dll

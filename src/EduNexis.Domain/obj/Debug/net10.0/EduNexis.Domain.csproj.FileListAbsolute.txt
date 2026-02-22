@@ -1,0 +1,11 @@
+D:\Coding\Projects\edunexis-api\src\EduNexis.Domain\bin\Debug\net10.0\EduNexis.Domain.deps.json
+D:\Coding\Projects\edunexis-api\src\EduNexis.Domain\bin\Debug\net10.0\EduNexis.Domain.dll
+D:\Coding\Projects\edunexis-api\src\EduNexis.Domain\bin\Debug\net10.0\EduNexis.Domain.pdb
+D:\Coding\Projects\edunexis-api\src\EduNexis.Domain\obj\Debug\net10.0\EduNexis.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Coding\Projects\edunexis-api\src\EduNexis.Domain\obj\Debug\net10.0\EduNexis.Domain.AssemblyInfoInputs.cache
+D:\Coding\Projects\edunexis-api\src\EduNexis.Domain\obj\Debug\net10.0\EduNexis.Domain.AssemblyInfo.cs
+D:\Coding\Projects\edunexis-api\src\EduNexis.Domain\obj\Debug\net10.0\EduNexis.Domain.csproj.CoreCompileInputs.cache
+D:\Coding\Projects\edunexis-api\src\EduNexis.Domain\obj\Debug\net10.0\EduNexis.Domain.dll
+D:\Coding\Projects\edunexis-api\src\EduNexis.Domain\obj\Debug\net10.0\refint\EduNexis.Domain.dll
+D:\Coding\Projects\edunexis-api\src\EduNexis.Domain\obj\Debug\net10.0\EduNexis.Domain.pdb
+D:\Coding\Projects\edunexis-api\src\EduNexis.Domain\obj\Debug\net10.0\ref\EduNexis.Domain.dll

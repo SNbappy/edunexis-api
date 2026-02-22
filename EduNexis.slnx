@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/EduNexis.API/EduNexis.API.csproj" />
+    <Project Path="src/EduNexis.Application/EduNexis.Application.csproj" />
+    <Project Path="src/EduNexis.Domain/EduNexis.Domain.csproj" />
+    <Project Path="src/EduNexis.Infrastructure/EduNexis.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/EduNexis.IntegrationTests/EduNexis.IntegrationTests.csproj" />
+    <Project Path="tests/EduNexis.UnitTests/EduNexis.UnitTests.csproj" />
+  </Folder>
+</Solution>
