@@ -20,7 +20,13 @@ public class Course : BaseEntity
     public User Teacher { get; private set; } = null!;
     public ICollection<CourseMember> Members { get; private set; } = [];
     public ICollection<JoinRequest> JoinRequests { get; private set; } = [];
-    // Remaining navigations added after Batch 2 entities exist
+    public ICollection<AttendanceSession> AttendanceSessions { get; private set; } = [];
+    public ICollection<Material> Materials { get; private set; } = [];
+    public ICollection<Assignment> Assignments { get; private set; } = [];
+    public ICollection<CTEvent> CTEvents { get; private set; } = [];
+    public ICollection<PresentationEvent> PresentationEvents { get; private set; } = [];
+    public ICollection<Announcement> Announcements { get; private set; } = [];
+    public GradingFormula? GradingFormula { get; private set; }
 
     protected Course() { }
 

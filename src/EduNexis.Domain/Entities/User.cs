@@ -12,7 +12,7 @@ public class User : BaseEntity
     public UserProfile? Profile { get; private set; }
     public ICollection<CourseMember> CourseMembers { get; private set; } = [];
     public ICollection<TeacherQuota> TeacherQuotas { get; private set; } = [];
-    // Notifications navigation added after Notification entity exists
+    public ICollection<Notification> Notifications { get; private set; } = [];
 
     protected User() { }
 
