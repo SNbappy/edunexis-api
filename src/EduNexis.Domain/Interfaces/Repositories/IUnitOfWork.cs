@@ -8,6 +8,7 @@ public interface IUnitOfWork : IDisposable
     ICourseMemberRepository CourseMembers { get; }
     IJoinRequestRepository JoinRequests { get; }
     ITeacherQuotaRepository TeacherQuotas { get; }
+    IBaseRepository<T> GetRepository<T>() where T : BaseEntity;  // ← ADD THIS
 
     Task<int> SaveChangesAsync(CancellationToken ct = default);
     Task BeginTransactionAsync(CancellationToken ct = default);
