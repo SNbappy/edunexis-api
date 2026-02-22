@@ -1,1 +1,10 @@
-// EduNexis.Domain.* usings will be added after Domain files are created
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Logging;
+global using EduNexis.Domain.Common;
+global using EduNexis.Domain.Entities;
+global using EduNexis.Domain.Enums;
+global using EduNexis.Domain.Exceptions;
+global using EduNexis.Domain.Interfaces.Repositories;
+global using EduNexis.Domain.Interfaces.Services;
