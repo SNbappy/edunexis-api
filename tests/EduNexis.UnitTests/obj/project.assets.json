@@ -511,7 +511,7 @@
       },
       "EduNexis.Application/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v9.0",
+        "framework": ".NETCoreApp,Version=v10.0",
         "dependencies": {
           "EduNexis.Domain": "1.0.0",
           "FluentValidation": "12.1.1",
@@ -531,7 +531,7 @@
       },
       "EduNexis.Domain/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v9.0",
+        "framework": ".NETCoreApp,Version=v10.0",
         "compile": {
           "bin/placeholder/EduNexis.Domain.dll": {}
         },

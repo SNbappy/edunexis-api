@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "rKweemD8iro=",
+  "dgSpecHash": "AtKJckQF2yc=",
   "success": true,
   "projectFilePath": "D:\\Coding\\Projects\\edunexis-api\\src\\EduNexis.Application\\EduNexis.Application.csproj",
   "expectedPackageFiles": [
@@ -11,11 +11,7 @@
     "C:\\Users\\Bappy\\.nuget\\packages\\mapster.dependencyinjection\\1.0.1\\mapster.dependencyinjection.1.0.1.nupkg.sha512",
     "C:\\Users\\Bappy\\.nuget\\packages\\mediator.abstractions\\3.0.1\\mediator.abstractions.3.0.1.nupkg.sha512",
     "C:\\Users\\Bappy\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\10.0.3\\microsoft.extensions.dependencyinjection.abstractions.10.0.3.nupkg.sha512",
-    "C:\\Users\\Bappy\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\10.0.3\\microsoft.extensions.logging.abstractions.10.0.3.nupkg.sha512",
-    "C:\\Users\\Bappy\\.nuget\\packages\\system.diagnostics.diagnosticsource\\10.0.3\\system.diagnostics.diagnosticsource.10.0.3.nupkg.sha512",
-    "C:\\Users\\Bappy\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\9.0.13\\microsoft.aspnetcore.app.ref.9.0.13.nupkg.sha512",
-    "C:\\Users\\Bappy\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.13\\microsoft.netcore.app.ref.9.0.13.nupkg.sha512",
-    "C:\\Users\\Bappy\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\9.0.13\\microsoft.windowsdesktop.app.ref.9.0.13.nupkg.sha512"
+    "C:\\Users\\Bappy\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\10.0.3\\microsoft.extensions.logging.abstractions.10.0.3.nupkg.sha512"
   ],
   "logs": []
 }

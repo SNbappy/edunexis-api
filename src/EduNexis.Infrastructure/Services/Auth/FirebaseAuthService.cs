@@ -1,41 +1,23 @@
-using FirebaseAdmin;
-using FirebaseAdmin.Auth;
-using Google.Apis.Auth.OAuth2;
+using EduNexis.Domain.Interfaces.Services;
 
 namespace EduNexis.Infrastructure.Services.Auth;
 
 public class FirebaseAuthService : IFirebaseAuthService
 {
-    public FirebaseAuthService(IConfiguration configuration)
-    {
-        if (FirebaseApp.DefaultInstance is null)
-        {
-            var credentialPath = configuration["Firebase:CredentialPath"]!;
-            FirebaseApp.Create(new AppOptions
-            {
-                Credential = GoogleCredential.FromFile(credentialPath)
-            });
-        }
-    }
-
-    public async Task<FirebaseTokenPayload?> VerifyTokenAsync(
+    public Task<FirebaseTokenResult> VerifyTokenAsync(
         string idToken, CancellationToken ct = default)
-    {
-        try
-        {
-            var decoded = await FirebaseAuth.DefaultInstance
-                .VerifyIdTokenAsync(idToken, ct);
+        => Task.FromResult(new FirebaseTokenResult(
+            "stub-uid",
+            "stub@edunexis.com",
+            "Stub User",
+            new Dictionary<string, object>(),
+            DateTime.UtcNow.AddHours(1)));
 
-            decoded.Claims.TryGetValue("name", out var name);
+    public Task<FirebaseUserResult> GetUserAsync(
+        string uid, CancellationToken ct = default)
+        => Task.FromResult(new FirebaseUserResult(
+            uid, "stub@edunexis.com", "Stub User", null, true));
 
-            return new FirebaseTokenPayload(
-                decoded.Uid,
-                decoded.Claims["email"].ToString()!,
-                name?.ToString());
-        }
-        catch
-        {
-            return null;
-        }
-    }
+    public Task RevokeTokenAsync(string uid, CancellationToken ct = default)
+        => Task.CompletedTask;
 }

@@ -10,8 +10,11 @@ D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\obj\Debug\net10.0\Ed
 D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\obj\Debug\net10.0\EduNexis.Infrastructure.AssemblyInfoInputs.cache
 D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\obj\Debug\net10.0\EduNexis.Infrastructure.AssemblyInfo.cs
 D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\obj\Debug\net10.0\EduNexis.Infrastructure.csproj.CoreCompileInputs.cache
+D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\obj\Debug\net10.0\EduNexis.Infrastructure.sourcelink.json
 D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\obj\Debug\net10.0\EduNexis.DBA46B75.Up2Date
 D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\obj\Debug\net10.0\EduNexis.Infrastructure.dll
 D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\obj\Debug\net10.0\refint\EduNexis.Infrastructure.dll
 D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\obj\Debug\net10.0\EduNexis.Infrastructure.pdb
 D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\obj\Debug\net10.0\ref\EduNexis.Infrastructure.dll
+D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\bin\Debug\net10.0\EduNexis.Infrastructure.runtimeconfig.json
+D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\obj\Debug\net10.0\EduNexis.Infrastructure.genruntimeconfig.cache

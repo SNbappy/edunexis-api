@@ -11,7 +11,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        // Pipeline Behaviors
+        // ─── Pipeline Behaviors ───────────────────────────────────────────────
         services.AddTransient(
             typeof(IPipelineBehavior<,>),
             typeof(LoggingBehavior<,>));
@@ -19,12 +19,12 @@ public static class DependencyInjection
             typeof(IPipelineBehavior<,>),
             typeof(ValidationBehavior<,>));
 
-        // FluentValidation
+        // ─── FluentValidation ─────────────────────────────────────────────────
         services.AddValidatorsFromAssembly(
             Assembly.GetExecutingAssembly(),
             includeInternalTypes: true);
 
-        // Mapster
+        // ─── Mapster ──────────────────────────────────────────────────────────
         var config = TypeAdapterConfig.GlobalSettings;
         config.Scan(Assembly.GetExecutingAssembly());
         services.AddSingleton(config);
