@@ -221,3 +221,8 @@ MySqlConnector.MySqlException (0x80004005): Unknown column 'u.PasswordHash' in '
 2026-02-24 01:20:39.330 +06:00 [INF] HTTP POST /api/Auth/register responded 200 in 3393.0254 ms
 2026-02-24 01:25:58.850 +06:00 [INF] HTTP GET /api/Auth/me responded 401 in 36.6138 ms
 2026-02-24 01:27:00.466 +06:00 [INF] HTTP GET /api/Auth/me responded 200 in 183.4973 ms
+2026-02-24 01:38:01.352 +06:00 [INF] HTTP POST /api/Auth/register responded 400 in 327.7666 ms
+2026-02-24 01:40:15.614 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 3473.1752 ms
+2026-02-24 01:41:14.494 +06:00 [INF] HTTP POST /api/Auth/refresh responded 200 in 201.6932 ms
+2026-02-24 01:42:10.436 +06:00 [INF] HTTP POST /api/Auth/logout responded 401 in 24.7320 ms
+2026-02-24 01:43:29.363 +06:00 [INF] HTTP POST /api/Auth/logout responded 200 in 78.8771 ms

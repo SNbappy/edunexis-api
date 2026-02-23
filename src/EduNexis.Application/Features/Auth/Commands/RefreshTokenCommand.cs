@@ -25,7 +25,7 @@ public sealed class RefreshTokenCommandHandler(
     {
         var user = await uow.Users.GetByRefreshTokenAsync(command.RefreshToken, ct);
 
-        if (user is null || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
+        if (user is null || !user.IsRefreshTokenValid(command.RefreshToken))
             return ApiResponse<AuthResponseDto>.Fail("Invalid or expired refresh token.");
 
         var accessToken = jwtService.GenerateAccessToken(user.Id, user.Email, user.Role.ToString());
