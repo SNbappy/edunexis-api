@@ -154,3 +154,11 @@ D:\Coding\Projects\edunexis-api\tests\EduNexis.IntegrationTests\bin\Debug\net10.
 D:\Coding\Projects\edunexis-api\tests\EduNexis.IntegrationTests\bin\Debug\net10.0\System.IO.Hashing.dll
 D:\Coding\Projects\edunexis-api\tests\EduNexis.IntegrationTests\bin\Debug\net10.0\System.Management.dll
 D:\Coding\Projects\edunexis-api\tests\EduNexis.IntegrationTests\bin\Debug\net10.0\runtimes\win\lib\net7.0\System.Management.dll
+D:\Coding\Projects\edunexis-api\tests\EduNexis.IntegrationTests\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Coding\Projects\edunexis-api\tests\EduNexis.IntegrationTests\bin\Debug\net10.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Coding\Projects\edunexis-api\tests\EduNexis.IntegrationTests\bin\Debug\net10.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Coding\Projects\edunexis-api\tests\EduNexis.IntegrationTests\bin\Debug\net10.0\Microsoft.IdentityModel.Logging.dll
+D:\Coding\Projects\edunexis-api\tests\EduNexis.IntegrationTests\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.dll
+D:\Coding\Projects\edunexis-api\tests\EduNexis.IntegrationTests\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Coding\Projects\edunexis-api\tests\EduNexis.IntegrationTests\bin\Debug\net10.0\Microsoft.IdentityModel.Tokens.dll
+D:\Coding\Projects\edunexis-api\tests\EduNexis.IntegrationTests\bin\Debug\net10.0\System.IdentityModel.Tokens.Jwt.dll
