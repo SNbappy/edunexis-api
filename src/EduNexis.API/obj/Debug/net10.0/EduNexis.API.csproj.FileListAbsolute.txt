@@ -6,6 +6,7 @@ D:\Coding\Projects\edunexis-api\src\EduNexis.API\bin\Debug\net10.0\EduNexis.API.
 D:\Coding\Projects\edunexis-api\src\EduNexis.API\bin\Debug\net10.0\EduNexis.API.runtimeconfig.json
 D:\Coding\Projects\edunexis-api\src\EduNexis.API\bin\Debug\net10.0\EduNexis.API.dll
 D:\Coding\Projects\edunexis-api\src\EduNexis.API\bin\Debug\net10.0\EduNexis.API.pdb
+D:\Coding\Projects\edunexis-api\src\EduNexis.API\bin\Debug\net10.0\BCrypt.Net-Next.dll
 D:\Coding\Projects\edunexis-api\src\EduNexis.API\bin\Debug\net10.0\CloudinaryDotNet.dll
 D:\Coding\Projects\edunexis-api\src\EduNexis.API\bin\Debug\net10.0\FluentEmail.Core.dll
 D:\Coding\Projects\edunexis-api\src\EduNexis.API\bin\Debug\net10.0\FluentEmail.Smtp.dll

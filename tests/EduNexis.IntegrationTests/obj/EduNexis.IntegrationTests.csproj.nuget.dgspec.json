@@ -1268,13 +1268,13 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.3, )"
+            },
             "CloudinaryDotNet": {
               "target": "Package",
               "version": "[1.28.0, )"
-            },
-            "FirebaseAdmin": {
-              "target": "Package",
-              "version": "[3.4.0, )"
             },
             "FluentEmail.Core": {
               "target": "Package",

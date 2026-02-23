@@ -1,3 +1,6 @@
+using EduNexis.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+
 namespace EduNexis.Infrastructure.Persistence;
 
 public class AppDbContext : DbContext
@@ -46,7 +49,6 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Course>().Property(c => c.CourseType).HasConversion<string>();
 
         // Unique indexes
-        modelBuilder.Entity<User>().HasIndex(u => u.FirebaseUid).IsUnique();
         modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
         modelBuilder.Entity<Course>().HasIndex(c => c.JoiningCode).IsUnique();
 

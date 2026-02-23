@@ -18,8 +18,13 @@ public class UserProfile : BaseEntity
 
     protected UserProfile() { }
 
-    public static UserProfile Create(Guid userId) =>
-        new() { UserId = userId };
+    public static UserProfile Create(Guid userId, string fullName = "") =>
+        new()
+        {
+            UserId = userId,
+            FullName = fullName,
+            ProfileCompletionPercent = string.IsNullOrWhiteSpace(fullName) ? 0 : 30
+        };
 
     public void Update(
         string fullName, string department,
