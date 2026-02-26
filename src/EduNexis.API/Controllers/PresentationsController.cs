@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EduNexis.API.Controllers;
 
 [Authorize]
+[Route("api")]
 public class PresentationsController : BaseController
 {
     [HttpPost("courses/{courseId:guid}/presentations")]
