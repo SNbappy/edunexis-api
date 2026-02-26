@@ -1,3 +1,4 @@
+using EduNexis.Application.Abstractions;
 using EduNexis.Domain.Interfaces.Repositories;
 using EduNexis.Domain.Interfaces.Services;
 using EduNexis.Infrastructure.Persistence;
@@ -6,8 +7,6 @@ using EduNexis.Infrastructure.Services.Auth;
 using EduNexis.Infrastructure.Services.Cache;
 using EduNexis.Infrastructure.Services.Email;
 using EduNexis.Infrastructure.Services.Storage;
-using FluentEmail.Core;
-using FluentEmail.Smtp;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,7 +20,7 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        // ─── EF Core + MySQL ────────────────────────────────────────────────
+        // ── EF Core + MySQL ────────────────────────────────────────────────
         services.AddDbContext<AppDbContext>(options =>
             options.UseMySql(
                 configuration.GetConnectionString("DefaultConnection")!,
@@ -30,22 +29,25 @@ public static class DependencyInjection
                     .EnableRetryOnFailure(3)
                     .CommandTimeout(30)));
 
-        // ─── Repositories + UnitOfWork ──────────────────────────────────────
+        // ── Repositories + UnitOfWork ──────────────────────────────────────
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IUserRepository, UserRepository>();
-        // add other repositories here as needed…
 
-        // ─── Auth services (JWT + password hashing) ─────────────────────────
+        // ── Current User (HttpContext) ─────────────────────────────────────
+        services.AddHttpContextAccessor();
+        services.AddScoped<ICurrentUserService, CurrentUserService>();
+
+        // ── Auth services (JWT + password hashing) ─────────────────────────
         services.AddSingleton<IJwtTokenService, JwtTokenService>();
         services.AddSingleton<IPasswordHasher, PasswordHasher>();
 
-        // ─── Firebase Auth (lazy — no init at startup) ──────────────────────
+        // ── Firebase Auth ──────────────────────────────────────────────────
         services.AddScoped<IFirebaseAuthService, FirebaseAuthService>();
 
-        // ─── Cloudinary Storage ─────────────────────────────────────────────
+        // ── Cloudinary Storage ─────────────────────────────────────────────
         services.AddScoped<IFileStorageService, CloudinaryStorageService>();
 
-        // ─── Email via FluentEmail ──────────────────────────────────────────
+        // ── Email via FluentEmail ──────────────────────────────────────────
         var emailConfig = configuration.GetSection("Email");
         services.AddFluentEmail(
                 emailConfig["From"] ?? "noreply@edunexis.com",
@@ -57,7 +59,7 @@ public static class DependencyInjection
                 emailConfig["Password"]);
         services.AddScoped<IEmailService, EmailService>();
 
-        // ─── Redis Cache (abortConnect=false → non-blocking startup) ────────
+        // ── Redis Cache ────────────────────────────────────────────────────
         services.AddStackExchangeRedisCache(options =>
         {
             options.Configuration =

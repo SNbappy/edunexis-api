@@ -11,7 +11,7 @@ public record UserDto(
 public record UserProfileDto(
     Guid Id,
     string FullName,
-    string Department,
+    string? Department,
     string? Designation,
     string? StudentId,
     string? Bio,

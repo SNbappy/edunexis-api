@@ -1,54 +1,45 @@
+using EduNexis.Domain.Entities;
+
 namespace EduNexis.Application.Features.Courses.Commands;
 
-public record RequestJoinCourseCommand(
-    Guid StudentId,
-    string JoiningCode
-) : ICommand<ApiResponse>;
+public record RequestJoinCourseCommand(Guid CourseId) : ICommand<ApiResponse>;
 
 public sealed class RequestJoinCourseCommandValidator : AbstractValidator<RequestJoinCourseCommand>
 {
     public RequestJoinCourseCommandValidator()
     {
-        RuleFor(x => x.JoiningCode).NotEmpty().Length(8);
+        RuleFor(x => x.CourseId).NotEmpty();
     }
 }
 
 public sealed class RequestJoinCourseCommandHandler(
-    IUnitOfWork uow
+    IUnitOfWork uow,
+    ICurrentUserService currentUser
 ) : ICommandHandler<RequestJoinCourseCommand, ApiResponse>
 {
     public async ValueTask<ApiResponse> Handle(
-        RequestJoinCourseCommand command, CancellationToken ct)
+        RequestJoinCourseCommand cmd, CancellationToken ct)
     {
-        // 1. Check student profile
-        var student = await uow.Users.GetWithProfileAsync(command.StudentId, ct)
-            ?? throw new NotFoundException("User", command.StudentId);
+        var userId = Guid.Parse(currentUser.UserId);
 
-        if (!student.IsProfileComplete)
-            throw new ProfileIncompleteException();
-
-        // 2. Find course by joining code
-        var course = await uow.Courses.GetByJoiningCodeAsync(command.JoiningCode, ct)
-            ?? throw new NotFoundException("Course", command.JoiningCode);
+        var course = await uow.Courses.GetByIdAsync(cmd.CourseId, ct);
+        if (course is null)
+            return ApiResponse.Fail("Course not found.");
 
         if (course.IsArchived)
-            return ApiResponse.Fail("This course is archived and not accepting new members.");
+            return ApiResponse.Fail("This course is no longer active.");
 
-        // 3. Check not already a member
-        var existing = await uow.CourseMembers.GetMemberAsync(course.Id, command.StudentId, ct);
-        if (existing is not null)
-            throw new AlreadyMemberException();
+        var existingMember = await uow.CourseMembers.GetMemberAsync(cmd.CourseId, userId, ct);
+        if (existingMember is not null && existingMember.IsActive)
+            return ApiResponse.Fail("You are already a member of this course.");
 
-        // 4. Check no duplicate pending request
-        var pending = await uow.JoinRequests.GetPendingAsync(course.Id, command.StudentId, ct);
-        if (pending is not null)
-            throw new DuplicateJoinRequestException();
+        var existingRequest = await uow.JoinRequests.GetPendingAsync(cmd.CourseId, userId, ct);
+        if (existingRequest is not null)
+            return ApiResponse.Fail("You already have a pending join request for this course.");
 
-        // 5. Create join request
-        var request = JoinRequest.Create(course.Id, command.StudentId);
-        await uow.JoinRequests.AddAsync(request, ct);
+        await uow.JoinRequests.AddAsync(JoinRequest.Create(cmd.CourseId, userId), ct);
         await uow.SaveChangesAsync(ct);
 
-        return ApiResponse.Ok("Join request submitted successfully.");
+        return ApiResponse.Ok("Join request sent successfully.");
     }
 }

@@ -767,6 +767,10 @@
               "target": "Package",
               "version": "[3.0.2, )"
             },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[9.0.3, )"
@@ -785,9 +789,9 @@
               "target": "Package",
               "version": "[9.0.3, )"
             },
-            "Microsoft.IdentityModel.Tokens": {
+            "Microsoft.IdentityModel.JsonWebTokens": {
               "target": "Package",
-              "version": "[8.4.0, )"
+              "version": "[8.16.0, )"
             },
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
@@ -808,10 +812,6 @@
             "StackExchange.Redis": {
               "target": "Package",
               "version": "[2.11.3, )"
-            },
-            "System.IdentityModel.Tokens.Jwt": {
-              "target": "Package",
-              "version": "[8.4.0, )"
             }
           },
           "imports": [

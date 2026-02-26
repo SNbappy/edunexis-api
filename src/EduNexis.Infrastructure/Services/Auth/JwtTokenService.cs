@@ -10,13 +10,27 @@ namespace EduNexis.Infrastructure.Services.Auth;
 
 public class JwtTokenService : IJwtTokenService
 {
-    private readonly IConfiguration _config;
-    public JwtTokenService(IConfiguration config) => _config = config;
+    private readonly string _secret;
+    private readonly string _issuer;
+    private readonly string _audience;
+    private readonly int _expiryMinutes;
+
+    public JwtTokenService(IConfiguration config)
+    {
+        _secret = config["Jwt:Secret"]
+                        ?? throw new InvalidOperationException("Jwt:Secret is not configured.");
+        _issuer = config["Jwt:Issuer"]
+                        ?? throw new InvalidOperationException("Jwt:Issuer is not configured.");
+        _audience = config["Jwt:Audience"]
+                        ?? throw new InvalidOperationException("Jwt:Audience is not configured.");
+        _expiryMinutes = int.Parse(config["Jwt:AccessTokenExpiryMinutes"] ?? "60");
+    }
 
     public string GenerateAccessToken(Guid userId, string email, string role)
     {
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Secret"]!));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secret));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
         var claims = new[]
         {
             new Claim(JwtRegisteredClaimNames.Sub,   userId.ToString()),
@@ -24,13 +38,14 @@ public class JwtTokenService : IJwtTokenService
             new Claim(ClaimTypes.Role,               role),
             new Claim(JwtRegisteredClaimNames.Jti,   Guid.NewGuid().ToString())
         };
+
         var token = new JwtSecurityToken(
-            issuer: _config["Jwt:Issuer"],
-            audience: _config["Jwt:Audience"],
+            issuer: _issuer,
+            audience: _audience,
             claims: claims,
-            expires: DateTime.UtcNow.AddMinutes(
-                                    int.Parse(_config["Jwt:AccessTokenExpiryMinutes"] ?? "60")),
+            expires: DateTime.UtcNow.AddMinutes(_expiryMinutes),
             signingCredentials: creds);
+
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
 

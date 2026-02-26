@@ -1,50 +1,71 @@
+using EduNexis.Domain.Entities;
+
 namespace EduNexis.Application.Features.Courses.Commands;
 
 public record ReviewJoinRequestCommand(
+    Guid CourseId,
     Guid RequestId,
-    Guid ReviewerId,
     bool Approve
 ) : ICommand<ApiResponse>;
 
+public sealed class ReviewJoinRequestCommandValidator : AbstractValidator<ReviewJoinRequestCommand>
+{
+    public ReviewJoinRequestCommandValidator()
+    {
+        RuleFor(x => x.CourseId).NotEmpty();
+        RuleFor(x => x.RequestId).NotEmpty();
+    }
+}
+
 public sealed class ReviewJoinRequestCommandHandler(
-    IUnitOfWork uow
+    IUnitOfWork uow,
+    ICurrentUserService currentUser
 ) : ICommandHandler<ReviewJoinRequestCommand, ApiResponse>
 {
     public async ValueTask<ApiResponse> Handle(
-        ReviewJoinRequestCommand command, CancellationToken ct)
+        ReviewJoinRequestCommand cmd, CancellationToken ct)
     {
-        var request = await uow.JoinRequests.GetByIdAsync(command.RequestId, ct)
-            ?? throw new NotFoundException("JoinRequest", command.RequestId);
+        var reviewerId = Guid.Parse(currentUser.UserId);
 
-        var course = await uow.Courses.GetByIdAsync(request.CourseId, ct)
-            ?? throw new NotFoundException("Course", request.CourseId);
+        var course = await uow.Courses.GetByIdAsync(cmd.CourseId, ct);
+        if (course is null)
+            return ApiResponse.Fail("Course not found.");
 
-        // Only teacher or CR can review
-        var reviewer = await uow.CourseMembers.GetMemberAsync(
-            course.Id, command.ReviewerId, ct);
+        if (course.TeacherId != reviewerId && currentUser.Role != "Admin")
+            return ApiResponse.Fail("You are not authorized to review join requests for this course.");
 
-        bool isTeacher = course.TeacherId == command.ReviewerId;
-        bool isCR = reviewer?.IsCR ?? false;
+        var request = await uow.JoinRequests.GetByIdAsync(cmd.RequestId, ct);
+        if (request is null || request.CourseId != cmd.CourseId)
+            return ApiResponse.Fail("Join request not found.");
 
-        if (!isTeacher && !isCR)
-            throw new UnauthorizedException("Only the teacher or CR can review join requests.");
+        if (request.Status != JoinRequestStatus.Pending)
+            return ApiResponse.Fail("This request has already been reviewed.");
 
-        if (command.Approve)
+        if (cmd.Approve)
         {
-            request.Approve(command.ReviewerId);
-            var member = CourseMember.Create(request.CourseId, request.StudentId);
-            await uow.CourseMembers.AddAsync(member, ct);
+            request.Approve(reviewerId);
+
+            // Reactivate if previously left, otherwise create new member
+            var existing = await uow.CourseMembers.GetMemberAsync(cmd.CourseId, request.StudentId, ct);
+            if (existing is not null)
+            {
+                existing.Reactivate();
+                uow.CourseMembers.Update(existing);
+            }
+            else
+            {
+                await uow.CourseMembers.AddAsync(
+                    CourseMember.Create(cmd.CourseId, request.StudentId), ct);
+            }
         }
         else
         {
-            request.Reject(command.ReviewerId);
+            request.Reject(reviewerId);
         }
 
         uow.JoinRequests.Update(request);
         await uow.SaveChangesAsync(ct);
 
-        return ApiResponse.Ok(command.Approve
-            ? "Join request approved."
-            : "Join request rejected.");
+        return ApiResponse.Ok(cmd.Approve ? "Join request approved." : "Join request rejected.");
     }
 }

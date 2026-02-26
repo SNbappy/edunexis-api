@@ -4,4 +4,5 @@ public interface IJoinRequestRepository : IBaseRepository<JoinRequest>
 {
     Task<JoinRequest?> GetPendingAsync(Guid courseId, Guid studentId, CancellationToken ct = default);
     Task<IEnumerable<JoinRequest>> GetPendingByCourseAsync(Guid courseId, CancellationToken ct = default);
+    Task<IEnumerable<JoinRequest>> GetByCourseAsync(Guid courseId, CancellationToken ct = default);
 }

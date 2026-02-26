@@ -1,8 +1,9 @@
 using EduNexis.Application.DTOs;
+using EduNexis.Application.Extensions;
 
 namespace EduNexis.Application.Features.Courses.Queries;
 
-public record GetCourseQuery(Guid CourseId) : IQuery<ApiResponse<CourseDto>>;
+public record GetCourseQuery(Guid Id) : IQuery<ApiResponse<CourseDto>>;
 
 public sealed class GetCourseQueryHandler(
     IUnitOfWork uow
@@ -11,18 +12,9 @@ public sealed class GetCourseQueryHandler(
     public async ValueTask<ApiResponse<CourseDto>> Handle(
         GetCourseQuery query, CancellationToken ct)
     {
-        var course = await uow.Courses.GetWithMembersAsync(query.CourseId, ct)
-            ?? throw new NotFoundException("Course", query.CourseId);
-
-        var teacher = await uow.Users.GetWithProfileAsync(course.TeacherId, ct)
-            ?? throw new NotFoundException("User", course.TeacherId);
-
-        return ApiResponse<CourseDto>.Ok(new CourseDto(
-            course.Id, course.Title, course.CourseCode, course.CreditHours,
-            course.Department, course.AcademicSession, course.Semester,
-            course.Section, course.CourseType.ToString(), course.Description,
-            course.CoverImageUrl, course.JoiningCode, course.TeacherId,
-            teacher.Profile?.FullName ?? teacher.Email, course.IsArchived,
-            course.Members.Count(m => m.IsActive), course.CreatedAt));
+        var course = await uow.Courses.GetByIdAsync(query.Id, ct);
+        return course is null
+            ? ApiResponse<CourseDto>.Fail("Course not found.")
+            : ApiResponse<CourseDto>.Ok(course.ToDto());
     }
 }

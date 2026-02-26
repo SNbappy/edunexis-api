@@ -15,9 +15,10 @@ public class CourseMember : BaseEntity
     protected CourseMember() { }
 
     public static CourseMember Create(Guid courseId, Guid userId) =>
-        new() { CourseId = courseId, UserId = userId };
+        new() { Id = Guid.NewGuid(), CourseId = courseId, UserId = userId, JoinedAt = DateTime.UtcNow };
 
     public void PromoteToCR() { IsCR = true; SetUpdatedAt(); }
     public void DemoteFromCR() { IsCR = false; SetUpdatedAt(); }
     public void Remove() { IsActive = false; SetUpdatedAt(); }
+    public void Reactivate() { IsActive = true; SetUpdatedAt(); }
 }

@@ -16,6 +16,14 @@
           "EduNexis.IntegrationTests.dll": {}
         }
       },
+      "BCrypt.Net-Next/4.0.3": {
+        "runtime": {
+          "lib/net6.0/BCrypt.Net-Next.dll": {
+            "assemblyVersion": "4.0.3.0",
+            "fileVersion": "4.0.3.0"
+          }
+        }
+      },
       "CloudinaryDotNet/1.28.0": {
         "dependencies": {
           "Newtonsoft.Json": "13.0.3"
@@ -24,18 +32,6 @@
           "lib/netstandard2.0/CloudinaryDotNet.dll": {
             "assemblyVersion": "1.28.0.0",
             "fileVersion": "1.28.0.0"
-          }
-        }
-      },
-      "FirebaseAdmin/3.4.0": {
-        "dependencies": {
-          "Google.Api.Gax.Rest": "4.8.0",
-          "Google.Apis.Auth": "1.68.0"
-        },
-        "runtime": {
-          "lib/net6.0/FirebaseAdmin.dll": {
-            "assemblyVersion": "3.4.0.0",
-            "fileVersion": "3.4.0.0"
           }
         }
       },
@@ -89,65 +85,6 @@
           }
         }
       },
-      "Google.Api.Gax/4.8.0": {
-        "dependencies": {
-          "Microsoft.Bcl.AsyncInterfaces": "6.0.0",
-          "Newtonsoft.Json": "13.0.3"
-        },
-        "runtime": {
-          "lib/netstandard2.0/Google.Api.Gax.dll": {
-            "assemblyVersion": "4.8.0.0",
-            "fileVersion": "4.8.0.0"
-          }
-        }
-      },
-      "Google.Api.Gax.Rest/4.8.0": {
-        "dependencies": {
-          "Google.Api.Gax": "4.8.0",
-          "Google.Apis.Auth": "1.68.0"
-        },
-        "runtime": {
-          "lib/netstandard2.0/Google.Api.Gax.Rest.dll": {
-            "assemblyVersion": "4.8.0.0",
-            "fileVersion": "4.8.0.0"
-          }
-        }
-      },
-      "Google.Apis/1.68.0": {
-        "dependencies": {
-          "Google.Apis.Core": "1.68.0"
-        },
-        "runtime": {
-          "lib/net6.0/Google.Apis.dll": {
-            "assemblyVersion": "1.68.0.0",
-            "fileVersion": "1.68.0.0"
-          }
-        }
-      },
-      "Google.Apis.Auth/1.68.0": {
-        "dependencies": {
-          "Google.Apis": "1.68.0",
-          "Google.Apis.Core": "1.68.0",
-          "System.Management": "7.0.2"
-        },
-        "runtime": {
-          "lib/net6.0/Google.Apis.Auth.dll": {
-            "assemblyVersion": "1.68.0.0",
-            "fileVersion": "1.68.0.0"
-          }
-        }
-      },
-      "Google.Apis.Core/1.68.0": {
-        "dependencies": {
-          "Newtonsoft.Json": "13.0.3"
-        },
-        "runtime": {
-          "lib/net6.0/Google.Apis.Core.dll": {
-            "assemblyVersion": "1.68.0.0",
-            "fileVersion": "1.68.0.0"
-          }
-        }
-      },
       "Mapster/7.4.0": {
         "dependencies": {
           "Mapster.Core": "1.2.1"
@@ -197,14 +134,6 @@
           }
         }
       },
-      "Microsoft.Bcl.AsyncInterfaces/6.0.0": {
-        "runtime": {
-          "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll": {
-            "assemblyVersion": "6.0.0.0",
-            "fileVersion": "6.0.21.52210"
-          }
-        }
-      },
       "Microsoft.CodeCoverage/17.14.1": {
         "runtime": {
           "lib/net8.0/Microsoft.VisualStudio.CodeCoverage.Shim.dll": {
@@ -243,14 +172,14 @@
           }
         }
       },
-      "Microsoft.Extensions.Caching.StackExchangeRedis/10.0.3": {
+      "Microsoft.Extensions.Caching.StackExchangeRedis/9.0.3": {
         "dependencies": {
           "StackExchange.Redis": "2.11.3"
         },
         "runtime": {
-          "lib/net10.0/Microsoft.Extensions.Caching.StackExchangeRedis.dll": {
-            "assemblyVersion": "10.0.3.0",
-            "fileVersion": "10.0.326.7603"
+          "lib/net9.0/Microsoft.Extensions.Caching.StackExchangeRedis.dll": {
+            "assemblyVersion": "9.0.3.0",
+            "fileVersion": "9.0.325.11220"
           }
         }
       },
@@ -262,39 +191,39 @@
           }
         }
       },
-      "Microsoft.IdentityModel.Abstractions/8.4.0": {
+      "Microsoft.IdentityModel.Abstractions/8.16.0": {
         "runtime": {
-          "lib/net9.0/Microsoft.IdentityModel.Abstractions.dll": {
-            "assemblyVersion": "8.4.0.0",
-            "fileVersion": "8.4.0.60207"
+          "lib/net10.0/Microsoft.IdentityModel.Abstractions.dll": {
+            "assemblyVersion": "8.16.0.0",
+            "fileVersion": "8.16.0.26043"
           }
         }
       },
-      "Microsoft.IdentityModel.JsonWebTokens/8.0.1": {
+      "Microsoft.IdentityModel.JsonWebTokens/8.16.0": {
         "dependencies": {
-          "Microsoft.IdentityModel.Tokens": "8.4.0"
+          "Microsoft.IdentityModel.Tokens": "8.16.0"
         },
         "runtime": {
-          "lib/net9.0/Microsoft.IdentityModel.JsonWebTokens.dll": {
-            "assemblyVersion": "8.0.1.0",
-            "fileVersion": "8.0.1.50722"
+          "lib/net10.0/Microsoft.IdentityModel.JsonWebTokens.dll": {
+            "assemblyVersion": "8.16.0.0",
+            "fileVersion": "8.16.0.26043"
           }
         }
       },
-      "Microsoft.IdentityModel.Logging/8.4.0": {
+      "Microsoft.IdentityModel.Logging/8.16.0": {
         "dependencies": {
-          "Microsoft.IdentityModel.Abstractions": "8.4.0"
+          "Microsoft.IdentityModel.Abstractions": "8.16.0"
         },
         "runtime": {
-          "lib/net9.0/Microsoft.IdentityModel.Logging.dll": {
-            "assemblyVersion": "8.4.0.0",
-            "fileVersion": "8.4.0.60207"
+          "lib/net10.0/Microsoft.IdentityModel.Logging.dll": {
+            "assemblyVersion": "8.16.0.0",
+            "fileVersion": "8.16.0.26043"
           }
         }
       },
       "Microsoft.IdentityModel.Protocols/8.0.1": {
         "dependencies": {
-          "Microsoft.IdentityModel.Tokens": "8.4.0"
+          "Microsoft.IdentityModel.Tokens": "8.16.0"
         },
         "runtime": {
           "lib/net9.0/Microsoft.IdentityModel.Protocols.dll": {
@@ -315,14 +244,14 @@
           }
         }
       },
-      "Microsoft.IdentityModel.Tokens/8.4.0": {
+      "Microsoft.IdentityModel.Tokens/8.16.0": {
         "dependencies": {
-          "Microsoft.IdentityModel.Logging": "8.4.0"
+          "Microsoft.IdentityModel.Logging": "8.16.0"
         },
         "runtime": {
-          "lib/net9.0/Microsoft.IdentityModel.Tokens.dll": {
-            "assemblyVersion": "8.4.0.0",
-            "fileVersion": "8.4.0.60207"
+          "lib/net10.0/Microsoft.IdentityModel.Tokens.dll": {
+            "assemblyVersion": "8.16.0.0",
+            "fileVersion": "8.16.0.26043"
           }
         }
       },
@@ -772,18 +701,10 @@
           }
         }
       },
-      "System.CodeDom/7.0.0": {
-        "runtime": {
-          "lib/net7.0/System.CodeDom.dll": {
-            "assemblyVersion": "7.0.0.0",
-            "fileVersion": "7.0.22.51805"
-          }
-        }
-      },
       "System.IdentityModel.Tokens.Jwt/8.0.1": {
         "dependencies": {
-          "Microsoft.IdentityModel.JsonWebTokens": "8.0.1",
-          "Microsoft.IdentityModel.Tokens": "8.4.0"
+          "Microsoft.IdentityModel.JsonWebTokens": "8.16.0",
+          "Microsoft.IdentityModel.Tokens": "8.16.0"
         },
         "runtime": {
           "lib/net9.0/System.IdentityModel.Tokens.Jwt.dll": {
@@ -797,25 +718,6 @@
           "lib/net10.0/System.IO.Hashing.dll": {
             "assemblyVersion": "10.0.0.2",
             "fileVersion": "10.0.225.61305"
-          }
-        }
-      },
-      "System.Management/7.0.2": {
-        "dependencies": {
-          "System.CodeDom": "7.0.0"
-        },
-        "runtime": {
-          "lib/net7.0/System.Management.dll": {
-            "assemblyVersion": "7.0.0.2",
-            "fileVersion": "7.0.723.27404"
-          }
-        },
-        "runtimeTargets": {
-          "runtimes/win/lib/net7.0/System.Management.dll": {
-            "rid": "win",
-            "assetType": "runtime",
-            "assemblyVersion": "7.0.0.2",
-            "fileVersion": "7.0.723.27404"
           }
         }
       },
@@ -874,8 +776,6 @@
           "EduNexis.Application": "1.0.0",
           "EduNexis.Infrastructure": "1.0.0",
           "FluentValidation.AspNetCore": "11.3.1",
-          "Microsoft.AspNetCore.Authentication.JwtBearer": "9.0.0",
-          "Microsoft.IdentityModel.Tokens": "8.4.0",
           "Serilog.AspNetCore": "10.0.0",
           "Swashbuckle.AspNetCore": "6.9.0"
         },
@@ -912,15 +812,17 @@
       },
       "EduNexis.Infrastructure/1.0.0": {
         "dependencies": {
+          "BCrypt.Net-Next": "4.0.3",
           "CloudinaryDotNet": "1.28.0",
           "EduNexis.Application": "1.0.0",
           "EduNexis.Domain": "1.0.0",
-          "FirebaseAdmin": "3.4.0",
           "FluentEmail.Core": "3.0.2",
           "FluentEmail.Smtp": "3.0.2",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "9.0.0",
           "Microsoft.EntityFrameworkCore": "9.0.3",
           "Microsoft.EntityFrameworkCore.Relational": "9.0.3",
-          "Microsoft.Extensions.Caching.StackExchangeRedis": "10.0.3",
+          "Microsoft.Extensions.Caching.StackExchangeRedis": "9.0.3",
+          "Microsoft.IdentityModel.JsonWebTokens": "8.16.0",
           "Pomelo.EntityFrameworkCore.MySql": "9.0.0",
           "Serilog.AspNetCore": "10.0.0",
           "Serilog.Sinks.Console": "6.1.1",
@@ -942,19 +844,19 @@
       "serviceable": false,
       "sha512": ""
     },
+    "BCrypt.Net-Next/4.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-W+U9WvmZQgi5cX6FS5GDtDoPzUCV4LkBLkywq/kRZhuDwcbavOzcDAr3LXJFqHUi952Yj3LEYoWW0jbEUQChsA==",
+      "path": "bcrypt.net-next/4.0.3",
+      "hashPath": "bcrypt.net-next.4.0.3.nupkg.sha512"
+    },
     "CloudinaryDotNet/1.28.0": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-o5Dfp5DrpF69s8qjlh4dxzXuJUCRxt7KQaweU8wMDxd1cPFONCVNZsgFQZ3v0PZDN76fLonZ5vFDjVTA3UTjCA==",
       "path": "cloudinarydotnet/1.28.0",
       "hashPath": "cloudinarydotnet.1.28.0.nupkg.sha512"
-    },
-    "FirebaseAdmin/3.4.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-sQyVEOYRe4HSSmRCJQhKr33DxZk10lpDE2otdTgNkqPn4BRul2JG7TCQC7N7X0wO9ShnPLbVS4xuSUHlaPBbug==",
-      "path": "firebaseadmin/3.4.0",
-      "hashPath": "firebaseadmin.3.4.0.nupkg.sha512"
     },
     "FluentEmail.Core/3.0.2": {
       "type": "package",
@@ -991,41 +893,6 @@
       "path": "fluentvalidation.dependencyinjectionextensions/12.1.1",
       "hashPath": "fluentvalidation.dependencyinjectionextensions.12.1.1.nupkg.sha512"
     },
-    "Google.Api.Gax/4.8.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-xlV8Jq/G5CQAA3PwYAuKGjfzGOP7AvjhREnE6vgZlzxREGYchHudZWa2PWSqFJL+MBtz9YgitLpRogANN3CVvg==",
-      "path": "google.api.gax/4.8.0",
-      "hashPath": "google.api.gax.4.8.0.nupkg.sha512"
-    },
-    "Google.Api.Gax.Rest/4.8.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-zaA5LZ2VvGj/wwIzRB68swr7khi2kWNgqWvsB0fYtScIAl3kGkGtqiBcx63H1YLeKr5xau1866bFjTeReH6FSQ==",
-      "path": "google.api.gax.rest/4.8.0",
-      "hashPath": "google.api.gax.rest.4.8.0.nupkg.sha512"
-    },
-    "Google.Apis/1.68.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-s2MymhdpH+ybZNBeZ2J5uFgFHApBp+QXf9FjZSdM1lk/vx5VqIknJwnaWiuAzXxPrLEkesX0Q+UsiWn39yZ9zw==",
-      "path": "google.apis/1.68.0",
-      "hashPath": "google.apis.1.68.0.nupkg.sha512"
-    },
-    "Google.Apis.Auth/1.68.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-hFx8Qz5bZ4w0hpnn4tSmZaaFpjAMsgVElZ+ZgVLUZ2r9i+AKcoVgwiNfv1pruNS5cCvpXqhKECbruBCfRezPHA==",
-      "path": "google.apis.auth/1.68.0",
-      "hashPath": "google.apis.auth.1.68.0.nupkg.sha512"
-    },
-    "Google.Apis.Core/1.68.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-pAqwa6pfu53UXCR2b7A/PAPXeuVg6L1OFw38WckN27NU2+mf+KTjoEg2YGv/f0UyKxzz7DxF1urOTKg/6dTP9g==",
-      "path": "google.apis.core/1.68.0",
-      "hashPath": "google.apis.core.1.68.0.nupkg.sha512"
-    },
     "Mapster/7.4.0": {
       "type": "package",
       "serviceable": true,
@@ -1061,13 +928,6 @@
       "path": "microsoft.aspnetcore.authentication.jwtbearer/9.0.0",
       "hashPath": "microsoft.aspnetcore.authentication.jwtbearer.9.0.0.nupkg.sha512"
     },
-    "Microsoft.Bcl.AsyncInterfaces/6.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-UcSjPsst+DfAdJGVDsu346FX0ci0ah+lw3WRtn18NUwEqRt70HaOQ7lI72vy3+1LxtqI3T5GWwV39rQSrCzAeg==",
-      "path": "microsoft.bcl.asyncinterfaces/6.0.0",
-      "hashPath": "microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512"
-    },
     "Microsoft.CodeCoverage/17.14.1": {
       "type": "package",
       "serviceable": true,
@@ -1096,12 +956,12 @@
       "path": "microsoft.entityframeworkcore.relational/9.0.3",
       "hashPath": "microsoft.entityframeworkcore.relational.9.0.3.nupkg.sha512"
     },
-    "Microsoft.Extensions.Caching.StackExchangeRedis/10.0.3": {
+    "Microsoft.Extensions.Caching.StackExchangeRedis/9.0.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-DarGypNFuSCH6J6N/aMos3X+XuIGz0IvazZLoy8SXe8jKWuzdqvxyrop1CPzv/oYPLbQkt1twEoaWr7arLBe3w==",
-      "path": "microsoft.extensions.caching.stackexchangeredis/10.0.3",
-      "hashPath": "microsoft.extensions.caching.stackexchangeredis.10.0.3.nupkg.sha512"
+      "sha512": "sha512-KG/ec3DjwEfTKJCF7vobLJvyU7ChI7N6sE3z0v/W2RQYUqd0IxklYutPaN0cZRyAmt2EtmGg30+dVeV5Cr73Dw==",
+      "path": "microsoft.extensions.caching.stackexchangeredis/9.0.3",
+      "hashPath": "microsoft.extensions.caching.stackexchangeredis.9.0.3.nupkg.sha512"
     },
     "Microsoft.Extensions.DependencyModel/10.0.0": {
       "type": "package",
@@ -1110,26 +970,26 @@
       "path": "microsoft.extensions.dependencymodel/10.0.0",
       "hashPath": "microsoft.extensions.dependencymodel.10.0.0.nupkg.sha512"
     },
-    "Microsoft.IdentityModel.Abstractions/8.4.0": {
+    "Microsoft.IdentityModel.Abstractions/8.16.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-4dDpw7DJ2yx2vFM/w0sceXoByUhrU68eMdlXyzsPTWPtAfgCbkuMl7jfLBLegmgerbOzGNMm7zq5xwr4+7yTSg==",
-      "path": "microsoft.identitymodel.abstractions/8.4.0",
-      "hashPath": "microsoft.identitymodel.abstractions.8.4.0.nupkg.sha512"
+      "sha512": "sha512-gSxKLWRZzBpIsEoeUPkxfywNCCvRvl7hkq146XHPk5vOQc9izSf1I+uL1vh4y2U19QPxd9Z8K/8AdWyxYz2lSg==",
+      "path": "microsoft.identitymodel.abstractions/8.16.0",
+      "hashPath": "microsoft.identitymodel.abstractions.8.16.0.nupkg.sha512"
     },
-    "Microsoft.IdentityModel.JsonWebTokens/8.0.1": {
+    "Microsoft.IdentityModel.JsonWebTokens/8.16.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-s6++gF9x0rQApQzOBbSyp4jUaAlwm+DroKfL8gdOHxs83k8SJfUXhuc46rDB3rNXBQ1MVRxqKUrqFhO/M0E97g==",
-      "path": "microsoft.identitymodel.jsonwebtokens/8.0.1",
-      "hashPath": "microsoft.identitymodel.jsonwebtokens.8.0.1.nupkg.sha512"
+      "sha512": "sha512-prBU72cIP4V8E9fhN+o/YdskTsLeIcnKPbhZf0X6mD7fdxoZqnS/NdEkSr+9Zp+2q7OZBOMfNBKGbTbhXODO4w==",
+      "path": "microsoft.identitymodel.jsonwebtokens/8.16.0",
+      "hashPath": "microsoft.identitymodel.jsonwebtokens.8.16.0.nupkg.sha512"
     },
-    "Microsoft.IdentityModel.Logging/8.4.0": {
+    "Microsoft.IdentityModel.Logging/8.16.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-vIKIBDMD6l2MeCwkdeh1XHSHNVz9C/qp9PaHMG6SF3OUSAh/2XMVj2zaVc2hs27QRfhh5xR3tvMSs8R96WS2IA==",
-      "path": "microsoft.identitymodel.logging/8.4.0",
-      "hashPath": "microsoft.identitymodel.logging.8.4.0.nupkg.sha512"
+      "sha512": "sha512-MTzXmETkNQPACR7/XCXM1OGM6oU9RkyibqeJRtO9Ndew2LnGjMf9Atqj2VSf4XC27X0FQycUAlzxxEgQMWn2xQ==",
+      "path": "microsoft.identitymodel.logging/8.16.0",
+      "hashPath": "microsoft.identitymodel.logging.8.16.0.nupkg.sha512"
     },
     "Microsoft.IdentityModel.Protocols/8.0.1": {
       "type": "package",
@@ -1145,12 +1005,12 @@
       "path": "microsoft.identitymodel.protocols.openidconnect/8.0.1",
       "hashPath": "microsoft.identitymodel.protocols.openidconnect.8.0.1.nupkg.sha512"
     },
-    "Microsoft.IdentityModel.Tokens/8.4.0": {
+    "Microsoft.IdentityModel.Tokens/8.16.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-n/wBvhj7oq3rZyImUhkUv6bUjwPWK+jG1R3BsCfahLtwoOzIWSPLmzMQ61HCtd1BiCU43IdkX9M+cD1xMmE3xQ==",
-      "path": "microsoft.identitymodel.tokens/8.4.0",
-      "hashPath": "microsoft.identitymodel.tokens.8.4.0.nupkg.sha512"
+      "sha512": "sha512-rtViGJcGsN7WcfUNErwNeQgjuU5cJNl6FDQsfi9TncwO+Epzn0FTfBsg3YuFW1Q0Ch/KPxaVdjLw3/+5Z5ceFQ==",
+      "path": "microsoft.identitymodel.tokens/8.16.0",
+      "hashPath": "microsoft.identitymodel.tokens.8.16.0.nupkg.sha512"
     },
     "Microsoft.NET.Test.Sdk/17.14.1": {
       "type": "package",
@@ -1306,13 +1166,6 @@
       "path": "swashbuckle.aspnetcore.swaggerui/6.9.0",
       "hashPath": "swashbuckle.aspnetcore.swaggerui.6.9.0.nupkg.sha512"
     },
-    "System.CodeDom/7.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-GLltyqEsE5/3IE+zYRP5sNa1l44qKl9v+bfdMcwg+M9qnQf47wK3H0SUR/T+3N4JEQXF3vV4CSuuo0rsg+nq2A==",
-      "path": "system.codedom/7.0.0",
-      "hashPath": "system.codedom.7.0.0.nupkg.sha512"
-    },
     "System.IdentityModel.Tokens.Jwt/8.0.1": {
       "type": "package",
       "serviceable": true,
@@ -1326,13 +1179,6 @@
       "sha512": "sha512-AKJknIFi9O3+rGExxTry188JPvUoZAPcCtS2qdqyFhIzsxQ1Ap94BeGDG0VzVEHakhmRxmJtVih6TsHoghIt/g==",
       "path": "system.io.hashing/10.0.2",
       "hashPath": "system.io.hashing.10.0.2.nupkg.sha512"
-    },
-    "System.Management/7.0.2": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-/qEUN91mP/MUQmJnM5y5BdT7ZoPuVrtxnFlbJ8a3kBJGhe2wCzBfnPFtK2wTtEEcf3DMGR9J00GZZfg6HRI6yA==",
-      "path": "system.management/7.0.2",
-      "hashPath": "system.management.7.0.2.nupkg.sha512"
     },
     "xunit/2.9.3": {
       "type": "package",

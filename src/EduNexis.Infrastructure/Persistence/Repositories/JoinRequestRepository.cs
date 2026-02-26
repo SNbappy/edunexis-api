@@ -14,7 +14,16 @@ public class JoinRequestRepository : BaseRepository<JoinRequest>, IJoinRequestRe
     public async Task<IEnumerable<JoinRequest>> GetPendingByCourseAsync(
         Guid courseId, CancellationToken ct = default) =>
         await DbSet
+            .Include(j => j.Student).ThenInclude(s => s.Profile)
             .Where(j => j.CourseId == courseId && j.Status == JoinRequestStatus.Pending)
+            .OrderByDescending(j => j.CreatedAt)
+            .ToListAsync(ct);
+
+    public async Task<IEnumerable<JoinRequest>> GetByCourseAsync(
+        Guid courseId, CancellationToken ct = default) =>
+        await DbSet
+            .Include(j => j.Student).ThenInclude(s => s.Profile)
+            .Where(j => j.CourseId == courseId)
             .OrderByDescending(j => j.CreatedAt)
             .ToListAsync(ct);
 }

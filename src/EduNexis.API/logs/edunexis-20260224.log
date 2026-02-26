@@ -226,3 +226,16 @@ MySqlConnector.MySqlException (0x80004005): Unknown column 'u.PasswordHash' in '
 2026-02-24 01:41:14.494 +06:00 [INF] HTTP POST /api/Auth/refresh responded 200 in 201.6932 ms
 2026-02-24 01:42:10.436 +06:00 [INF] HTTP POST /api/Auth/logout responded 401 in 24.7320 ms
 2026-02-24 01:43:29.363 +06:00 [INF] HTTP POST /api/Auth/logout responded 200 in 78.8771 ms
+2026-02-24 01:53:39.358 +06:00 [INF] HTTP POST /api/Courses responded 401 in 87.2420 ms
+2026-02-24 01:55:32.590 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 3177.2531 ms
+2026-02-24 01:57:22.423 +06:00 [INF] HTTP POST /api/Courses responded 401 in 88.9432 ms
+2026-02-24 01:59:31.971 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 3113.9453 ms
+2026-02-24 02:00:38.962 +06:00 [INF] HTTP POST /api/Courses responded 401 in 51.7694 ms
+2026-02-24 02:15:36.728 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 3927.1446 ms
+2026-02-24 02:16:22.546 +06:00 [INF] HTTP POST /api/Courses responded 401 in 92.7690 ms
+2026-02-24 02:18:54.416 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 3256.7838 ms
+2026-02-24 02:19:37.279 +06:00 [INF] HTTP POST /api/Courses responded 401 in 50.0819 ms
+2026-02-24 02:23:28.046 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 3361.2079 ms
+2026-02-24 02:23:58.165 +06:00 [INF] HTTP POST /api/Courses responded 401 in 87.9328 ms
+2026-02-24 02:27:31.630 +06:00 [INF] HTTP POST /api/Auth/logout responded 401 in 42.0298 ms
+2026-02-24 02:28:03.453 +06:00 [INF] HTTP POST /api/Courses responded 200 in 723.3565 ms

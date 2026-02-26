@@ -44,7 +44,6 @@ public sealed class SubmitAssignmentCommandHandler(
         if (isLate && !assignment.AllowLateSubmission)
             return ApiResponse<SubmissionDto>.Fail("Deadline has passed. Late submissions not allowed.");
 
-        // Check if already submitted
         var existing = await uow.GetRepository<AssignmentSubmission>()
             .FirstOrDefaultAsync(s =>
                 s.AssignmentId == command.AssignmentId &&
