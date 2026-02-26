@@ -1,6 +1,8 @@
 using EduNexis.Application.DTOs;
 
+
 namespace EduNexis.Application.Features.Assignments.Commands;
+
 
 public record SubmitAssignmentCommand(
     Guid AssignmentId,
@@ -11,6 +13,7 @@ public record SubmitAssignmentCommand(
     string? FileName,
     string? LinkUrl
 ) : ICommand<ApiResponse<SubmissionDto>>;
+
 
 public sealed class SubmitAssignmentCommandValidator : AbstractValidator<SubmitAssignmentCommand>
 {
@@ -27,6 +30,7 @@ public sealed class SubmitAssignmentCommandValidator : AbstractValidator<SubmitA
             .WithMessage("Link URL is required for link submissions.");
     }
 }
+
 
 public sealed class SubmitAssignmentCommandHandler(
     IUnitOfWork uow,
@@ -74,9 +78,14 @@ public sealed class SubmitAssignmentCommandHandler(
 
         await uow.SaveChangesAsync(ct);
 
+        // ✅ Fetch student full name from UserProfile
+        var profile = await uow.UserProfiles
+            .FirstOrDefaultAsync(p => p.UserId == command.StudentId, ct);
+        var studentName = profile?.FullName ?? "Unknown";
+
         return ApiResponse<SubmissionDto>.Ok(new SubmissionDto(
             existing.Id, existing.AssignmentId, existing.StudentId,
-            string.Empty, existing.SubmissionType.ToString(),
+            studentName, existing.SubmissionType.ToString(),
             existing.TextContent, existing.FileUrl, existing.LinkUrl,
             existing.SubmittedAt, existing.IsLate, existing.Marks,
             existing.Feedback, existing.IsGraded));

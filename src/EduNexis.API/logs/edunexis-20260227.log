@@ -1,0 +1,274 @@
+2026-02-27 00:12:18.326 +06:00 [INF] HTTP POST /api/Assignments/assignments/9220e574-955f-4db4-b220-d4c546f64855/submit responded 401 in 185.9612 ms
+2026-02-27 00:14:47.075 +06:00 [ERR] HTTP POST /api/Auth/login responded 500 in 6069.5805 ms
+EduNexis.Domain.Exceptions.UnauthorizedException: Invalid email or password.
+   at EduNexis.Application.Features.Auth.Commands.LoginUserCommandHandler.Handle(LoginUserCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\Auth\Commands\LoginUserCommand.cs:line 29
+   at EduNexis.API.Controllers.AuthController.Login(LoginUserCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\AuthController.cs:line 18
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-02-27 00:14:47.208 +06:00 [ERR] Unhandled exception: Invalid email or password.
+EduNexis.Domain.Exceptions.UnauthorizedException: Invalid email or password.
+   at EduNexis.Application.Features.Auth.Commands.LoginUserCommandHandler.Handle(LoginUserCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\Auth\Commands\LoginUserCommand.cs:line 29
+   at EduNexis.API.Controllers.AuthController.Login(LoginUserCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\AuthController.cs:line 18
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EduNexis.API.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Middleware\ExceptionMiddleware.cs:line 15
+2026-02-27 00:15:58.175 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 3270.4572 ms
+2026-02-27 00:17:45.246 +06:00 [INF] HTTP POST /api/Assignments/assignments/9220e574-955f-4db4-b220-d4c546f64855/submit responded 200 in 1113.5554 ms
+2026-02-27 00:35:52.683 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 3622.6365 ms
+2026-02-27 00:36:32.596 +06:00 [INF] HTTP POST /api/Assignments/assignments/9220e574-955f-4db4-b220-d4c546f64855/submit responded 401 in 32.7882 ms
+2026-02-27 00:37:58.079 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 554.1259 ms
+2026-02-27 00:38:46.842 +06:00 [INF] HTTP POST /api/Assignments/assignments/9220e574-955f-4db4-b220-d4c546f64855/submit responded 200 in 578.0117 ms
+2026-02-27 00:39:41.887 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 268.2867 ms
+2026-02-27 00:40:58.874 +06:00 [INF] HTTP GET /api/Assignments/courses/9220e574-955f-4db4-b220-d4c546f64855/assignments responded 200 in 66.7245 ms
+2026-02-27 00:41:41.782 +06:00 [INF] HTTP GET /api/Assignments/courses/bdfd5fd1-675f-4901-ac6f-45c59f7a55ab/assignments responded 200 in 39.0409 ms
+2026-02-27 00:52:21.918 +06:00 [INF] HTTP POST /api/Assignments/submissions/8205d686-2b2e-41e1-a947-a353e351443b/grade responded 200 in 438.1738 ms
+2026-02-27 00:59:45.722 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 3889.1583 ms
+2026-02-27 01:00:46.356 +06:00 [INF] HTTP POST /api/Assignments/submissions/8205d686-2b2e-41e1-a947-a353e351443b/grade responded 200 in 784.8834 ms
+2026-02-27 01:03:04.481 +06:00 [INF] HTTP POST /api/Attendance/courses/bdfd5fd1-675f-4901-ac6f-45c59f7a55ab/sessions responded 200 in 396.6685 ms
+2026-02-27 01:08:23.354 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 3292.3468 ms
+2026-02-27 01:09:12.578 +06:00 [INF] HTTP POST /api/Attendance/courses/bdfd5fd1-675f-4901-ac6f-45c59f7a55ab/sessions responded 200 in 800.7948 ms
+2026-02-27 01:10:45.435 +06:00 [INF] HTTP GET /api/Attendance/courses/bdfd5fd1-675f-4901-ac6f-45c59f7a55ab/summary responded 200 in 153.6160 ms
+2026-02-27 01:12:56.714 +06:00 [INF] HTTP GET /api/Courses/bdfd5fd1-675f-4901-ac6f-45c59f7a55ab/members responded 200 in 91.9982 ms
+2026-02-27 01:13:41.831 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 342.8931 ms
+2026-02-27 01:16:25.726 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 245.4648 ms
+2026-02-27 01:17:15.378 +06:00 [INF] HTTP POST /api/Courses/bdfd5fd1-675f-4901-ac6f-45c59f7a55ab/join responded 200 in 206.8639 ms
+2026-02-27 01:19:13.643 +06:00 [INF] HTTP POST /api/Courses/bdfd5fd1-675f-4901-ac6f-45c59f7a55ab/join responded 200 in 77.1344 ms
+2026-02-27 01:20:49.703 +06:00 [INF] HTTP POST /api/Courses/bdfd5fd1-675f-4901-ac6f-45c59f7a55ab/join responded 200 in 71.9796 ms
+2026-02-27 01:21:41.882 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 217.1362 ms
+2026-02-27 01:22:40.002 +06:00 [INF] HTTP GET /api/Courses/bdfd5fd1-675f-4901-ac6f-45c59f7a55ab/join-requests responded 200 in 134.6329 ms
+2026-02-27 01:25:15.934 +06:00 [INF] HTTP POST /api/Courses/bdfd5fd1-675f-4901-ac6f-45c59f7a55ab/join-requests/50ee7bee-457e-43a0-9718-da2d3b6e2f35/review responded 200 in 92.0578 ms
+2026-02-27 01:31:39.354 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 3727.5631 ms
+2026-02-27 01:33:02.498 +06:00 [INF] HTTP POST /api/Courses/bdfd5fd1-675f-4901-ac6f-45c59f7a55ab/join-requests/50ee7bee-457e-43a0-9718-da2d3b6e2f35/review responded 200 in 587.0274 ms
+2026-02-27 01:35:01.139 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 479.5321 ms
+2026-02-27 01:36:11.358 +06:00 [INF] HTTP POST /api/Courses/bdfd5fd1-675f-4901-ac6f-45c59f7a55ab/join responded 401 in 15.0368 ms
+2026-02-27 01:37:04.651 +06:00 [INF] HTTP POST /api/Courses/bdfd5fd1-675f-4901-ac6f-45c59f7a55ab/join responded 200 in 219.7941 ms
+2026-02-27 01:38:00.115 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 255.0059 ms
+2026-02-27 01:38:53.081 +06:00 [INF] HTTP GET /api/Courses/bdfd5fd1-675f-4901-ac6f-45c59f7a55ab/join-requests responded 200 in 172.4832 ms
+2026-02-27 01:40:15.919 +06:00 [INF] HTTP POST /api/Courses/bdfd5fd1-675f-4901-ac6f-45c59f7a55ab/join-requests/be2cf9f2-7109-42cd-ab52-6dda35a65729/review responded 200 in 118.2227 ms
+2026-02-27 01:41:32.839 +06:00 [INF] HTTP GET /api/Courses/bdfd5fd1-675f-4901-ac6f-45c59f7a55ab/members responded 200 in 144.5876 ms
+2026-02-27 01:42:22.521 +06:00 [INF] HTTP GET /api/Attendance/courses/bdfd5fd1-675f-4901-ac6f-45c59f7a55ab/summary responded 200 in 192.5739 ms
+2026-02-27 01:46:27.941 +06:00 [ERR] HTTP POST /api/ct/courses/bdfd5fd1-675f-4901-ac6f-45c59f7a55ab/events responded 500 in 78.6984 ms
+EduNexis.Domain.Exceptions.DomainException: Max marks must be greater than zero.
+   at EduNexis.Domain.Entities.CTEvent.Create(Guid courseId, String title, Decimal maxMarks, Guid createdById) in D:\Coding\Projects\edunexis-api\src\EduNexis.Domain\Entities\CTEvent.cs:line 23
+   at EduNexis.Application.Features.CT.Commands.CreateCTEventCommandHandler.Handle(CreateCTEventCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\CT\Commands\CreateCTEventCommand.cs:line 34
+   at EduNexis.API.Controllers.CTController.CreateEvent(Guid courseId, CreateCTEventCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\CTController.cs:line 14
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-02-27 01:46:27.983 +06:00 [ERR] Unhandled exception: Max marks must be greater than zero.
+EduNexis.Domain.Exceptions.DomainException: Max marks must be greater than zero.
+   at EduNexis.Domain.Entities.CTEvent.Create(Guid courseId, String title, Decimal maxMarks, Guid createdById) in D:\Coding\Projects\edunexis-api\src\EduNexis.Domain\Entities\CTEvent.cs:line 23
+   at EduNexis.Application.Features.CT.Commands.CreateCTEventCommandHandler.Handle(CreateCTEventCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\CT\Commands\CreateCTEventCommand.cs:line 34
+   at EduNexis.API.Controllers.CTController.CreateEvent(Guid courseId, CreateCTEventCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\CTController.cs:line 14
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EduNexis.API.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Middleware\ExceptionMiddleware.cs:line 15
+2026-02-27 01:48:58.654 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 2908.4160 ms
+2026-02-27 01:50:17.197 +06:00 [INF] HTTP POST /api/ct/courses/bdfd5fd1-675f-4901-ac6f-45c59f7a55ab/events responded 200 in 611.9842 ms
+2026-02-27 01:54:19.395 +06:00 [INF] HTTP POST /api/ct/events/3f55c2f6-acc8-49b2-8d4c-5097b7004a9a/grade responded 400 in 51.3114 ms
+2026-02-27 01:55:27.007 +06:00 [ERR] HTTP POST /api/ct/events/3f55c2f6-acc8-49b2-8d4c-5097b7004a9a/grade responded 500 in 291.2739 ms
+Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException: The database operation was expected to affect 1 row(s), but actually affected 0 row(s); data may have been modified or deleted since entities were loaded. See https://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions.
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ThrowAggregateUpdateConcurrencyExceptionAsync(RelationalDataReader reader, Int32 commandIndex, Int32 expectedRowsAffected, Int32 rowsAffected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetWithRowsAffectedOnlyAsync(Int32 commandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at EduNexis.Infrastructure.Persistence.Repositories.UnitOfWork.SaveChangesAsync(CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\Persistence\Repositories\UnitOfWork.cs:line 32
+   at EduNexis.Application.Features.CT.Commands.GradeCTSubmissionCommandHandler.Handle(GradeCTSubmissionCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\CT\Commands\GradeCTSubmissionCommand.cs:line 50
+   at EduNexis.API.Controllers.CTController.Grade(Guid ctEventId, GradeCTSubmissionCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\CTController.cs:line 32
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-02-27 01:55:27.036 +06:00 [ERR] Unhandled exception: The database operation was expected to affect 1 row(s), but actually affected 0 row(s); data may have been modified or deleted since entities were loaded. See https://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions.
+Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException: The database operation was expected to affect 1 row(s), but actually affected 0 row(s); data may have been modified or deleted since entities were loaded. See https://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions.
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ThrowAggregateUpdateConcurrencyExceptionAsync(RelationalDataReader reader, Int32 commandIndex, Int32 expectedRowsAffected, Int32 rowsAffected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetWithRowsAffectedOnlyAsync(Int32 commandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at EduNexis.Infrastructure.Persistence.Repositories.UnitOfWork.SaveChangesAsync(CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\Persistence\Repositories\UnitOfWork.cs:line 32
+   at EduNexis.Application.Features.CT.Commands.GradeCTSubmissionCommandHandler.Handle(GradeCTSubmissionCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\CT\Commands\GradeCTSubmissionCommand.cs:line 50
+   at EduNexis.API.Controllers.CTController.Grade(Guid ctEventId, GradeCTSubmissionCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\CTController.cs:line 32
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EduNexis.API.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Middleware\ExceptionMiddleware.cs:line 15
+2026-02-27 02:02:54.318 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 3085.2478 ms
+2026-02-27 02:04:18.207 +06:00 [INF] HTTP POST /api/ct/events/3f55c2f6-acc8-49b2-8d4c-5097b7004a9a/grade responded 200 in 620.4875 ms
+2026-02-27 02:12:41.684 +06:00 [ERR] Unhandled exception: Failed to generate Operation for action - EduNexis.API.Controllers.CTController.UploadCopies (EduNexis.API). See inner exception
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Failed to generate Operation for action - EduNexis.API.Controllers.CTController.UploadCopies (EduNexis.API). See inner exception
+ ---> Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Error reading parameter(s) for action EduNexis.API.Controllers.CTController.UploadCopies (EduNexis.API) as [FromForm] attribute used with IFormFile. Please refer to https://github.com/domaindrivendev/Swashbuckle.AspNetCore#handle-forms-and-file-uploads for more information
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateParametersAsync(ApiDescription apiDescription, SchemaRepository schemaRespository, Func`3 parameterGenerator)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateParametersAsync(ApiDescription apiDescription, SchemaRepository schemaRespository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperationAsync(ApiDescription apiDescription, SchemaRepository schemaRepository, Func`3 parametersGenerator, Func`3 bodyGenerator, Func`3 applyFilters)
+   --- End of inner exception stack trace ---
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperationAsync(ApiDescription apiDescription, SchemaRepository schemaRepository, Func`3 parametersGenerator, Func`3 bodyGenerator, Func`3 applyFilters)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperationAsync(ApiDescription apiDescription, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperationsAsync(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePathsAsync(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository, Func`3 operationsGenerator)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePathsAsync(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EduNexis.API.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Middleware\ExceptionMiddleware.cs:line 15
+2026-02-27 02:12:54.635 +06:00 [ERR] Unhandled exception: Failed to generate Operation for action - EduNexis.API.Controllers.CTController.UploadCopies (EduNexis.API). See inner exception
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Failed to generate Operation for action - EduNexis.API.Controllers.CTController.UploadCopies (EduNexis.API). See inner exception
+ ---> Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Error reading parameter(s) for action EduNexis.API.Controllers.CTController.UploadCopies (EduNexis.API) as [FromForm] attribute used with IFormFile. Please refer to https://github.com/domaindrivendev/Swashbuckle.AspNetCore#handle-forms-and-file-uploads for more information
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateParametersAsync(ApiDescription apiDescription, SchemaRepository schemaRespository, Func`3 parameterGenerator)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateParametersAsync(ApiDescription apiDescription, SchemaRepository schemaRespository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperationAsync(ApiDescription apiDescription, SchemaRepository schemaRepository, Func`3 parametersGenerator, Func`3 bodyGenerator, Func`3 applyFilters)
+   --- End of inner exception stack trace ---
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperationAsync(ApiDescription apiDescription, SchemaRepository schemaRepository, Func`3 parametersGenerator, Func`3 bodyGenerator, Func`3 applyFilters)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperationAsync(ApiDescription apiDescription, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperationsAsync(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePathsAsync(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository, Func`3 operationsGenerator)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePathsAsync(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EduNexis.API.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Middleware\ExceptionMiddleware.cs:line 15
+2026-02-27 02:13:28.076 +06:00 [ERR] Unhandled exception: Failed to generate Operation for action - EduNexis.API.Controllers.CTController.UploadCopies (EduNexis.API). See inner exception
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Failed to generate Operation for action - EduNexis.API.Controllers.CTController.UploadCopies (EduNexis.API). See inner exception
+ ---> Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Error reading parameter(s) for action EduNexis.API.Controllers.CTController.UploadCopies (EduNexis.API) as [FromForm] attribute used with IFormFile. Please refer to https://github.com/domaindrivendev/Swashbuckle.AspNetCore#handle-forms-and-file-uploads for more information
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateParametersAsync(ApiDescription apiDescription, SchemaRepository schemaRespository, Func`3 parameterGenerator)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateParametersAsync(ApiDescription apiDescription, SchemaRepository schemaRespository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperationAsync(ApiDescription apiDescription, SchemaRepository schemaRepository, Func`3 parametersGenerator, Func`3 bodyGenerator, Func`3 applyFilters)
+   --- End of inner exception stack trace ---
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperationAsync(ApiDescription apiDescription, SchemaRepository schemaRepository, Func`3 parametersGenerator, Func`3 bodyGenerator, Func`3 applyFilters)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperationAsync(ApiDescription apiDescription, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperationsAsync(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePathsAsync(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository, Func`3 operationsGenerator)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePathsAsync(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EduNexis.API.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Middleware\ExceptionMiddleware.cs:line 15
+2026-02-27 02:15:49.287 +06:00 [INF] HTTP POST /api/ct/events/3f55c2f6-acc8-49b2-8d4c-5097b7004a9a/upload-copies responded 401 in 63.9354 ms
+2026-02-27 02:17:17.933 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 3285.3238 ms
+2026-02-27 02:18:20.499 +06:00 [ERR] HTTP POST /api/ct/events/3f55c2f6-acc8-49b2-8d4c-5097b7004a9a/upload-copies responded 500 in 3706.0224 ms
+EduNexis.Domain.Exceptions.DomainException: File upload failed: Unknown API key YOUR_API_KEY
+   at EduNexis.Infrastructure.Services.Storage.CloudinaryStorageService.UploadAsync(Stream fileStream, String fileName, String folder, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\Services\Storage\CloudinaryStorageService.cs:line 63
+   at EduNexis.Application.Features.CT.Commands.UploadCTCopiesCommandHandler.Handle(UploadCTCopiesCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\CT\Commands\UploadCTCopiesCommand.cs:line 41
+   at EduNexis.API.Controllers.CTController.UploadCopies(Guid ctEventId, UploadCTCopiesRequest request, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\CTController.cs:line 44
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-02-27 02:18:20.528 +06:00 [ERR] Unhandled exception: File upload failed: Unknown API key YOUR_API_KEY
+EduNexis.Domain.Exceptions.DomainException: File upload failed: Unknown API key YOUR_API_KEY
+   at EduNexis.Infrastructure.Services.Storage.CloudinaryStorageService.UploadAsync(Stream fileStream, String fileName, String folder, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\Services\Storage\CloudinaryStorageService.cs:line 63
+   at EduNexis.Application.Features.CT.Commands.UploadCTCopiesCommandHandler.Handle(UploadCTCopiesCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\CT\Commands\UploadCTCopiesCommand.cs:line 41
+   at EduNexis.API.Controllers.CTController.UploadCopies(Guid ctEventId, UploadCTCopiesRequest request, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\CTController.cs:line 44
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EduNexis.API.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Middleware\ExceptionMiddleware.cs:line 15

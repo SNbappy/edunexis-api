@@ -37,15 +37,15 @@ public sealed class GradeCTSubmissionCommandHandler(
         var submission = await uow.GetRepository<CTSubmission>()
             .FirstOrDefaultAsync(s =>
                 s.CTEventId == command.CTEventId &&
-                s.StudentId == command.StudentId, ct)
-            ?? CTSubmission.Create(command.CTEventId, command.StudentId);
+                s.StudentId == command.StudentId, ct);
+
+        if (submission is null)
+        {
+            submission = CTSubmission.Create(command.CTEventId, command.StudentId);
+            await uow.GetRepository<CTSubmission>().AddAsync(submission, ct);
+        }
 
         submission.AssignMarks(command.Marks);
-
-        if (submission.Id == Guid.Empty)
-            await uow.GetRepository<CTSubmission>().AddAsync(submission, ct);
-        else
-            uow.GetRepository<CTSubmission>().Update(submission);
 
         await uow.SaveChangesAsync(ct);
         return ApiResponse.Ok("CT marks assigned successfully.");

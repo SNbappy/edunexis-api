@@ -189,3 +189,11 @@ System.InvalidOperationException: Could not create an instance of type 'System.I
    at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
    at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
    at EduNexis.API.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Middleware\ExceptionMiddleware.cs:line 15
+2026-02-26 23:30:56.731 +06:00 [INF] HTTP POST /api/Announcements/courses/bdfd5fd1-675f-4901-ac6f-45c59f7a55ab/announcements responded 401 in 135.0235 ms
+2026-02-26 23:32:05.881 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 3594.1600 ms
+2026-02-26 23:32:29.997 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 560.4139 ms
+2026-02-26 23:33:46.250 +06:00 [INF] HTTP POST /api/Announcements/courses/bdfd5fd1-675f-4901-ac6f-45c59f7a55ab/announcements responded 200 in 600.9479 ms
+2026-02-26 23:35:03.735 +06:00 [INF] HTTP GET /api/Announcements/courses/bdfd5fd1-675f-4901-ac6f-45c59f7a55ab/announcements responded 200 in 67.1001 ms
+2026-02-26 23:39:40.123 +06:00 [INF] HTTP POST /api/Assignments/courses/bdfd5fd1-675f-4901-ac6f-45c59f7a55ab/assignments responded 200 in 163.9929 ms
+2026-02-26 23:42:33.413 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 226.6058 ms
+2026-02-26 23:49:42.091 +06:00 [INF] HTTP POST /api/Assignments/assignments/9220e574-955f-4db4-b220-d4c546f64855/submit responded 200 in 238.9666 ms

@@ -22,13 +22,18 @@ public sealed class UploadCTCopiesCommandHandler(
         var ctEvent = await uow.GetRepository<CTEvent>().GetByIdAsync(command.CTEventId, ct)
             ?? throw new NotFoundException("CTEvent", command.CTEventId);
 
+        var folder = $"ct/{command.CTEventId}/{command.StudentId}";
+
         var submission = await uow.GetRepository<CTSubmission>()
             .FirstOrDefaultAsync(s =>
                 s.CTEventId == command.CTEventId &&
-                s.StudentId == command.StudentId, ct)
-            ?? CTSubmission.Create(command.CTEventId, command.StudentId);
+                s.StudentId == command.StudentId, ct);
 
-        var folder = $"ct/{command.CTEventId}/{command.StudentId}";
+        if (submission is null)
+        {
+            submission = CTSubmission.Create(command.CTEventId, command.StudentId);
+            await uow.GetRepository<CTSubmission>().AddAsync(submission, ct);
+        }
 
         string? bestUrl = null, worstUrl = null, avgUrl = null;
 
@@ -42,11 +47,6 @@ public sealed class UploadCTCopiesCommandHandler(
             avgUrl = await storage.UploadAsync(command.AvgCopyStream, command.AvgCopyFileName, folder, ct);
 
         submission.UploadCopies(bestUrl, worstUrl, avgUrl);
-
-        if (submission.Id == Guid.Empty)
-            await uow.GetRepository<CTSubmission>().AddAsync(submission, ct);
-        else
-            uow.GetRepository<CTSubmission>().Update(submission);
 
         await uow.SaveChangesAsync(ct);
         return ApiResponse.Ok("CT copies uploaded successfully.");

@@ -1,8 +1,11 @@
 using EduNexis.Application.DTOs;
 
+
 namespace EduNexis.Application.Features.Attendance.Commands;
 
+
 public record AttendanceEntry(Guid StudentId, AttendanceStatus Status);
+
 
 public record CreateAttendanceSessionCommand(
     Guid CourseId,
@@ -11,6 +14,7 @@ public record CreateAttendanceSessionCommand(
     string? Topic,
     List<AttendanceEntry> Entries
 ) : ICommand<ApiResponse<AttendanceSessionDto>>;
+
 
 public sealed class CreateAttendanceSessionCommandValidator
     : AbstractValidator<CreateAttendanceSessionCommand>
@@ -23,6 +27,7 @@ public sealed class CreateAttendanceSessionCommandValidator
     }
 }
 
+
 public sealed class CreateAttendanceSessionCommandHandler(
     IUnitOfWork uow
 ) : ICommandHandler<CreateAttendanceSessionCommand, ApiResponse<AttendanceSessionDto>>
@@ -33,18 +38,23 @@ public sealed class CreateAttendanceSessionCommandHandler(
         var course = await uow.Courses.GetByIdAsync(command.CourseId, ct)
             ?? throw new NotFoundException("Course", command.CourseId);
 
+
         bool isTeacher = course.TeacherId == command.CreatedById;
         var member = await uow.CourseMembers.GetMemberAsync(course.Id, command.CreatedById, ct);
         bool isCR = member?.IsCR ?? false;
 
+
         if (!isTeacher && !isCR)
             throw new UnauthorizedException("Only teacher or CR can take attendance.");
+
 
         var session = AttendanceSession.Create(
             command.CourseId, command.Date, command.Topic, command.CreatedById);
 
+
         await uow.GetRepository<AttendanceSession>().AddAsync(session, ct);
         await uow.SaveChangesAsync(ct);
+
 
         var records = new List<AttendanceRecord>();
         foreach (var entry in command.Entries)
@@ -54,10 +64,23 @@ public sealed class CreateAttendanceSessionCommandHandler(
             records.Add(record);
         }
 
+
         await uow.SaveChangesAsync(ct);
 
+
+        // ✅ Fetch profiles and filter in memory
+        var studentIds = command.Entries.Select(e => e.StudentId).ToHashSet();
+        var allProfiles = await uow.UserProfiles.GetAllAsync(ct);
+        var profileMap = allProfiles
+            .Where(p => studentIds.Contains(p.UserId))
+            .ToDictionary(p => p.UserId, p => p.FullName);
+
+
         var recordDtos = records.Select(r => new AttendanceRecordDto(
-            r.StudentId, string.Empty, r.Status.ToString())).ToList();
+            r.StudentId,
+            profileMap.TryGetValue(r.StudentId, out var name) ? name : "Unknown",
+            r.Status.ToString())).ToList();
+
 
         return ApiResponse<AttendanceSessionDto>.Ok(
             new AttendanceSessionDto(session.Id, session.CourseId,
