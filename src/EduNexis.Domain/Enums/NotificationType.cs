@@ -2,6 +2,7 @@ namespace EduNexis.Domain.Enums;
 
 public enum NotificationType
 {
+    JoinRequestReceived,
     CourseJoinApproved,
     CourseJoinRejected,
     NewMaterial,

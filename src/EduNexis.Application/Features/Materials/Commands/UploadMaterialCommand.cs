@@ -1,4 +1,4 @@
-namespace EduNexis.Application.Features.Materials.Commands;
+﻿namespace EduNexis.Application.Features.Materials.Commands;
 
 public record UploadMaterialCommand(
     Guid CourseId,
@@ -9,7 +9,8 @@ public record UploadMaterialCommand(
     string? FileName,
     string? EmbedUrl,
     string? Description,
-    string? Category
+    string? Category,
+    Guid? ParentFolderId
 ) : ICommand<ApiResponse>;
 
 public sealed class UploadMaterialCommandValidator : AbstractValidator<UploadMaterialCommand>
@@ -21,8 +22,8 @@ public sealed class UploadMaterialCommandValidator : AbstractValidator<UploadMat
             .NotNull().When(x => x.Type == MaterialType.File)
             .WithMessage("File is required for File type materials.");
         RuleFor(x => x.EmbedUrl)
-            .NotEmpty().When(x => x.Type != MaterialType.File)
-            .WithMessage("Embed URL is required for YouTube/GoogleDrive materials.");
+            .NotEmpty().When(x => x.Type == MaterialType.Link)
+            .WithMessage("Embed URL is required for Link type materials.");
     }
 }
 
@@ -56,7 +57,7 @@ public sealed class UploadMaterialCommandHandler(
         var material = Material.Create(
             command.CourseId, command.Title, command.Type,
             fileUrl, command.EmbedUrl, null,
-            command.Description, command.Category, command.UploadedById);
+            command.Description, command.Category, command.UploadedById, command.ParentFolderId);
 
         await uow.GetRepository<Material>().AddAsync(material, ct);
         await uow.SaveChangesAsync(ct);
@@ -64,3 +65,7 @@ public sealed class UploadMaterialCommandHandler(
         return ApiResponse.Ok("Material uploaded successfully.");
     }
 }
+
+
+
+

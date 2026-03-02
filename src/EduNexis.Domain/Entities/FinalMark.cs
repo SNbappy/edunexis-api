@@ -29,6 +29,15 @@ public class FinalMark : BaseEntity
             FinalMarkValue = finalMark
         };
 
+    public void UpdateMark(string breakdownJson, decimal finalMark)
+    {
+        BreakdownJson = breakdownJson;
+        FinalMarkValue = finalMark;
+        IsPublished = false;
+        PublishedAt = null;
+        SetUpdatedAt();
+    }
+
     public void Publish()
     {
         IsPublished = true;

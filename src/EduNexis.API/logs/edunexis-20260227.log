@@ -332,3 +332,8 @@ System.OperationCanceledException: The operation was canceled.
 2026-02-27 02:55:13.039 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 2621.2849 ms
 2026-02-27 02:56:15.151 +06:00 [INF] HTTP POST /api/courses/bdfd5fd1-675f-4901-ac6f-45c59f7a55ab/presentations responded 200 in 604.9706 ms
 2026-02-27 02:57:18.525 +06:00 [INF] HTTP POST /api/presentations/cae643e5-336d-4126-97dd-c67bfb0c4902/grade responded 200 in 181.6352 ms
+2026-02-27 03:17:54.688 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 3736.1023 ms
+2026-02-27 03:19:00.393 +06:00 [INF] HTTP POST /api/courses/bdfd5fd1-675f-4901-ac6f-45c59f7a55ab/grading-formula responded 200 in 650.7772 ms
+2026-02-27 03:19:53.354 +06:00 [INF] HTTP POST /api/courses/bdfd5fd1-675f-4901-ac6f-45c59f7a55ab/grading-formula/calculate responded 200 in 614.0569 ms
+2026-02-27 03:20:59.176 +06:00 [INF] HTTP GET /api/courses/bdfd5fd1-675f-4901-ac6f-45c59f7a55ab/marks responded 200 in 114.8461 ms
+2026-02-27 03:21:35.849 +06:00 [INF] HTTP POST /api/courses/bdfd5fd1-675f-4901-ac6f-45c59f7a55ab/grading-formula/publish responded 200 in 111.1184 ms

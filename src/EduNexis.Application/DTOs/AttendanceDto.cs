@@ -20,6 +20,6 @@ public record AttendanceSummaryDto(
     int TotalSessions,
     int PresentCount,
     int AbsentCount,
-    int LateCount,
+    int UnmarkedCount,
     decimal AttendancePercent
 );

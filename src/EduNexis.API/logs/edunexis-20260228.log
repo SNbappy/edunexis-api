@@ -1,0 +1,243 @@
+2026-02-28 15:42:29.973 +06:00 [INF] HTTP OPTIONS /api/Auth/register responded 204 in 11.3066 ms
+2026-02-28 15:42:37.188 +06:00 [ERR] An error occurred using the connection to database 'edunexis_db' on server 'localhost'.
+2026-02-28 15:42:41.458 +06:00 [ERR] An error occurred using the connection to database 'edunexis_db' on server 'localhost'.
+2026-02-28 15:42:46.634 +06:00 [ERR] An error occurred using the connection to database 'edunexis_db' on server 'localhost'.
+2026-02-28 15:42:51.676 +06:00 [INF] HTTP POST /api/Auth/register responded 200 in 21584.3862 ms
+2026-02-28 15:49:51.495 +06:00 [INF] HTTP OPTIONS /api/Auth/logout responded 204 in 1.1734 ms
+2026-02-28 15:49:51.735 +06:00 [INF] HTTP POST /api/Auth/logout responded 200 in 232.7040 ms
+2026-02-28 15:50:24.757 +06:00 [INF] HTTP OPTIONS /api/Auth/login responded 204 in 0.1077 ms
+2026-02-28 15:50:24.854 +06:00 [ERR] HTTP POST /api/Auth/login responded 500 in 81.0657 ms
+EduNexis.Domain.Exceptions.UnauthorizedException: Invalid email or password.
+   at EduNexis.Application.Features.Auth.Commands.LoginUserCommandHandler.Handle(LoginUserCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\Auth\Commands\LoginUserCommand.cs:line 29
+   at EduNexis.API.Controllers.AuthController.Login(LoginUserCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\AuthController.cs:line 18
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-02-28 15:50:24.922 +06:00 [ERR] Unhandled exception: Invalid email or password.
+EduNexis.Domain.Exceptions.UnauthorizedException: Invalid email or password.
+   at EduNexis.Application.Features.Auth.Commands.LoginUserCommandHandler.Handle(LoginUserCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\Auth\Commands\LoginUserCommand.cs:line 29
+   at EduNexis.API.Controllers.AuthController.Login(LoginUserCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\AuthController.cs:line 18
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EduNexis.API.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Middleware\ExceptionMiddleware.cs:line 15
+2026-02-28 15:50:37.128 +06:00 [INF] HTTP OPTIONS /api/Auth/login responded 204 in 1.1302 ms
+2026-02-28 15:50:37.148 +06:00 [ERR] HTTP POST /api/Auth/login responded 500 in 7.6664 ms
+EduNexis.Domain.Exceptions.UnauthorizedException: Invalid email or password.
+   at EduNexis.Application.Features.Auth.Commands.LoginUserCommandHandler.Handle(LoginUserCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\Auth\Commands\LoginUserCommand.cs:line 29
+   at EduNexis.API.Controllers.AuthController.Login(LoginUserCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\AuthController.cs:line 18
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-02-28 15:50:37.164 +06:00 [ERR] Unhandled exception: Invalid email or password.
+EduNexis.Domain.Exceptions.UnauthorizedException: Invalid email or password.
+   at EduNexis.Application.Features.Auth.Commands.LoginUserCommandHandler.Handle(LoginUserCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\Auth\Commands\LoginUserCommand.cs:line 29
+   at EduNexis.API.Controllers.AuthController.Login(LoginUserCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\AuthController.cs:line 18
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EduNexis.API.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Middleware\ExceptionMiddleware.cs:line 15
+2026-02-28 15:50:45.244 +06:00 [INF] HTTP OPTIONS /api/Auth/login responded 204 in 0.0689 ms
+2026-02-28 15:50:45.524 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 268.4883 ms
+2026-02-28 15:53:17.129 +06:00 [INF] HTTP OPTIONS /api/Courses/my responded 204 in 0.2653 ms
+2026-02-28 15:53:17.129 +06:00 [INF] HTTP OPTIONS /api/Courses/my responded 204 in 0.6196 ms
+2026-02-28 15:53:17.150 +06:00 [INF] HTTP GET /api/Courses/my responded 404 in 4.1499 ms
+2026-02-28 15:53:17.156 +06:00 [INF] HTTP GET /api/Courses/my responded 404 in 0.4672 ms
+2026-02-28 15:53:25.147 +06:00 [INF] HTTP OPTIONS /api/Courses/my responded 204 in 0.1511 ms
+2026-02-28 15:53:25.147 +06:00 [INF] HTTP OPTIONS /api/Courses/my responded 204 in 0.3809 ms
+2026-02-28 15:53:25.160 +06:00 [INF] HTTP GET /api/Courses/my responded 404 in 0.6389 ms
+2026-02-28 15:53:25.165 +06:00 [INF] HTTP GET /api/Courses/my responded 404 in 0.4414 ms
+2026-02-28 15:59:54.641 +06:00 [INF] HTTP OPTIONS /api/Auth/login responded 204 in 1.0592 ms
+2026-02-28 15:59:54.984 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 334.7870 ms
+2026-02-28 15:59:55.170 +06:00 [INF] HTTP OPTIONS /api/Courses/my responded 204 in 0.0862 ms
+2026-02-28 15:59:55.172 +06:00 [INF] HTTP OPTIONS /api/Courses/my responded 204 in 0.0898 ms
+2026-02-28 15:59:55.177 +06:00 [INF] HTTP GET /api/Courses/my responded 404 in 0.5406 ms
+2026-02-28 15:59:55.185 +06:00 [INF] HTTP GET /api/Courses/my responded 404 in 0.4288 ms
+2026-02-28 15:59:58.782 +06:00 [INF] HTTP OPTIONS /api/Auth/logout responded 204 in 0.1249 ms
+2026-02-28 15:59:58.808 +06:00 [INF] HTTP POST /api/Auth/logout responded 200 in 15.9979 ms
+2026-02-28 16:06:37.495 +06:00 [INF] HTTP OPTIONS /api/Auth/login responded 204 in 0.1623 ms
+2026-02-28 16:06:37.763 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 259.9404 ms
+2026-02-28 16:06:38.035 +06:00 [INF] HTTP OPTIONS /api/Courses/my responded 204 in 0.0862 ms
+2026-02-28 16:06:38.037 +06:00 [INF] HTTP OPTIONS /api/Courses/my responded 204 in 0.2736 ms
+2026-02-28 16:06:38.044 +06:00 [INF] HTTP GET /api/Courses/my responded 404 in 0.4667 ms
+2026-02-28 16:06:38.051 +06:00 [INF] HTTP GET /api/Courses/my responded 404 in 0.6790 ms
+2026-02-28 16:06:56.784 +06:00 [INF] HTTP OPTIONS /api/Courses/my responded 204 in 0.1027 ms
+2026-02-28 16:06:56.784 +06:00 [INF] HTTP OPTIONS /api/Courses/my responded 204 in 0.1102 ms
+2026-02-28 16:06:56.791 +06:00 [INF] HTTP GET /api/Courses/my responded 404 in 1.0710 ms
+2026-02-28 16:06:56.796 +06:00 [INF] HTTP GET /api/Courses/my responded 404 in 0.2974 ms
+2026-02-28 16:07:51.971 +06:00 [INF] HTTP OPTIONS /api/Auth/logout responded 204 in 0.1611 ms
+2026-02-28 16:07:52.002 +06:00 [INF] HTTP POST /api/Auth/logout responded 200 in 24.6516 ms
+2026-02-28 16:13:56.131 +06:00 [INF] HTTP OPTIONS /api/Auth/login responded 204 in 0.1833 ms
+2026-02-28 16:13:56.425 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 287.1622 ms
+2026-02-28 16:14:36.535 +06:00 [INF] HTTP OPTIONS /api/Courses/my responded 204 in 0.1098 ms
+2026-02-28 16:14:36.537 +06:00 [INF] HTTP OPTIONS /api/Courses/my responded 204 in 0.5365 ms
+2026-02-28 16:14:36.558 +06:00 [INF] HTTP GET /api/Courses/my responded 404 in 7.4818 ms
+2026-02-28 16:14:36.564 +06:00 [INF] HTTP GET /api/Courses/my responded 404 in 0.7046 ms
+2026-02-28 16:16:11.068 +06:00 [INF] HTTP OPTIONS /api/Auth/login responded 204 in 0.7733 ms
+2026-02-28 16:16:11.423 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 331.0957 ms
+2026-02-28 16:20:10.443 +06:00 [INF] HTTP OPTIONS /api/Assignments/my responded 204 in 0.2440 ms
+2026-02-28 16:20:10.443 +06:00 [INF] HTTP OPTIONS /api/Assignments/my responded 204 in 0.2430 ms
+2026-02-28 16:20:10.462 +06:00 [INF] HTTP GET /api/Assignments/my responded 404 in 1.2574 ms
+2026-02-28 16:20:10.471 +06:00 [INF] HTTP GET /api/Assignments/my responded 404 in 2.6162 ms
+2026-02-28 16:23:51.849 +06:00 [INF] HTTP OPTIONS /api/Results/my responded 204 in 0.1096 ms
+2026-02-28 16:23:51.849 +06:00 [INF] HTTP OPTIONS /api/Results/my responded 204 in 0.5756 ms
+2026-02-28 16:23:51.864 +06:00 [INF] HTTP GET /api/Results/my responded 404 in 1.0870 ms
+2026-02-28 16:23:51.872 +06:00 [INF] HTTP GET /api/Results/my responded 404 in 1.5577 ms
+2026-02-28 19:56:21.916 +06:00 [INF] HTTP OPTIONS /api/Auth/login responded 204 in 34.3882 ms
+2026-02-28 19:56:27.814 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 5657.0509 ms
+2026-02-28 19:58:02.643 +06:00 [INF] HTTP OPTIONS /api/Auth/login responded 204 in 5.2899 ms
+2026-02-28 19:58:03.428 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 778.2100 ms
+2026-02-28 20:10:18.378 +06:00 [INF] HTTP OPTIONS /api/courses responded 204 in 0.5007 ms
+2026-02-28 20:10:18.378 +06:00 [INF] HTTP OPTIONS /api/courses responded 204 in 0.4986 ms
+2026-02-28 20:10:18.857 +06:00 [INF] HTTP GET /api/courses responded 200 in 457.8192 ms
+2026-02-28 20:10:18.876 +06:00 [INF] HTTP GET /api/courses responded 200 in 17.0399 ms
+2026-02-28 20:10:24.141 +06:00 [INF] HTTP OPTIONS /api/courses responded 204 in 0.1961 ms
+2026-02-28 20:10:24.141 +06:00 [INF] HTTP OPTIONS /api/courses responded 204 in 0.1488 ms
+2026-02-28 20:10:24.196 +06:00 [INF] HTTP GET /api/courses responded 200 in 47.3811 ms
+2026-02-28 20:10:24.211 +06:00 [INF] HTTP GET /api/courses responded 200 in 13.2177 ms
+2026-02-28 20:10:25.816 +06:00 [INF] HTTP GET /api/courses responded 200 in 55.1864 ms
+2026-02-28 20:10:25.836 +06:00 [INF] HTTP GET /api/courses responded 200 in 16.6777 ms
+2026-02-28 20:10:37.729 +06:00 [INF] HTTP OPTIONS /api/Auth/logout responded 204 in 0.0870 ms
+2026-02-28 20:10:37.785 +06:00 [INF] HTTP POST /api/Auth/logout responded 200 in 49.0978 ms
+2026-02-28 20:11:17.240 +06:00 [INF] HTTP OPTIONS /api/Auth/register responded 204 in 0.1804 ms
+2026-02-28 20:11:17.882 +06:00 [INF] HTTP POST /api/Auth/register responded 200 in 626.5072 ms
+2026-02-28 20:11:32.989 +06:00 [INF] HTTP OPTIONS /api/courses responded 204 in 0.0682 ms
+2026-02-28 20:11:32.990 +06:00 [INF] HTTP OPTIONS /api/courses responded 204 in 0.0680 ms
+2026-02-28 20:11:33.087 +06:00 [INF] HTTP GET /api/courses responded 200 in 88.1423 ms
+2026-02-28 20:11:33.107 +06:00 [INF] HTTP GET /api/courses responded 200 in 17.7608 ms
+2026-02-28 20:14:03.846 +06:00 [INF] HTTP OPTIONS /api/courses responded 204 in 0.3981 ms
+2026-02-28 20:14:03.846 +06:00 [INF] HTTP OPTIONS /api/courses responded 204 in 0.4105 ms
+2026-02-28 20:14:03.907 +06:00 [INF] HTTP GET /api/courses responded 200 in 50.1981 ms
+2026-02-28 20:14:03.940 +06:00 [INF] HTTP GET /api/courses responded 200 in 32.0859 ms
+2026-02-28 20:14:08.774 +06:00 [INF] HTTP GET /api/courses responded 200 in 24.2341 ms
+2026-02-28 20:14:08.790 +06:00 [INF] HTTP GET /api/courses responded 200 in 12.6655 ms
+2026-02-28 20:14:10.783 +06:00 [INF] HTTP OPTIONS /api/courses responded 204 in 0.4545 ms
+2026-02-28 20:14:10.783 +06:00 [INF] HTTP OPTIONS /api/courses responded 204 in 0.4545 ms
+2026-02-28 20:14:10.822 +06:00 [INF] HTTP GET /api/courses responded 200 in 33.0716 ms
+2026-02-28 20:14:10.837 +06:00 [INF] HTTP GET /api/courses responded 200 in 11.8571 ms
+2026-02-28 20:16:14.773 +06:00 [INF] HTTP OPTIONS /api/courses responded 204 in 0.2825 ms
+2026-02-28 20:16:14.774 +06:00 [INF] HTTP OPTIONS /api/courses responded 204 in 0.3509 ms
+2026-02-28 20:16:14.827 +06:00 [INF] HTTP GET /api/courses responded 200 in 43.4050 ms
+2026-02-28 20:16:14.844 +06:00 [INF] HTTP GET /api/courses responded 200 in 15.7424 ms
+2026-02-28 20:16:18.473 +06:00 [INF] HTTP GET /api/courses responded 200 in 29.4083 ms
+2026-02-28 20:16:18.490 +06:00 [INF] HTTP GET /api/courses responded 200 in 15.6955 ms
+2026-02-28 20:22:25.924 +06:00 [INF] HTTP OPTIONS /api/Auth/logout responded 204 in 0.1804 ms
+2026-02-28 20:22:25.965 +06:00 [INF] HTTP POST /api/Auth/logout responded 200 in 34.8637 ms
+2026-02-28 21:12:44.383 +06:00 [INF] HTTP OPTIONS /api/Auth/login responded 204 in 12.6975 ms
+2026-02-28 21:12:57.745 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 13057.0711 ms
+2026-02-28 21:13:03.068 +06:00 [INF] HTTP OPTIONS /api/courses responded 204 in 1.9252 ms
+2026-02-28 21:13:03.068 +06:00 [INF] HTTP OPTIONS /api/courses responded 204 in 1.9248 ms
+2026-02-28 21:13:04.101 +06:00 [INF] HTTP GET /api/courses responded 200 in 995.4509 ms
+2026-02-28 21:13:04.261 +06:00 [INF] HTTP GET /api/courses responded 200 in 157.4028 ms
+2026-02-28 21:13:08.156 +06:00 [INF] HTTP OPTIONS /api/courses responded 204 in 0.2944 ms
+2026-02-28 21:13:08.158 +06:00 [INF] HTTP OPTIONS /api/courses responded 204 in 0.1299 ms
+2026-02-28 21:13:08.250 +06:00 [INF] HTTP GET /api/courses responded 200 in 83.3021 ms
+2026-02-28 21:13:08.277 +06:00 [INF] HTTP GET /api/courses responded 200 in 23.6820 ms
+2026-02-28 21:13:09.369 +06:00 [INF] HTTP GET /api/courses responded 200 in 55.8150 ms
+2026-02-28 21:13:09.395 +06:00 [INF] HTTP GET /api/courses responded 200 in 22.8633 ms
+2026-02-28 21:13:10.638 +06:00 [INF] HTTP GET /api/courses responded 200 in 50.2823 ms
+2026-02-28 21:13:10.662 +06:00 [INF] HTTP GET /api/courses responded 200 in 22.4676 ms
+2026-02-28 21:18:15.104 +06:00 [INF] HTTP OPTIONS /profile responded 204 in 5.0880 ms
+2026-02-28 21:18:15.104 +06:00 [INF] HTTP OPTIONS /profile responded 204 in 5.1135 ms
+2026-02-28 21:18:15.188 +06:00 [INF] HTTP GET /profile responded 404 in 40.5491 ms
+2026-02-28 21:18:15.227 +06:00 [INF] HTTP GET /profile responded 404 in 2.5067 ms
+2026-02-28 21:18:20.360 +06:00 [INF] HTTP OPTIONS /profile responded 204 in 0.3528 ms
+2026-02-28 21:18:20.360 +06:00 [INF] HTTP OPTIONS /profile responded 204 in 0.3462 ms
+2026-02-28 21:18:20.375 +06:00 [INF] HTTP GET /profile responded 404 in 0.9070 ms
+2026-02-28 21:18:20.404 +06:00 [INF] HTTP GET /profile responded 404 in 1.0412 ms
+2026-02-28 21:18:29.359 +06:00 [INF] HTTP OPTIONS /profile responded 204 in 1.7124 ms
+2026-02-28 21:18:29.359 +06:00 [INF] HTTP OPTIONS /profile responded 204 in 0.5650 ms
+2026-02-28 21:18:29.373 +06:00 [INF] HTTP GET /profile responded 404 in 1.5627 ms
+2026-02-28 21:18:29.399 +06:00 [INF] HTTP GET /profile responded 404 in 0.7075 ms
+2026-02-28 21:19:09.485 +06:00 [INF] HTTP OPTIONS /profile responded 204 in 1.4196 ms
+2026-02-28 21:19:09.485 +06:00 [INF] HTTP OPTIONS /profile responded 204 in 0.8840 ms
+2026-02-28 21:19:09.507 +06:00 [INF] HTTP GET /profile responded 404 in 7.1219 ms
+2026-02-28 21:19:09.527 +06:00 [INF] HTTP GET /profile responded 404 in 4.5919 ms
+2026-02-28 21:24:35.364 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 1.7948 ms
+2026-02-28 21:24:35.364 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 1.7088 ms
+2026-02-28 21:24:37.098 +06:00 [INF] HTTP GET /api/profile responded 200 in 1680.3580 ms
+2026-02-28 21:24:37.185 +06:00 [INF] HTTP GET /api/profile responded 200 in 86.8780 ms
+2026-02-28 21:24:47.181 +06:00 [INF] HTTP OPTIONS /api/courses responded 204 in 0.2947 ms
+2026-02-28 21:24:47.181 +06:00 [INF] HTTP OPTIONS /api/courses responded 204 in 0.2947 ms
+2026-02-28 21:24:47.694 +06:00 [INF] HTTP GET /api/courses responded 200 in 502.4465 ms
+2026-02-28 21:24:47.706 +06:00 [INF] HTTP GET /api/courses responded 200 in 10.5844 ms
+2026-02-28 21:24:48.438 +06:00 [INF] HTTP GET /api/courses responded 200 in 48.2983 ms
+2026-02-28 21:24:48.465 +06:00 [INF] HTTP GET /api/courses responded 200 in 25.7936 ms
+2026-02-28 21:24:52.266 +06:00 [INF] HTTP OPTIONS /api/courses responded 204 in 0.1483 ms
+2026-02-28 21:24:52.266 +06:00 [INF] HTTP OPTIONS /api/courses responded 204 in 0.1484 ms
+2026-02-28 21:24:52.306 +06:00 [INF] HTTP GET /api/courses responded 200 in 29.8351 ms
+2026-02-28 21:24:52.320 +06:00 [INF] HTTP GET /api/courses responded 200 in 11.8928 ms
+2026-02-28 21:24:54.441 +06:00 [INF] HTTP GET /api/courses responded 200 in 29.5894 ms
+2026-02-28 21:24:54.490 +06:00 [INF] HTTP GET /api/courses responded 200 in 47.6497 ms
+2026-02-28 21:24:56.180 +06:00 [INF] HTTP GET /api/courses responded 200 in 36.5027 ms
+2026-02-28 21:24:56.206 +06:00 [INF] HTTP GET /api/courses responded 200 in 24.7890 ms
+2026-02-28 22:37:11.548 +06:00 [INF] HTTP GET /api/profile responded 401 in 75.9297 ms
+2026-02-28 22:37:25.869 +06:00 [INF] HTTP GET /api/profile responded 401 in 7.2803 ms
+2026-02-28 22:37:27.224 +06:00 [INF] HTTP GET /api/profile responded 401 in 4.6713 ms
+2026-02-28 22:37:41.045 +06:00 [INF] HTTP GET /api/profile responded 401 in 0.5324 ms
+2026-02-28 22:37:41.796 +06:00 [INF] HTTP GET /api/profile responded 401 in 0.6515 ms
+2026-02-28 22:37:59.112 +06:00 [INF] HTTP OPTIONS /api/Auth/login responded 204 in 22.8986 ms
+2026-02-28 22:38:04.689 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 5559.1753 ms
+2026-02-28 22:38:07.203 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.2021 ms
+2026-02-28 22:38:07.204 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.0562 ms
+2026-02-28 22:38:07.410 +06:00 [INF] HTTP GET /api/profile responded 200 in 198.1526 ms
+2026-02-28 22:38:07.448 +06:00 [INF] HTTP GET /api/profile responded 200 in 36.3812 ms
+2026-02-28 22:38:15.921 +06:00 [INF] HTTP GET /api/profile responded 401 in 1.2776 ms
+2026-02-28 22:38:23.553 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.1243 ms
+2026-02-28 22:38:23.553 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.1136 ms
+2026-02-28 22:38:55.961 +06:00 [INF] HTTP OPTIONS /api/profile/photo responded 204 in 0.2064 ms
+2026-02-28 22:38:59.217 +06:00 [INF] HTTP POST /api/profile/photo responded 200 in 3245.9092 ms
+2026-02-28 22:39:08.765 +06:00 [INF] HTTP OPTIONS /api/profile/photo responded 204 in 0.3118 ms
+2026-02-28 22:39:10.770 +06:00 [INF] HTTP POST /api/profile/photo responded 200 in 1994.5166 ms
+2026-02-28 22:39:30.225 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.1894 ms
+2026-02-28 22:39:30.314 +06:00 [INF] HTTP PUT /api/profile responded 200 in 79.8462 ms
+2026-02-28 22:40:01.033 +06:00 [INF] HTTP OPTIONS /api/profile/photo responded 204 in 0.2833 ms
+2026-02-28 22:40:03.100 +06:00 [INF] HTTP POST /api/profile/photo responded 200 in 2059.0124 ms
+2026-02-28 22:41:35.051 +06:00 [INF] HTTP OPTIONS /api/courses responded 204 in 0.1603 ms
+2026-02-28 22:41:35.052 +06:00 [INF] HTTP OPTIONS /api/courses responded 204 in 0.0900 ms
+2026-02-28 22:41:35.404 +06:00 [INF] HTTP GET /api/courses responded 200 in 342.4874 ms
+2026-02-28 22:41:35.421 +06:00 [INF] HTTP GET /api/courses responded 200 in 13.8345 ms
+2026-02-28 22:41:42.446 +06:00 [INF] HTTP OPTIONS /api/Auth/logout responded 204 in 0.3370 ms
+2026-02-28 22:41:42.499 +06:00 [INF] HTTP POST /api/Auth/logout responded 200 in 44.0660 ms
+2026-02-28 22:41:55.955 +06:00 [INF] HTTP OPTIONS /api/Auth/login responded 204 in 0.1176 ms
+2026-02-28 22:41:56.353 +06:00 [INF] HTTP POST /api/Auth/login responded 200 in 382.9121 ms

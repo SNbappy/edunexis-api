@@ -26,4 +26,13 @@ public class AnnouncementsController : BaseController
             AttachmentStream: attachment?.OpenReadStream(),
             AttachmentFileName: attachment?.FileName
         ), ct));
+
+    [HttpDelete("courses/{courseId:guid}/announcements/{id:guid}")]
+    public async Task<IActionResult> Delete(Guid courseId, Guid id, CancellationToken ct) =>
+        Ok(await Mediator.Send(new DeleteAnnouncementCommand(courseId, id), ct));
+
+    [HttpPatch("courses/{courseId:guid}/announcements/{id:guid}/pin")]
+    [Authorize(Roles = "Teacher,Admin")]
+    public async Task<IActionResult> TogglePin(Guid courseId, Guid id, CancellationToken ct) =>
+        Ok(await Mediator.Send(new PinAnnouncementCommand(courseId, id), ct));
 }

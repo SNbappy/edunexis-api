@@ -1,20 +1,23 @@
+using EduNexis.Application.Features.Notifications.Commands;
 using EduNexis.Domain.Entities;
 
 namespace EduNexis.Application.Features.Courses.Commands;
 
-public record RequestJoinCourseCommand(Guid CourseId) : ICommand<ApiResponse>;
+public record RequestJoinCourseCommand(Guid CourseId, string JoiningCode) : ICommand<ApiResponse>;
 
 public sealed class RequestJoinCourseCommandValidator : AbstractValidator<RequestJoinCourseCommand>
 {
     public RequestJoinCourseCommandValidator()
     {
         RuleFor(x => x.CourseId).NotEmpty();
+        RuleFor(x => x.JoiningCode).NotEmpty().WithMessage("Joining code is required.");
     }
 }
 
 public sealed class RequestJoinCourseCommandHandler(
     IUnitOfWork uow,
-    ICurrentUserService currentUser
+    ICurrentUserService currentUser,
+    ISender sender
 ) : ICommandHandler<RequestJoinCourseCommand, ApiResponse>
 {
     public async ValueTask<ApiResponse> Handle(
@@ -29,6 +32,9 @@ public sealed class RequestJoinCourseCommandHandler(
         if (course.IsArchived)
             return ApiResponse.Fail("This course is no longer active.");
 
+        if (!string.Equals(course.JoiningCode, cmd.JoiningCode, StringComparison.OrdinalIgnoreCase))
+            return ApiResponse.Fail("Invalid joining code.");
+
         var existingMember = await uow.CourseMembers.GetMemberAsync(cmd.CourseId, userId, ct);
         if (existingMember is not null && existingMember.IsActive)
             return ApiResponse.Fail("You are already a member of this course.");
@@ -39,6 +45,17 @@ public sealed class RequestJoinCourseCommandHandler(
 
         await uow.JoinRequests.AddAsync(JoinRequest.Create(cmd.CourseId, userId), ct);
         await uow.SaveChangesAsync(ct);
+
+        var student = await uow.Users.GetWithProfileAsync(userId, ct);
+        var studentName = student?.Profile?.FullName ?? "A student";
+
+        await sender.Send(new SendNotificationCommand(
+            UserId: course.TeacherId,
+            Title: "New Join Request",
+            Body: $"{studentName} has requested to join {course.Title}.",
+            Type: NotificationType.JoinRequestReceived,
+            RedirectUrl: $"/courses/{course.Id}/members"
+        ), ct);
 
         return ApiResponse.Ok("Join request sent successfully.");
     }

@@ -1,4 +1,4 @@
-using EduNexis.Application.DTOs;
+﻿using EduNexis.Application.DTOs;
 
 
 namespace EduNexis.Application.Features.Attendance.Commands;
@@ -87,3 +87,4 @@ public sealed class CreateAttendanceSessionCommandHandler(
                 session.Date, session.Topic, recordDtos));
     }
 }
+

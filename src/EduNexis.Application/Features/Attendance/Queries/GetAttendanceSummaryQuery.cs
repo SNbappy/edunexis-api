@@ -35,17 +35,17 @@ public sealed class GetAttendanceSummaryQueryHandler(
                 .FindAsync(r => sessions.Select(s => s.Id).Contains(r.SessionId)
                     && r.StudentId == member.UserId, ct);
 
-            var present = allRecords.Count(r => r.Status == AttendanceStatus.Present);
-            var absent = allRecords.Count(r => r.Status == AttendanceStatus.Absent);
-            var late = allRecords.Count(r => r.Status == AttendanceStatus.Late);
-            var percent = totalSessions > 0
-                ? Math.Round((decimal)(present + late) / totalSessions * 100, 2)
+            var present  = allRecords.Count(r => r.Status == AttendanceStatus.Present);
+            var absent   = allRecords.Count(r => r.Status == AttendanceStatus.Absent);
+            var unmarked = allRecords.Count(r => r.Status == AttendanceStatus.Unmarked);
+            var percent  = totalSessions > 0
+                ? Math.Round((decimal)present / totalSessions * 100, 2)
                 : 0;
 
             dtos.Add(new AttendanceSummaryDto(
                 member.UserId,
                 user?.Profile?.FullName ?? "Unknown",
-                totalSessions, present, absent, late, percent));
+                totalSessions, present, absent, unmarked, percent));
         }
 
         return ApiResponse<List<AttendanceSummaryDto>>.Ok(dtos);

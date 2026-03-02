@@ -1,4 +1,4 @@
-namespace EduNexis.Application.Features.Materials.Queries;
+﻿namespace EduNexis.Application.Features.Materials.Queries;
 
 public record MaterialDto(
     Guid Id,
@@ -10,12 +10,14 @@ public record MaterialDto(
     string? Category,
     bool IsPinned,
     int DownloadCount,
-    DateTime CreatedAt
+    DateTime CreatedAt,
+    Guid? ParentFolderId
 );
 
 public record GetMaterialsQuery(
     Guid CourseId,
-    string? Category = null
+    string? Category = null,
+    Guid? ParentFolderId = null
 ) : IQuery<ApiResponse<List<MaterialDto>>>;
 
 public sealed class GetMaterialsQueryHandler(
@@ -25,8 +27,12 @@ public sealed class GetMaterialsQueryHandler(
     public async ValueTask<ApiResponse<List<MaterialDto>>> Handle(
         GetMaterialsQuery query, CancellationToken ct)
     {
-        var materials = await uow.GetRepository<Material>()
-            .FindAsync(m => m.CourseId == query.CourseId, ct);
+        var repo = uow.GetRepository<Material>();
+
+        var materials = await repo.FindAsync(m =>
+            m.CourseId == query.CourseId &&
+            m.ParentFolderId == query.ParentFolderId,
+            ct);
 
         if (!string.IsNullOrEmpty(query.Category))
             materials = materials.Where(m => m.Category == query.Category);
@@ -35,8 +41,18 @@ public sealed class GetMaterialsQueryHandler(
             .OrderByDescending(m => m.IsPinned)
             .ThenByDescending(m => m.CreatedAt)
             .Select(m => new MaterialDto(
-                m.Id, m.Title, m.Type.ToString(), m.FileUrl, m.EmbedUrl,
-                m.Description, m.Category, m.IsPinned, m.DownloadCount, m.CreatedAt))
+                m.Id,
+                m.Title,
+                m.Type.ToString(),
+                m.FileUrl,
+                m.EmbedUrl,
+                m.Description,
+                m.Category,
+                m.IsPinned,
+                m.DownloadCount,
+                m.CreatedAt,
+                m.ParentFolderId
+            ))
             .ToList();
 
         return ApiResponse<List<MaterialDto>>.Ok(dtos);

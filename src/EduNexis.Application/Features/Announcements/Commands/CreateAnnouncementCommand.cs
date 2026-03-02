@@ -3,7 +3,7 @@ namespace EduNexis.Application.Features.Announcements.Commands;
 public record AnnouncementDto(
     Guid Id, Guid CourseId, Guid AuthorId,
     string AuthorName, string Content,
-    string? AttachmentUrl, DateTime CreatedAt
+    string? AttachmentUrl, bool IsPinned, DateTime CreatedAt
 );
 
 public record CreateAnnouncementCommand(
@@ -59,6 +59,7 @@ public sealed class CreateAnnouncementCommandHandler(
         return ApiResponse<AnnouncementDto>.Ok(new AnnouncementDto(
             announcement.Id, announcement.CourseId, announcement.AuthorId,
             author?.Profile?.FullName ?? "Unknown",
-            announcement.Content, announcement.AttachmentUrl, announcement.CreatedAt));
+            announcement.Content, announcement.AttachmentUrl,
+            announcement.IsPinned, announcement.CreatedAt));
     }
 }

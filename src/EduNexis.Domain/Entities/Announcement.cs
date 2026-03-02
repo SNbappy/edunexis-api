@@ -6,6 +6,7 @@ public class Announcement : BaseEntity
     public Guid AuthorId { get; private set; }
     public string Content { get; private set; } = string.Empty;
     public string? AttachmentUrl { get; private set; }
+    public bool IsPinned { get; private set; } = false;
 
     // Navigation
     public Course Course { get; private set; } = null!;
@@ -35,4 +36,7 @@ public class Announcement : BaseEntity
         AttachmentUrl = attachmentUrl;
         SetUpdatedAt();
     }
+
+    public void Pin()   { IsPinned = true;  SetUpdatedAt(); }
+    public void Unpin() { IsPinned = false; SetUpdatedAt(); }
 }

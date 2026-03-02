@@ -5,6 +5,8 @@ public abstract class BaseEntity
     public Guid Id { get; protected set; } = Guid.NewGuid();
     public DateTime CreatedAt { get; protected set; } = DateTime.UtcNow;
     public DateTime? UpdatedAt { get; protected set; }
+    public bool IsDeleted { get; protected set; } = false;
+    public DateTime? DeletedAt { get; protected set; }
 
     private readonly List<IDomainEvent> _domainEvents = [];
     public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
@@ -14,4 +16,11 @@ public abstract class BaseEntity
 
     public void ClearDomainEvents() => _domainEvents.Clear();
     protected void SetUpdatedAt() => UpdatedAt = DateTime.UtcNow;
+
+    public void Delete()
+    {
+        IsDeleted = true;
+        DeletedAt = DateTime.UtcNow;
+        SetUpdatedAt();
+    }
 }

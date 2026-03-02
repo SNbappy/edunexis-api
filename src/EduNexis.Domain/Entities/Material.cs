@@ -1,4 +1,4 @@
-namespace EduNexis.Domain.Entities;
+﻿namespace EduNexis.Domain.Entities;
 
 public class Material : BaseEntity
 {
@@ -12,6 +12,7 @@ public class Material : BaseEntity
     public string? Category { get; private set; }
     public bool IsPinned { get; private set; } = false;
     public int DownloadCount { get; private set; } = 0;
+    public Guid? ParentFolderId { get; private set; }
     public Guid UploadedById { get; private set; }
 
     // Navigation
@@ -23,7 +24,7 @@ public class Material : BaseEntity
     public static Material Create(
         Guid courseId, string title, MaterialType type,
         string? fileUrl, string? embedUrl, string? thumbnailUrl,
-        string? description, string? category, Guid uploadedById)
+        string? description, string? category, Guid uploadedById, Guid? parentFolderId = null)
     {
         if (string.IsNullOrWhiteSpace(title))
             throw new DomainException("Material title is required.");
@@ -38,7 +39,8 @@ public class Material : BaseEntity
             ThumbnailUrl = thumbnailUrl,
             Description = description,
             Category = category,
-            UploadedById = uploadedById
+            UploadedById = uploadedById,
+            ParentFolderId = parentFolderId
         };
     }
 
@@ -54,3 +56,6 @@ public class Material : BaseEntity
     public void Unpin() { IsPinned = false; SetUpdatedAt(); }
     public void IncrementDownload() { DownloadCount++; SetUpdatedAt(); }
 }
+
+
+
