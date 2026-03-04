@@ -4,6 +4,7 @@ using EduNexis.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EduNexis.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260304053804_AddUserEducation")]
+    partial class AddUserEducation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1258,9 +1261,6 @@ namespace EduNexis.Infrastructure.Persistence.Migrations
                     b.Property<string>("Bio")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("CoverPhotoUrl")
-                        .HasColumnType("longtext");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
@@ -1274,14 +1274,8 @@ namespace EduNexis.Infrastructure.Persistence.Migrations
                     b.Property<string>("Designation")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("FacebookUrl")
-                        .HasColumnType("longtext");
-
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("GitHubUrl")
                         .HasColumnType("longtext");
 
                     b.Property<bool>("IsDeleted")
@@ -1302,17 +1296,11 @@ namespace EduNexis.Infrastructure.Persistence.Migrations
                     b.Property<string>("StudentId")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("TwitterUrl")
-                        .HasColumnType("longtext");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("char(36)");
-
-                    b.Property<string>("WebsiteUrl")
-                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 

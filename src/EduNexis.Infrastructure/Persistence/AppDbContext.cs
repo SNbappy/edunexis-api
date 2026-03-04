@@ -32,6 +32,7 @@ public class AppDbContext : DbContext
     public DbSet<AnnouncementComment> AnnouncementComments => Set<AnnouncementComment>();
     public DbSet<Notification> Notifications => Set<Notification>();
     public DbSet<AuditLog> AuditLogs => Set<AuditLog>();
+    public DbSet<UserEducation> UserEducations => Set<UserEducation>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -81,4 +82,5 @@ public class AppDbContext : DbContext
             .HasForeignKey(f => f.CourseId).OnDelete(DeleteBehavior.Restrict);
     }
 }
+
 

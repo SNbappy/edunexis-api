@@ -1,4 +1,4 @@
-namespace EduNexis.Domain.Entities;
+﻿namespace EduNexis.Domain.Entities;
 
 public class UserProfile : BaseEntity
 {
@@ -9,11 +9,15 @@ public class UserProfile : BaseEntity
     public string? StudentId { get; private set; }
     public string? Bio { get; private set; }
     public string? ProfilePhotoUrl { get; private set; }
+    public string? CoverPhotoUrl { get; private set; }
     public string? PhoneNumber { get; private set; }
     public string? LinkedInUrl { get; private set; }
+    public string? FacebookUrl { get; private set; }
+    public string? TwitterUrl { get; private set; }
+    public string? GitHubUrl { get; private set; }
+    public string? WebsiteUrl { get; private set; }
     public int ProfileCompletionPercent { get; private set; }
 
-    // Navigation
     public User User { get; private set; } = null!;
 
     protected UserProfile() { }
@@ -29,7 +33,9 @@ public class UserProfile : BaseEntity
     public void Update(
         string fullName, string department,
         string? designation, string? studentId,
-        string? bio, string? phoneNumber, string? linkedInUrl)
+        string? bio, string? phoneNumber,
+        string? linkedInUrl, string? facebookUrl,
+        string? twitterUrl, string? gitHubUrl, string? websiteUrl)
     {
         FullName = fullName;
         Department = department;
@@ -38,6 +44,10 @@ public class UserProfile : BaseEntity
         Bio = bio;
         PhoneNumber = phoneNumber;
         LinkedInUrl = linkedInUrl;
+        FacebookUrl = facebookUrl;
+        TwitterUrl = twitterUrl;
+        GitHubUrl = gitHubUrl;
+        WebsiteUrl = websiteUrl;
         SetUpdatedAt();
         RecalculateCompletion();
     }
@@ -47,6 +57,25 @@ public class UserProfile : BaseEntity
         ProfilePhotoUrl = url;
         SetUpdatedAt();
         RecalculateCompletion();
+    }
+
+    public void RemoveProfilePhoto()
+    {
+        ProfilePhotoUrl = null;
+        SetUpdatedAt();
+        RecalculateCompletion();
+    }
+
+    public void SetCoverPhoto(string url)
+    {
+        CoverPhotoUrl = url;
+        SetUpdatedAt();
+    }
+
+    public void RemoveCoverPhoto()
+    {
+        CoverPhotoUrl = null;
+        SetUpdatedAt();
     }
 
     public bool MeetsRequirement() =>
@@ -60,8 +89,7 @@ public class UserProfile : BaseEntity
         var score = 0;
         if (!string.IsNullOrWhiteSpace(FullName)) score += 30;
         if (!string.IsNullOrWhiteSpace(Department)) score += 25;
-        if (!string.IsNullOrWhiteSpace(Designation) ||
-            !string.IsNullOrWhiteSpace(StudentId)) score += 25;
+        if (!string.IsNullOrWhiteSpace(Designation) || !string.IsNullOrWhiteSpace(StudentId)) score += 25;
         if (!string.IsNullOrWhiteSpace(ProfilePhotoUrl)) score += 10;
         if (!string.IsNullOrWhiteSpace(Bio)) score += 5;
         if (!string.IsNullOrWhiteSpace(PhoneNumber)) score += 5;

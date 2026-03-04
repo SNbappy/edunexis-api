@@ -1,12 +1,10 @@
-using EduNexis.Application.DTOs;
+﻿using EduNexis.Application.DTOs;
+using EduNexis.Application.Features.Profile.Commands;
 using EduNexis.Domain.Interfaces.Services;
 
 namespace EduNexis.Application.Features.Auth.Commands;
 
-public record LoginUserCommand(
-    string Email,
-    string Password
-) : ICommand<ApiResponse<AuthResponseDto>>;
+public record LoginUserCommand(string Email, string Password) : ICommand<ApiResponse<AuthResponseDto>>;
 
 public sealed class LoginUserCommandValidator : AbstractValidator<LoginUserCommand>
 {
@@ -18,13 +16,10 @@ public sealed class LoginUserCommandValidator : AbstractValidator<LoginUserComma
 }
 
 public sealed class LoginUserCommandHandler(
-    IUnitOfWork uow,
-    IJwtTokenService jwtService,
-    IPasswordHasher passwordHasher
+    IUnitOfWork uow, IJwtTokenService jwtService, IPasswordHasher passwordHasher
 ) : ICommandHandler<LoginUserCommand, ApiResponse<AuthResponseDto>>
 {
-    public async ValueTask<ApiResponse<AuthResponseDto>> Handle(
-        LoginUserCommand command, CancellationToken ct)
+    public async ValueTask<ApiResponse<AuthResponseDto>> Handle(LoginUserCommand command, CancellationToken ct)
     {
         var user = await uow.Users.GetByEmailAsync(command.Email, ct)
             ?? throw new UnauthorizedException("Invalid email or password.");
@@ -43,17 +38,9 @@ public sealed class LoginUserCommandHandler(
         var profile = await uow.UserProfiles.GetByUserIdAsync(user.Id, ct);
 
         return ApiResponse<AuthResponseDto>.Ok(new AuthResponseDto(
-            AccessToken: accessToken,
-            RefreshToken: refreshToken,
-            ExpiresIn: 3600,
-            User: new UserDto(
-                user.Id, user.Email, user.Role.ToString(),
-                user.IsProfileComplete,
-                profile is null ? null : new UserProfileDto(
-                    profile.Id, profile.FullName, profile.Department,
-                    profile.Designation, profile.StudentId, profile.Bio,
-                    profile.ProfilePhotoUrl, profile.PhoneNumber,
-                    profile.LinkedInUrl, profile.ProfileCompletionPercent))),
+            AccessToken: accessToken, RefreshToken: refreshToken, ExpiresIn: 3600,
+            User: new UserDto(user.Id, user.Email, user.Role.ToString(), user.IsProfileComplete,
+                profile is null ? null : UpdateProfileCommandHandler.MapToDto(profile))),
             "Login successful.");
     }
 }

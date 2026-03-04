@@ -654,3 +654,977 @@ MySqlConnector.MySqlException (0x80004005): Unknown column 'p.Description' in 'f
 2026-03-04 10:50:53.586 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 8.4131 ms
 2026-03-04 10:51:23.609 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0518 ms
 2026-03-04 10:51:23.629 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 6.5512 ms
+2026-03-04 10:54:36.208 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 204 in 2.9373 ms
+2026-03-04 10:54:39.099 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 200 in 2795.4003 ms
+2026-03-04 10:54:39.138 +06:00 [INF] HTTP OPTIONS /api/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/grading-formula responded 204 in 0.4328 ms
+2026-03-04 10:54:39.139 +06:00 [INF] HTTP OPTIONS /api/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/marks responded 204 in 0.1637 ms
+2026-03-04 10:54:39.445 +06:00 [INF] HTTP GET /api/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/marks responded 200 in 296.9912 ms
+2026-03-04 10:54:39.449 +06:00 [INF] HTTP GET /api/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/grading-formula responded 200 in 302.3690 ms
+2026-03-04 10:54:42.354 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.1621 ms
+2026-03-04 10:54:42.433 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 72.2156 ms
+2026-03-04 10:55:12.085 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.1399 ms
+2026-03-04 10:55:12.085 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 204 in 0.1064 ms
+2026-03-04 10:55:12.101 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 8.2760 ms
+2026-03-04 10:55:12.264 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 200 in 170.2940 ms
+2026-03-04 10:55:12.415 +06:00 [INF] HTTP OPTIONS /api/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/grading-formula responded 204 in 0.1012 ms
+2026-03-04 10:55:12.415 +06:00 [INF] HTTP OPTIONS /api/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/marks responded 204 in 0.0619 ms
+2026-03-04 10:55:12.434 +06:00 [INF] HTTP GET /api/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/grading-formula responded 200 in 9.5226 ms
+2026-03-04 10:55:12.459 +06:00 [INF] HTTP GET /api/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/marks responded 200 in 31.9246 ms
+2026-03-04 10:55:22.514 +06:00 [INF] HTTP OPTIONS /api/auth/logout responded 204 in 0.1671 ms
+2026-03-04 10:55:22.733 +06:00 [INF] HTTP POST /api/auth/logout responded 200 in 211.3812 ms
+2026-03-04 10:55:36.131 +06:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 1.1848 ms
+2026-03-04 10:55:37.101 +06:00 [INF] HTTP POST /api/auth/login responded 200 in 954.4360 ms
+2026-03-04 10:55:37.254 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.1063 ms
+2026-03-04 10:55:37.254 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.0572 ms
+2026-03-04 10:55:37.256 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.0864 ms
+2026-03-04 10:55:37.334 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 74.9905 ms
+2026-03-04 10:55:37.484 +06:00 [INF] HTTP GET /api/Courses responded 200 in 220.1747 ms
+2026-03-04 10:55:37.494 +06:00 [INF] HTTP GET /api/Courses responded 200 in 230.9614 ms
+2026-03-04 10:55:45.501 +06:00 [INF] HTTP OPTIONS /api/Courses/90d7ab00-c743-4253-8d9f-e69759d0be36 responded 204 in 0.1255 ms
+2026-03-04 10:55:45.548 +06:00 [INF] HTTP GET /api/Courses/90d7ab00-c743-4253-8d9f-e69759d0be36 responded 200 in 41.1152 ms
+2026-03-04 10:55:45.557 +06:00 [INF] HTTP OPTIONS /api/Courses/90d7ab00-c743-4253-8d9f-e69759d0be36/members responded 204 in 0.0433 ms
+2026-03-04 10:55:45.712 +06:00 [INF] HTTP GET /api/Courses/90d7ab00-c743-4253-8d9f-e69759d0be36/members responded 200 in 148.4327 ms
+2026-03-04 10:55:45.737 +06:00 [INF] HTTP OPTIONS /api/Announcements/courses/90d7ab00-c743-4253-8d9f-e69759d0be36/announcements responded 204 in 0.0549 ms
+2026-03-04 10:55:45.883 +06:00 [INF] HTTP GET /api/Announcements/courses/90d7ab00-c743-4253-8d9f-e69759d0be36/announcements responded 200 in 141.2984 ms
+2026-03-04 10:55:57.219 +06:00 [INF] HTTP OPTIONS /api/Notifications/read-all responded 204 in 0.1832 ms
+2026-03-04 10:55:57.354 +06:00 [INF] HTTP PATCH /api/Notifications/read-all responded 200 in 130.4914 ms
+2026-03-04 10:55:57.361 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0655 ms
+2026-03-04 10:55:57.369 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 4.1769 ms
+2026-03-04 10:56:16.958 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.0989 ms
+2026-03-04 10:56:17.009 +06:00 [INF] HTTP GET /api/profile responded 200 in 28.9595 ms
+2026-03-04 10:56:21.280 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 204 in 0.1143 ms
+2026-03-04 10:56:21.366 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 200 in 80.2629 ms
+2026-03-04 10:56:21.388 +06:00 [INF] HTTP OPTIONS /api/Announcements/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/announcements responded 204 in 0.0378 ms
+2026-03-04 10:56:21.437 +06:00 [INF] HTTP GET /api/Announcements/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/announcements responded 200 in 42.9514 ms
+2026-03-04 10:56:24.625 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/summary responded 204 in 0.0756 ms
+2026-03-04 10:56:24.628 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 204 in 0.0625 ms
+2026-03-04 10:56:24.628 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 204 in 0.0622 ms
+2026-03-04 10:56:24.704 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 200 in 75.5260 ms
+2026-03-04 10:56:24.787 +06:00 [INF] HTTP GET /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/summary responded 200 in 151.9880 ms
+2026-03-04 10:56:24.851 +06:00 [INF] HTTP GET /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 200 in 211.8708 ms
+2026-03-04 10:56:24.886 +06:00 [INF] HTTP GET /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 200 in 33.3461 ms
+2026-03-04 10:56:42.192 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 204 in 0.0958 ms
+2026-03-04 10:56:42.192 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0219 ms
+2026-03-04 10:56:42.209 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 8.1991 ms
+2026-03-04 10:56:42.273 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 200 in 72.9032 ms
+2026-03-04 10:56:42.373 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 204 in 0.0367 ms
+2026-03-04 10:56:42.441 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 200 in 61.8281 ms
+2026-03-04 10:56:42.517 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/summary responded 204 in 0.0537 ms
+2026-03-04 10:56:42.518 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 204 in 0.0525 ms
+2026-03-04 10:56:42.518 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 204 in 0.0377 ms
+2026-03-04 10:56:42.596 +06:00 [INF] HTTP GET /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/summary responded 200 in 73.1470 ms
+2026-03-04 10:56:42.604 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 200 in 85.8272 ms
+2026-03-04 10:56:42.607 +06:00 [INF] HTTP GET /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 200 in 80.5065 ms
+2026-03-04 10:56:42.641 +06:00 [INF] HTTP GET /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 200 in 28.8836 ms
+2026-03-04 10:58:33.378 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 204 in 0.0836 ms
+2026-03-04 10:58:33.378 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0169 ms
+2026-03-04 10:58:33.391 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 6.0780 ms
+2026-03-04 10:58:33.463 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 200 in 78.8551 ms
+2026-03-04 10:58:33.502 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 204 in 0.0637 ms
+2026-03-04 10:58:33.569 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 200 in 57.7066 ms
+2026-03-04 10:58:33.657 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/summary responded 204 in 0.0596 ms
+2026-03-04 10:58:33.657 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 204 in 0.0440 ms
+2026-03-04 10:58:33.658 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 204 in 0.0204 ms
+2026-03-04 10:58:33.691 +06:00 [INF] HTTP GET /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/summary responded 200 in 28.4845 ms
+2026-03-04 10:58:33.701 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 200 in 42.5898 ms
+2026-03-04 10:58:33.758 +06:00 [INF] HTTP GET /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 200 in 90.8929 ms
+2026-03-04 10:58:33.795 +06:00 [INF] HTTP GET /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 200 in 29.9808 ms
+2026-03-04 10:59:44.109 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.1473 ms
+2026-03-04 10:59:44.125 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 7.6180 ms
+2026-03-04 10:59:49.003 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 204 in 0.0281 ms
+2026-03-04 10:59:49.007 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 4.5596 ms
+2026-03-04 10:59:49.063 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 200 in 52.9662 ms
+2026-03-04 10:59:49.113 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 204 in 0.0338 ms
+2026-03-04 10:59:49.159 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 200 in 40.6756 ms
+2026-03-04 10:59:49.217 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/summary responded 204 in 0.0326 ms
+2026-03-04 10:59:49.218 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 204 in 0.0247 ms
+2026-03-04 10:59:49.218 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 204 in 0.0142 ms
+2026-03-04 10:59:49.241 +06:00 [INF] HTTP GET /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/summary responded 200 in 16.8025 ms
+2026-03-04 10:59:49.267 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 200 in 47.6873 ms
+2026-03-04 10:59:49.290 +06:00 [INF] HTTP GET /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 200 in 64.2120 ms
+2026-03-04 10:59:49.338 +06:00 [INF] HTTP GET /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 200 in 43.8379 ms
+2026-03-04 11:00:10.978 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0563 ms
+2026-03-04 11:00:11.245 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 258.2439 ms
+2026-03-04 11:00:15.444 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0407 ms
+2026-03-04 11:00:15.489 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 38.7257 ms
+2026-03-04 11:00:17.891 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0532 ms
+2026-03-04 11:00:17.912 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 12.4715 ms
+2026-03-04 11:00:19.076 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0217 ms
+2026-03-04 11:00:19.086 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 3.7069 ms
+2026-03-04 11:00:22.620 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/assignments responded 204 in 0.0424 ms
+2026-03-04 11:00:22.685 +06:00 [INF] HTTP GET /api/Assignments/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/assignments responded 200 in 57.0151 ms
+2026-03-04 11:00:29.403 +06:00 [INF] HTTP OPTIONS /api/ct/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/events responded 204 in 0.0781 ms
+2026-03-04 11:00:29.628 +06:00 [INF] HTTP GET /api/ct/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/events responded 200 in 217.5282 ms
+2026-03-04 11:00:31.732 +06:00 [INF] HTTP OPTIONS /api/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/presentations responded 204 in 0.0441 ms
+2026-03-04 11:00:32.034 +06:00 [INF] HTTP GET /api/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/presentations responded 200 in 296.0998 ms
+2026-03-04 11:00:37.146 +06:00 [INF] HTTP OPTIONS /api/presentations/f1f17f7c-554d-48d7-b51b-314151da6892/results responded 204 in 0.0329 ms
+2026-03-04 11:00:37.248 +06:00 [INF] HTTP GET /api/presentations/f1f17f7c-554d-48d7-b51b-314151da6892/results responded 200 in 95.2071 ms
+2026-03-04 11:00:45.733 +06:00 [INF] HTTP OPTIONS /api/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/grading-formula responded 204 in 0.0293 ms
+2026-03-04 11:00:45.735 +06:00 [INF] HTTP OPTIONS /api/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/marks responded 204 in 0.0481 ms
+2026-03-04 11:00:45.745 +06:00 [INF] HTTP GET /api/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/grading-formula responded 200 in 5.3357 ms
+2026-03-04 11:00:45.803 +06:00 [INF] HTTP GET /api/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/marks responded 200 in 61.2537 ms
+2026-03-04 11:00:49.098 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0187 ms
+2026-03-04 11:00:49.111 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 4.1193 ms
+2026-03-04 11:00:55.842 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0470 ms
+2026-03-04 11:00:55.842 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 204 in 0.0061 ms
+2026-03-04 11:00:55.850 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 2.6668 ms
+2026-03-04 11:00:55.927 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 200 in 78.6440 ms
+2026-03-04 11:00:55.989 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 204 in 0.0544 ms
+2026-03-04 11:00:56.069 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 200 in 69.5932 ms
+2026-03-04 11:00:57.736 +06:00 [INF] HTTP OPTIONS /api/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/grading-formula responded 204 in 0.0678 ms
+2026-03-04 11:00:57.737 +06:00 [INF] HTTP OPTIONS /api/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/marks responded 204 in 0.0194 ms
+2026-03-04 11:00:57.749 +06:00 [INF] HTTP GET /api/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/grading-formula responded 200 in 5.9269 ms
+2026-03-04 11:00:57.817 +06:00 [INF] HTTP GET /api/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/marks responded 200 in 71.3714 ms
+2026-03-04 11:00:59.072 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 204 in 0.0144 ms
+2026-03-04 11:00:59.072 +06:00 [INF] HTTP OPTIONS /api/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/presentations responded 204 in 0.2928 ms
+2026-03-04 11:00:59.165 +06:00 [INF] HTTP GET /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 200 in 82.9030 ms
+2026-03-04 11:00:59.188 +06:00 [INF] HTTP GET /api/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/presentations responded 200 in 97.6108 ms
+2026-03-04 11:00:59.195 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 200 in 120.0261 ms
+2026-03-04 11:01:05.602 +06:00 [INF] HTTP OPTIONS /api/ct/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/events responded 204 in 0.0476 ms
+2026-03-04 11:01:05.694 +06:00 [INF] HTTP GET /api/ct/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/events responded 200 in 69.9604 ms
+2026-03-04 11:05:38.994 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.1294 ms
+2026-03-04 11:05:38.994 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.2436 ms
+2026-03-04 11:05:39.081 +06:00 [INF] HTTP GET /api/Courses responded 200 in 76.1966 ms
+2026-03-04 11:05:39.081 +06:00 [INF] HTTP GET /api/Courses responded 200 in 73.8026 ms
+2026-03-04 11:05:40.499 +06:00 [INF] HTTP OPTIONS /api/Announcements/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/announcements responded 204 in 0.0425 ms
+2026-03-04 11:05:40.539 +06:00 [INF] HTTP GET /api/Announcements/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/announcements responded 200 in 32.3962 ms
+2026-03-04 11:05:55.899 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0430 ms
+2026-03-04 11:05:55.908 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 4.6799 ms
+2026-03-04 11:07:42.334 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 204 in 0.0516 ms
+2026-03-04 11:07:42.411 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 200 in 63.4252 ms
+2026-03-04 11:07:47.123 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.1919 ms
+2026-03-04 11:07:47.134 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 5.8659 ms
+2026-03-04 11:07:47.184 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 200 in 60.8774 ms
+2026-03-04 11:07:47.289 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 204 in 0.0694 ms
+2026-03-04 11:07:47.360 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 200 in 65.1529 ms
+2026-03-04 11:08:10.644 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0584 ms
+2026-03-04 11:08:10.645 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 204 in 0.0275 ms
+2026-03-04 11:08:10.654 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 3.2741 ms
+2026-03-04 11:08:10.755 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 200 in 103.3190 ms
+2026-03-04 11:08:10.834 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 204 in 0.0360 ms
+2026-03-04 11:08:10.920 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 200 in 81.3122 ms
+2026-03-04 11:09:12.368 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0727 ms
+2026-03-04 11:09:12.370 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 204 in 0.0334 ms
+2026-03-04 11:09:12.378 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 3.9501 ms
+2026-03-04 11:09:12.468 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 200 in 92.7567 ms
+2026-03-04 11:09:12.565 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 204 in 0.0402 ms
+2026-03-04 11:09:12.667 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 200 in 96.3003 ms
+2026-03-04 11:09:41.315 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/assignments responded 204 in 0.0549 ms
+2026-03-04 11:09:41.324 +06:00 [INF] HTTP GET /api/Assignments/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/assignments responded 200 in 4.8177 ms
+2026-03-04 11:09:41.894 +06:00 [INF] HTTP OPTIONS /api/ct/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/events responded 204 in 0.0248 ms
+2026-03-04 11:09:41.984 +06:00 [INF] HTTP GET /api/ct/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/events responded 200 in 80.5616 ms
+2026-03-04 11:09:42.334 +06:00 [INF] HTTP OPTIONS /api/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/presentations responded 204 in 0.0257 ms
+2026-03-04 11:09:42.335 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 204 in 0.0238 ms
+2026-03-04 11:09:42.336 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 204 in 0.0221 ms
+2026-03-04 11:09:42.397 +06:00 [INF] HTTP GET /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 200 in 51.1143 ms
+2026-03-04 11:09:42.410 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0185 ms
+2026-03-04 11:09:42.429 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 5.8777 ms
+2026-03-04 11:09:42.440 +06:00 [INF] HTTP GET /api/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/presentations responded 200 in 93.4955 ms
+2026-03-04 11:09:42.460 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 200 in 115.3071 ms
+2026-03-04 11:09:42.925 +06:00 [INF] HTTP OPTIONS /api/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/grading-formula responded 204 in 0.0358 ms
+2026-03-04 11:09:42.925 +06:00 [INF] HTTP OPTIONS /api/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/marks responded 204 in 0.0263 ms
+2026-03-04 11:09:42.957 +06:00 [INF] HTTP GET /api/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/grading-formula responded 200 in 21.9856 ms
+2026-03-04 11:09:42.966 +06:00 [INF] HTTP GET /api/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/marks responded 200 in 30.1729 ms
+2026-03-04 11:09:53.764 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/summary responded 204 in 0.0316 ms
+2026-03-04 11:09:53.766 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 204 in 0.0235 ms
+2026-03-04 11:09:53.805 +06:00 [INF] HTTP GET /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 200 in 35.4158 ms
+2026-03-04 11:09:53.811 +06:00 [INF] HTTP GET /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/summary responded 200 in 41.2559 ms
+2026-03-04 11:09:57.047 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0322 ms
+2026-03-04 11:09:57.064 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 11.1553 ms
+2026-03-04 11:10:25.051 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/join-requests responded 204 in 0.0713 ms
+2026-03-04 11:10:25.084 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/join-requests responded 403 in 20.8338 ms
+2026-03-04 11:10:26.098 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/join-requests responded 403 in 0.5074 ms
+2026-03-04 11:10:26.790 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0633 ms
+2026-03-04 11:10:26.790 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 204 in 0.0188 ms
+2026-03-04 11:10:26.799 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 3.0310 ms
+2026-03-04 11:10:26.872 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 200 in 74.6914 ms
+2026-03-04 11:10:26.950 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 204 in 0.0191 ms
+2026-03-04 11:10:27.019 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 200 in 65.1110 ms
+2026-03-04 11:10:27.061 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/join-requests responded 403 in 1.1555 ms
+2026-03-04 11:10:28.078 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/join-requests responded 403 in 0.1715 ms
+2026-03-04 11:10:31.604 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/join-requests responded 204 in 0.0328 ms
+2026-03-04 11:10:31.611 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/join-requests responded 403 in 0.3090 ms
+2026-03-04 11:10:32.627 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/join-requests responded 403 in 0.2935 ms
+2026-03-04 11:10:40.678 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.2924 ms
+2026-03-04 11:10:40.689 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 2.5821 ms
+2026-03-04 11:10:43.841 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 204 in 0.0388 ms
+2026-03-04 11:10:43.897 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 200 in 49.6171 ms
+2026-03-04 11:10:43.908 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 204 in 0.0456 ms
+2026-03-04 11:10:43.956 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 200 in 40.4798 ms
+2026-03-04 11:10:43.991 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/join-requests responded 204 in 0.0213 ms
+2026-03-04 11:10:43.998 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/join-requests responded 403 in 0.4258 ms
+2026-03-04 11:10:45.022 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/join-requests responded 403 in 0.1726 ms
+2026-03-04 11:10:47.051 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0379 ms
+2026-03-04 11:10:47.059 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 3.1449 ms
+2026-03-04 11:10:47.103 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 200 in 51.6282 ms
+2026-03-04 11:10:47.268 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 200 in 31.2802 ms
+2026-03-04 11:10:47.355 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/join-requests responded 403 in 0.2977 ms
+2026-03-04 11:10:48.425 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/join-requests responded 403 in 0.4816 ms
+2026-03-04 11:11:31.340 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/summary responded 204 in 0.0538 ms
+2026-03-04 11:11:31.342 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 204 in 0.0292 ms
+2026-03-04 11:11:31.343 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 204 in 0.0364 ms
+2026-03-04 11:11:31.344 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 204 in 0.0214 ms
+2026-03-04 11:11:31.402 +06:00 [INF] HTTP GET /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 200 in 52.5703 ms
+2026-03-04 11:11:31.404 +06:00 [INF] HTTP GET /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/summary responded 200 in 57.5888 ms
+2026-03-04 11:11:31.445 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 200 in 88.5105 ms
+2026-03-04 11:11:31.478 +06:00 [INF] HTTP GET /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 200 in 71.5833 ms
+2026-03-04 11:11:32.679 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/join-requests responded 204 in 0.1326 ms
+2026-03-04 11:11:32.686 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/join-requests responded 403 in 0.5612 ms
+2026-03-04 11:11:33.742 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/join-requests responded 403 in 0.3280 ms
+2026-03-04 11:11:53.516 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 204 in 0.0498 ms
+2026-03-04 11:11:53.517 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0334 ms
+2026-03-04 11:11:53.530 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 3.1614 ms
+2026-03-04 11:11:53.610 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 200 in 83.8795 ms
+2026-03-04 11:11:53.644 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 204 in 0.0216 ms
+2026-03-04 11:11:53.707 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 200 in 59.8646 ms
+2026-03-04 11:12:05.128 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0617 ms
+2026-03-04 11:12:05.128 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 204 in 0.0616 ms
+2026-03-04 11:12:05.136 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 3.6931 ms
+2026-03-04 11:12:05.269 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 200 in 135.3724 ms
+2026-03-04 11:12:05.314 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 204 in 0.0481 ms
+2026-03-04 11:12:05.421 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 200 in 90.3817 ms
+2026-03-04 11:12:35.172 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0413 ms
+2026-03-04 11:12:35.188 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 4.7109 ms
+2026-03-04 11:13:35.201 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0267 ms
+2026-03-04 11:13:35.210 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 3.7905 ms
+2026-03-04 11:13:37.848 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 204 in 0.0254 ms
+2026-03-04 11:13:37.851 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 3.3793 ms
+2026-03-04 11:13:37.984 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 200 in 130.9976 ms
+2026-03-04 11:13:38.094 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 204 in 0.4316 ms
+2026-03-04 11:13:38.174 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 200 in 74.4419 ms
+2026-03-04 11:14:44.221 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0720 ms
+2026-03-04 11:14:44.221 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 204 in 0.0207 ms
+2026-03-04 11:14:44.232 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 5.0896 ms
+2026-03-04 11:14:44.311 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 200 in 82.9239 ms
+2026-03-04 11:14:44.415 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 204 in 0.0333 ms
+2026-03-04 11:14:44.492 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 200 in 66.4372 ms
+2026-03-04 11:14:45.539 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.0313 ms
+2026-03-04 11:14:45.549 +06:00 [INF] HTTP GET /api/profile responded 200 in 4.1688 ms
+2026-03-04 11:14:49.954 +06:00 [INF] HTTP OPTIONS /api/auth/logout responded 204 in 0.0296 ms
+2026-03-04 11:14:50.027 +06:00 [INF] HTTP POST /api/auth/logout responded 200 in 66.6070 ms
+2026-03-04 11:15:24.581 +06:00 [INF] HTTP OPTIONS /api/auth/register responded 204 in 0.0598 ms
+2026-03-04 11:15:24.764 +06:00 [INF] HTTP POST /api/auth/register responded 200 in 175.5539 ms
+2026-03-04 11:15:31.223 +06:00 [INF] HTTP OPTIONS /api/auth/register responded 204 in 0.0338 ms
+2026-03-04 11:15:31.933 +06:00 [INF] HTTP POST /api/auth/register responded 200 in 692.4174 ms
+2026-03-04 11:16:25.250 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 1.6630 ms
+2026-03-04 11:16:25.447 +06:00 [INF] HTTP PUT /api/profile responded 200 in 174.2073 ms
+2026-03-04 11:16:25.524 +06:00 [INF] HTTP GET /api/profile responded 200 in 5.3622 ms
+2026-03-04 11:16:25.667 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0779 ms
+2026-03-04 11:16:25.668 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.0544 ms
+2026-03-04 11:16:25.677 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.5896 ms
+2026-03-04 11:16:25.703 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 12.4962 ms
+2026-03-04 11:16:25.772 +06:00 [INF] HTTP GET /api/Courses responded 200 in 69.9819 ms
+2026-03-04 11:16:26.023 +06:00 [INF] HTTP GET /api/Courses responded 200 in 321.1647 ms
+2026-03-04 11:16:55.716 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0204 ms
+2026-03-04 11:16:55.724 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 2.5835 ms
+2026-03-04 11:21:58.777 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0614 ms
+2026-03-04 11:21:58.791 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 6.8575 ms
+2026-03-04 11:43:22.148 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 3.4772 ms
+2026-03-04 11:43:22.148 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 3.4623 ms
+2026-03-04 11:43:22.148 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 3.4582 ms
+2026-03-04 11:43:25.010 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 2721.1165 ms
+2026-03-04 11:43:25.010 +06:00 [INF] HTTP GET /api/Courses responded 200 in 2719.8914 ms
+2026-03-04 11:43:25.311 +06:00 [INF] HTTP GET /api/Courses responded 200 in 3021.6989 ms
+2026-03-04 11:43:27.682 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.4080 ms
+2026-03-04 11:43:27.688 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.1065 ms
+2026-03-04 11:43:27.689 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.1148 ms
+2026-03-04 11:43:27.903 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 212.1202 ms
+2026-03-04 11:43:27.952 +06:00 [INF] HTTP GET /api/Courses responded 200 in 259.0793 ms
+2026-03-04 11:43:27.955 +06:00 [INF] HTTP GET /api/Courses responded 200 in 260.1425 ms
+2026-03-04 11:43:44.089 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0871 ms
+2026-03-04 11:43:44.102 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 5.6515 ms
+2026-03-04 11:43:47.479 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.1296 ms
+2026-03-04 11:43:47.479 +06:00 [INF] HTTP OPTIONS /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 204 in 0.0635 ms
+2026-03-04 11:43:47.603 +06:00 [INF] HTTP GET /api/profile responded 200 in 81.3858 ms
+2026-03-04 11:43:47.666 +06:00 [INF] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 200 in 146.0585 ms
+2026-03-04 11:44:02.425 +06:00 [INF] HTTP OPTIONS /api/profile/photo responded 204 in 0.2108 ms
+2026-03-04 11:44:06.187 +06:00 [INF] HTTP POST /api/profile/photo responded 200 in 3750.5511 ms
+2026-03-04 11:44:06.196 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.0764 ms
+2026-03-04 11:44:06.208 +06:00 [INF] HTTP GET /api/profile responded 200 in 6.1968 ms
+2026-03-04 11:44:14.122 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.1662 ms
+2026-03-04 11:44:14.141 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 8.2001 ms
+2026-03-04 11:44:26.534 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.5825 ms
+2026-03-04 11:44:26.723 +06:00 [INF] HTTP PUT /api/profile responded 200 in 176.2164 ms
+2026-03-04 11:44:26.759 +06:00 [INF] HTTP GET /api/profile responded 200 in 5.8049 ms
+2026-03-04 11:44:33.023 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.2051 ms
+2026-03-04 11:44:33.056 +06:00 [INF] HTTP PUT /api/profile responded 200 in 24.9381 ms
+2026-03-04 11:44:33.083 +06:00 [INF] HTTP GET /api/profile responded 200 in 3.6174 ms
+2026-03-04 11:45:14.165 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0797 ms
+2026-03-04 11:45:14.183 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 6.6955 ms
+2026-03-04 11:45:34.971 +06:00 [INF] HTTP OPTIONS /api/profile/education responded 204 in 0.0783 ms
+2026-03-04 11:45:35.122 +06:00 [INF] HTTP POST /api/profile/education responded 200 in 144.1261 ms
+2026-03-04 11:45:35.135 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.0725 ms
+2026-03-04 11:45:35.136 +06:00 [INF] HTTP OPTIONS /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 204 in 0.0782 ms
+2026-03-04 11:45:35.148 +06:00 [INF] HTTP GET /api/profile responded 200 in 6.5983 ms
+2026-03-04 11:45:35.168 +06:00 [INF] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 200 in 21.2702 ms
+2026-03-04 11:45:40.992 +06:00 [INF] HTTP OPTIONS /api/profile/education/105756b2-01a1-4457-8869-ba05db6c9d4f responded 204 in 0.1047 ms
+2026-03-04 11:45:41.048 +06:00 [INF] HTTP DELETE /api/profile/education/105756b2-01a1-4457-8869-ba05db6c9d4f responded 200 in 49.6679 ms
+2026-03-04 11:45:41.056 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.0470 ms
+2026-03-04 11:45:41.056 +06:00 [INF] HTTP OPTIONS /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 204 in 0.0157 ms
+2026-03-04 11:45:41.065 +06:00 [INF] HTTP GET /api/profile responded 200 in 3.4989 ms
+2026-03-04 11:45:41.073 +06:00 [INF] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 200 in 10.5333 ms
+2026-03-04 11:45:44.195 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0540 ms
+2026-03-04 11:45:44.207 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 5.5382 ms
+2026-03-04 11:46:29.133 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.1759 ms
+2026-03-04 11:46:29.133 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.0342 ms
+2026-03-04 11:46:29.135 +06:00 [INF] HTTP OPTIONS /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 204 in 0.0531 ms
+2026-03-04 11:46:29.203 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 58.0470 ms
+2026-03-04 11:46:29.219 +06:00 [INF] HTTP GET /api/profile responded 200 in 72.5358 ms
+2026-03-04 11:46:29.228 +06:00 [INF] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 200 in 82.0107 ms
+2026-03-04 11:55:57.307 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 2.5639 ms
+2026-03-04 11:55:57.307 +06:00 [INF] HTTP OPTIONS /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 204 in 2.5811 ms
+2026-03-04 11:55:57.307 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 2.5730 ms
+2026-03-04 11:55:59.049 +06:00 [ERR] Failed executing DbCommand (75ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT `u`.`Id`, `u`.`CreatedAt`, `u`.`DeletedAt`, `u`.`Email`, `u`.`IsActive`, `u`.`IsDeleted`, `u`.`IsProfileComplete`, `u`.`PasswordHash`, `u`.`RefreshToken`, `u`.`RefreshTokenExpiry`, `u`.`Role`, `u`.`UpdatedAt`, `u0`.`Id`, `u0`.`Bio`, `u0`.`CoverPhotoUrl`, `u0`.`CreatedAt`, `u0`.`DeletedAt`, `u0`.`Department`, `u0`.`Designation`, `u0`.`FacebookUrl`, `u0`.`FullName`, `u0`.`GitHubUrl`, `u0`.`IsDeleted`, `u0`.`LinkedInUrl`, `u0`.`PhoneNumber`, `u0`.`ProfileCompletionPercent`, `u0`.`ProfilePhotoUrl`, `u0`.`StudentId`, `u0`.`TwitterUrl`, `u0`.`UpdatedAt`, `u0`.`UserId`, `u0`.`WebsiteUrl`
+FROM `Users` AS `u`
+LEFT JOIN `UserProfiles` AS `u0` ON `u`.`Id` = `u0`.`UserId`
+WHERE `u`.`Id` = @__userId_0
+LIMIT 1
+2026-03-04 11:55:59.049 +06:00 [ERR] Failed executing DbCommand (75ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT `u`.`Id`, `u`.`Bio`, `u`.`CoverPhotoUrl`, `u`.`CreatedAt`, `u`.`DeletedAt`, `u`.`Department`, `u`.`Designation`, `u`.`FacebookUrl`, `u`.`FullName`, `u`.`GitHubUrl`, `u`.`IsDeleted`, `u`.`LinkedInUrl`, `u`.`PhoneNumber`, `u`.`ProfileCompletionPercent`, `u`.`ProfilePhotoUrl`, `u`.`StudentId`, `u`.`TwitterUrl`, `u`.`UpdatedAt`, `u`.`UserId`, `u`.`WebsiteUrl`
+FROM `UserProfiles` AS `u`
+WHERE `u`.`UserId` = @__userId_0
+LIMIT 1
+2026-03-04 11:55:59.105 +06:00 [ERR] An exception occurred while iterating over the results of a query for context type 'EduNexis.Infrastructure.Persistence.AppDbContext'.
+MySqlConnector.MySqlException (0x80004005): Unknown column 'u.CoverPhotoUrl' in 'field list'
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 1081
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 131
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 487
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+MySqlConnector.MySqlException (0x80004005): Unknown column 'u.CoverPhotoUrl' in 'field list'
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 1081
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 131
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 487
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-03-04 11:55:59.106 +06:00 [ERR] An exception occurred while iterating over the results of a query for context type 'EduNexis.Infrastructure.Persistence.AppDbContext'.
+MySqlConnector.MySqlException (0x80004005): Unknown column 'u0.CoverPhotoUrl' in 'field list'
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 1081
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 131
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 487
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+MySqlConnector.MySqlException (0x80004005): Unknown column 'u0.CoverPhotoUrl' in 'field list'
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 1081
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 131
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 487
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-03-04 11:55:59.125 +06:00 [ERR] HTTP GET /api/profile responded 500 in 1752.3785 ms
+MySqlConnector.MySqlException (0x80004005): Unknown column 'u.CoverPhotoUrl' in 'field list'
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 1081
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 131
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 487
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at EduNexis.Infrastructure.Persistence.Repositories.UserProfileRepository.GetByUserIdAsync(Guid userId, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\Persistence\Repositories\UserProfileRepository.cs:line 8
+   at EduNexis.Application.Features.Profile.Queries.GetProfileQueryHandler.Handle(GetProfileQuery query, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\Profile\Queries\GetProfileQuery.cs:line 14
+   at EduNexis.API.Controllers.ProfileController.Get(CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\ProfileController.cs:line 13
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-03-04 11:55:59.135 +06:00 [ERR] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 500 in 1762.5055 ms
+MySqlConnector.MySqlException (0x80004005): Unknown column 'u0.CoverPhotoUrl' in 'field list'
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 1081
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 131
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 487
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at EduNexis.Infrastructure.Persistence.Repositories.UserRepository.GetWithProfileAsync(Guid userId, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\Persistence\Repositories\UserRepository.cs:line 26
+   at EduNexis.Application.Features.Profile.Queries.GetPublicProfileQueryHandler.Handle(GetPublicProfileQuery query, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\Profile\Queries\GetPublicProfileQuery.cs:line 16
+   at EduNexis.API.Controllers.ProfileController.GetPublic(Guid userId, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\ProfileController.cs:line 17
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-03-04 11:55:59.146 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 1773.4626 ms
+2026-03-04 11:55:59.160 +06:00 [ERR] Unhandled exception: Unknown column 'u.CoverPhotoUrl' in 'field list'
+MySqlConnector.MySqlException (0x80004005): Unknown column 'u.CoverPhotoUrl' in 'field list'
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 1081
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 131
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 487
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at EduNexis.Infrastructure.Persistence.Repositories.UserProfileRepository.GetByUserIdAsync(Guid userId, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\Persistence\Repositories\UserProfileRepository.cs:line 8
+   at EduNexis.Application.Features.Profile.Queries.GetProfileQueryHandler.Handle(GetProfileQuery query, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\Profile\Queries\GetProfileQuery.cs:line 14
+   at EduNexis.API.Controllers.ProfileController.Get(CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\ProfileController.cs:line 13
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EduNexis.API.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Middleware\ExceptionMiddleware.cs:line 15
+2026-03-04 11:55:59.238 +06:00 [ERR] Unhandled exception: Unknown column 'u0.CoverPhotoUrl' in 'field list'
+MySqlConnector.MySqlException (0x80004005): Unknown column 'u0.CoverPhotoUrl' in 'field list'
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 1081
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 131
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 487
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at EduNexis.Infrastructure.Persistence.Repositories.UserRepository.GetWithProfileAsync(Guid userId, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\Persistence\Repositories\UserRepository.cs:line 26
+   at EduNexis.Application.Features.Profile.Queries.GetPublicProfileQueryHandler.Handle(GetPublicProfileQuery query, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\Profile\Queries\GetPublicProfileQuery.cs:line 16
+   at EduNexis.API.Controllers.ProfileController.GetPublic(Guid userId, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\ProfileController.cs:line 17
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EduNexis.API.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Middleware\ExceptionMiddleware.cs:line 15
+2026-03-04 11:56:00.423 +06:00 [ERR] Failed executing DbCommand (5ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT `u`.`Id`, `u`.`Bio`, `u`.`CoverPhotoUrl`, `u`.`CreatedAt`, `u`.`DeletedAt`, `u`.`Department`, `u`.`Designation`, `u`.`FacebookUrl`, `u`.`FullName`, `u`.`GitHubUrl`, `u`.`IsDeleted`, `u`.`LinkedInUrl`, `u`.`PhoneNumber`, `u`.`ProfileCompletionPercent`, `u`.`ProfilePhotoUrl`, `u`.`StudentId`, `u`.`TwitterUrl`, `u`.`UpdatedAt`, `u`.`UserId`, `u`.`WebsiteUrl`
+FROM `UserProfiles` AS `u`
+WHERE `u`.`UserId` = @__userId_0
+LIMIT 1
+2026-03-04 11:56:00.423 +06:00 [ERR] Failed executing DbCommand (5ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT `u`.`Id`, `u`.`CreatedAt`, `u`.`DeletedAt`, `u`.`Email`, `u`.`IsActive`, `u`.`IsDeleted`, `u`.`IsProfileComplete`, `u`.`PasswordHash`, `u`.`RefreshToken`, `u`.`RefreshTokenExpiry`, `u`.`Role`, `u`.`UpdatedAt`, `u0`.`Id`, `u0`.`Bio`, `u0`.`CoverPhotoUrl`, `u0`.`CreatedAt`, `u0`.`DeletedAt`, `u0`.`Department`, `u0`.`Designation`, `u0`.`FacebookUrl`, `u0`.`FullName`, `u0`.`GitHubUrl`, `u0`.`IsDeleted`, `u0`.`LinkedInUrl`, `u0`.`PhoneNumber`, `u0`.`ProfileCompletionPercent`, `u0`.`ProfilePhotoUrl`, `u0`.`StudentId`, `u0`.`TwitterUrl`, `u0`.`UpdatedAt`, `u0`.`UserId`, `u0`.`WebsiteUrl`
+FROM `Users` AS `u`
+LEFT JOIN `UserProfiles` AS `u0` ON `u`.`Id` = `u0`.`UserId`
+WHERE `u`.`Id` = @__userId_0
+LIMIT 1
+2026-03-04 11:56:00.431 +06:00 [ERR] An exception occurred while iterating over the results of a query for context type 'EduNexis.Infrastructure.Persistence.AppDbContext'.
+MySqlConnector.MySqlException (0x80004005): Unknown column 'u.CoverPhotoUrl' in 'field list'
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 1081
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 131
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 487
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+MySqlConnector.MySqlException (0x80004005): Unknown column 'u.CoverPhotoUrl' in 'field list'
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 1081
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 131
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 487
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-03-04 11:56:00.434 +06:00 [ERR] An exception occurred while iterating over the results of a query for context type 'EduNexis.Infrastructure.Persistence.AppDbContext'.
+MySqlConnector.MySqlException (0x80004005): Unknown column 'u0.CoverPhotoUrl' in 'field list'
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 1081
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 131
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 487
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+MySqlConnector.MySqlException (0x80004005): Unknown column 'u0.CoverPhotoUrl' in 'field list'
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 1081
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 131
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 487
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-03-04 11:56:00.449 +06:00 [ERR] HTTP GET /api/profile responded 500 in 165.0349 ms
+MySqlConnector.MySqlException (0x80004005): Unknown column 'u.CoverPhotoUrl' in 'field list'
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 1081
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 131
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 487
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at EduNexis.Infrastructure.Persistence.Repositories.UserProfileRepository.GetByUserIdAsync(Guid userId, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\Persistence\Repositories\UserProfileRepository.cs:line 8
+   at EduNexis.Application.Features.Profile.Queries.GetProfileQueryHandler.Handle(GetProfileQuery query, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\Profile\Queries\GetProfileQuery.cs:line 14
+   at EduNexis.API.Controllers.ProfileController.Get(CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\ProfileController.cs:line 13
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-03-04 11:56:00.462 +06:00 [ERR] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 500 in 177.5343 ms
+MySqlConnector.MySqlException (0x80004005): Unknown column 'u0.CoverPhotoUrl' in 'field list'
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 1081
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 131
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 487
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at EduNexis.Infrastructure.Persistence.Repositories.UserRepository.GetWithProfileAsync(Guid userId, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\Persistence\Repositories\UserRepository.cs:line 26
+   at EduNexis.Application.Features.Profile.Queries.GetPublicProfileQueryHandler.Handle(GetPublicProfileQuery query, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\Profile\Queries\GetPublicProfileQuery.cs:line 16
+   at EduNexis.API.Controllers.ProfileController.GetPublic(Guid userId, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\ProfileController.cs:line 17
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-03-04 11:56:00.542 +06:00 [ERR] Unhandled exception: Unknown column 'u.CoverPhotoUrl' in 'field list'
+MySqlConnector.MySqlException (0x80004005): Unknown column 'u.CoverPhotoUrl' in 'field list'
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 1081
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 131
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 487
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at EduNexis.Infrastructure.Persistence.Repositories.UserProfileRepository.GetByUserIdAsync(Guid userId, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\Persistence\Repositories\UserProfileRepository.cs:line 8
+   at EduNexis.Application.Features.Profile.Queries.GetProfileQueryHandler.Handle(GetProfileQuery query, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\Profile\Queries\GetProfileQuery.cs:line 14
+   at EduNexis.API.Controllers.ProfileController.Get(CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\ProfileController.cs:line 13
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EduNexis.API.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Middleware\ExceptionMiddleware.cs:line 15
+2026-03-04 11:56:00.566 +06:00 [ERR] Unhandled exception: Unknown column 'u0.CoverPhotoUrl' in 'field list'
+MySqlConnector.MySqlException (0x80004005): Unknown column 'u0.CoverPhotoUrl' in 'field list'
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 1081
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 131
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 487
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at EduNexis.Infrastructure.Persistence.Repositories.UserRepository.GetWithProfileAsync(Guid userId, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\Persistence\Repositories\UserRepository.cs:line 26
+   at EduNexis.Application.Features.Profile.Queries.GetPublicProfileQueryHandler.Handle(GetPublicProfileQuery query, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\Profile\Queries\GetPublicProfileQuery.cs:line 16
+   at EduNexis.API.Controllers.ProfileController.GetPublic(Guid userId, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\ProfileController.cs:line 17
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EduNexis.API.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Middleware\ExceptionMiddleware.cs:line 15
+2026-03-04 11:56:29.256 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.2317 ms
+2026-03-04 11:56:29.278 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 11.3298 ms
+2026-03-04 11:57:54.875 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 3.0145 ms
+2026-03-04 11:57:54.875 +06:00 [INF] HTTP OPTIONS /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 204 in 3.0307 ms
+2026-03-04 11:57:54.875 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 3.0231 ms
+2026-03-04 11:57:56.628 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 1698.4677 ms
+2026-03-04 11:57:56.697 +06:00 [INF] HTTP GET /api/profile responded 200 in 1767.2904 ms
+2026-03-04 11:57:56.877 +06:00 [INF] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 200 in 1946.9869 ms
+2026-03-04 11:58:55.694 +06:00 [INF] HTTP OPTIONS /api/profile/photo responded 204 in 0.1611 ms
+2026-03-04 11:58:56.020 +06:00 [INF] HTTP DELETE /api/profile/photo responded 200 in 319.7899 ms
+2026-03-04 11:58:56.031 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.1054 ms
+2026-03-04 11:58:56.031 +06:00 [INF] HTTP OPTIONS /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 204 in 0.0586 ms
+2026-03-04 11:58:56.041 +06:00 [INF] HTTP GET /api/profile responded 200 in 5.0326 ms
+2026-03-04 11:58:56.053 +06:00 [INF] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 200 in 14.1215 ms
+2026-03-04 11:58:56.645 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.1073 ms
+2026-03-04 11:58:56.660 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 8.6563 ms
+2026-03-04 11:59:03.441 +06:00 [INF] HTTP OPTIONS /api/profile/photo responded 204 in 0.1343 ms
+2026-03-04 11:59:06.473 +06:00 [INF] HTTP POST /api/profile/photo responded 200 in 3023.6253 ms
+2026-03-04 11:59:06.484 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.1167 ms
+2026-03-04 11:59:06.484 +06:00 [INF] HTTP OPTIONS /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 204 in 0.1168 ms
+2026-03-04 11:59:06.504 +06:00 [INF] HTTP GET /api/profile responded 200 in 12.9947 ms
+2026-03-04 11:59:06.509 +06:00 [INF] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 200 in 14.6220 ms
+2026-03-04 11:59:10.429 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.2825 ms
+2026-03-04 11:59:10.441 +06:00 [INF] HTTP GET /api/profile responded 200 in 10.4864 ms
+2026-03-04 11:59:10.450 +06:00 [INF] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 200 in 19.5688 ms
+2026-03-04 11:59:10.451 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 9.4902 ms
+2026-03-04 11:59:16.737 +06:00 [INF] HTTP OPTIONS /api/profile/photo responded 204 in 0.0986 ms
+2026-03-04 11:59:16.757 +06:00 [INF] HTTP DELETE /api/profile/photo responded 200 in 14.0335 ms
+2026-03-04 11:59:16.764 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.0701 ms
+2026-03-04 11:59:16.764 +06:00 [INF] HTTP OPTIONS /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 204 in 0.0701 ms
+2026-03-04 11:59:16.774 +06:00 [INF] HTTP GET /api/profile responded 200 in 3.8684 ms
+2026-03-04 11:59:16.781 +06:00 [INF] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 200 in 8.4909 ms
+2026-03-04 11:59:58.547 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.3597 ms
+2026-03-04 11:59:58.547 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.3596 ms
+2026-03-04 11:59:58.549 +06:00 [INF] HTTP OPTIONS /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 204 in 0.0737 ms
+2026-03-04 11:59:58.564 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 4.6013 ms
+2026-03-04 11:59:58.564 +06:00 [INF] HTTP GET /api/profile responded 200 in 11.0810 ms
+2026-03-04 11:59:58.591 +06:00 [INF] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 200 in 27.5341 ms
+2026-03-04 12:00:02.840 +06:00 [INF] HTTP OPTIONS /api/profile/photo responded 204 in 0.1580 ms
+2026-03-04 12:00:05.517 +06:00 [INF] HTTP POST /api/profile/photo responded 200 in 2671.1874 ms
+2026-03-04 12:00:05.527 +06:00 [INF] HTTP OPTIONS /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 204 in 0.0829 ms
+2026-03-04 12:00:05.527 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.0828 ms
+2026-03-04 12:00:05.536 +06:00 [INF] HTTP GET /api/profile responded 200 in 2.9457 ms
+2026-03-04 12:00:05.542 +06:00 [INF] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 200 in 9.5775 ms
+2026-03-04 12:02:04.071 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.1410 ms
+2026-03-04 12:02:04.082 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 6.5171 ms
+2026-03-04 12:02:08.912 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.0446 ms
+2026-03-04 12:02:08.915 +06:00 [INF] HTTP OPTIONS /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 204 in 0.0538 ms
+2026-03-04 12:02:08.918 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 6.1898 ms
+2026-03-04 12:02:08.927 +06:00 [INF] HTTP GET /api/profile responded 200 in 4.9096 ms
+2026-03-04 12:02:09.000 +06:00 [INF] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 200 in 74.9177 ms
+2026-03-04 12:02:22.680 +06:00 [INF] HTTP OPTIONS /api/profile/photo responded 204 in 0.0796 ms
+2026-03-04 12:02:22.696 +06:00 [INF] HTTP DELETE /api/profile/photo responded 200 in 11.9320 ms
+2026-03-04 12:02:22.705 +06:00 [INF] HTTP OPTIONS /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 204 in 0.0505 ms
+2026-03-04 12:02:22.705 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.0505 ms
+2026-03-04 12:02:22.715 +06:00 [INF] HTTP GET /api/profile responded 200 in 4.5184 ms
+2026-03-04 12:02:22.717 +06:00 [INF] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 200 in 8.2818 ms
+2026-03-04 12:02:37.967 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.0548 ms
+2026-03-04 12:02:37.967 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0174 ms
+2026-03-04 12:02:37.968 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.0134 ms
+2026-03-04 12:02:37.978 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 3.3560 ms
+2026-03-04 12:02:38.188 +06:00 [INF] HTTP GET /api/Courses responded 200 in 214.9955 ms
+2026-03-04 12:02:38.321 +06:00 [INF] HTTP GET /api/Courses responded 200 in 342.6580 ms
+2026-03-04 12:03:17.599 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 2.7851 ms
+2026-03-04 12:03:18.129 +06:00 [INF] HTTP PUT /api/profile responded 200 in 519.5969 ms
+2026-03-04 12:03:18.186 +06:00 [INF] HTTP OPTIONS /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 204 in 0.0468 ms
+2026-03-04 12:03:18.189 +06:00 [INF] HTTP GET /api/profile responded 200 in 3.4749 ms
+2026-03-04 12:03:18.213 +06:00 [INF] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 200 in 20.9880 ms
+2026-03-04 12:03:38.958 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.1667 ms
+2026-03-04 12:03:38.984 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 5.4054 ms
+2026-03-04 12:03:44.340 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.0737 ms
+2026-03-04 12:03:44.383 +06:00 [INF] HTTP PUT /api/profile responded 200 in 33.5572 ms
+2026-03-04 12:03:44.422 +06:00 [INF] HTTP OPTIONS /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 204 in 0.0719 ms
+2026-03-04 12:03:44.442 +06:00 [INF] HTTP GET /api/profile responded 200 in 18.9435 ms
+2026-03-04 12:03:44.491 +06:00 [INF] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 200 in 39.3217 ms
+2026-03-04 12:03:50.032 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0427 ms
+2026-03-04 12:03:50.032 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.1397 ms
+2026-03-04 12:03:50.038 +06:00 [INF] HTTP OPTIONS /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 204 in 0.0411 ms
+2026-03-04 12:03:50.046 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 6.3670 ms
+2026-03-04 12:03:50.046 +06:00 [INF] HTTP GET /api/profile responded 200 in 4.0468 ms
+2026-03-04 12:03:50.075 +06:00 [INF] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 200 in 30.7597 ms
+2026-03-04 12:06:50.077 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0347 ms
+2026-03-04 12:06:50.092 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 6.9193 ms
+2026-03-04 12:07:50.112 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0505 ms
+2026-03-04 12:07:50.124 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 5.0111 ms
+2026-03-04 12:07:55.644 +06:00 [INF] HTTP OPTIONS /api/profile/photo responded 204 in 0.0428 ms
+2026-03-04 12:07:57.719 +06:00 [INF] HTTP POST /api/profile/photo responded 200 in 2051.3183 ms
+2026-03-04 12:07:57.725 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.0340 ms
+2026-03-04 12:07:57.726 +06:00 [INF] HTTP OPTIONS /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 204 in 0.0208 ms
+2026-03-04 12:07:57.733 +06:00 [INF] HTTP GET /api/profile responded 200 in 3.2959 ms
+2026-03-04 12:07:57.749 +06:00 [INF] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 200 in 16.7290 ms
+2026-03-04 12:09:27.479 +06:00 [INF] HTTP OPTIONS /api/profile/cover responded 204 in 0.0570 ms
+2026-03-04 12:09:29.556 +06:00 [INF] HTTP POST /api/profile/cover responded 200 in 2070.5411 ms
+2026-03-04 12:09:29.564 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.0277 ms
+2026-03-04 12:09:29.565 +06:00 [INF] HTTP OPTIONS /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 204 in 0.0178 ms
+2026-03-04 12:09:29.580 +06:00 [INF] HTTP GET /api/profile responded 200 in 7.7014 ms
+2026-03-04 12:09:29.592 +06:00 [INF] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 200 in 16.4469 ms
+2026-03-04 12:11:21.287 +06:00 [INF] HTTP OPTIONS /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 204 in 3.2574 ms
+2026-03-04 12:11:21.287 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 3.2489 ms
+2026-03-04 12:11:21.287 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 3.2695 ms
+2026-03-04 12:11:23.813 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 2435.5296 ms
+2026-03-04 12:11:23.853 +06:00 [INF] HTTP GET /api/profile responded 200 in 2475.2468 ms
+2026-03-04 12:11:24.003 +06:00 [INF] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 200 in 2625.0186 ms
+2026-03-04 12:11:33.245 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.2305 ms
+2026-03-04 12:11:33.929 +06:00 [INF] HTTP PUT /api/profile responded 200 in 669.5012 ms
+2026-03-04 12:11:33.963 +06:00 [INF] HTTP OPTIONS /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 204 in 0.0515 ms
+2026-03-04 12:11:33.976 +06:00 [INF] HTTP GET /api/profile responded 200 in 13.7900 ms
+2026-03-04 12:11:33.995 +06:00 [INF] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 200 in 19.5880 ms
+2026-03-04 12:11:53.830 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.2425 ms
+2026-03-04 12:11:53.847 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 8.3513 ms
+2026-03-04 12:11:57.318 +06:00 [INF] HTTP OPTIONS /api/profile/photo responded 204 in 0.1524 ms
+2026-03-04 12:11:59.919 +06:00 [INF] HTTP POST /api/profile/photo responded 200 in 2592.4439 ms
+2026-03-04 12:11:59.929 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.1118 ms
+2026-03-04 12:11:59.930 +06:00 [INF] HTTP OPTIONS /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 204 in 0.1144 ms
+2026-03-04 12:11:59.946 +06:00 [INF] HTTP GET /api/profile responded 200 in 8.8694 ms
+2026-03-04 12:11:59.948 +06:00 [INF] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 200 in 9.9906 ms
+2026-03-04 12:12:08.961 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.1807 ms
+2026-03-04 12:12:08.961 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.3829 ms
+2026-03-04 12:12:08.962 +06:00 [INF] HTTP OPTIONS /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 204 in 0.0643 ms
+2026-03-04 12:12:08.974 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 7.2432 ms
+2026-03-04 12:12:09.005 +06:00 [INF] HTTP GET /api/profile responded 200 in 15.1196 ms
+2026-03-04 12:12:09.060 +06:00 [INF] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 200 in 51.6581 ms
+2026-03-04 12:12:14.040 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.1185 ms
+2026-03-04 12:12:14.040 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.1442 ms
+2026-03-04 12:12:14.040 +06:00 [INF] HTTP OPTIONS /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 204 in 0.1031 ms
+2026-03-04 12:12:14.050 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 5.5944 ms
+2026-03-04 12:12:14.050 +06:00 [INF] HTTP GET /api/profile responded 200 in 4.2652 ms
+2026-03-04 12:12:14.059 +06:00 [INF] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 200 in 10.5750 ms
+2026-03-04 12:12:17.878 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.2016 ms
+2026-03-04 12:12:17.878 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.2018 ms
+2026-03-04 12:12:18.140 +06:00 [INF] HTTP GET /api/Courses responded 200 in 253.5841 ms
+2026-03-04 12:12:18.340 +06:00 [INF] HTTP GET /api/Courses responded 200 in 456.0921 ms
+2026-03-04 12:12:20.492 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.5805 ms
+2026-03-04 12:12:20.514 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 12.7306 ms
+2026-03-04 12:12:20.534 +06:00 [INF] HTTP GET /api/Courses responded 200 in 42.1490 ms
+2026-03-04 12:12:20.551 +06:00 [INF] HTTP GET /api/Courses responded 200 in 59.6409 ms
+2026-03-04 12:12:25.238 +06:00 [INF] HTTP OPTIONS /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 204 in 0.0448 ms
+2026-03-04 12:12:25.238 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.0992 ms
+2026-03-04 12:12:25.252 +06:00 [INF] HTTP GET /api/profile responded 200 in 5.1715 ms
+2026-03-04 12:12:25.259 +06:00 [INF] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 200 in 14.4206 ms
+2026-03-04 12:12:50.625 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.2147 ms
+2026-03-04 12:12:50.638 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 4.3247 ms
+2026-03-04 12:13:07.297 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.0393 ms
+2026-03-04 12:13:07.373 +06:00 [INF] HTTP PUT /api/profile responded 200 in 58.1187 ms
+2026-03-04 12:13:07.418 +06:00 [INF] HTTP OPTIONS /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 204 in 0.0646 ms
+2026-03-04 12:13:07.432 +06:00 [INF] HTTP GET /api/profile responded 200 in 14.3243 ms
+2026-03-04 12:13:07.443 +06:00 [INF] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 200 in 10.0283 ms
+2026-03-04 12:13:20.649 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.1419 ms
+2026-03-04 12:13:20.663 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 4.3474 ms
+2026-03-04 12:14:20.692 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.1647 ms
+2026-03-04 12:14:20.707 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 6.0769 ms
+2026-03-04 12:15:20.731 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.1299 ms
+2026-03-04 12:15:20.749 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 7.5970 ms
+2026-03-04 12:17:48.448 +06:00 [INF] HTTP OPTIONS /api/profile responded 204 in 0.0347 ms
+2026-03-04 12:17:48.448 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0888 ms
+2026-03-04 12:17:48.450 +06:00 [INF] HTTP OPTIONS /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 204 in 0.0673 ms
+2026-03-04 12:17:48.504 +06:00 [INF] HTTP GET /api/Notifications responded 401 in 18.2743 ms
+2026-03-04 12:17:48.514 +06:00 [INF] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 401 in 22.3180 ms
+2026-03-04 12:17:48.520 +06:00 [INF] HTTP GET /api/profile responded 401 in 35.8037 ms
+2026-03-04 12:17:48.549 +06:00 [INF] HTTP OPTIONS /api/auth/refresh responded 204 in 0.0747 ms
+2026-03-04 12:17:48.964 +06:00 [INF] HTTP POST /api/auth/refresh responded 200 in 195.4551 ms
+2026-03-04 12:17:49.014 +06:00 [INF] HTTP GET /api/profile responded 200 in 3.5389 ms
+2026-03-04 12:17:49.018 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 7.8264 ms
+2026-03-04 12:17:49.021 +06:00 [INF] HTTP GET /api/profile/e87aab8a-c88e-4010-b7ae-48b629499788 responded 200 in 11.2985 ms
+2026-03-04 12:18:09.392 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.0535 ms
+2026-03-04 12:18:09.392 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.0347 ms
+2026-03-04 12:18:09.431 +06:00 [INF] HTTP GET /api/Courses responded 200 in 30.9999 ms
+2026-03-04 12:18:09.432 +06:00 [INF] HTTP GET /api/Courses responded 200 in 32.7453 ms
+2026-03-04 12:18:19.216 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0644 ms
+2026-03-04 12:18:19.232 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 6.2488 ms
+2026-03-04 12:18:49.252 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0371 ms
+2026-03-04 12:18:49.263 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 4.6304 ms
+2026-03-04 12:19:19.289 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.1717 ms
+2026-03-04 12:19:19.321 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 13.2178 ms
+2026-03-04 12:20:49.345 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0417 ms
+2026-03-04 12:20:49.373 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 14.6139 ms
+2026-03-04 12:21:49.385 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0509 ms
+2026-03-04 12:21:49.401 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 5.0687 ms
+2026-03-04 12:22:04.760 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.0428 ms
+2026-03-04 12:22:05.016 +06:00 [INF] HTTP POST /api/Courses responded 200 in 242.6317 ms
+2026-03-04 12:22:05.023 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.0353 ms
+2026-03-04 12:22:05.074 +06:00 [INF] HTTP GET /api/Courses responded 200 in 50.3985 ms
+2026-03-04 12:22:05.078 +06:00 [INF] HTTP GET /api/Courses responded 200 in 49.5378 ms
+2026-03-04 12:23:19.417 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0488 ms
+2026-03-04 12:23:19.426 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 4.0127 ms
+2026-03-04 12:23:49.437 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0327 ms
+2026-03-04 12:23:49.447 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 3.2096 ms
+2026-03-04 12:24:26.969 +06:00 [INF] HTTP OPTIONS /api/Courses/cc450f6c-78b5-4751-860a-256aa9dc92c8 responded 204 in 0.0609 ms
+2026-03-04 12:24:27.163 +06:00 [INF] HTTP GET /api/Courses/cc450f6c-78b5-4751-860a-256aa9dc92c8 responded 200 in 185.2702 ms
+2026-03-04 12:24:27.189 +06:00 [INF] HTTP OPTIONS /api/Announcements/courses/cc450f6c-78b5-4751-860a-256aa9dc92c8/announcements responded 204 in 0.0513 ms
+2026-03-04 12:24:27.266 +06:00 [INF] HTTP GET /api/Announcements/courses/cc450f6c-78b5-4751-860a-256aa9dc92c8/announcements responded 200 in 72.2009 ms
+2026-03-04 12:24:29.074 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.0348 ms
+2026-03-04 12:24:29.075 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.0334 ms
+2026-03-04 12:24:29.111 +06:00 [INF] HTTP GET /api/Courses responded 200 in 27.5277 ms
+2026-03-04 12:24:29.111 +06:00 [INF] HTTP GET /api/Courses responded 200 in 27.6116 ms
+2026-03-04 12:24:49.740 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0469 ms
+2026-03-04 12:24:49.752 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 2.8934 ms
+2026-03-04 12:25:49.771 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.1811 ms
+2026-03-04 12:25:49.785 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 5.8499 ms

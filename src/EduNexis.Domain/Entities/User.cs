@@ -1,4 +1,4 @@
-namespace EduNexis.Domain.Entities;
+﻿namespace EduNexis.Domain.Entities;
 
 public class User : BaseEntity
 {
@@ -15,6 +15,7 @@ public class User : BaseEntity
     public ICollection<CourseMember> CourseMembers { get; private set; } = [];
     public ICollection<TeacherQuota> TeacherQuotas { get; private set; } = [];
     public ICollection<Notification> Notifications { get; private set; } = [];
+    public ICollection<UserEducation> Educations { get; private set; } = [];
 
     protected User() { }
 
@@ -64,3 +65,4 @@ public class User : BaseEntity
             throw new DomainException("Student email must end with @student.just.edu.bd");
     }
 }
+
