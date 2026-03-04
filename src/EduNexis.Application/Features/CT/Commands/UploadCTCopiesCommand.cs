@@ -2,13 +2,16 @@ namespace EduNexis.Application.Features.CT.Commands;
 
 public record UploadCTCopiesCommand(
     Guid CTEventId,
-    Guid StudentId,
+    Guid TeacherId,
     Stream? BestCopyStream,
     string? BestCopyFileName,
+    Guid? BestStudentId,
     Stream? WorstCopyStream,
     string? WorstCopyFileName,
+    Guid? WorstStudentId,
     Stream? AvgCopyStream,
-    string? AvgCopyFileName
+    string? AvgCopyFileName,
+    Guid? AvgStudentId
 ) : ICommand<ApiResponse>;
 
 public sealed class UploadCTCopiesCommandHandler(
@@ -22,33 +25,29 @@ public sealed class UploadCTCopiesCommandHandler(
         var ctEvent = await uow.GetRepository<CTEvent>().GetByIdAsync(command.CTEventId, ct)
             ?? throw new NotFoundException("CTEvent", command.CTEventId);
 
-        var folder = $"ct/{command.CTEventId}/{command.StudentId}";
+        var course = await uow.Courses.GetByIdAsync(ctEvent.CourseId, ct)
+            ?? throw new NotFoundException("Course", ctEvent.CourseId);
 
-        var submission = await uow.GetRepository<CTSubmission>()
-            .FirstOrDefaultAsync(s =>
-                s.CTEventId == command.CTEventId &&
-                s.StudentId == command.StudentId, ct);
+        if (course.TeacherId != command.TeacherId)
+            return ApiResponse.Fail("Only the teacher can upload khata.");
 
-        if (submission is null)
-        {
-            submission = CTSubmission.Create(command.CTEventId, command.StudentId);
-            await uow.GetRepository<CTSubmission>().AddAsync(submission, ct);
-        }
+        var folder = $"ct/{command.CTEventId}/khata";
 
-        string? bestUrl = null, worstUrl = null, avgUrl = null;
+        var bestUrl  = command.BestCopyStream  != null ? await storage.UploadAsync(command.BestCopyStream,  command.BestCopyFileName!,  folder, ct) : ctEvent.BestScriptUrl;
+        var worstUrl = command.WorstCopyStream != null ? await storage.UploadAsync(command.WorstCopyStream, command.WorstCopyFileName!, folder, ct) : ctEvent.WorstScriptUrl;
+        var avgUrl   = command.AvgCopyStream   != null ? await storage.UploadAsync(command.AvgCopyStream,   command.AvgCopyFileName!,   folder, ct) : ctEvent.AverageScriptUrl;
 
-        if (command.BestCopyStream is not null && command.BestCopyFileName is not null)
-            bestUrl = await storage.UploadAsync(command.BestCopyStream, command.BestCopyFileName, folder, ct);
+        ctEvent.UploadKhata(
+            bestUrl ?? string.Empty,  command.BestCopyStream  != null ? command.BestStudentId  : ctEvent.BestStudentId,
+            worstUrl ?? string.Empty, command.WorstCopyStream != null ? command.WorstStudentId : ctEvent.WorstStudentId,
+            avgUrl ?? string.Empty,   command.AvgCopyStream   != null ? command.AvgStudentId   : ctEvent.AverageStudentId);
 
-        if (command.WorstCopyStream is not null && command.WorstCopyFileName is not null)
-            worstUrl = await storage.UploadAsync(command.WorstCopyStream, command.WorstCopyFileName, folder, ct);
-
-        if (command.AvgCopyStream is not null && command.AvgCopyFileName is not null)
-            avgUrl = await storage.UploadAsync(command.AvgCopyStream, command.AvgCopyFileName, folder, ct);
-
-        submission.UploadCopies(bestUrl, worstUrl, avgUrl);
-
+        uow.GetRepository<CTEvent>().Update(ctEvent);
         await uow.SaveChangesAsync(ct);
-        return ApiResponse.Ok("CT copies uploaded successfully.");
+
+        return ApiResponse.Ok("CT khata uploaded successfully.");
     }
 }
+
+
+

@@ -1,4 +1,4 @@
-using EduNexis.Application.Features.Marks.Commands;
+﻿using EduNexis.Application.Features.Marks.Commands;
 using EduNexis.Application.Features.Marks.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +26,12 @@ public class MarksController : BaseController
     public async Task<IActionResult> Publish(Guid courseId, CancellationToken ct) =>
         Ok(await Mediator.Send(new PublishFinalMarksCommand(courseId, CurrentUserId), ct));
 
+    [HttpGet("grading-formula")]
+    public async Task<IActionResult> GetFormula(Guid courseId, CancellationToken ct) =>
+        Ok(await Mediator.Send(new GetGradingFormulaQuery(courseId, CurrentUserId), ct));
+
     [HttpGet("marks")]
     public async Task<IActionResult> GetMarks(Guid courseId, CancellationToken ct) =>
         Ok(await Mediator.Send(new GetCourseMarksQuery(courseId, CurrentUserId), ct));
 }
+

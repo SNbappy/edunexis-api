@@ -184,3 +184,330 @@ System.IO.IOException: Failed to bind to address http://127.0.0.1:5041: address 
 2026-03-02 23:02:52.291 +06:00 [INF] HTTP GET /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 200 in 37.1656 ms
 2026-03-02 23:02:52.664 +06:00 [INF] HTTP OPTIONS /api/Announcements/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/announcements responded 204 in 0.0700 ms
 2026-03-02 23:02:52.673 +06:00 [INF] HTTP GET /api/Announcements/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/announcements responded 200 in 4.2040 ms
+2026-03-02 23:14:06.307 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 6.9728 ms
+2026-03-02 23:14:06.307 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 6.9874 ms
+2026-03-02 23:14:06.513 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0940 ms
+2026-03-02 23:14:09.491 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 2970.7971 ms
+2026-03-02 23:14:10.009 +06:00 [INF] HTTP GET /api/Courses responded 200 in 3595.8325 ms
+2026-03-02 23:14:10.009 +06:00 [INF] HTTP GET /api/Courses responded 200 in 3595.8167 ms
+2026-03-02 23:14:12.784 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 204 in 0.4833 ms
+2026-03-02 23:14:13.110 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 200 in 317.8574 ms
+2026-03-02 23:14:13.151 +06:00 [INF] HTTP OPTIONS /api/Announcements/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/announcements responded 204 in 0.1337 ms
+2026-03-02 23:14:13.245 +06:00 [INF] HTTP GET /api/Announcements/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/announcements responded 200 in 82.0060 ms
+2026-03-02 23:14:14.615 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.2778 ms
+2026-03-02 23:14:14.882 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 260.2026 ms
+2026-03-02 23:14:18.378 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/b1cc5981-a103-49fe-bb90-9e242965650c responded 204 in 0.6284 ms
+2026-03-02 23:14:18.895 +06:00 [INF] HTTP DELETE /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/b1cc5981-a103-49fe-bb90-9e242965650c responded 200 in 506.1681 ms
+2026-03-02 23:14:18.929 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 20.7074 ms
+2026-03-02 23:14:22.520 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0872 ms
+2026-03-02 23:14:22.520 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 204 in 0.1362 ms
+2026-03-02 23:14:22.555 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 20.5535 ms
+2026-03-02 23:14:22.648 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 200 in 108.1928 ms
+2026-03-02 23:14:22.777 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0582 ms
+2026-03-02 23:14:22.821 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 39.8281 ms
+2026-03-02 23:14:29.886 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/1243faf2-65be-4376-a778-b1d1c5fae1eb responded 204 in 0.1674 ms
+2026-03-02 23:14:29.998 +06:00 [INF] HTTP DELETE /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/1243faf2-65be-4376-a778-b1d1c5fae1eb responded 200 in 99.4661 ms
+2026-03-02 23:14:30.014 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.1056 ms
+2026-03-02 23:14:30.038 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 9.1634 ms
+2026-03-02 23:14:33.396 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/84c5216c-dac9-492b-98d3-3d4a9fa7cac7 responded 204 in 0.1060 ms
+2026-03-02 23:14:33.546 +06:00 [INF] HTTP DELETE /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/84c5216c-dac9-492b-98d3-3d4a9fa7cac7 responded 200 in 135.5000 ms
+2026-03-02 23:14:33.590 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 23.2139 ms
+2026-03-02 23:14:37.392 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/88b89627-fd26-4306-a0fe-cea7b8e8b880 responded 204 in 0.2141 ms
+2026-03-02 23:14:37.542 +06:00 [INF] HTTP DELETE /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/88b89627-fd26-4306-a0fe-cea7b8e8b880 responded 200 in 136.3735 ms
+2026-03-02 23:14:37.560 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0560 ms
+2026-03-02 23:14:37.713 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 74.8193 ms
+2026-03-02 23:14:40.775 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/df12cdb8-092b-4b51-85dc-e2b2a820fcac responded 204 in 0.1131 ms
+2026-03-02 23:14:40.889 +06:00 [INF] HTTP DELETE /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/df12cdb8-092b-4b51-85dc-e2b2a820fcac responded 200 in 101.4330 ms
+2026-03-02 23:14:40.908 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 4.5117 ms
+2026-03-02 23:14:52.614 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.1715 ms
+2026-03-02 23:14:52.628 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 7.9916 ms
+2026-03-02 23:14:56.292 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0638 ms
+2026-03-02 23:14:56.702 +06:00 [INF] HTTP POST /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 392.0946 ms
+2026-03-02 23:14:56.747 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 22.6484 ms
+2026-03-02 23:18:57.044 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 6.5221 ms
+2026-03-02 23:18:57.044 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 6.5176 ms
+2026-03-02 23:19:00.448 +06:00 [ERR] HTTP GET /api/Courses responded 500 in 3289.0435 ms
+System.OperationCanceledException: The operation was canceled.
+   at System.Threading.CancellationToken.ThrowOperationCanceledException()
+   at System.Threading.CancellationToken.ThrowIfCancellationRequested()
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at EduNexis.Infrastructure.Persistence.Repositories.CourseRepository.GetByTeacherAsync(Guid teacherId, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\Persistence\Repositories\CourseRepository.cs:line 25
+   at EduNexis.Application.Features.Courses.Queries.GetCoursesQueryHandler.Handle(GetCoursesQuery query, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\Courses\Queries\GetCoursesQuery.cs:line 21
+   at EduNexis.API.Controllers.CoursesController.GetAll(Nullable`1 teacherId, Nullable`1 studentId, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\CoursesController.cs:line 27
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-03-02 23:19:00.448 +06:00 [ERR] HTTP GET /api/Courses responded 500 in 3289.7105 ms
+System.OperationCanceledException: The operation was canceled.
+   at System.Threading.CancellationToken.ThrowOperationCanceledException()
+   at System.Threading.CancellationToken.ThrowIfCancellationRequested()
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at EduNexis.Infrastructure.Persistence.Repositories.CourseRepository.GetAllAsync(CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\Persistence\Repositories\CourseRepository.cs:line 41
+   at EduNexis.Application.Features.Courses.Queries.GetCoursesQueryHandler.Handle(GetCoursesQuery query, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\Courses\Queries\GetCoursesQuery.cs:line 25
+   at EduNexis.API.Controllers.CoursesController.GetAll(Nullable`1 teacherId, Nullable`1 studentId, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\CoursesController.cs:line 27
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-03-02 23:19:00.497 +06:00 [ERR] Unhandled exception: The operation was canceled.
+System.OperationCanceledException: The operation was canceled.
+   at System.Threading.CancellationToken.ThrowOperationCanceledException()
+   at System.Threading.CancellationToken.ThrowIfCancellationRequested()
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at EduNexis.Infrastructure.Persistence.Repositories.CourseRepository.GetByTeacherAsync(Guid teacherId, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\Persistence\Repositories\CourseRepository.cs:line 25
+   at EduNexis.Application.Features.Courses.Queries.GetCoursesQueryHandler.Handle(GetCoursesQuery query, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\Courses\Queries\GetCoursesQuery.cs:line 21
+   at EduNexis.API.Controllers.CoursesController.GetAll(Nullable`1 teacherId, Nullable`1 studentId, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\CoursesController.cs:line 27
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EduNexis.API.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Middleware\ExceptionMiddleware.cs:line 15
+2026-03-02 23:19:00.502 +06:00 [ERR] Unhandled exception: The operation was canceled.
+System.OperationCanceledException: The operation was canceled.
+   at System.Threading.CancellationToken.ThrowOperationCanceledException()
+   at System.Threading.CancellationToken.ThrowIfCancellationRequested()
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at EduNexis.Infrastructure.Persistence.Repositories.CourseRepository.GetAllAsync(CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\Persistence\Repositories\CourseRepository.cs:line 41
+   at EduNexis.Application.Features.Courses.Queries.GetCoursesQueryHandler.Handle(GetCoursesQuery query, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\Courses\Queries\GetCoursesQuery.cs:line 25
+   at EduNexis.API.Controllers.CoursesController.GetAll(Nullable`1 teacherId, Nullable`1 studentId, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\CoursesController.cs:line 27
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EduNexis.API.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Middleware\ExceptionMiddleware.cs:line 15
+2026-03-02 23:19:00.721 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.1426 ms
+2026-03-02 23:19:01.851 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 1120.1130 ms
+2026-03-02 23:19:02.336 +06:00 [INF] HTTP GET /api/Courses responded 200 in 1611.4551 ms
+2026-03-02 23:19:02.336 +06:00 [INF] HTTP GET /api/Courses responded 200 in 1612.0567 ms
+2026-03-02 23:19:07.224 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 204 in 0.3749 ms
+2026-03-02 23:19:07.471 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 200 in 235.5361 ms
+2026-03-02 23:19:07.502 +06:00 [INF] HTTP OPTIONS /api/Announcements/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/announcements responded 204 in 0.0652 ms
+2026-03-02 23:19:07.614 +06:00 [INF] HTTP GET /api/Announcements/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/announcements responded 200 in 106.0530 ms
+2026-03-02 23:19:09.972 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 204 in 0.4382 ms
+2026-03-02 23:19:09.972 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 204 in 0.5037 ms
+2026-03-02 23:19:09.972 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 204 in 0.6476 ms
+2026-03-02 23:19:10.234 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/members responded 200 in 226.0203 ms
+2026-03-02 23:19:10.292 +06:00 [INF] HTTP GET /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 200 in 301.1975 ms
+2026-03-02 23:19:10.347 +06:00 [INF] HTTP GET /api/Attendance/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/sessions responded 200 in 51.1974 ms
+2026-03-02 23:19:10.531 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0513 ms
+2026-03-02 23:19:10.766 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 230.9176 ms
+2026-03-02 23:19:17.032 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/82157b91-6f8d-4885-b2a3-8c49b9a53307 responded 204 in 0.3500 ms
+2026-03-02 23:19:17.678 +06:00 [INF] HTTP DELETE /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/82157b91-6f8d-4885-b2a3-8c49b9a53307 responded 200 in 635.5385 ms
+2026-03-02 23:19:17.694 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.1094 ms
+2026-03-02 23:19:17.724 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 17.4531 ms
+2026-03-02 23:19:19.735 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 204 in 0.0607 ms
+2026-03-02 23:19:19.735 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0605 ms
+2026-03-02 23:19:19.747 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 4.8495 ms
+2026-03-02 23:19:19.803 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 200 in 63.8475 ms
+2026-03-02 23:19:19.925 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 5.0256 ms
+2026-03-02 23:19:25.887 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.4170 ms
+2026-03-02 23:19:29.000 +06:00 [INF] HTTP POST /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 3097.2761 ms
+2026-03-02 23:19:29.039 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 20.9542 ms
+2026-03-02 23:20:18.712 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0979 ms
+2026-03-02 23:20:19.818 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.5113 ms
+2026-03-02 23:20:19.843 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 15.7410 ms
+2026-03-02 23:20:23.617 +06:00 [INF] HTTP POST /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 4890.9526 ms
+2026-03-02 23:20:23.655 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 21.4649 ms
+2026-03-02 23:21:33.900 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.9172 ms
+2026-03-02 23:21:34.054 +06:00 [INF] HTTP POST /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 140.7040 ms
+2026-03-02 23:21:34.201 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 137.2804 ms
+2026-03-02 23:21:41.349 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.1391 ms
+2026-03-02 23:21:41.370 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 14.2110 ms
+2026-03-02 23:21:49.875 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.1070 ms
+2026-03-02 23:21:49.887 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 5.2621 ms
+2026-03-02 23:21:51.612 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0517 ms
+2026-03-02 23:21:55.619 +06:00 [INF] HTTP POST /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 4000.3472 ms
+2026-03-02 23:21:55.637 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.1273 ms
+2026-03-02 23:21:55.660 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 16.9637 ms
+2026-03-02 23:22:03.944 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0908 ms
+2026-03-02 23:22:03.963 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 13.4345 ms
+2026-03-02 23:22:08.692 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.4531 ms
+2026-03-02 23:22:08.692 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 204 in 0.0246 ms
+2026-03-02 23:22:08.711 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 5.4510 ms
+2026-03-02 23:22:08.814 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 200 in 105.2149 ms
+2026-03-02 23:22:08.963 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 11.6428 ms
+2026-03-02 23:22:38.791 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.1273 ms
+2026-03-02 23:22:38.804 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 6.4719 ms
+2026-03-02 23:25:08.848 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.7123 ms
+2026-03-02 23:25:08.873 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 14.8623 ms
+2026-03-02 23:30:35.373 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 3.4801 ms
+2026-03-02 23:30:35.373 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 3.4933 ms
+2026-03-02 23:30:35.373 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 3.4739 ms
+2026-03-02 23:30:38.675 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 3169.3304 ms
+2026-03-02 23:30:38.989 +06:00 [INF] HTTP GET /api/Courses responded 200 in 3483.2363 ms
+2026-03-02 23:30:38.989 +06:00 [INF] HTTP GET /api/Courses responded 200 in 3483.2398 ms
+2026-03-02 23:30:56.150 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 204 in 0.4754 ms
+2026-03-02 23:30:56.645 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 200 in 484.3645 ms
+2026-03-02 23:31:00.480 +06:00 [INF] HTTP OPTIONS /api/Announcements/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/announcements responded 204 in 0.1812 ms
+2026-03-02 23:31:00.599 +06:00 [INF] HTTP GET /api/Announcements/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/announcements responded 200 in 104.1832 ms
+2026-03-02 23:31:02.831 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0937 ms
+2026-03-02 23:31:03.081 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 242.0663 ms
+2026-03-02 23:31:06.091 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 204 in 0.0922 ms
+2026-03-02 23:31:06.091 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0923 ms
+2026-03-02 23:31:06.105 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 7.3149 ms
+2026-03-02 23:31:06.194 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 200 in 97.4161 ms
+2026-03-02 23:31:06.341 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 16.3621 ms
+2026-03-02 23:31:10.717 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.1349 ms
+2026-03-02 23:31:10.773 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 49.2266 ms
+2026-03-02 23:31:20.548 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.1949 ms
+2026-03-02 23:31:20.568 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 13.4944 ms
+2026-03-02 23:31:27.949 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/979f8e0c-98d1-403a-8e0e-82316824ec70 responded 204 in 0.3990 ms
+2026-03-02 23:31:28.620 +06:00 [INF] HTTP DELETE /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/979f8e0c-98d1-403a-8e0e-82316824ec70 responded 200 in 661.1581 ms
+2026-03-02 23:31:28.639 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.1792 ms
+2026-03-02 23:31:28.650 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 5.6828 ms
+2026-03-02 23:31:32.690 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/eb1e147c-c422-413c-97fa-9296a69f69da responded 204 in 0.0977 ms
+2026-03-02 23:31:32.830 +06:00 [INF] HTTP DELETE /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/eb1e147c-c422-413c-97fa-9296a69f69da responded 200 in 126.7841 ms
+2026-03-02 23:31:32.858 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 16.6573 ms
+2026-03-02 23:31:36.159 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.8745 ms
+2026-03-02 23:31:36.188 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 18.0895 ms
+2026-03-02 23:31:36.241 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/5333385f-1d41-4d7f-a875-ece8160c2e51 responded 204 in 0.2905 ms
+2026-03-02 23:31:36.398 +06:00 [INF] HTTP DELETE /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/5333385f-1d41-4d7f-a875-ece8160c2e51 responded 200 in 141.2122 ms
+2026-03-02 23:31:36.410 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.6449 ms
+2026-03-02 23:31:36.452 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 28.3447 ms
+2026-03-02 23:31:40.715 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/696630fe-b5c6-44ca-9ba5-5cd15867ba6c responded 204 in 0.0595 ms
+2026-03-02 23:31:40.866 +06:00 [INF] HTTP DELETE /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/696630fe-b5c6-44ca-9ba5-5cd15867ba6c responded 200 in 136.4868 ms
+2026-03-02 23:31:40.908 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 20.7455 ms
+2026-03-02 23:31:45.462 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/119ce300-da71-4063-aa40-f1a18d6b051e responded 204 in 0.0627 ms
+2026-03-02 23:31:45.552 +06:00 [INF] HTTP DELETE /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/119ce300-da71-4063-aa40-f1a18d6b051e responded 200 in 84.1901 ms
+2026-03-02 23:31:45.563 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0709 ms
+2026-03-02 23:31:45.587 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 9.4121 ms
+2026-03-02 23:31:50.790 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/a853a792-3401-4b4b-a157-013eaa9c4394 responded 204 in 0.0884 ms
+2026-03-02 23:31:50.886 +06:00 [INF] HTTP DELETE /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/a853a792-3401-4b4b-a157-013eaa9c4394 responded 200 in 89.9619 ms
+2026-03-02 23:31:50.901 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.1015 ms
+2026-03-02 23:31:50.920 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 12.5803 ms
+2026-03-02 23:31:54.048 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/e4433779-6162-4721-80ef-e082149eb9b0 responded 204 in 0.2285 ms
+2026-03-02 23:31:54.239 +06:00 [INF] HTTP DELETE /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/e4433779-6162-4721-80ef-e082149eb9b0 responded 200 in 184.6606 ms
+2026-03-02 23:31:54.263 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 9.4928 ms
+2026-03-02 23:31:55.299 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.1377 ms
+2026-03-02 23:31:55.312 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 5.3064 ms
+2026-03-02 23:32:03.536 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0540 ms
+2026-03-02 23:32:03.845 +06:00 [INF] HTTP POST /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 293.8059 ms
+2026-03-02 23:32:03.860 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0504 ms
+2026-03-02 23:32:03.895 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 20.0470 ms
+2026-03-02 23:32:05.713 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0714 ms
+2026-03-02 23:32:05.722 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 3.5212 ms
+2026-03-02 23:32:06.210 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0340 ms
+2026-03-02 23:32:06.221 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 3.7174 ms
+2026-03-02 23:32:08.487 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0519 ms
+2026-03-02 23:32:08.503 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 9.7047 ms
+2026-03-02 23:32:17.373 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0798 ms
+2026-03-02 23:32:29.341 +06:00 [INF] HTTP POST /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 11952.2955 ms
+2026-03-02 23:32:29.357 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0557 ms
+2026-03-02 23:32:29.402 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 13.0227 ms
+2026-03-02 23:32:34.240 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 204 in 0.1511 ms
+2026-03-02 23:32:34.240 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0571 ms
+2026-03-02 23:32:34.255 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 6.3477 ms
+2026-03-02 23:32:34.315 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 200 in 67.1789 ms
+2026-03-02 23:32:34.480 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0569 ms
+2026-03-02 23:32:34.497 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 11.1428 ms
+2026-03-02 23:32:36.546 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0909 ms
+2026-03-02 23:32:36.566 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 9.6307 ms
+2026-03-02 23:32:38.076 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0373 ms
+2026-03-02 23:32:38.084 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 3.2518 ms
+2026-03-02 23:32:49.058 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0268 ms
+2026-03-02 23:32:49.068 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 4.4013 ms
+2026-03-02 23:33:04.304 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0686 ms
+2026-03-02 23:33:04.316 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 4.9531 ms
+2026-03-02 23:33:09.425 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.2025 ms
+2026-03-02 23:33:11.895 +06:00 [INF] HTTP POST /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 2458.4902 ms
+2026-03-02 23:33:11.929 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 20.8828 ms
+2026-03-02 23:33:13.221 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0610 ms
+2026-03-02 23:33:13.231 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 3.8191 ms
+2026-03-02 23:33:16.331 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0316 ms
+2026-03-02 23:33:16.342 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 5.5694 ms
+2026-03-02 23:33:24.160 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0335 ms
+2026-03-02 23:33:24.171 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 5.2153 ms
+2026-03-02 23:33:30.765 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/fd150fb5-9e1b-47c0-8e05-fb43df688178 responded 204 in 0.0448 ms
+2026-03-02 23:33:30.868 +06:00 [INF] HTTP DELETE /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/fd150fb5-9e1b-47c0-8e05-fb43df688178 responded 200 in 97.2312 ms
+2026-03-02 23:33:30.883 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0478 ms
+2026-03-02 23:33:30.900 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 12.0591 ms
+2026-03-02 23:33:33.897 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/af35c30e-c6bc-42de-8ffb-fae04703856a responded 204 in 0.0461 ms
+2026-03-02 23:33:34.060 +06:00 [INF] HTTP DELETE /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/af35c30e-c6bc-42de-8ffb-fae04703856a responded 200 in 157.3136 ms
+2026-03-02 23:33:34.084 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 5.8846 ms
+2026-03-02 23:33:34.331 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0245 ms
+2026-03-02 23:33:34.344 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 8.9021 ms
+2026-03-02 23:33:34.924 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0317 ms
+2026-03-02 23:33:34.935 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 4.6068 ms
+2026-03-02 23:33:38.989 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 204 in 0.0745 ms
+2026-03-02 23:33:38.995 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 3.9643 ms
+2026-03-02 23:33:39.057 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 200 in 60.3394 ms
+2026-03-02 23:33:39.548 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 6.5730 ms
+2026-03-02 23:33:40.616 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0810 ms
+2026-03-02 23:33:40.633 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 10.9844 ms
+2026-03-02 23:33:42.479 +06:00 [INF] HTTP OPTIONS /api/Announcements/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/announcements responded 204 in 0.1728 ms
+2026-03-02 23:33:42.492 +06:00 [INF] HTTP GET /api/Announcements/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/announcements responded 200 in 6.4819 ms
+2026-03-02 23:33:47.590 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/e6a7343b-f837-49aa-b15d-d8073d43c3ec responded 204 in 0.0380 ms
+2026-03-02 23:33:47.691 +06:00 [INF] HTTP DELETE /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials/e6a7343b-f837-49aa-b15d-d8073d43c3ec responded 200 in 93.9384 ms
+2026-03-02 23:33:47.704 +06:00 [INF] HTTP OPTIONS /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 204 in 0.0215 ms
+2026-03-02 23:33:47.722 +06:00 [INF] HTTP GET /api/Materials/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/materials responded 200 in 8.2538 ms
+2026-03-02 23:33:58.347 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/assignments responded 204 in 0.0343 ms
+2026-03-02 23:33:58.513 +06:00 [INF] HTTP GET /api/Assignments/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/assignments responded 200 in 146.2211 ms
+2026-03-02 23:34:09.052 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0540 ms
+2026-03-02 23:34:09.065 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 5.9465 ms
+2026-03-02 23:34:26.868 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/[object Object]/assignments responded 204 in 0.2587 ms
+2026-03-02 23:34:26.888 +06:00 [INF] HTTP POST /api/Assignments/courses/[object Object]/assignments responded 404 in 0.5323 ms
+2026-03-02 23:35:42.047 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.1165 ms
+2026-03-02 23:35:42.048 +06:00 [INF] HTTP OPTIONS /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 204 in 0.0481 ms
+2026-03-02 23:35:42.180 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 124.1127 ms
+2026-03-02 23:35:42.222 +06:00 [INF] HTTP GET /api/Courses/ac80d30d-540f-4a38-aa5e-22420bf183c7 responded 200 in 162.7901 ms
+2026-03-02 23:35:42.403 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/assignments responded 204 in 0.0372 ms
+2026-03-02 23:35:42.413 +06:00 [INF] HTTP GET /api/Assignments/courses/ac80d30d-540f-4a38-aa5e-22420bf183c7/assignments responded 200 in 4.4093 ms
+2026-03-02 23:36:12.283 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0977 ms
+2026-03-02 23:36:12.303 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 12.6425 ms

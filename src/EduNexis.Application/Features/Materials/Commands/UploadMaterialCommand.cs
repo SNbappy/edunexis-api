@@ -1,4 +1,4 @@
-﻿namespace EduNexis.Application.Features.Materials.Commands;
+namespace EduNexis.Application.Features.Materials.Commands;
 
 public record UploadMaterialCommand(
     Guid CourseId,
@@ -46,18 +46,23 @@ public sealed class UploadMaterialCommandHandler(
             throw new UnauthorizedException("Only teacher or CR can upload materials.");
 
         string? fileUrl = null;
+        long? fileSizeBytes = null;
+
         if (command.Type == MaterialType.File &&
             command.FileStream is not null && command.FileName is not null)
         {
+            fileSizeBytes = command.FileStream.CanSeek ? command.FileStream.Length : null;
             fileUrl = await storage.UploadAsync(
                 command.FileStream, command.FileName,
-                $"materials/{command.CourseId}", ct);
+                "materials/" + command.CourseId, ct);
         }
 
         var material = Material.Create(
             command.CourseId, command.Title, command.Type,
-            fileUrl, command.EmbedUrl, null,
-            command.Description, command.Category, command.UploadedById, command.ParentFolderId);
+            fileUrl, command.FileName, fileSizeBytes,
+            command.EmbedUrl, null,
+            command.Description, command.Category,
+            command.UploadedById, command.ParentFolderId);
 
         await uow.GetRepository<Material>().AddAsync(material, ct);
         await uow.SaveChangesAsync(ct);
@@ -65,7 +70,3 @@ public sealed class UploadMaterialCommandHandler(
         return ApiResponse.Ok("Material uploaded successfully.");
     }
 }
-
-
-
-

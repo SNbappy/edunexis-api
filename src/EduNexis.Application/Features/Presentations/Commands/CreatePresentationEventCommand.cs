@@ -1,21 +1,26 @@
-namespace EduNexis.Application.Features.Presentations.Commands;
+﻿using EduNexis.Application.Features.Presentations.Queries;
 
-public record PresentationEventDto(Guid Id, Guid CourseId, string Title, decimal MaxMarks, DateTime CreatedAt);
+namespace EduNexis.Application.Features.Presentations.Commands;
 
 public record CreatePresentationEventCommand(
     Guid CourseId,
     Guid TeacherId,
     string Title,
-    decimal MaxMarks
+    string? Description,
+    decimal TotalMarks,
+    DateTime? ScheduledDate,
+    string Format,
+    string? Venue,
+    bool TopicsAllowed,
+    int? DurationPerGroupMinutes
 ) : ICommand<ApiResponse<PresentationEventDto>>;
 
-public sealed class CreatePresentationEventCommandValidator
-    : AbstractValidator<CreatePresentationEventCommand>
+public sealed class CreatePresentationEventCommandValidator : AbstractValidator<CreatePresentationEventCommand>
 {
     public CreatePresentationEventCommandValidator()
     {
-        RuleFor(x => x.Title).NotEmpty().MaximumLength(100);
-        RuleFor(x => x.MaxMarks).GreaterThan(0);
+        RuleFor(x => x.Title).NotEmpty().MaximumLength(200);
+        RuleFor(x => x.TotalMarks).GreaterThan(0);
     }
 }
 
@@ -30,16 +35,20 @@ public sealed class CreatePresentationEventCommandHandler(
             ?? throw new NotFoundException("Course", command.CourseId);
 
         if (course.TeacherId != command.TeacherId)
-            throw new UnauthorizedException("Only the teacher can create presentation events.");
+            throw new UnauthorizedException("Only the teacher can create presentations.");
 
-        var presentation = PresentationEvent.Create(
-            command.CourseId, command.Title, command.MaxMarks, command.TeacherId);
+        var format = Enum.Parse<PresentationFormat>(command.Format);
 
-        await uow.GetRepository<PresentationEvent>().AddAsync(presentation, ct);
+        var ev = PresentationEvent.Create(
+            command.CourseId, command.Title, command.Description,
+            command.TotalMarks, command.ScheduledDate, format,
+            command.Venue, command.TopicsAllowed, command.DurationPerGroupMinutes,
+            command.TeacherId);
+
+        await uow.GetRepository<PresentationEvent>().AddAsync(ev, ct);
         await uow.SaveChangesAsync(ct);
 
-        return ApiResponse<PresentationEventDto>.Ok(
-            new PresentationEventDto(presentation.Id, presentation.CourseId,
-                presentation.Title, presentation.MaxMarks, presentation.CreatedAt));
+        return ApiResponse<PresentationEventDto>.Ok(PresentationEventDto.From(ev, null, 0));
     }
 }
+

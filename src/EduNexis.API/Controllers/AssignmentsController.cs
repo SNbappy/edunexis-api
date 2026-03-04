@@ -1,7 +1,6 @@
 using EduNexis.Application.Features.Assignments.Commands;
 using EduNexis.Application.Features.Assignments.Queries;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EduNexis.API.Controllers;
@@ -38,6 +37,36 @@ public class AssignmentsController : BaseController
             ReferenceFileName: referenceFile?.FileName
         ), ct));
 
+    [HttpPut("courses/{courseId:guid}/assignments/{id:guid}")]
+    [Authorize(Roles = "Teacher,Admin")]
+    public async Task<IActionResult> Update(
+        Guid courseId,
+        Guid id,
+        [FromForm] string title,
+        [FromForm] string? instructions,
+        [FromForm] DateTime deadline,
+        [FromForm] bool allowLateSubmission,
+        [FromForm] decimal maxMarks,
+        [FromForm] string? rubricNotes,
+        CancellationToken ct) =>
+        Ok(await Mediator.Send(new UpdateAssignmentCommand(
+            AssignmentId: id,
+            CourseId: courseId,
+            RequestedById: CurrentUserId,
+            Title: title,
+            Instructions: instructions,
+            Deadline: deadline,
+            AllowLateSubmission: allowLateSubmission,
+            MaxMarks: maxMarks,
+            RubricNotes: rubricNotes
+        ), ct));
+
+    [HttpDelete("courses/{courseId:guid}/assignments/{id:guid}")]
+    [Authorize(Roles = "Teacher,Admin")]
+    public async Task<IActionResult> Delete(
+        Guid courseId, Guid id, CancellationToken ct) =>
+        Ok(await Mediator.Send(new DeleteAssignmentCommand(courseId, id, CurrentUserId), ct));
+
     [HttpPost("assignments/{assignmentId:guid}/submit")]
     [Authorize(Roles = "Student")]
     public async Task<IActionResult> Submit(
@@ -68,4 +97,10 @@ public class AssignmentsController : BaseController
             SubmissionId = submissionId,
             TeacherId = CurrentUserId
         }, ct));
+
+    [HttpGet("assignments/{assignmentId:guid}/submissions")]
+    [Authorize(Roles = "Teacher,Admin")]
+    public async Task<IActionResult> GetSubmissions(
+        Guid assignmentId, CancellationToken ct) =>
+        Ok(await Mediator.Send(new GetSubmissionsQuery(assignmentId), ct));
 }

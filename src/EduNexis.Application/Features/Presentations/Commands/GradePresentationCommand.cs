@@ -1,4 +1,4 @@
-namespace EduNexis.Application.Features.Presentations.Commands;
+﻿namespace EduNexis.Application.Features.Presentations.Commands;
 
 public record GradePresentationCommand(
     Guid PresentationEventId,
@@ -43,14 +43,14 @@ public sealed class GradePresentationCommandHandler(
 
         if (existing is not null)
         {
-            existing.Update(command.Marks, command.Feedback);
+            existing.Update(command.Marks, false, null, command.Feedback);
             uow.GetRepository<PresentationMark>().Update(existing);
         }
         else
         {
             var mark = PresentationMark.Create(
                 command.PresentationEventId, command.StudentId,
-                command.Marks, command.Feedback);
+                command.Marks, false, null, command.Feedback);
             await uow.GetRepository<PresentationMark>().AddAsync(mark, ct);
         }
 

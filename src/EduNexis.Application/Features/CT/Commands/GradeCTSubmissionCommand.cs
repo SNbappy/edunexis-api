@@ -1,26 +1,38 @@
-namespace EduNexis.Application.Features.CT.Commands;
+﻿namespace EduNexis.Application.Features.CT.Commands;
 
-public record GradeCTSubmissionCommand(
-    Guid CTEventId,
+public record CTMarkEntry(
     Guid StudentId,
+    decimal? ObtainedMarks,
+    bool IsAbsent,
+    string? Remarks
+);
+
+public record BulkGradeCTCommand(
+    Guid CTEventId,
     Guid TeacherId,
-    decimal Marks
+    List<CTMarkEntry> Marks
 ) : ICommand<ApiResponse>;
 
-public sealed class GradeCTSubmissionCommandValidator : AbstractValidator<GradeCTSubmissionCommand>
+public sealed class BulkGradeCTCommandValidator : AbstractValidator<BulkGradeCTCommand>
 {
-    public GradeCTSubmissionCommandValidator()
+    public BulkGradeCTCommandValidator()
     {
-        RuleFor(x => x.Marks).GreaterThanOrEqualTo(0);
+        RuleFor(x => x.Marks).NotEmpty();
+        RuleForEach(x => x.Marks).ChildRules(entry =>
+        {
+            entry.RuleFor(e => e.ObtainedMarks)
+                .GreaterThanOrEqualTo(0)
+                .When(e => !e.IsAbsent && e.ObtainedMarks.HasValue);
+        });
     }
 }
 
-public sealed class GradeCTSubmissionCommandHandler(
+public sealed class BulkGradeCTCommandHandler(
     IUnitOfWork uow
-) : ICommandHandler<GradeCTSubmissionCommand, ApiResponse>
+) : ICommandHandler<BulkGradeCTCommand, ApiResponse>
 {
     public async ValueTask<ApiResponse> Handle(
-        GradeCTSubmissionCommand command, CancellationToken ct)
+        BulkGradeCTCommand command, CancellationToken ct)
     {
         var ctEvent = await uow.GetRepository<CTEvent>().GetByIdAsync(command.CTEventId, ct)
             ?? throw new NotFoundException("CTEvent", command.CTEventId);
@@ -29,25 +41,34 @@ public sealed class GradeCTSubmissionCommandHandler(
             ?? throw new NotFoundException("Course", ctEvent.CourseId);
 
         if (course.TeacherId != command.TeacherId)
-            throw new UnauthorizedException("Only the teacher can grade CT submissions.");
+            return ApiResponse.Fail("Only the teacher can enter CT marks.");
 
-        if (command.Marks > ctEvent.MaxMarks)
-            return ApiResponse.Fail($"Marks cannot exceed max marks ({ctEvent.MaxMarks}).");
+        if (!ctEvent.KhataUploaded)
+            return ApiResponse.Fail("All 3 khata must be uploaded before entering marks.");
 
-        var submission = await uow.GetRepository<CTSubmission>()
-            .FirstOrDefaultAsync(s =>
-                s.CTEventId == command.CTEventId &&
-                s.StudentId == command.StudentId, ct);
+        var existingSubmissions = await uow.GetRepository<CTSubmission>()
+            .FindAsync(s => s.CTEventId == command.CTEventId, ct);
+        var submissionMap = existingSubmissions.ToDictionary(s => s.StudentId);
 
-        if (submission is null)
+        foreach (var entry in command.Marks)
         {
-            submission = CTSubmission.Create(command.CTEventId, command.StudentId);
-            await uow.GetRepository<CTSubmission>().AddAsync(submission, ct);
+            if (!entry.IsAbsent && entry.ObtainedMarks.HasValue && entry.ObtainedMarks > ctEvent.MaxMarks)
+                return ApiResponse.Fail($"Marks for student {entry.StudentId} exceed max marks ({ctEvent.MaxMarks}).");
+
+            if (!submissionMap.TryGetValue(entry.StudentId, out var submission))
+            {
+                submission = CTSubmission.Create(command.CTEventId, entry.StudentId);
+                await uow.GetRepository<CTSubmission>().AddAsync(submission, ct);
+                submissionMap[entry.StudentId] = submission;
+            }
+
+            if (entry.IsAbsent)
+                submission.MarkAbsent(entry.Remarks);
+            else if (entry.ObtainedMarks.HasValue)
+                submission.AssignMarks(entry.ObtainedMarks.Value, entry.Remarks);
         }
 
-        submission.AssignMarks(command.Marks);
-
         await uow.SaveChangesAsync(ct);
-        return ApiResponse.Ok("CT marks assigned successfully.");
+        return ApiResponse.Ok("CT marks saved successfully.");
     }
 }

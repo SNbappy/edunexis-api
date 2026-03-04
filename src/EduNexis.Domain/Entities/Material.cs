@@ -1,4 +1,4 @@
-﻿namespace EduNexis.Domain.Entities;
+namespace EduNexis.Domain.Entities;
 
 public class Material : BaseEntity
 {
@@ -6,6 +6,8 @@ public class Material : BaseEntity
     public string Title { get; private set; } = string.Empty;
     public MaterialType Type { get; private set; }
     public string? FileUrl { get; private set; }
+    public string? FileName { get; private set; }
+    public long? FileSizeBytes { get; private set; }
     public string? EmbedUrl { get; private set; }
     public string? ThumbnailUrl { get; private set; }
     public string? Description { get; private set; }
@@ -15,7 +17,6 @@ public class Material : BaseEntity
     public Guid? ParentFolderId { get; private set; }
     public Guid UploadedById { get; private set; }
 
-    // Navigation
     public Course Course { get; private set; } = null!;
     public User UploadedBy { get; private set; } = null!;
 
@@ -23,8 +24,10 @@ public class Material : BaseEntity
 
     public static Material Create(
         Guid courseId, string title, MaterialType type,
-        string? fileUrl, string? embedUrl, string? thumbnailUrl,
-        string? description, string? category, Guid uploadedById, Guid? parentFolderId = null)
+        string? fileUrl, string? fileName, long? fileSizeBytes,
+        string? embedUrl, string? thumbnailUrl,
+        string? description, string? category,
+        Guid uploadedById, Guid? parentFolderId = null)
     {
         if (string.IsNullOrWhiteSpace(title))
             throw new DomainException("Material title is required.");
@@ -35,6 +38,8 @@ public class Material : BaseEntity
             Title = title,
             Type = type,
             FileUrl = fileUrl,
+            FileName = fileName,
+            FileSizeBytes = fileSizeBytes,
             EmbedUrl = embedUrl,
             ThumbnailUrl = thumbnailUrl,
             Description = description,
@@ -56,6 +61,3 @@ public class Material : BaseEntity
     public void Unpin() { IsPinned = false; SetUpdatedAt(); }
     public void IncrementDownload() { DownloadCount++; SetUpdatedAt(); }
 }
-
-
-

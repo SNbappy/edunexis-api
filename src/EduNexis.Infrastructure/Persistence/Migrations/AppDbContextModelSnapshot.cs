@@ -355,6 +355,21 @@ namespace EduNexis.Infrastructure.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<string>("AverageScriptUrl")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid?>("AverageStudentId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("BestScriptUrl")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid?>("BestStudentId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<int>("CTNumber")
+                        .HasColumnType("int");
+
                     b.Property<Guid>("CourseId")
                         .HasColumnType("char(36)");
 
@@ -367,11 +382,17 @@ namespace EduNexis.Infrastructure.Persistence.Migrations
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<DateTime?>("HeldOn")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<decimal>("MaxMarks")
                         .HasColumnType("decimal(65,30)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -379,6 +400,12 @@ namespace EduNexis.Infrastructure.Persistence.Migrations
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<string>("WorstScriptUrl")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid?>("WorstStudentId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -395,12 +422,6 @@ namespace EduNexis.Infrastructure.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("AvgCopyUrl")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("BestCopyUrl")
-                        .HasColumnType("longtext");
-
                     b.Property<Guid>("CTEventId")
                         .HasColumnType("char(36)");
 
@@ -410,23 +431,26 @@ namespace EduNexis.Infrastructure.Persistence.Migrations
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<bool>("IsAbsent")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime?>("MarkedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<decimal?>("Marks")
+                    b.Property<decimal?>("ObtainedMarks")
                         .HasColumnType("decimal(65,30)");
+
+                    b.Property<string>("Remarks")
+                        .HasColumnType("longtext");
 
                     b.Property<Guid>("StudentId")
                         .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<string>("WorstCopyUrl")
-                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -839,6 +863,12 @@ namespace EduNexis.Infrastructure.Persistence.Migrations
                     b.Property<string>("EmbedUrl")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("FileName")
+                        .HasColumnType("longtext");
+
+                    b.Property<long?>("FileSizeBytes")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("FileUrl")
                         .HasColumnType("longtext");
 
@@ -982,18 +1012,41 @@ namespace EduNexis.Infrastructure.Persistence.Migrations
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("DurationPerGroupMinutes")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Format")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<decimal>("MaxMarks")
                         .HasColumnType("decimal(65,30)");
 
+                    b.Property<DateTime?>("ScheduledDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<bool>("TopicsAllowed")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Venue")
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -1019,6 +1072,9 @@ namespace EduNexis.Infrastructure.Persistence.Migrations
                     b.Property<string>("Feedback")
                         .HasColumnType("longtext");
 
+                    b.Property<bool>("IsAbsent")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
@@ -1033,6 +1089,9 @@ namespace EduNexis.Infrastructure.Persistence.Migrations
 
                     b.Property<Guid>("StudentId")
                         .HasColumnType("char(36)");
+
+                    b.Property<string>("Topic")
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");

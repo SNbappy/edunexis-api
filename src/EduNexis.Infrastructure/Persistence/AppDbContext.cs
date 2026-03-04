@@ -1,4 +1,4 @@
-using EduNexis.Domain.Entities;
+﻿using EduNexis.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace EduNexis.Infrastructure.Persistence;
@@ -47,6 +47,8 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<FormulaComponent>().Property(f => f.ComponentType).HasConversion<string>();
         modelBuilder.Entity<Notification>().Property(n => n.Type).HasConversion<string>();
         modelBuilder.Entity<Course>().Property(c => c.CourseType).HasConversion<string>();
+        modelBuilder.Entity<PresentationEvent>().Property(p => p.Status).HasConversion<string>();
+        modelBuilder.Entity<PresentationEvent>().Property(p => p.Format).HasConversion<string>();
 
         // Unique indexes
         modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
@@ -79,3 +81,4 @@ public class AppDbContext : DbContext
             .HasForeignKey(f => f.CourseId).OnDelete(DeleteBehavior.Restrict);
     }
 }
+

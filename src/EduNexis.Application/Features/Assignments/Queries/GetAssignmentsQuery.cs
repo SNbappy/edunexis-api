@@ -12,7 +12,7 @@ public sealed class GetAssignmentsQueryHandler(
         GetAssignmentsQuery query, CancellationToken ct)
     {
         var assignments = await uow.GetRepository<Assignment>()
-            .FindAsync(a => a.CourseId == query.CourseId, ct);
+            .FindAsync(a => a.CourseId == query.CourseId && !a.IsDeleted, ct);
 
         var dtos = new List<AssignmentDto>();
         foreach (var a in assignments.OrderByDescending(a => a.CreatedAt))

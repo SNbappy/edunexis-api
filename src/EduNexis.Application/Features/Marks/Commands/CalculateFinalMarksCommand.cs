@@ -1,4 +1,4 @@
-namespace EduNexis.Application.Features.Marks.Commands;
+﻿namespace EduNexis.Application.Features.Marks.Commands;
 
 public record CalculateFinalMarksCommand(
     Guid CourseId,
@@ -64,7 +64,6 @@ public sealed class CalculateFinalMarksCommandHandler(
 
             var breakdownJson = System.Text.Json.JsonSerializer.Serialize(breakdown);
 
-            // Upsert FinalMark
             var existing = await uow.GetRepository<FinalMark>()
                 .FirstOrDefaultAsync(fm =>
                     fm.CourseId == command.CourseId &&
@@ -99,8 +98,13 @@ public sealed class CalculateFinalMarksCommandHandler(
             var sub = await uow.GetRepository<CTSubmission>()
                 .FirstOrDefaultAsync(s =>
                     s.CTEventId == ev.Id && s.StudentId == studentId, ct);
-            if (sub?.Marks is not null)
-                marks.Add(sub.Marks.Value);
+            if (sub is not null && ev.MaxMarks > 0)
+            {
+                var scaled = sub.IsAbsent || sub.ObtainedMarks is null
+                    ? 0
+                    : sub.ObtainedMarks.Value / ev.MaxMarks * maxMarks;
+                marks.Add(Math.Round(scaled, 4));
+            }
         }
 
         return ApplyRule(marks, rule, maxMarks);
@@ -118,8 +122,11 @@ public sealed class CalculateFinalMarksCommandHandler(
             var sub = await uow.GetRepository<AssignmentSubmission>()
                 .FirstOrDefaultAsync(s =>
                     s.AssignmentId == a.Id && s.StudentId == studentId, ct);
-            if (sub?.Marks is not null)
-                marks.Add(sub.Marks.Value);
+            if (sub?.Marks is not null && a.MaxMarks > 0)
+            {
+                var scaled = sub.Marks.Value / a.MaxMarks * maxMarks;
+                marks.Add(Math.Round(scaled, 4));
+            }
         }
 
         return ApplyRule(marks, rule, maxMarks);
@@ -137,8 +144,13 @@ public sealed class CalculateFinalMarksCommandHandler(
             var mark = await uow.GetRepository<PresentationMark>()
                 .FirstOrDefaultAsync(m =>
                     m.PresentationEventId == ev.Id && m.StudentId == studentId, ct);
-            if (mark is not null)
-                marks.Add(mark.Marks);
+            if (mark is not null && ev.MaxMarks > 0)
+            {
+                var scaled = mark.IsAbsent
+                    ? 0
+                    : mark.Marks / ev.MaxMarks * maxMarks;
+                marks.Add(Math.Round(scaled, 4));
+            }
         }
 
         return ApplyRule(marks, rule, maxMarks);
@@ -178,11 +190,11 @@ public sealed class CalculateFinalMarksCommandHandler(
             "Best1" => sorted.First(),
             "Best2" => sorted.Take(2).Average(),
             "Best3" => sorted.Take(3).Average(),
-            "All" => sorted.Average(),
-            _ => sorted.Average()
+            "All"   => sorted.Average(),
+            _       => sorted.Average()
         };
 
-        // Scale to maxMarks relative to the average of available event maxMarks
         return Math.Round(Math.Min(raw, maxMarks), 2);
     }
 }
+
