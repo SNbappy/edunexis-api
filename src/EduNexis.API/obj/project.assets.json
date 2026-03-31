@@ -826,20 +826,21 @@
           }
         }
       },
-      "Scriban/6.2.0": {
+      "Scriban/7.0.6": {
         "type": "package",
         "compile": {
-          "lib/net7.0/_._": {
+          "lib/net8.0/Scriban.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net7.0/_._": {
+          "lib/net8.0/Scriban.dll": {
             "related": ".xml"
           }
         },
         "build": {
-          "build/_._": {}
+          "build/Scriban.props": {},
+          "build/Scriban.targets": {}
         }
       },
       "Serilog/4.3.0": {
@@ -3148,21 +3149,21 @@
         "pomelo.entityframeworkcore.mysql.nuspec"
       ]
     },
-    "Scriban/6.2.0": {
-      "sha512": "Mpd/9Q6LQn9jPGZR11gfytuZ5ivNgjnds1RB/3HzAdivhreX5mosRtqI87Zjafdxmm7HRgjZgdDYhiGVdytLwA==",
+    "Scriban/7.0.6": {
+      "sha512": "bOtHyk30sjl0y3+KYImIJv0ETZYLuFFJvlBF2ks2YLNtydhJqxRTGe4WaBDvg/3VRhhI6uf+qVfixuFROsOi+w==",
       "type": "package",
-      "path": "scriban/6.2.0",
+      "path": "scriban/7.0.6",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "build/Scriban.props",
         "build/Scriban.targets",
-        "lib/net7.0/Scriban.dll",
-        "lib/net7.0/Scriban.xml",
+        "lib/net8.0/Scriban.dll",
+        "lib/net8.0/Scriban.xml",
         "lib/netstandard2.0/Scriban.dll",
         "lib/netstandard2.0/Scriban.xml",
         "readme.md",
-        "scriban.6.2.0.nupkg.sha512",
+        "scriban.7.0.6.nupkg.sha512",
         "scriban.nuspec",
         "scriban.png",
         "src/Scriban/.editorconfig",
@@ -3183,7 +3184,6 @@
         "src/Scriban/Helpers/FastStack.cs",
         "src/Scriban/Helpers/InlineList.cs",
         "src/Scriban/Helpers/ReflectionHelper.cs",
-        "src/Scriban/Helpers/StringHelper.cs",
         "src/Scriban/Helpers/ThrowHelper.cs",
         "src/Scriban/LogMessageBag.cs",
         "src/Scriban/Parsing/Lexer.cs",
@@ -3939,6 +3939,7 @@
       "FluentValidation.AspNetCore >= 11.3.1",
       "Mediator.SourceGenerator >= 3.0.1",
       "Microsoft.EntityFrameworkCore.Design >= 9.0.3",
+      "Scriban >= 7.0.6",
       "Serilog.AspNetCore >= 10.0.0",
       "Swashbuckle.AspNetCore >= 6.9.0"
     ]
@@ -3956,12 +3957,14 @@
       "outputPath": "D:\\Coding\\Projects\\edunexis-api\\src\\EduNexis.API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Bappy\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Bappy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3987,7 +3990,7 @@
         "auditLevel": "low",
         "auditMode": "all"
       },
-      "SdkAnalysisLevel": "10.0.100"
+      "SdkAnalysisLevel": "10.0.200"
     },
     "frameworks": {
       "net10.0": {
@@ -4008,6 +4011,10 @@
             "suppressParent": "All",
             "target": "Package",
             "version": "[9.0.3, )"
+          },
+          "Scriban": {
+            "target": "Package",
+            "version": "[7.0.6, )"
           },
           "Serilog.AspNetCore": {
             "target": "Package",
@@ -4037,7 +4044,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.AspNetCore": "(,10.0.32767]",
           "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",

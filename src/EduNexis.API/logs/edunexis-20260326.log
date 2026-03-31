@@ -1,0 +1,82 @@
+2026-03-26 10:31:11.112 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 13.7165 ms
+2026-03-26 10:31:11.112 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 13.8982 ms
+2026-03-26 10:31:12.240 +06:00 [INF] HTTP GET /api/Courses responded 401 in 504.7964 ms
+2026-03-26 10:31:12.241 +06:00 [INF] HTTP GET /api/Courses responded 401 in 504.9776 ms
+2026-03-26 10:31:12.519 +06:00 [INF] HTTP OPTIONS /api/auth/refresh responded 204 in 1.0256 ms
+2026-03-26 10:31:19.983 +06:00 [ERR] HTTP POST /api/auth/refresh responded 500 in 7426.4018 ms
+System.OperationCanceledException: The operation was canceled.
+   at System.Threading.CancellationToken.ThrowOperationCanceledException()
+   at System.Threading.CancellationToken.ThrowIfCancellationRequested()
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at EduNexis.Infrastructure.Persistence.Repositories.UserRepository.GetByRefreshTokenAsync(String refreshToken, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\Persistence\Repositories\UserRepository.cs:line 17
+   at EduNexis.Application.Features.Auth.Commands.RefreshTokenCommandHandler.Handle(RefreshTokenCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\Auth\Commands\RefreshTokenCommand.cs:line 23
+   at EduNexis.API.Controllers.AuthController.Refresh(RefreshTokenCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\AuthController.cs:line 23
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-03-26 10:31:22.416 +06:00 [ERR] Unhandled exception: The operation was canceled.
+System.OperationCanceledException: The operation was canceled.
+   at System.Threading.CancellationToken.ThrowOperationCanceledException()
+   at System.Threading.CancellationToken.ThrowIfCancellationRequested()
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at EduNexis.Infrastructure.Persistence.Repositories.UserRepository.GetByRefreshTokenAsync(String refreshToken, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\Persistence\Repositories\UserRepository.cs:line 17
+   at EduNexis.Application.Features.Auth.Commands.RefreshTokenCommandHandler.Handle(RefreshTokenCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\Auth\Commands\RefreshTokenCommand.cs:line 23
+   at EduNexis.API.Controllers.AuthController.Refresh(RefreshTokenCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\AuthController.cs:line 23
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EduNexis.API.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Middleware\ExceptionMiddleware.cs:line 15
+2026-03-26 10:32:13.040 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 7.9428 ms
+2026-03-26 10:32:13.041 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 7.9743 ms
+2026-03-26 10:32:13.695 +06:00 [INF] HTTP GET /api/Courses responded 401 in 407.3400 ms
+2026-03-26 10:32:13.695 +06:00 [INF] HTTP GET /api/Courses responded 401 in 407.3470 ms
+2026-03-26 10:32:13.730 +06:00 [INF] HTTP OPTIONS /api/auth/refresh responded 204 in 0.1310 ms
+2026-03-26 10:32:20.025 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.3508 ms
+2026-03-26 10:32:20.047 +06:00 [INF] HTTP GET /api/Notifications responded 401 in 11.5769 ms
+2026-03-26 10:32:20.354 +06:00 [INF] HTTP POST /api/auth/refresh responded 200 in 6616.0114 ms
+2026-03-26 10:32:35.002 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.2092 ms
+2026-03-26 10:32:35.004 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.0909 ms
+2026-03-26 10:32:35.004 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.0927 ms
+2026-03-26 10:32:35.017 +06:00 [INF] HTTP GET /api/Notifications responded 401 in 3.1907 ms
+2026-03-26 10:32:35.019 +06:00 [INF] HTTP GET /api/Courses responded 401 in 0.6195 ms
+2026-03-26 10:32:35.021 +06:00 [INF] HTTP GET /api/Courses responded 401 in 0.7419 ms
+2026-03-26 10:32:35.189 +06:00 [INF] HTTP OPTIONS /api/auth/refresh responded 204 in 0.0566 ms
+2026-03-26 10:32:35.303 +06:00 [INF] HTTP POST /api/auth/refresh responded 200 in 108.1903 ms
+2026-03-26 10:33:32.297 +06:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 0.2187 ms
+2026-03-26 10:33:32.916 +06:00 [INF] HTTP POST /api/auth/login responded 200 in 615.0867 ms
+2026-03-26 10:33:33.477 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0717 ms
+2026-03-26 10:33:33.478 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.0705 ms
+2026-03-26 10:33:33.478 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.0399 ms
+2026-03-26 10:33:33.595 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 113.1878 ms
+2026-03-26 10:33:34.066 +06:00 [INF] HTTP GET /api/Courses responded 200 in 581.7285 ms
+2026-03-26 10:33:34.067 +06:00 [INF] HTTP GET /api/Courses responded 200 in 582.4349 ms

@@ -1,3 +1,5 @@
+﻿using EduNexis.Application.Features.Notifications.Commands;
+
 namespace EduNexis.Application.Features.CT.Commands;
 
 public record CTEventDto(
@@ -27,7 +29,8 @@ public sealed class CreateCTEventCommandValidator : AbstractValidator<CreateCTEv
 }
 
 public sealed class CreateCTEventCommandHandler(
-    IUnitOfWork uow
+    IUnitOfWork uow,
+    ISender sender
 ) : ICommandHandler<CreateCTEventCommand, ApiResponse<CTEventDto>>
 {
     public async ValueTask<ApiResponse<CTEventDto>> Handle(
@@ -50,6 +53,22 @@ public sealed class CreateCTEventCommandHandler(
         await uow.GetRepository<CTEvent>().AddAsync(ctEvent, ct);
         await uow.SaveChangesAsync(ct);
 
+        var members = await uow.CourseMembers.GetByCourseAsync(command.CourseId, ct);
+        var heldOnText = command.HeldOn.HasValue
+            ? $" scheduled for {command.HeldOn.Value:MMM dd, yyyy}"
+            : string.Empty;
+        var tasks = members
+            .Where(m => m.IsActive)
+            .Select(m => sender.Send(new SendNotificationCommand(
+                UserId: m.UserId,
+                Title: $"New CT in {course.Title}",
+                Body: $"CT {ctNumber}: \"{command.Title}\"{heldOnText}.",
+                Type: NotificationType.General,
+                RedirectUrl: $"/courses/{course.Id}/ct"
+            ), ct).AsTask());
+
+        await Task.WhenAll(tasks);
+
         return ApiResponse<CTEventDto>.Ok(new CTEventDto(
             ctEvent.Id, ctEvent.CourseId, ctEvent.CTNumber,
             ctEvent.Title, ctEvent.MaxMarks, ctEvent.HeldOn,
@@ -57,6 +76,3 @@ public sealed class CreateCTEventCommandHandler(
             null, null, null, null, null, null));
     }
 }
-
-
-

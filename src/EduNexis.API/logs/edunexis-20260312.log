@@ -1,0 +1,371 @@
+2026-03-12 11:19:56.727 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 5.3874 ms
+2026-03-12 11:19:57.538 +06:00 [INF] HTTP GET /api/Notifications responded 401 in 652.7058 ms
+2026-03-12 11:19:57.892 +06:00 [INF] HTTP OPTIONS /api/auth/refresh responded 204 in 1.8573 ms
+2026-03-12 11:20:03.211 +06:00 [ERR] HTTP POST /api/auth/refresh responded 500 in 5307.8122 ms
+System.OperationCanceledException: The operation was canceled.
+   at System.Threading.CancellationToken.ThrowOperationCanceledException()
+   at System.Threading.CancellationToken.ThrowIfCancellationRequested()
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at EduNexis.Infrastructure.Persistence.Repositories.UserRepository.GetByRefreshTokenAsync(String refreshToken, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\Persistence\Repositories\UserRepository.cs:line 17
+   at EduNexis.Application.Features.Auth.Commands.RefreshTokenCommandHandler.Handle(RefreshTokenCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\Auth\Commands\RefreshTokenCommand.cs:line 23
+   at EduNexis.API.Controllers.AuthController.Refresh(RefreshTokenCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\AuthController.cs:line 23
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-03-12 11:20:03.317 +06:00 [ERR] Unhandled exception: The operation was canceled.
+System.OperationCanceledException: The operation was canceled.
+   at System.Threading.CancellationToken.ThrowOperationCanceledException()
+   at System.Threading.CancellationToken.ThrowIfCancellationRequested()
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at EduNexis.Infrastructure.Persistence.Repositories.UserRepository.GetByRefreshTokenAsync(String refreshToken, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Infrastructure\Persistence\Repositories\UserRepository.cs:line 17
+   at EduNexis.Application.Features.Auth.Commands.RefreshTokenCommandHandler.Handle(RefreshTokenCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\Auth\Commands\RefreshTokenCommand.cs:line 23
+   at EduNexis.API.Controllers.AuthController.Refresh(RefreshTokenCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\AuthController.cs:line 23
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EduNexis.API.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Middleware\ExceptionMiddleware.cs:line 15
+2026-03-12 11:20:22.118 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.6980 ms
+2026-03-12 11:20:22.118 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 6.4807 ms
+2026-03-12 11:20:22.121 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.1175 ms
+2026-03-12 11:20:22.287 +06:00 [INF] HTTP GET /api/Courses responded 401 in 75.1859 ms
+2026-03-12 11:20:22.309 +06:00 [INF] HTTP GET /api/Notifications responded 401 in 9.0921 ms
+2026-03-12 11:20:22.313 +06:00 [INF] HTTP GET /api/Courses responded 401 in 1.7360 ms
+2026-03-12 11:20:22.512 +06:00 [INF] HTTP OPTIONS /api/auth/refresh responded 204 in 0.1157 ms
+2026-03-12 11:20:24.142 +06:00 [INF] HTTP POST /api/auth/refresh responded 200 in 1620.5775 ms
+2026-03-12 11:20:25.010 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 390.9998 ms
+2026-03-12 11:20:25.333 +06:00 [INF] HTTP GET /api/Courses responded 200 in 714.5668 ms
+2026-03-12 11:20:25.339 +06:00 [INF] HTTP GET /api/Courses responded 200 in 716.6277 ms
+2026-03-12 11:20:39.595 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.2271 ms
+2026-03-12 11:20:39.595 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.1971 ms
+2026-03-12 11:20:39.597 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.0998 ms
+2026-03-12 11:20:39.639 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 27.6454 ms
+2026-03-12 11:20:39.736 +06:00 [INF] HTTP GET /api/Courses responded 200 in 125.0681 ms
+2026-03-12 11:20:39.750 +06:00 [INF] HTTP GET /api/Courses responded 200 in 129.9984 ms
+2026-03-12 11:20:50.318 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 0.4961 ms
+2026-03-12 11:20:50.753 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 419.9244 ms
+2026-03-12 11:20:50.878 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.1159 ms
+2026-03-12 11:20:51.127 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 238.4609 ms
+2026-03-12 11:20:51.174 +06:00 [INF] HTTP OPTIONS /api/Announcements/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/announcements responded 204 in 0.2711 ms
+2026-03-12 11:20:51.358 +06:00 [INF] HTTP GET /api/Announcements/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/announcements responded 200 in 174.5976 ms
+2026-03-12 11:20:54.765 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 204 in 0.4434 ms
+2026-03-12 11:20:54.766 +06:00 [INF] HTTP OPTIONS /api/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/presentations responded 204 in 0.1474 ms
+2026-03-12 11:20:54.872 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 106.4523 ms
+2026-03-12 11:20:54.975 +06:00 [INF] HTTP GET /api/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/presentations responded 200 in 198.7159 ms
+2026-03-12 11:20:55.125 +06:00 [INF] HTTP GET /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 200 in 348.0784 ms
+2026-03-12 11:20:58.355 +06:00 [INF] HTTP OPTIONS /api/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/marks responded 204 in 0.3095 ms
+2026-03-12 11:20:58.355 +06:00 [INF] HTTP OPTIONS /api/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/grading-formula responded 204 in 0.3071 ms
+2026-03-12 11:20:58.488 +06:00 [INF] HTTP GET /api/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/grading-formula responded 200 in 121.0994 ms
+2026-03-12 11:20:58.571 +06:00 [INF] HTTP GET /api/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/marks responded 200 in 206.4044 ms
+2026-03-12 11:21:02.159 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 204 in 0.1650 ms
+2026-03-12 11:21:02.489 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 321.5174 ms
+2026-03-12 11:21:05.307 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 12.6412 ms
+2026-03-12 11:21:10.356 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.1012 ms
+2026-03-12 11:21:10.392 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 19.5938 ms
+2026-03-12 11:21:30.567 +06:00 [INF] HTTP OPTIONS /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/submit responded 204 in 29.3183 ms
+2026-03-12 11:21:45.061 +06:00 [INF] HTTP POST /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/submit responded 200 in 14311.2428 ms
+2026-03-12 11:21:45.467 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 204 in 1.7816 ms
+2026-03-12 11:21:45.711 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 197.2140 ms
+2026-03-12 11:22:12.146 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 36.1955 ms
+2026-03-12 11:22:12.997 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 732.4447 ms
+2026-03-12 11:22:54.559 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 13.2148 ms
+2026-03-12 11:22:54.568 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 0.5576 ms
+2026-03-12 11:22:54.951 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 333.7632 ms
+2026-03-12 11:22:55.036 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 419.1278 ms
+2026-03-12 11:22:55.369 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.0812 ms
+2026-03-12 11:22:55.509 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 131.2968 ms
+2026-03-12 11:22:55.783 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 204 in 0.4356 ms
+2026-03-12 11:22:55.894 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 89.4354 ms
+2026-03-12 11:25:39.389 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 12.3844 ms
+2026-03-12 11:25:39.389 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 12.3574 ms
+2026-03-12 11:25:39.738 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 283.4851 ms
+2026-03-12 11:25:39.823 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 368.2366 ms
+2026-03-12 11:25:40.140 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.0818 ms
+2026-03-12 11:25:40.280 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 133.2641 ms
+2026-03-12 11:25:40.402 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 204 in 1.2427 ms
+2026-03-12 11:25:40.410 +06:00 [INF] HTTP OPTIONS /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/my-submission responded 204 in 0.0447 ms
+2026-03-12 11:25:40.420 +06:00 [INF] HTTP GET /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/my-submission responded 404 in 2.3377 ms
+2026-03-12 11:25:40.433 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 22.9962 ms
+2026-03-12 11:27:12.208 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 3.5712 ms
+2026-03-12 11:27:12.208 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 3.5430 ms
+2026-03-12 11:27:16.282 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 3875.5300 ms
+2026-03-12 11:27:16.342 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 3935.4718 ms
+2026-03-12 11:27:16.503 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.1032 ms
+2026-03-12 11:27:16.929 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 411.6533 ms
+2026-03-12 11:27:17.081 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 204 in 0.3691 ms
+2026-03-12 11:27:17.083 +06:00 [INF] HTTP OPTIONS /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/my-submission responded 204 in 0.4668 ms
+2026-03-12 11:27:17.102 +06:00 [INF] HTTP GET /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/my-submission responded 404 in 0.7628 ms
+2026-03-12 11:27:17.408 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 315.2200 ms
+2026-03-12 11:29:49.376 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 4.3122 ms
+2026-03-12 11:29:49.376 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 4.3120 ms
+2026-03-12 11:29:53.429 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 3863.8364 ms
+2026-03-12 11:29:53.709 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 4144.1649 ms
+2026-03-12 11:29:53.948 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.3443 ms
+2026-03-12 11:29:54.494 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 421.7070 ms
+2026-03-12 11:29:54.795 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 204 in 0.7782 ms
+2026-03-12 11:29:54.801 +06:00 [INF] HTTP OPTIONS /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/my-submission responded 204 in 0.4510 ms
+2026-03-12 11:29:55.063 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 253.5104 ms
+2026-03-12 11:29:55.121 +06:00 [INF] HTTP GET /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/my-submission responded 200 in 306.7044 ms
+2026-03-12 11:30:08.534 +06:00 [INF] HTTP OPTIONS /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/submit responded 204 in 0.9830 ms
+2026-03-12 11:30:17.471 +06:00 [INF] HTTP POST /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/submit responded 200 in 8877.6041 ms
+2026-03-12 11:30:17.584 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 204 in 0.3043 ms
+2026-03-12 11:30:17.659 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 44.5137 ms
+2026-03-12 11:30:24.465 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 1.4963 ms
+2026-03-12 11:30:24.623 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 83.5418 ms
+2026-03-12 11:30:45.234 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 1.0615 ms
+2026-03-12 11:30:45.236 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 0.9075 ms
+2026-03-12 11:30:45.349 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 91.8988 ms
+2026-03-12 11:30:45.874 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 614.1474 ms
+2026-03-12 11:30:46.115 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.3144 ms
+2026-03-12 11:30:46.287 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 163.1363 ms
+2026-03-12 11:30:46.624 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 204 in 0.1421 ms
+2026-03-12 11:30:46.625 +06:00 [INF] HTTP OPTIONS /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/my-submission responded 204 in 0.3021 ms
+2026-03-12 11:30:46.668 +06:00 [INF] HTTP GET /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/my-submission responded 200 in 20.4429 ms
+2026-03-12 11:30:46.668 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 30.5280 ms
+2026-03-12 11:31:15.664 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.4112 ms
+2026-03-12 11:31:15.702 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 14.6533 ms
+2026-03-12 11:33:43.814 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 5.1425 ms
+2026-03-12 11:33:43.815 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 5.1045 ms
+2026-03-12 11:33:48.036 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 4114.6168 ms
+2026-03-12 11:33:48.357 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 4435.1296 ms
+2026-03-12 11:33:48.519 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.1933 ms
+2026-03-12 11:33:48.967 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 438.2411 ms
+2026-03-12 11:33:49.068 +06:00 [INF] HTTP OPTIONS /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/my-submission responded 204 in 0.1366 ms
+2026-03-12 11:33:49.068 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 204 in 0.0882 ms
+2026-03-12 11:33:49.205 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 127.5677 ms
+2026-03-12 11:33:49.257 +06:00 [INF] HTTP GET /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/my-submission responded 200 in 179.6304 ms
+2026-03-12 11:34:36.175 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 5.0936 ms
+2026-03-12 11:34:36.175 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 5.0748 ms
+2026-03-12 11:34:39.784 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 3515.2888 ms
+2026-03-12 11:34:39.973 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 3704.5994 ms
+2026-03-12 11:34:40.133 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.1760 ms
+2026-03-12 11:34:40.591 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 436.2556 ms
+2026-03-12 11:34:40.752 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 204 in 0.1282 ms
+2026-03-12 11:34:40.752 +06:00 [INF] HTTP OPTIONS /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/my-submission responded 204 in 0.1283 ms
+2026-03-12 11:34:41.103 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 342.1414 ms
+2026-03-12 11:34:41.138 +06:00 [INF] HTTP GET /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/my-submission responded 200 in 375.8357 ms
+2026-03-12 11:34:59.746 +06:00 [INF] HTTP OPTIONS /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/submit responded 204 in 4.9582 ms
+2026-03-12 11:35:09.106 +06:00 [INF] HTTP POST /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/submit responded 200 in 9239.8383 ms
+2026-03-12 11:35:09.374 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 204 in 0.1304 ms
+2026-03-12 11:35:09.418 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 34.9216 ms
+2026-03-12 11:35:10.084 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0933 ms
+2026-03-12 11:35:10.110 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 17.9224 ms
+2026-03-12 11:36:07.516 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 19.9132 ms
+2026-03-12 11:36:07.515 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 17.6595 ms
+2026-03-12 11:36:07.918 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 298.0168 ms
+2026-03-12 11:36:08.252 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 632.1483 ms
+2026-03-12 11:36:08.616 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.6694 ms
+2026-03-12 11:36:08.704 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 81.7895 ms
+2026-03-12 11:36:08.793 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 204 in 0.1089 ms
+2026-03-12 11:36:08.793 +06:00 [INF] HTTP OPTIONS /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/my-submission responded 204 in 0.0759 ms
+2026-03-12 11:36:08.825 +06:00 [INF] HTTP GET /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/my-submission responded 200 in 19.2140 ms
+2026-03-12 11:36:08.827 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 25.4135 ms
+2026-03-12 11:37:56.871 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 204 in 5.0610 ms
+2026-03-12 11:37:57.132 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 217.4895 ms
+2026-03-12 11:39:49.645 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 10.4084 ms
+2026-03-12 11:39:49.647 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 0.3022 ms
+2026-03-12 11:39:49.961 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 231.6435 ms
+2026-03-12 11:39:50.105 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 375.1711 ms
+2026-03-12 11:39:50.330 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.1063 ms
+2026-03-12 11:39:50.467 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 129.8580 ms
+2026-03-12 11:39:50.602 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 204 in 0.1566 ms
+2026-03-12 11:39:50.603 +06:00 [INF] HTTP OPTIONS /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/my-submission responded 204 in 0.1801 ms
+2026-03-12 11:39:50.658 +06:00 [INF] HTTP GET /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/my-submission responded 200 in 22.0551 ms
+2026-03-12 11:39:50.668 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 46.0628 ms
+2026-03-12 11:40:03.183 +06:00 [INF] HTTP OPTIONS /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/submit responded 204 in 2.2035 ms
+2026-03-12 11:40:07.268 +06:00 [INF] HTTP POST /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/submit responded 200 in 3958.8740 ms
+2026-03-12 11:40:07.365 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 204 in 0.1192 ms
+2026-03-12 11:40:07.407 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 31.2456 ms
+2026-03-12 11:40:25.108 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.5717 ms
+2026-03-12 11:40:25.112 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 5.6864 ms
+2026-03-12 11:40:25.267 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 64.8637 ms
+2026-03-12 11:40:25.535 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 332.3852 ms
+2026-03-12 11:40:25.887 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.0764 ms
+2026-03-12 11:40:25.986 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 90.9235 ms
+2026-03-12 11:40:26.226 +06:00 [INF] HTTP OPTIONS /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/my-submission responded 204 in 0.0114 ms
+2026-03-12 11:40:26.226 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 204 in 0.0899 ms
+2026-03-12 11:40:26.245 +06:00 [INF] HTTP GET /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/my-submission responded 200 in 13.2253 ms
+2026-03-12 11:40:26.248 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 13.4266 ms
+2026-03-12 11:43:08.285 +06:00 [INF] HTTP OPTIONS /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/my-submission responded 204 in 6.6455 ms
+2026-03-12 11:43:08.656 +06:00 [INF] HTTP GET /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/my-submission responded 200 in 333.5983 ms
+2026-03-12 11:43:24.731 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.1397 ms
+2026-03-12 11:43:24.736 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 0.0653 ms
+2026-03-12 11:43:24.794 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 53.2716 ms
+2026-03-12 11:43:25.155 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 400.9404 ms
+2026-03-12 11:43:25.608 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.2881 ms
+2026-03-12 11:43:25.737 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 119.9776 ms
+2026-03-12 11:43:25.927 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 204 in 0.0725 ms
+2026-03-12 11:43:25.927 +06:00 [INF] HTTP OPTIONS /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/my-submission responded 204 in 0.0083 ms
+2026-03-12 11:43:25.951 +06:00 [INF] HTTP GET /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/my-submission responded 200 in 15.1311 ms
+2026-03-12 11:43:25.960 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 25.4503 ms
+2026-03-12 11:43:51.957 +06:00 [INF] HTTP OPTIONS /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/submit responded 204 in 1.7393 ms
+2026-03-12 11:43:54.694 +06:00 [INF] HTTP POST /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/submit responded 200 in 2706.2385 ms
+2026-03-12 11:43:54.826 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 204 in 0.5455 ms
+2026-03-12 11:43:54.861 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 22.7011 ms
+2026-03-12 11:43:55.106 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.2770 ms
+2026-03-12 11:43:55.172 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 52.8523 ms
+2026-03-12 11:44:13.318 +06:00 [INF] HTTP OPTIONS /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/submit responded 204 in 4.1296 ms
+2026-03-12 11:44:20.798 +06:00 [INF] HTTP POST /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/submit responded 200 in 7425.0512 ms
+2026-03-12 11:44:21.187 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 204 in 0.5826 ms
+2026-03-12 11:44:21.257 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 51.2240 ms
+2026-03-12 11:44:26.135 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0653 ms
+2026-03-12 11:44:26.194 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 47.4948 ms
+2026-03-12 11:44:31.187 +06:00 [INF] HTTP OPTIONS /api/auth/logout responded 204 in 0.0606 ms
+2026-03-12 11:44:32.220 +06:00 [INF] HTTP POST /api/auth/logout responded 200 in 1012.9651 ms
+2026-03-12 11:45:52.006 +06:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 6.3430 ms
+2026-03-12 11:45:55.201 +06:00 [INF] HTTP POST /api/auth/login responded 200 in 3156.2314 ms
+2026-03-12 11:46:03.365 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.1018 ms
+2026-03-12 11:46:03.407 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.0554 ms
+2026-03-12 11:46:03.407 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.0377 ms
+2026-03-12 11:46:03.453 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 66.6690 ms
+2026-03-12 11:46:04.799 +06:00 [INF] HTTP GET /api/Courses responded 200 in 1372.8113 ms
+2026-03-12 11:46:04.812 +06:00 [INF] HTTP GET /api/Courses responded 200 in 1381.1600 ms
+2026-03-12 11:46:12.258 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 0.0951 ms
+2026-03-12 11:46:12.433 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 160.1820 ms
+2026-03-12 11:46:12.602 +06:00 [INF] HTTP OPTIONS /api/Announcements/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/announcements responded 204 in 0.0402 ms
+2026-03-12 11:46:12.841 +06:00 [INF] HTTP GET /api/Announcements/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/announcements responded 200 in 231.7607 ms
+2026-03-12 11:46:17.767 +06:00 [INF] HTTP OPTIONS /api/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/presentations responded 204 in 0.0832 ms
+2026-03-12 11:46:17.768 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 204 in 0.1704 ms
+2026-03-12 11:46:17.769 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.0278 ms
+2026-03-12 11:46:18.104 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 275.9582 ms
+2026-03-12 11:46:19.056 +06:00 [INF] HTTP GET /api/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/presentations responded 200 in 1259.8751 ms
+2026-03-12 11:46:19.463 +06:00 [INF] HTTP GET /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 200 in 1637.9425 ms
+2026-03-12 11:46:26.011 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 204 in 0.0895 ms
+2026-03-12 11:46:26.101 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 39.4999 ms
+2026-03-12 11:46:30.546 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 23.7216 ms
+2026-03-12 11:46:30.555 +06:00 [INF] HTTP OPTIONS /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/submissions responded 204 in 0.0354 ms
+2026-03-12 11:46:30.834 +06:00 [INF] HTTP GET /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/submissions responded 200 in 261.4314 ms
+2026-03-12 11:46:34.465 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0841 ms
+2026-03-12 11:46:34.495 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 21.4705 ms
+2026-03-12 11:48:05.420 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 102.0740 ms
+2026-03-12 11:48:06.343 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 704.8059 ms
+2026-03-12 11:50:37.297 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 8.7626 ms
+2026-03-12 11:50:37.759 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 374.0646 ms
+2026-03-12 12:01:35.638 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 4.0483 ms
+2026-03-12 12:01:35.638 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 4.0500 ms
+2026-03-12 12:01:35.963 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 204 in 0.8867 ms
+2026-03-12 12:01:35.963 +06:00 [INF] HTTP OPTIONS /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/submissions responded 204 in 1.3858 ms
+2026-03-12 12:01:40.282 +06:00 [INF] HTTP GET /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/submissions responded 200 in 4274.3235 ms
+2026-03-12 12:01:40.282 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 4274.3178 ms
+2026-03-12 12:03:25.386 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 15.0534 ms
+2026-03-12 12:03:25.390 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 14.8463 ms
+2026-03-12 12:03:26.178 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 725.5594 ms
+2026-03-12 12:03:27.376 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 1923.8049 ms
+2026-03-12 12:03:27.633 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 204 in 0.1495 ms
+2026-03-12 12:03:27.633 +06:00 [INF] HTTP OPTIONS /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/submissions responded 204 in 0.1495 ms
+2026-03-12 12:03:27.669 +06:00 [INF] HTTP GET /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/submissions responded 200 in 25.1440 ms
+2026-03-12 12:03:27.669 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 25.3098 ms
+2026-03-12 12:03:55.479 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 8.8138 ms
+2026-03-12 12:03:55.479 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 8.7246 ms
+2026-03-12 12:03:55.777 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 253.0078 ms
+2026-03-12 12:03:55.823 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 299.1073 ms
+2026-03-12 12:03:55.921 +06:00 [INF] HTTP OPTIONS /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/submissions responded 204 in 0.1610 ms
+2026-03-12 12:03:55.921 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 204 in 0.1418 ms
+2026-03-12 12:03:55.958 +06:00 [INF] HTTP GET /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/submissions responded 200 in 29.7354 ms
+2026-03-12 12:03:55.972 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 39.6549 ms
+2026-03-12 12:05:11.359 +06:00 [INF] HTTP OPTIONS /api/auth/logout responded 204 in 31.4895 ms
+2026-03-12 12:05:13.101 +06:00 [INF] HTTP POST /api/auth/logout responded 200 in 1608.7956 ms
+2026-03-12 12:05:40.487 +06:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 0.9405 ms
+2026-03-12 12:05:42.051 +06:00 [INF] HTTP POST /api/auth/login responded 200 in 1542.9453 ms
+2026-03-12 12:05:49.130 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.1401 ms
+2026-03-12 12:05:49.132 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.0818 ms
+2026-03-12 12:05:49.146 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.2102 ms
+2026-03-12 12:05:49.210 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 61.5712 ms
+2026-03-12 12:05:49.653 +06:00 [INF] HTTP GET /api/Courses responded 200 in 505.0772 ms
+2026-03-12 12:05:49.662 +06:00 [INF] HTTP GET /api/Courses responded 200 in 499.3477 ms
+2026-03-12 12:05:55.878 +06:00 [INF] HTTP OPTIONS /api/auth/logout responded 204 in 0.2269 ms
+2026-03-12 12:05:55.925 +06:00 [INF] HTTP POST /api/auth/logout responded 200 in 36.3858 ms
+2026-03-12 12:06:11.387 +06:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 0.1988 ms
+2026-03-12 12:06:12.099 +06:00 [INF] HTTP POST /api/auth/login responded 200 in 694.7841 ms
+2026-03-12 12:06:16.769 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0234 ms
+2026-03-12 12:06:16.769 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.0881 ms
+2026-03-12 12:06:16.802 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 26.5488 ms
+2026-03-12 12:06:17.083 +06:00 [INF] HTTP GET /api/Courses responded 200 in 298.2409 ms
+2026-03-12 12:06:24.246 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.0792 ms
+2026-03-12 12:06:24.571 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 317.5876 ms
+2026-03-12 12:06:24.706 +06:00 [INF] HTTP OPTIONS /api/Announcements/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/announcements responded 204 in 0.0526 ms
+2026-03-12 12:06:24.863 +06:00 [INF] HTTP GET /api/Announcements/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/announcements responded 200 in 144.5576 ms
+2026-03-12 12:06:29.218 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 204 in 0.1596 ms
+2026-03-12 12:06:29.246 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 15.3974 ms
+2026-03-12 12:06:32.032 +06:00 [INF] HTTP OPTIONS /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/my-submission responded 204 in 1.1162 ms
+2026-03-12 12:06:32.241 +06:00 [INF] HTTP GET /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/my-submission responded 200 in 200.4333 ms
+2026-03-12 12:06:42.648 +06:00 [INF] HTTP OPTIONS /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/submit responded 204 in 0.1320 ms
+2026-03-12 12:06:46.612 +06:00 [INF] HTTP POST /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/submit responded 200 in 3929.5806 ms
+2026-03-12 12:06:46.814 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 204 in 0.0496 ms
+2026-03-12 12:06:46.831 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 8.0998 ms
+2026-03-12 12:06:47.158 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0843 ms
+2026-03-12 12:06:47.179 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 14.3581 ms
+2026-03-12 12:06:52.212 +06:00 [INF] HTTP OPTIONS /api/auth/logout responded 204 in 0.1004 ms
+2026-03-12 12:06:52.252 +06:00 [INF] HTTP POST /api/auth/logout responded 200 in 32.1279 ms
+2026-03-12 12:08:08.832 +06:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 2.9640 ms
+2026-03-12 12:08:09.701 +06:00 [INF] HTTP POST /api/auth/login responded 200 in 841.3175 ms
+2026-03-12 12:08:17.356 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0756 ms
+2026-03-12 12:08:17.358 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.4433 ms
+2026-03-12 12:08:17.377 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.0465 ms
+2026-03-12 12:08:17.479 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 107.5960 ms
+2026-03-12 12:08:17.824 +06:00 [INF] HTTP GET /api/Courses responded 200 in 455.1870 ms
+2026-03-12 12:08:17.828 +06:00 [INF] HTTP GET /api/Courses responded 200 in 446.0214 ms
+2026-03-12 12:08:27.566 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 204 in 0.1653 ms
+2026-03-12 12:08:27.617 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 36.7836 ms
+2026-03-12 12:08:51.665 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 2.7950 ms
+2026-03-12 12:08:51.665 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 2.8028 ms
+2026-03-12 12:08:51.867 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 153.8344 ms
+2026-03-12 12:08:51.945 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 237.5150 ms
+2026-03-12 12:08:52.247 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 204 in 0.0343 ms
+2026-03-12 12:08:52.252 +06:00 [INF] HTTP OPTIONS /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/submissions responded 204 in 0.0360 ms
+2026-03-12 12:08:52.278 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 23.4558 ms
+2026-03-12 12:08:52.290 +06:00 [INF] HTTP GET /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/submissions responded 200 in 17.7760 ms
+2026-03-12 12:17:15.750 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 3.0419 ms
+2026-03-12 12:17:19.706 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 3874.1309 ms
+2026-03-12 13:51:52.141 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 52.5939 ms
+2026-03-12 13:51:52.142 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 52.6142 ms
+2026-03-12 13:51:52.536 +06:00 [INF] HTTP GET /api/Notifications responded 401 in 268.3515 ms
+2026-03-12 13:51:52.536 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 401 in 268.3529 ms
+2026-03-12 13:51:52.652 +06:00 [INF] HTTP OPTIONS /api/auth/refresh responded 204 in 2.5327 ms
+2026-03-12 13:51:56.054 +06:00 [INF] HTTP POST /api/auth/refresh responded 200 in 3369.6016 ms
+2026-03-12 13:51:56.231 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 104.6174 ms
+2026-03-12 13:51:56.883 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 756.1211 ms
+2026-03-12 13:51:56.996 +06:00 [INF] HTTP OPTIONS /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/submissions responded 204 in 0.1055 ms
+2026-03-12 13:51:56.996 +06:00 [INF] HTTP OPTIONS /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 204 in 0.0847 ms
+2026-03-12 13:51:57.206 +06:00 [INF] HTTP GET /api/Assignments/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/assignments responded 200 in 200.8774 ms
+2026-03-12 13:51:57.260 +06:00 [INF] HTTP GET /api/Assignments/assignments/6bd03b6b-98cc-4e8e-81d4-d16a9e287f28/submissions responded 200 in 255.1786 ms
+2026-03-12 23:12:46.881 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 30.3654 ms
+2026-03-12 23:12:46.881 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 28.9910 ms
+2026-03-12 23:12:46.881 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 35.1253 ms
+2026-03-12 23:12:47.240 +06:00 [INF] HTTP GET /api/Notifications responded 401 in 175.0754 ms
+2026-03-12 23:12:47.241 +06:00 [INF] HTTP GET /api/Courses responded 401 in 173.4825 ms
+2026-03-12 23:12:47.241 +06:00 [INF] HTTP GET /api/Courses responded 401 in 174.4606 ms
+2026-03-12 23:12:47.525 +06:00 [INF] HTTP OPTIONS /api/auth/refresh responded 204 in 1.7522 ms
+2026-03-12 23:12:48.104 +06:00 [INF] HTTP POST /api/auth/refresh responded 200 in 532.5277 ms
+2026-03-12 23:12:48.228 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 74.7151 ms
+2026-03-12 23:12:48.764 +06:00 [INF] HTTP GET /api/Courses responded 200 in 611.1314 ms
+2026-03-12 23:12:48.779 +06:00 [INF] HTTP GET /api/Courses responded 200 in 625.5354 ms

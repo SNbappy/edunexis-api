@@ -103,4 +103,10 @@ public class AssignmentsController : BaseController
     public async Task<IActionResult> GetSubmissions(
         Guid assignmentId, CancellationToken ct) =>
         Ok(await Mediator.Send(new GetSubmissionsQuery(assignmentId), ct));
+
+    [HttpGet("assignments/{assignmentId:guid}/my-submission")]
+    [Authorize(Roles = "Student")]
+    public async Task<IActionResult> GetMySubmission(
+        Guid assignmentId, CancellationToken ct) =>
+        Ok(await Mediator.Send(new GetMySubmissionQuery(assignmentId, CurrentUserId), ct));
 }

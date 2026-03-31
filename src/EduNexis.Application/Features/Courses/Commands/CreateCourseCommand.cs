@@ -38,8 +38,7 @@ public sealed class CreateCourseCommandHandler(
     public async ValueTask<ApiResponse<CourseDto>> Handle(
         CreateCourseCommand cmd, CancellationToken ct)
     {
-        var exists = await uow.Courses.ExistsAsync(
-            c => c.CourseCode == cmd.CourseCode, ct);
+        var exists = await uow.Courses.ExistsAsync(c => c.CourseCode == cmd.CourseCode && c.TeacherId == cmd.TeacherId && c.AcademicSession == cmd.AcademicSession && c.Semester == cmd.Semester, ct);
         if (exists)
             return ApiResponse<CourseDto>.Fail("Course code already exists.");
 
@@ -55,3 +54,4 @@ public sealed class CreateCourseCommandHandler(
         return ApiResponse<CourseDto>.Ok(course.ToDto(), "Course created.");
     }
 }
+

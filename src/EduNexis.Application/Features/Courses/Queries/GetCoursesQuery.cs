@@ -24,7 +24,15 @@ public sealed class GetCoursesQueryHandler(
         else
             courses = await uow.Courses.GetAllAsync(ct);
 
-        return ApiResponse<List<CourseDto>>.Ok(
-            courses.Select(c => c.ToDto()).ToList());
+        var dtos = new List<CourseDto>();
+        foreach (var course in courses)
+        {
+            var teacher = await uow.Users.GetWithProfileAsync(course.TeacherId, ct);
+            dtos.Add(course.ToDto(
+                teacher?.Profile?.FullName ?? teacher?.Email ?? "Unknown",
+                teacher?.Profile?.ProfilePhotoUrl));
+        }
+
+        return ApiResponse<List<CourseDto>>.Ok(dtos);
     }
 }

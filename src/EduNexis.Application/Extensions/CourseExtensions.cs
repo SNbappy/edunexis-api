@@ -5,7 +5,7 @@ namespace EduNexis.Application.Extensions;
 
 public static class CourseExtensions
 {
-    public static CourseDto ToDto(this Course course, string teacherName = "", int memberCount = 0) =>
+    public static CourseDto ToDto(this Course course, string teacherName = "", string? teacherProfilePhotoUrl = null, int memberCount = 0) =>
         new(
             course.Id,
             course.Title,
@@ -21,6 +21,7 @@ public static class CourseExtensions
             course.JoiningCode,
             course.TeacherId,
             teacherName,
+            teacherProfilePhotoUrl,
             course.IsArchived,
             memberCount,
             course.CreatedAt

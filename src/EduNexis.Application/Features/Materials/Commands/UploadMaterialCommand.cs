@@ -1,3 +1,5 @@
+﻿using EduNexis.Application.Features.Notifications.Commands;
+
 namespace EduNexis.Application.Features.Materials.Commands;
 
 public record UploadMaterialCommand(
@@ -29,7 +31,8 @@ public sealed class UploadMaterialCommandValidator : AbstractValidator<UploadMat
 
 public sealed class UploadMaterialCommandHandler(
     IUnitOfWork uow,
-    IFileStorageService storage
+    IFileStorageService storage,
+    ISender sender
 ) : ICommandHandler<UploadMaterialCommand, ApiResponse>
 {
     public async ValueTask<ApiResponse> Handle(
@@ -66,6 +69,19 @@ public sealed class UploadMaterialCommandHandler(
 
         await uow.GetRepository<Material>().AddAsync(material, ct);
         await uow.SaveChangesAsync(ct);
+
+        var members = await uow.CourseMembers.GetByCourseAsync(command.CourseId, ct);
+        var tasks = members
+            .Where(m => m.IsActive && m.UserId != command.UploadedById)
+            .Select(m => sender.Send(new SendNotificationCommand(
+                UserId: m.UserId,
+                Title: $"New Material in {course.Title}",
+                Body: $"\"{command.Title}\" has been uploaded.",
+                Type: NotificationType.NewMaterial,
+                RedirectUrl: $"/courses/{course.Id}/materials"
+            ), ct).AsTask());
+
+        await Task.WhenAll(tasks);
 
         return ApiResponse.Ok("Material uploaded successfully.");
     }

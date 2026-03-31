@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "QK0t9mVFUhc=",
+  "dgSpecHash": "JUogsiRgflY=",
   "success": true,
   "projectFilePath": "D:\\Coding\\Projects\\edunexis-api\\tests\\EduNexis.IntegrationTests\\EduNexis.IntegrationTests.csproj",
   "expectedPackageFiles": [
@@ -53,6 +53,7 @@
     "C:\\Users\\Bappy\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\Bappy\\.nuget\\packages\\pipelines.sockets.unofficial\\2.2.8\\pipelines.sockets.unofficial.2.2.8.nupkg.sha512",
     "C:\\Users\\Bappy\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\9.0.0\\pomelo.entityframeworkcore.mysql.9.0.0.nupkg.sha512",
+    "C:\\Users\\Bappy\\.nuget\\packages\\scriban\\7.0.6\\scriban.7.0.6.nupkg.sha512",
     "C:\\Users\\Bappy\\.nuget\\packages\\serilog\\4.3.0\\serilog.4.3.0.nupkg.sha512",
     "C:\\Users\\Bappy\\.nuget\\packages\\serilog.aspnetcore\\10.0.0\\serilog.aspnetcore.10.0.0.nupkg.sha512",
     "C:\\Users\\Bappy\\.nuget\\packages\\serilog.extensions.hosting\\10.0.0\\serilog.extensions.hosting.10.0.0.nupkg.sha512",

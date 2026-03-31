@@ -1,3 +1,5 @@
+﻿using EduNexis.Application.Features.Notifications.Commands;
+
 namespace EduNexis.Application.Features.Announcements.Commands;
 
 public record AnnouncementDto(
@@ -24,7 +26,8 @@ public sealed class CreateAnnouncementCommandValidator : AbstractValidator<Creat
 
 public sealed class CreateAnnouncementCommandHandler(
     IUnitOfWork uow,
-    IFileStorageService storage
+    IFileStorageService storage,
+    ISender sender
 ) : ICommandHandler<CreateAnnouncementCommand, ApiResponse<AnnouncementDto>>
 {
     public async ValueTask<ApiResponse<AnnouncementDto>> Handle(
@@ -55,11 +58,24 @@ public sealed class CreateAnnouncementCommandHandler(
         await uow.SaveChangesAsync(ct);
 
         var author = await uow.Users.GetWithProfileAsync(command.AuthorId, ct);
+        var authorName = author?.Profile?.FullName ?? "Someone";
+
+        var members = await uow.CourseMembers.GetByCourseAsync(command.CourseId, ct);
+        var tasks = members
+            .Where(m => m.IsActive && m.UserId != command.AuthorId)
+            .Select(m => sender.Send(new SendNotificationCommand(
+                UserId: m.UserId,
+                Title: $"New Announcement in {course.Title}",
+                Body: $"{authorName}: {command.Content[..Math.Min(80, command.Content.Length)]}...",
+                Type: NotificationType.NewAnnouncement,
+                RedirectUrl: $"/courses/{course.Id}/stream"
+            ), ct).AsTask());
+
+        await Task.WhenAll(tasks);
 
         return ApiResponse<AnnouncementDto>.Ok(new AnnouncementDto(
             announcement.Id, announcement.CourseId, announcement.AuthorId,
-            author?.Profile?.FullName ?? "Unknown",
-            announcement.Content, announcement.AttachmentUrl,
+            authorName, announcement.Content, announcement.AttachmentUrl,
             announcement.IsPinned, announcement.CreatedAt));
     }
 }

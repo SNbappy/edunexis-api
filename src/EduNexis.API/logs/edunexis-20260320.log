@@ -1,0 +1,359 @@
+2026-03-20 01:31:27.078 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 7.1082 ms
+2026-03-20 01:31:27.078 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 7.1252 ms
+2026-03-20 01:31:27.078 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 7.1122 ms
+2026-03-20 01:31:27.502 +06:00 [INF] HTTP GET /api/Courses responded 401 in 67.9603 ms
+2026-03-20 01:31:27.502 +06:00 [INF] HTTP GET /api/Courses responded 401 in 65.9843 ms
+2026-03-20 01:31:27.502 +06:00 [INF] HTTP GET /api/Notifications responded 401 in 67.4854 ms
+2026-03-20 01:31:28.044 +06:00 [INF] HTTP OPTIONS /api/auth/refresh responded 204 in 0.0623 ms
+2026-03-20 01:31:28.789 +06:00 [INF] HTTP POST /api/auth/refresh responded 200 in 736.7045 ms
+2026-03-20 01:31:29.459 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 572.6554 ms
+2026-03-20 01:31:29.529 +06:00 [INF] HTTP GET /api/Courses responded 200 in 643.9846 ms
+2026-03-20 01:31:29.556 +06:00 [INF] HTTP GET /api/Courses responded 200 in 675.6489 ms
+2026-03-20 01:37:36.109 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 1.2280 ms
+2026-03-20 01:37:36.287 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 160.4766 ms
+2026-03-20 01:37:44.027 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.3402 ms
+2026-03-20 01:37:44.028 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.0629 ms
+2026-03-20 01:37:44.184 +06:00 [INF] HTTP GET /api/Courses responded 200 in 106.8606 ms
+2026-03-20 01:37:44.195 +06:00 [INF] HTTP GET /api/Courses responded 200 in 124.0560 ms
+2026-03-20 01:37:48.618 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 0.0503 ms
+2026-03-20 01:37:48.730 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 99.7819 ms
+2026-03-20 01:37:49.041 +06:00 [INF] HTTP OPTIONS /api/Announcements/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/announcements responded 204 in 0.0361 ms
+2026-03-20 01:37:49.081 +06:00 [INF] HTTP GET /api/Announcements/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/announcements responded 200 in 33.7804 ms
+2026-03-20 01:37:58.888 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.3431 ms
+2026-03-20 01:37:58.911 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 8.1153 ms
+2026-03-20 10:51:10.407 +06:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 4.4231 ms
+2026-03-20 10:51:19.652 +06:00 [ERR] HTTP POST /api/auth/login responded 500 in 8868.5067 ms
+EduNexis.Domain.Exceptions.UnauthorizedException: Invalid email or password.
+   at EduNexis.Application.Features.Auth.Commands.LoginUserCommandHandler.Handle(LoginUserCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\Auth\Commands\LoginUserCommand.cs:line 28
+   at EduNexis.API.Controllers.AuthController.Login(LoginUserCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\AuthController.cs:line 18
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-03-20 10:51:19.981 +06:00 [ERR] Unhandled exception: Invalid email or password.
+EduNexis.Domain.Exceptions.UnauthorizedException: Invalid email or password.
+   at EduNexis.Application.Features.Auth.Commands.LoginUserCommandHandler.Handle(LoginUserCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\Auth\Commands\LoginUserCommand.cs:line 28
+   at EduNexis.API.Controllers.AuthController.Login(LoginUserCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\AuthController.cs:line 18
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EduNexis.API.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Middleware\ExceptionMiddleware.cs:line 15
+2026-03-20 10:52:09.018 +06:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 6.2696 ms
+2026-03-20 10:52:13.577 +06:00 [ERR] HTTP POST /api/auth/login responded 500 in 4439.7151 ms
+EduNexis.Domain.Exceptions.UnauthorizedException: Invalid email or password.
+   at EduNexis.Application.Features.Auth.Commands.LoginUserCommandHandler.Handle(LoginUserCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\Auth\Commands\LoginUserCommand.cs:line 28
+   at EduNexis.API.Controllers.AuthController.Login(LoginUserCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\AuthController.cs:line 18
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-03-20 10:52:13.795 +06:00 [ERR] Unhandled exception: Invalid email or password.
+EduNexis.Domain.Exceptions.UnauthorizedException: Invalid email or password.
+   at EduNexis.Application.Features.Auth.Commands.LoginUserCommandHandler.Handle(LoginUserCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.Application\Features\Auth\Commands\LoginUserCommand.cs:line 28
+   at EduNexis.API.Controllers.AuthController.Login(LoginUserCommand command, CancellationToken ct) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Controllers\AuthController.cs:line 18
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EduNexis.API.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\Coding\Projects\edunexis-api\src\EduNexis.API\Middleware\ExceptionMiddleware.cs:line 15
+2026-03-20 10:53:39.673 +06:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 0.5083 ms
+2026-03-20 10:53:40.936 +06:00 [INF] HTTP POST /api/auth/login responded 200 in 1254.8985 ms
+2026-03-20 10:53:41.842 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.2608 ms
+2026-03-20 10:53:41.850 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.0970 ms
+2026-03-20 10:53:41.850 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.0969 ms
+2026-03-20 10:53:42.124 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 257.3476 ms
+2026-03-20 10:53:42.440 +06:00 [INF] HTTP GET /api/Courses responded 200 in 573.3824 ms
+2026-03-20 10:53:42.442 +06:00 [INF] HTTP GET /api/Courses responded 200 in 574.9884 ms
+2026-03-20 10:53:46.918 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 1.4007 ms
+2026-03-20 10:53:47.178 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 247.3470 ms
+2026-03-20 10:53:47.358 +06:00 [INF] HTTP OPTIONS /api/Announcements/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/announcements responded 204 in 0.1973 ms
+2026-03-20 10:53:47.467 +06:00 [INF] HTTP GET /api/Announcements/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/announcements responded 200 in 101.8145 ms
+2026-03-20 10:54:05.531 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 12.1883 ms
+2026-03-20 10:54:05.531 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 204 in 12.2917 ms
+2026-03-20 10:54:06.213 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 200 in 629.5617 ms
+2026-03-20 10:54:06.215 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 630.8031 ms
+2026-03-20 10:59:36.162 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 27.5046 ms
+2026-03-20 10:59:36.711 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 497.3803 ms
+2026-03-20 11:00:07.496 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 13.5981 ms
+2026-03-20 11:00:07.940 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 357.1880 ms
+2026-03-20 11:02:07.933 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 11.6650 ms
+2026-03-20 11:02:07.933 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 10.3059 ms
+2026-03-20 11:02:08.186 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 213.1507 ms
+2026-03-20 11:02:08.286 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 312.8001 ms
+2026-03-20 11:02:08.467 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 204 in 0.7814 ms
+2026-03-20 11:02:08.467 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.8402 ms
+2026-03-20 11:02:08.544 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 200 in 67.8833 ms
+2026-03-20 11:02:08.564 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 87.1861 ms
+2026-03-20 11:04:34.021 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 2.8887 ms
+2026-03-20 11:04:34.021 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 2.8695 ms
+2026-03-20 11:04:34.108 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 52.6856 ms
+2026-03-20 11:04:34.282 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 228.0084 ms
+2026-03-20 11:04:34.748 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 204 in 0.0623 ms
+2026-03-20 11:04:34.748 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.0623 ms
+2026-03-20 11:04:34.804 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 200 in 49.9926 ms
+2026-03-20 11:04:34.905 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 151.1365 ms
+2026-03-20 11:04:55.221 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 0.0202 ms
+2026-03-20 11:04:55.221 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.2224 ms
+2026-03-20 11:04:55.260 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 28.6728 ms
+2026-03-20 11:04:55.381 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 149.2457 ms
+2026-03-20 11:04:55.737 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.6919 ms
+2026-03-20 11:04:55.737 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 204 in 0.0433 ms
+2026-03-20 11:04:55.800 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 200 in 53.8848 ms
+2026-03-20 11:04:55.862 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 118.0293 ms
+2026-03-20 11:04:58.196 +06:00 [INF] HTTP OPTIONS /api/Announcements/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/announcements responded 204 in 0.0983 ms
+2026-03-20 11:04:58.279 +06:00 [INF] HTTP GET /api/Announcements/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/announcements responded 200 in 70.5441 ms
+2026-03-20 11:05:23.230 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 13.5599 ms
+2026-03-20 11:05:23.230 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 13.5599 ms
+2026-03-20 11:05:23.925 +06:00 [INF] HTTP GET /api/Courses responded 200 in 563.2010 ms
+2026-03-20 11:05:23.941 +06:00 [INF] HTTP GET /api/Courses responded 200 in 579.0732 ms
+2026-03-20 11:05:25.316 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.3032 ms
+2026-03-20 11:05:25.453 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 107.2650 ms
+2026-03-20 11:10:17.570 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 5.7713 ms
+2026-03-20 11:10:18.097 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 490.6531 ms
+2026-03-20 11:10:19.491 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.1466 ms
+2026-03-20 11:10:19.493 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 0.0568 ms
+2026-03-20 11:10:19.719 +06:00 [INF] HTTP GET /api/Courses responded 200 in 220.6646 ms
+2026-03-20 11:10:19.732 +06:00 [INF] HTTP GET /api/Courses responded 200 in 231.9730 ms
+2026-03-20 11:10:23.879 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 0.2092 ms
+2026-03-20 11:10:23.980 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 80.8247 ms
+2026-03-20 11:10:24.249 +06:00 [INF] HTTP OPTIONS /api/Announcements/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/announcements responded 204 in 1.4501 ms
+2026-03-20 11:10:24.251 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 1.1114 ms
+2026-03-20 11:10:24.252 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 204 in 0.9298 ms
+2026-03-20 11:10:24.349 +06:00 [INF] HTTP GET /api/Announcements/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/announcements responded 200 in 87.7472 ms
+2026-03-20 11:10:24.384 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 200 in 114.6680 ms
+2026-03-20 11:10:24.452 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 187.8859 ms
+2026-03-20 11:10:48.466 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 7.3529 ms
+2026-03-20 11:10:48.897 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 397.3042 ms
+2026-03-20 11:11:20.058 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 12.3931 ms
+2026-03-20 11:11:21.448 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 1140.2291 ms
+2026-03-20 11:11:52.777 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 13.5816 ms
+2026-03-20 11:11:53.865 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 999.6089 ms
+2026-03-20 11:12:02.707 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 204 in 21.9697 ms
+2026-03-20 11:12:02.706 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 204 in 27.6379 ms
+2026-03-20 11:12:02.706 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 27.7083 ms
+2026-03-20 11:12:06.859 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 3907.7110 ms
+2026-03-20 11:12:07.188 +06:00 [INF] HTTP GET /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 200 in 4220.8698 ms
+2026-03-20 11:12:07.341 +06:00 [INF] HTTP GET /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 200 in 130.8176 ms
+2026-03-20 11:12:24.551 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 11.7984 ms
+2026-03-20 11:12:25.211 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 575.9410 ms
+2026-03-20 11:14:24.027 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 3.5367 ms
+2026-03-20 11:14:24.027 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 3.5337 ms
+2026-03-20 11:14:24.027 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 3.5179 ms
+2026-03-20 11:14:24.269 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 210.0631 ms
+2026-03-20 11:14:24.351 +06:00 [INF] HTTP GET /api/Courses responded 200 in 293.1033 ms
+2026-03-20 11:14:24.381 +06:00 [INF] HTTP GET /api/Courses responded 200 in 321.1201 ms
+2026-03-20 11:15:03.627 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 0.0520 ms
+2026-03-20 11:15:03.733 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 92.0166 ms
+2026-03-20 11:15:03.998 +06:00 [INF] HTTP OPTIONS /api/Announcements/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/announcements responded 204 in 0.0642 ms
+2026-03-20 11:15:03.998 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.0331 ms
+2026-03-20 11:15:03.999 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 204 in 0.0475 ms
+2026-03-20 11:15:04.062 +06:00 [INF] HTTP GET /api/Announcements/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/announcements responded 200 in 57.4823 ms
+2026-03-20 11:15:04.113 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 200 in 71.0417 ms
+2026-03-20 11:15:04.133 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 110.2021 ms
+2026-03-20 11:15:24.435 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 2.5553 ms
+2026-03-20 11:15:24.623 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 157.8076 ms
+2026-03-20 11:19:55.324 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 6.8335 ms
+2026-03-20 11:19:55.891 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 506.8742 ms
+2026-03-20 11:25:16.180 +06:00 [INF] HTTP OPTIONS /api/Announcements/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/announcements responded 204 in 3.0797 ms
+2026-03-20 11:25:16.451 +06:00 [INF] HTTP GET /api/Announcements/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/announcements responded 200 in 246.3417 ms
+2026-03-20 11:26:48.173 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 4.1291 ms
+2026-03-20 11:26:48.193 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 0.0549 ms
+2026-03-20 11:26:48.566 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 210.3779 ms
+2026-03-20 11:26:48.844 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 486.0481 ms
+2026-03-20 11:26:49.132 +06:00 [INF] HTTP OPTIONS /api/Announcements/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/announcements responded 204 in 0.0328 ms
+2026-03-20 11:26:49.132 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.0182 ms
+2026-03-20 11:26:49.135 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 204 in 0.1011 ms
+2026-03-20 11:26:49.177 +06:00 [INF] HTTP GET /api/Announcements/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/announcements responded 200 in 38.5168 ms
+2026-03-20 11:26:49.360 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 200 in 211.7758 ms
+2026-03-20 11:26:49.375 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 235.3412 ms
+2026-03-20 11:26:58.763 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.0462 ms
+2026-03-20 11:26:58.764 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 204 in 0.0276 ms
+2026-03-20 11:26:58.764 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 204 in 0.0275 ms
+2026-03-20 11:26:58.880 +06:00 [INF] HTTP GET /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 200 in 108.6053 ms
+2026-03-20 11:26:58.891 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 123.2560 ms
+2026-03-20 11:26:58.898 +06:00 [INF] HTTP GET /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 200 in 16.1494 ms
+2026-03-20 12:00:02.871 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 204 in 2.7876 ms
+2026-03-20 12:00:03.019 +06:00 [INF] HTTP GET /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 401 in 134.0875 ms
+2026-03-20 12:00:03.036 +06:00 [INF] HTTP OPTIONS /api/auth/refresh responded 204 in 0.0203 ms
+2026-03-20 12:00:03.595 +06:00 [INF] HTTP POST /api/auth/refresh responded 200 in 549.1836 ms
+2026-03-20 12:00:03.685 +06:00 [INF] HTTP GET /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 200 in 14.9856 ms
+2026-03-20 12:00:25.558 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.3124 ms
+2026-03-20 12:00:25.560 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 0.0335 ms
+2026-03-20 12:00:25.635 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 68.7922 ms
+2026-03-20 12:00:25.749 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 182.8428 ms
+2026-03-20 12:00:26.171 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 204 in 0.0353 ms
+2026-03-20 12:00:26.171 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 204 in 0.0320 ms
+2026-03-20 12:00:26.173 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.0504 ms
+2026-03-20 12:00:26.174 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 204 in 0.0274 ms
+2026-03-20 12:00:26.175 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.1312 ms
+2026-03-20 12:00:26.204 +06:00 [INF] HTTP GET /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 200 in 24.6526 ms
+2026-03-20 12:00:26.221 +06:00 [INF] HTTP GET /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 200 in 11.7398 ms
+2026-03-20 12:00:26.285 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 200 in 96.9070 ms
+2026-03-20 12:00:26.310 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 122.0845 ms
+2026-03-20 12:00:26.370 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 58.2179 ms
+2026-03-20 12:00:53.503 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 0.0931 ms
+2026-03-20 12:00:53.503 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0929 ms
+2026-03-20 12:00:53.545 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 34.9568 ms
+2026-03-20 12:00:53.634 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 125.7560 ms
+2026-03-20 12:00:54.010 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 204 in 0.0302 ms
+2026-03-20 12:00:54.011 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.0162 ms
+2026-03-20 12:00:54.011 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 204 in 0.0439 ms
+2026-03-20 12:00:54.012 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.0212 ms
+2026-03-20 12:00:54.012 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 204 in 0.0323 ms
+2026-03-20 12:00:54.076 +06:00 [INF] HTTP GET /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 200 in 55.7929 ms
+2026-03-20 12:00:54.108 +06:00 [INF] HTTP GET /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 200 in 29.8420 ms
+2026-03-20 12:00:54.207 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 200 in 160.2095 ms
+2026-03-20 12:00:54.228 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 203.5684 ms
+2026-03-20 12:00:54.394 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 164.3647 ms
+2026-03-20 12:01:17.510 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0772 ms
+2026-03-20 12:01:17.511 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 0.0323 ms
+2026-03-20 12:01:17.520 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 3.8040 ms
+2026-03-20 12:01:17.594 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 76.3233 ms
+2026-03-20 12:01:17.775 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 204 in 0.0322 ms
+2026-03-20 12:01:17.775 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 204 in 0.0209 ms
+2026-03-20 12:01:17.776 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.0082 ms
+2026-03-20 12:01:17.777 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.0949 ms
+2026-03-20 12:01:17.779 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 204 in 0.0155 ms
+2026-03-20 12:01:17.805 +06:00 [INF] HTTP GET /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 200 in 20.6119 ms
+2026-03-20 12:01:17.822 +06:00 [INF] HTTP GET /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 200 in 14.0939 ms
+2026-03-20 12:01:17.887 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 200 in 97.2181 ms
+2026-03-20 12:01:17.930 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 141.9331 ms
+2026-03-20 12:01:17.995 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 61.7820 ms
+2026-03-20 12:07:36.146 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0597 ms
+2026-03-20 12:07:36.149 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 0.0269 ms
+2026-03-20 12:07:36.176 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 22.2108 ms
+2026-03-20 12:07:36.279 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 124.0335 ms
+2026-03-20 12:07:36.538 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 204 in 0.0374 ms
+2026-03-20 12:07:36.538 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 204 in 0.0214 ms
+2026-03-20 12:07:36.541 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.0428 ms
+2026-03-20 12:07:36.542 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.0330 ms
+2026-03-20 12:07:36.544 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 204 in 0.0275 ms
+2026-03-20 12:07:36.557 +06:00 [INF] HTTP GET /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 200 in 11.0824 ms
+2026-03-20 12:07:36.575 +06:00 [INF] HTTP GET /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 200 in 15.5324 ms
+2026-03-20 12:07:36.626 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 200 in 71.1898 ms
+2026-03-20 12:07:36.643 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 96.2272 ms
+2026-03-20 12:07:36.716 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 67.5121 ms
+2026-03-20 12:07:46.079 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 0.0665 ms
+2026-03-20 12:07:46.080 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 1.6337 ms
+2026-03-20 12:07:46.116 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 16.9375 ms
+2026-03-20 12:07:46.211 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 119.6715 ms
+2026-03-20 12:07:46.382 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 204 in 0.0694 ms
+2026-03-20 12:07:46.385 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 204 in 0.0244 ms
+2026-03-20 12:07:46.385 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.0472 ms
+2026-03-20 12:07:46.385 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.0177 ms
+2026-03-20 12:07:46.387 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 204 in 0.0269 ms
+2026-03-20 12:07:46.415 +06:00 [INF] HTTP GET /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 200 in 21.5560 ms
+2026-03-20 12:07:46.434 +06:00 [INF] HTTP GET /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 200 in 16.9245 ms
+2026-03-20 12:07:46.501 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 200 in 86.3770 ms
+2026-03-20 12:07:46.508 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 97.9765 ms
+2026-03-20 12:07:46.602 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 90.3680 ms
+2026-03-20 12:08:16.443 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 2.7157 ms
+2026-03-20 12:08:16.955 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 474.6123 ms
+2026-03-20 12:09:18.328 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 11.1157 ms
+2026-03-20 12:09:18.328 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 11.1320 ms
+2026-03-20 12:09:18.559 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 193.5322 ms
+2026-03-20 12:09:18.910 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 550.2636 ms
+2026-03-20 12:09:19.037 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 204 in 0.0261 ms
+2026-03-20 12:09:19.038 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 204 in 0.0423 ms
+2026-03-20 12:09:19.039 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.0862 ms
+2026-03-20 12:09:19.039 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.0435 ms
+2026-03-20 12:09:19.040 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 204 in 0.0195 ms
+2026-03-20 12:09:19.063 +06:00 [INF] HTTP GET /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 200 in 20.7005 ms
+2026-03-20 12:09:19.080 +06:00 [INF] HTTP GET /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 200 in 13.1859 ms
+2026-03-20 12:09:19.183 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 200 in 130.1114 ms
+2026-03-20 12:09:19.229 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 179.2695 ms
+2026-03-20 12:09:19.281 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 49.7666 ms
+2026-03-20 12:09:49.056 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 5.3279 ms
+2026-03-20 12:09:49.284 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 194.1304 ms
+2026-03-20 12:10:19.565 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 7.3694 ms
+2026-03-20 12:10:19.964 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 342.0359 ms
+2026-03-20 12:10:50.179 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 4.2433 ms
+2026-03-20 12:10:50.381 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 166.2715 ms
+2026-03-20 12:11:20.563 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 12.7487 ms
+2026-03-20 12:11:21.014 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 381.8354 ms
+2026-03-20 12:11:51.163 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 6.6242 ms
+2026-03-20 12:11:51.478 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 263.4268 ms
+2026-03-20 12:13:53.309 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 6.8343 ms
+2026-03-20 12:13:53.309 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 8.3022 ms
+2026-03-20 12:13:53.309 +06:00 [INF] HTTP OPTIONS /api/Courses responded 204 in 1.2198 ms
+2026-03-20 12:13:53.440 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 114.1200 ms
+2026-03-20 12:13:53.508 +06:00 [INF] HTTP GET /api/Courses responded 200 in 180.6879 ms
+2026-03-20 12:13:53.534 +06:00 [INF] HTTP GET /api/Courses responded 200 in 208.4165 ms
+2026-03-20 12:14:02.115 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 0.0582 ms
+2026-03-20 12:14:02.173 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 52.1527 ms
+2026-03-20 12:14:02.472 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.0530 ms
+2026-03-20 12:14:02.472 +06:00 [INF] HTTP OPTIONS /api/Announcements/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/announcements responded 204 in 0.0265 ms
+2026-03-20 12:14:02.472 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 204 in 0.0373 ms
+2026-03-20 12:14:02.568 +06:00 [INF] HTTP GET /api/Announcements/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/announcements responded 200 in 79.1668 ms
+2026-03-20 12:14:02.626 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 200 in 139.3649 ms
+2026-03-20 12:14:02.649 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 162.9661 ms
+2026-03-20 12:14:04.578 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 204 in 0.0660 ms
+2026-03-20 12:14:04.578 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 204 in 0.0664 ms
+2026-03-20 12:14:04.621 +06:00 [INF] HTTP GET /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 200 in 37.9117 ms
+2026-03-20 12:14:04.632 +06:00 [INF] HTTP GET /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 200 in 9.7446 ms
+2026-03-20 12:14:04.677 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 98.5870 ms
+2026-03-20 12:14:23.681 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.5270 ms
+2026-03-20 12:14:23.754 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 64.5396 ms
+2026-03-20 12:19:32.588 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 14.0084 ms
+2026-03-20 12:19:33.374 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 696.0908 ms
+2026-03-20 12:19:56.290 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 0.0624 ms
+2026-03-20 12:19:56.298 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 204 in 0.1100 ms
+2026-03-20 12:19:56.326 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 25.2380 ms
+2026-03-20 12:19:56.528 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e responded 200 in 212.6345 ms
+2026-03-20 12:19:57.017 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 204 in 0.1599 ms
+2026-03-20 12:19:57.017 +06:00 [INF] HTTP OPTIONS /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 204 in 0.0318 ms
+2026-03-20 12:19:57.022 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.0320 ms
+2026-03-20 12:19:57.022 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 204 in 0.0214 ms
+2026-03-20 12:19:57.024 +06:00 [INF] HTTP OPTIONS /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 204 in 0.0669 ms
+2026-03-20 12:19:57.056 +06:00 [INF] HTTP GET /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 200 in 30.2072 ms
+2026-03-20 12:19:57.067 +06:00 [INF] HTTP GET /api/Attendance/courses/4a04c797-2999-4459-960e-e5d8d5493d9e/sessions responded 200 in 7.5628 ms
+2026-03-20 12:19:57.141 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/join-requests responded 200 in 98.5627 ms
+2026-03-20 12:19:57.165 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 128.0012 ms
+2026-03-20 12:19:57.273 +06:00 [INF] HTTP GET /api/Courses/4a04c797-2999-4459-960e-e5d8d5493d9e/members responded 200 in 95.0853 ms
+2026-03-20 12:20:28.314 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 7.3985 ms
+2026-03-20 12:20:28.594 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 223.3142 ms
+2026-03-20 12:20:59.006 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 8.3612 ms
+2026-03-20 12:20:59.776 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 703.8202 ms
+2026-03-20 12:21:30.864 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 16.0304 ms
+2026-03-20 12:21:32.173 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 1228.6901 ms
+2026-03-20 12:22:13.691 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 54.6732 ms
+2026-03-20 12:22:15.832 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 1732.5757 ms
+2026-03-20 12:22:54.388 +06:00 [INF] HTTP OPTIONS /api/Notifications responded 204 in 11.2874 ms
+2026-03-20 12:22:55.226 +06:00 [INF] HTTP GET /api/Notifications responded 200 in 553.3320 ms

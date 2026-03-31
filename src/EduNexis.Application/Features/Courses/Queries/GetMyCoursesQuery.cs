@@ -28,6 +28,7 @@ public sealed class GetMyCoursesQueryHandler(
                 course.Department, course.AcademicSession,
                 course.CoverImageUrl,
                 teacher?.Profile?.FullName ?? teacher?.Email ?? "Unknown",
+                teacher?.Profile?.ProfilePhotoUrl,
                 course.IsArchived));
         }
 

@@ -15,6 +15,7 @@ public record CourseDto(
     string JoiningCode,
     Guid TeacherId,
     string TeacherName,
+    string? TeacherProfilePhotoUrl,
     bool IsArchived,
     int MemberCount,
     DateTime CreatedAt
@@ -28,5 +29,6 @@ public record CourseSummaryDto(
     string AcademicSession,
     string CoverImageUrl,
     string TeacherName,
+    string? TeacherProfilePhotoUrl,
     bool IsArchived
 );
