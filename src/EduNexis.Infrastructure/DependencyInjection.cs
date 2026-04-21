@@ -20,7 +20,7 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        // ── EF Core + MySQL ────────────────────────────────────────────────
+        // EF Core + MySQL
         services.AddDbContext<AppDbContext>(options =>
             options.UseMySql(
                 configuration.GetConnectionString("DefaultConnection")!,
@@ -29,25 +29,25 @@ public static class DependencyInjection
                     .EnableRetryOnFailure(3)
                     .CommandTimeout(30)));
 
-        // ── Repositories + UnitOfWork ──────────────────────────────────────
+        // Repositories + UnitOfWork
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IUserRepository, UserRepository>();
 
-        // ── Current User (HttpContext) ─────────────────────────────────────
+        // Current User (HttpContext)
         services.AddHttpContextAccessor();
         services.AddScoped<ICurrentUserService, CurrentUserService>();
 
-        // ── Auth services (JWT + password hashing) ─────────────────────────
+        // Auth services (JWT + password hashing)
         services.AddSingleton<IJwtTokenService, JwtTokenService>();
         services.AddSingleton<IPasswordHasher, PasswordHasher>();
 
-        // ── Firebase Auth ──────────────────────────────────────────────────
+        // Firebase Auth
         services.AddScoped<IFirebaseAuthService, FirebaseAuthService>();
 
-        // ── Cloudinary Storage ─────────────────────────────────────────────
+        // Cloudinary Storage
         services.AddScoped<IFileStorageService, CloudinaryStorageService>();
 
-        // ── Email via FluentEmail ──────────────────────────────────────────
+        // Email via FluentEmail
         var emailConfig = configuration.GetSection("Email");
         services.AddFluentEmail(
                 emailConfig["From"] ?? "noreply@edunexis.com",
@@ -59,17 +59,22 @@ public static class DependencyInjection
                 emailConfig["Password"]);
         services.AddScoped<IEmailService, EmailService>();
 
-        // ── Redis Cache ────────────────────────────────────────────────────
-        services.AddStackExchangeRedisCache(options =>
+        // Redis Cache (optional, falls back to in-memory if no Redis URL)
+        var redisConn = configuration.GetConnectionString("Redis");
+        if (!string.IsNullOrWhiteSpace(redisConn))
         {
-            options.Configuration =
-                configuration.GetConnectionString("Redis") +
-                ",abortConnect=false,connectTimeout=3000,syncTimeout=3000";
-            options.InstanceName = "EduNexis:";
-        });
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = redisConn + ",abortConnect=false,connectTimeout=3000,syncTimeout=3000";
+                options.InstanceName = "EduNexis:";
+            });
+        }
+        else
+        {
+            services.AddDistributedMemoryCache();
+        }
         services.AddScoped<ICacheService, CacheService>();
 
         return services;
     }
 }
-
