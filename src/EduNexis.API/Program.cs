@@ -15,7 +15,8 @@ Directory.CreateDirectory("logs");
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.WebHost.UseUrls("http://localhost:5041");
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5041";
+builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 
 
 builder.Host.UseSerilog((ctx, config) =>
@@ -124,15 +125,12 @@ var app = builder.Build();
 app.UseMiddleware<ExceptionMiddleware>();
 
 
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "EduNexis API v1");
-        c.RoutePrefix = "swagger";
-    });
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "EduNexis API v1");
+    c.RoutePrefix = "swagger";
+});
 
 
 app.UseSerilogRequestLogging();
@@ -143,3 +141,5 @@ app.MapControllers();
 
 
 app.Run();
+
+

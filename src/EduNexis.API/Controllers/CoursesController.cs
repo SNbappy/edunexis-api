@@ -1,4 +1,4 @@
-﻿using EduNexis.Application.Abstractions;
+using EduNexis.Application.Abstractions;
 using EduNexis.Application.Features.Courses.Commands;
 using EduNexis.Application.Features.Courses.Queries;
 using Microsoft.AspNetCore.Authorization;
@@ -79,14 +79,13 @@ public class CoursesController : BaseController
         CancellationToken ct) =>
         Ok(await Mediator.Send(new RequestJoinCourseCommand(id, body.JoiningCode), ct));
 
-    [HttpPost("{id:guid}
-
-    [HttpPost("join-by-code")]
+        [HttpPost("join-by-code")]
     [Authorize(Roles = "Student")]
     public async Task<IActionResult> JoinByCode(
         [FromBody] RequestJoinBody body,
         CancellationToken ct) =>
-        Ok(await Mediator.Send(new RequestJoinByCodeCommand(body.JoiningCode), ct));/leave")]
+        Ok(await Mediator.Send(new RequestJoinByCodeCommand(body.JoiningCode), ct));
+    [HttpPost("{id:guid}/leave")]
     [Authorize(Roles = "Student")]
     public async Task<IActionResult> Leave(Guid id, CancellationToken ct) =>
         Ok(await Mediator.Send(new LeaveCourseCommand(id), ct));

@@ -161,3 +161,4 @@ D:\Coding\Projects\edunexis-api\src\EduNexis.API\obj\Debug\net10.0\refint\EduNex
 D:\Coding\Projects\edunexis-api\src\EduNexis.API\obj\Debug\net10.0\EduNexis.API.pdb
 D:\Coding\Projects\edunexis-api\src\EduNexis.API\obj\Debug\net10.0\EduNexis.API.genruntimeconfig.cache
 D:\Coding\Projects\edunexis-api\src\EduNexis.API\obj\Debug\net10.0\ref\EduNexis.API.dll
+D:\Coding\Projects\edunexis-api\src\EduNexis.API\bin\Debug\net10.0\Scriban.dll
