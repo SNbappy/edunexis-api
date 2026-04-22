@@ -45,23 +45,29 @@ public record PublicCourseDto(
     string CourseType
 );
 
+/// <summary>
+/// "Self"       → profile owner viewing their own profile
+/// "CourseMate" → viewer and profile owner share an active course enrollment
+/// "Stranger"   → any other authenticated viewer
+/// </summary>
 public record PublicProfileDto(
     Guid UserId,
     string FullName,
     string? Department,
     string? Designation,
-    string? StudentId,
+    string? StudentId,        // null unless viewer is Self or CourseMate
     string? Bio,
     string? ProfilePhotoUrl,
     string? CoverPhotoUrl,
-    string? PhoneNumber,
+    string? PhoneNumber,      // null unless viewer is Self or CourseMate
     string? LinkedInUrl,
     string? FacebookUrl,
     string? TwitterUrl,
     string? GitHubUrl,
     string? WebsiteUrl,
-    string Email,
+    string? Email,            // null unless viewer is Self or CourseMate
     string Role,
     List<UserEducationDto> Education,
-    List<PublicCourseDto> Courses
+    List<PublicCourseDto> Courses,    // teachers: always shown; students: only if viewer is Self or CourseMate
+    string ViewerRelation     // "Self" | "CourseMate" | "Stranger"
 );

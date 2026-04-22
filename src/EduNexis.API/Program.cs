@@ -1,27 +1,24 @@
-using EduNexis.API.Middleware;
+﻿using EduNexis.API.Middleware;
 using EduNexis.Application;
 using EduNexis.Infrastructure;
+using EduNexis.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using System.Text;
 using System.Text.Json.Serialization;
 
-
 Directory.CreateDirectory("logs");
 
-
 var builder = WebApplication.CreateBuilder(args);
-
 
 var port = Environment.GetEnvironmentVariable("PORT") ?? "5041";
 builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 
-
 builder.Host.UseSerilog((ctx, config) =>
     config.ReadFrom.Configuration(ctx.Configuration));
-
 
 builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend", policy =>
@@ -32,19 +29,15 @@ builder.Services.AddCors(options =>
         .AllowAnyMethod()
         .AllowCredentials()));
 
-
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
-
 
 builder.Services.AddMediator(options =>
     options.ServiceLifetime = ServiceLifetime.Scoped);
 
-
-var jwtSecret = builder.Configuration["Jwt:Secret"]!;
-var jwtIssuer = builder.Configuration["Jwt:Issuer"]!;
+var jwtSecret   = builder.Configuration["Jwt:Secret"]!;
+var jwtIssuer   = builder.Configuration["Jwt:Issuer"]!;
 var jwtAudience = builder.Configuration["Jwt:Audience"]!;
-
 
 builder.Services.AddAuthentication(options =>
 {
@@ -62,17 +55,15 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = true,
         ValidAudience = jwtAudience,
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(
-                                       Encoding.UTF8.GetBytes(jwtSecret)),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret)),
         ValidateLifetime = true,
         ClockSkew = TimeSpan.Zero
     };
 });
 
-
 builder.Services.AddAuthorization();
 
-// ✅ Added JsonStringEnumConverter so enums serialize as strings (e.g. "Text" not 0)
+// Enums serialize as strings (e.g. "Text" not 0)
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -89,7 +80,7 @@ builder.Services.AddSwaggerGen(c =>
         Description = "EduNexis Learning Management System API"
     });
 
-    // ✅ Makes Swagger display enum string names instead of integers
+    // Display enum names instead of integers
     c.UseInlineDefinitionsForEnums();
 
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -117,13 +108,30 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-
 builder.Services.AddHttpClient();
+
 var app = builder.Build();
 
+// ─────────────────────────────────────────────
+// Apply pending EF Core migrations on startup
+// so schema changes ship with code deploys.
+// ─────────────────────────────────────────────
+using (var scope = app.Services.CreateScope())
+{
+    try
+    {
+        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        db.Database.Migrate();
+        Log.Information("Database migrations applied successfully.");
+    }
+    catch (Exception ex)
+    {
+        Log.Fatal(ex, "Database migration failed on startup.");
+        throw;
+    }
+}
 
 app.UseMiddleware<ExceptionMiddleware>();
-
 
 app.UseSwagger();
 app.UseSwaggerUI(c =>
@@ -132,7 +140,6 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = "swagger";
 });
 
-
 app.UseSerilogRequestLogging();
 app.UseCors("AllowFrontend");
 app.UseAuthentication();
@@ -140,8 +147,4 @@ app.UseAuthorization();
 app.MapControllers();
 app.MapGet("/health", () => Results.Ok(new { status = "ok", timestamp = DateTime.UtcNow }));
 
-
 app.Run();
-
-
-

@@ -1,6 +1,7 @@
-using EduNexis.Application.Abstractions;
+﻿using EduNexis.Application.Abstractions;
 using EduNexis.Application.Features.Courses.Commands;
 using EduNexis.Application.Features.Courses.Queries;
+using EduNexis.Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,12 +20,31 @@ public class CoursesController : BaseController
         _currentUser = currentUser;
     }
 
+    // ──────────────────────────────────────────────────────────────
+    // Listing
+    // ──────────────────────────────────────────────────────────────
+
+    /// <summary>
+    /// Admin-only course listing. Regular users use /my-courses.
+    /// </summary>
     [HttpGet]
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public async Task<IActionResult> GetAll(
         [FromQuery] Guid? teacherId,
         [FromQuery] Guid? studentId,
         CancellationToken ct) =>
         Ok(await Mediator.Send(new GetCoursesQuery(teacherId, studentId), ct));
+
+    /// <summary>
+    /// Returns the caller's enrolled + pending + rejected courses.
+    /// </summary>
+    [HttpGet("my-courses")]
+    public async Task<IActionResult> GetMyCourses(CancellationToken ct)
+    {
+        var userId = Guid.Parse(_currentUser.UserId);
+        var role   = Enum.Parse<UserRole>(_currentUser.Role ?? "Student");
+        return Ok(await Mediator.Send(new GetMyCoursesQuery(userId, role), ct));
+    }
 
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetById(Guid id, CancellationToken ct) =>
@@ -39,6 +59,10 @@ public class CoursesController : BaseController
     public async Task<IActionResult> GetJoinRequests(Guid id, CancellationToken ct) =>
         Ok(await Mediator.Send(
             new GetPendingJoinRequestsQuery(id, Guid.Parse(_currentUser.UserId)), ct));
+
+    // ──────────────────────────────────────────────────────────────
+    // CRUD (teachers)
+    // ──────────────────────────────────────────────────────────────
 
     [HttpPost]
     [Authorize(Roles = "Teacher,Admin")]
@@ -63,6 +87,15 @@ public class CoursesController : BaseController
         Ok(await Mediator.Send(
             new ArchiveCourseCommand(id, Guid.Parse(_currentUser.UserId)), ct));
 
+    [HttpPatch("{id:guid}/unarchive")]
+    [Authorize(Roles = "Teacher,Admin")]
+    public async Task<IActionResult> Unarchive(Guid id, CancellationToken ct) =>
+        Ok(await Mediator.Send(new UnarchiveCourseCommand(id), ct));
+
+    // ──────────────────────────────────────────────────────────────
+    // Join requests
+    // ──────────────────────────────────────────────────────────────
+
     [HttpPost("{id:guid}/join-requests/{requestId:guid}/review")]
     [Authorize(Roles = "Teacher,Admin")]
     public async Task<IActionResult> ReviewJoinRequest(
@@ -79,15 +112,14 @@ public class CoursesController : BaseController
         CancellationToken ct) =>
         Ok(await Mediator.Send(new RequestJoinCourseCommand(id, body.JoiningCode), ct));
 
-        [HttpPost("join-by-code")]
+    [HttpPost("join-requests/{requestId:guid}/dismiss")]
     [Authorize(Roles = "Student")]
-    public async Task<IActionResult> JoinByCode(
-        [FromBody] RequestJoinBody body,
-        CancellationToken ct) =>
-        Ok(await Mediator.Send(new RequestJoinByCodeCommand(body.JoiningCode), ct));
+    public async Task<IActionResult> DismissJoinRequest(
+        Guid requestId, CancellationToken ct) =>
+        Ok(await Mediator.Send(new DismissJoinRequestCommand(requestId), ct));
+
     [HttpPost("{id:guid}/leave")]
     [Authorize(Roles = "Student")]
     public async Task<IActionResult> Leave(Guid id, CancellationToken ct) =>
         Ok(await Mediator.Send(new LeaveCourseCommand(id), ct));
 }
-

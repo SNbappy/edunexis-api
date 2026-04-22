@@ -1,11 +1,20 @@
-using EduNexis.Application.DTOs;
+﻿using EduNexis.Application.DTOs;
 using EduNexis.Domain.Entities;
 
 namespace EduNexis.Application.Extensions;
 
 public static class CourseExtensions
 {
-    public static CourseDto ToDto(this Course course, string teacherName = "", string? teacherProfilePhotoUrl = null, int memberCount = 0) =>
+    /// <summary>
+    /// Maps a Course to a CourseDto with viewer-aware field stripping.
+    /// </summary>
+    /// <param name="viewerRole">"Owner", "Member", or "None"</param>
+    public static CourseDto ToDto(
+        this Course course,
+        string teacherName = "",
+        string? teacherProfilePhotoUrl = null,
+        int memberCount = 0,
+        string viewerRole = "None") =>
         new(
             course.Id,
             course.Title,
@@ -18,8 +27,30 @@ public static class CourseExtensions
             course.CourseType.ToString(),
             course.Description,
             course.CoverImageUrl,
-            course.JoiningCode,
+            viewerRole == "Owner" ? course.JoiningCode : null,   // hide from non-owners
             course.TeacherId,
+            teacherName,
+            teacherProfilePhotoUrl,
+            course.IsArchived,
+            memberCount,
+            course.CreatedAt,
+            viewerRole
+        );
+
+    public static CourseSummaryDto ToSummaryDto(
+        this Course course,
+        string teacherName = "",
+        string? teacherProfilePhotoUrl = null,
+        int memberCount = 0) =>
+        new(
+            course.Id,
+            course.Title,
+            course.CourseCode,
+            course.Department,
+            course.AcademicSession,
+            course.Semester,
+            course.CourseType.ToString(),
+            course.CoverImageUrl,
             teacherName,
             teacherProfilePhotoUrl,
             course.IsArchived,

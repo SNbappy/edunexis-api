@@ -1,4 +1,4 @@
-namespace EduNexis.Domain.Entities;
+﻿namespace EduNexis.Domain.Entities;
 
 public class JoinRequest : BaseEntity
 {
@@ -7,6 +7,7 @@ public class JoinRequest : BaseEntity
     public JoinRequestStatus Status { get; private set; } = JoinRequestStatus.Pending;
     public Guid? ReviewedById { get; private set; }
     public DateTime? ReviewedAt { get; private set; }
+    public bool IsDismissedByStudent { get; private set; } = false;
 
     // Navigation
     public Course Course { get; private set; } = null!;
@@ -35,6 +36,18 @@ public class JoinRequest : BaseEntity
         Status = JoinRequestStatus.Rejected;
         ReviewedById = reviewerId;
         ReviewedAt = DateTime.UtcNow;
+        SetUpdatedAt();
+    }
+
+    /// <summary>
+    /// Student acknowledges a rejected request — hides it from their courses list.
+    /// Only valid on rejected requests.
+    /// </summary>
+    public void DismissByStudent()
+    {
+        if (Status != JoinRequestStatus.Rejected)
+            throw new DomainException("Only rejected requests can be dismissed.");
+        IsDismissedByStudent = true;
         SetUpdatedAt();
     }
 }

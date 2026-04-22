@@ -1,4 +1,4 @@
-namespace EduNexis.Domain.Entities;
+﻿namespace EduNexis.Domain.Entities;
 
 public class Course : BaseEntity
 {
@@ -74,7 +74,21 @@ public class Course : BaseEntity
     }
 
     public void SetCoverImage(string url) { CoverImageUrl = url; SetUpdatedAt(); }
-    public void Archive() { IsArchived = true; SetUpdatedAt(); }
+
+    public void Archive()
+    {
+        if (IsArchived) throw new DomainException("Course is already archived.");
+        IsArchived = true;
+        SetUpdatedAt();
+    }
+
+    public void Unarchive()
+    {
+        if (!IsArchived) throw new DomainException("Course is not archived.");
+        IsArchived = false;
+        SetUpdatedAt();
+    }
+
     public void RegenerateJoiningCode() { JoiningCode = GenerateJoiningCode(); SetUpdatedAt(); }
 
     private static string GenerateJoiningCode() =>
