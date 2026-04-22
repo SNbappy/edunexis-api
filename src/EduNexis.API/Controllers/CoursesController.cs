@@ -24,9 +24,7 @@ public class CoursesController : BaseController
     // Listing
     // ──────────────────────────────────────────────────────────────
 
-    /// <summary>
-    /// Admin-only course listing. Regular users use /my-courses.
-    /// </summary>
+    /// <summary>Admin-only course listing. Regular users use /my-courses.</summary>
     [HttpGet]
     [Authorize(Roles = "Admin,SuperAdmin")]
     public async Task<IActionResult> GetAll(
@@ -35,9 +33,7 @@ public class CoursesController : BaseController
         CancellationToken ct) =>
         Ok(await Mediator.Send(new GetCoursesQuery(teacherId, studentId), ct));
 
-    /// <summary>
-    /// Returns the caller's enrolled + pending + rejected courses.
-    /// </summary>
+    /// <summary>Returns the caller's enrolled + pending + rejected courses.</summary>
     [HttpGet("my-courses")]
     public async Task<IActionResult> GetMyCourses(CancellationToken ct)
     {
@@ -49,6 +45,11 @@ public class CoursesController : BaseController
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetById(Guid id, CancellationToken ct) =>
         Ok(await Mediator.Send(new GetCourseQuery(id), ct));
+
+    /// <summary>Looks up a course by its 8-char joining code. Used for the Join flow preview.</summary>
+    [HttpGet("by-code/{code}")]
+    public async Task<IActionResult> GetByCode(string code, CancellationToken ct) =>
+        Ok(await Mediator.Send(new GetCourseByCodeQuery(code), ct));
 
     [HttpGet("{id:guid}/members")]
     public async Task<IActionResult> GetMembers(Guid id, CancellationToken ct) =>
