@@ -1,5 +1,6 @@
 ﻿using EduNexis.Application.Features.Notifications.Commands;
 using EduNexis.Domain.Entities;
+using EduNexis.Domain.Enums;
 
 namespace EduNexis.Application.Features.Courses.Commands;
 
@@ -43,6 +44,20 @@ public sealed class RequestJoinCourseCommandHandler(
         if (existingRequest is not null)
             return ApiResponse.Fail("You already have a pending join request for this course.");
 
+        // When re-requesting a course we were previously rejected from, auto-dismiss
+        // the old Rejected row(s). Otherwise the student would see a stale
+        // "Rejected" card even after being approved on the new request.
+        var previousRequests = await uow.JoinRequests.FindAsync(
+            r => r.CourseId == cmd.CourseId && r.StudentId == userId, ct);
+        foreach (var prev in previousRequests)
+        {
+            if (prev.Status == JoinRequestStatus.Rejected && !prev.IsDismissedByStudent)
+            {
+                prev.DismissByStudent();
+                uow.JoinRequests.Update(prev);
+            }
+        }
+
         await uow.JoinRequests.AddAsync(JoinRequest.Create(cmd.CourseId, userId), ct);
         await uow.SaveChangesAsync(ct);
 
@@ -60,4 +75,5 @@ public sealed class RequestJoinCourseCommandHandler(
         return ApiResponse.Ok("Join request sent successfully.");
     }
 }
+
 

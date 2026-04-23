@@ -44,10 +44,15 @@ public sealed class GetMyCoursesQueryHandler(
             var requests = await uow.JoinRequests.FindAsync(
                 r => r.StudentId == query.UserId, ct);
 
+            // Any course the student is currently enrolled in should never
+            // surface on the rejected list, regardless of prior history.
+            var enrolledCourseIds = new HashSet<Guid>(enrolled.Select(e => e.Id));
+
             foreach (var req in requests)
             {
                 if (req.Status == JoinRequestStatus.Approved) continue;
                 if (req.Status == JoinRequestStatus.Rejected && req.IsDismissedByStudent) continue;
+                if (req.Status == JoinRequestStatus.Rejected && enrolledCourseIds.Contains(req.CourseId)) continue;
 
                 var course = await uow.Courses.GetByIdAsync(req.CourseId, ct);
                 if (course is null) continue;
@@ -79,3 +84,4 @@ public sealed class GetMyCoursesQueryHandler(
             new MyCoursesDto(enrolled, pending, rejected));
     }
 }
+

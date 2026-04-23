@@ -97,6 +97,12 @@ public class CoursesController : BaseController
     // Join requests
     // ──────────────────────────────────────────────────────────────
 
+    
+    [HttpDelete("{id:guid}/members/{studentId:guid}")]
+    [Authorize(Roles = "Teacher,Admin")]
+    public async Task<IActionResult> RemoveMember(
+        Guid id, Guid studentId, CancellationToken ct) =>
+        Ok(await Mediator.Send(new RemoveCourseMemberCommand(id, studentId), ct));
     [HttpPost("{id:guid}/join-requests/{requestId:guid}/review")]
     [Authorize(Roles = "Teacher,Admin")]
     public async Task<IActionResult> ReviewJoinRequest(
@@ -124,3 +130,4 @@ public class CoursesController : BaseController
     public async Task<IActionResult> Leave(Guid id, CancellationToken ct) =>
         Ok(await Mediator.Send(new LeaveCourseCommand(id), ct));
 }
+
