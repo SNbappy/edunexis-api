@@ -68,6 +68,10 @@ builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        // Force all DateTime values to serialize as ISO-8601 UTC ("...Z")
+        // so client-side Date parsers never misinterpret them as local time.
+        options.JsonSerializerOptions.Converters.Add(new EduNexis.API.Serialization.Iso8601UtcDateTimeConverter());
+        options.JsonSerializerOptions.Converters.Add(new EduNexis.API.Serialization.Iso8601UtcNullableDateTimeConverter());
     });
 
 builder.Services.AddEndpointsApiExplorer();
@@ -148,3 +152,4 @@ app.MapControllers();
 app.MapGet("/health", () => Results.Ok(new { status = "ok", timestamp = DateTime.UtcNow }));
 
 app.Run();
+
