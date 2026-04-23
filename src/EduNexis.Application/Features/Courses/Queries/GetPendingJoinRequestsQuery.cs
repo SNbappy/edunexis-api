@@ -1,13 +1,15 @@
-using EduNexis.Application.DTOs;
+﻿using EduNexis.Application.DTOs;
 
 namespace EduNexis.Application.Features.Courses.Queries;
 
 public record JoinRequestDto(
-    Guid Id,
-    Guid CourseId,
-    Guid StudentId,
+    Guid   Id,
+    Guid   CourseId,
+    Guid   StudentUserId,
     string StudentName,
     string StudentEmail,
+    string? StudentIdNumber,
+    string? ProfilePhotoUrl,
     string Status,
     DateTime CreatedAt
 );
@@ -41,10 +43,15 @@ public sealed class GetPendingJoinRequestsQueryHandler(
         {
             var student = await uow.Users.GetWithProfileAsync(r.StudentId, ct);
             dtos.Add(new JoinRequestDto(
-                r.Id, r.CourseId, r.StudentId,
-                student?.Profile?.FullName ?? "Unknown",
-                student?.Email ?? "Unknown",
-                r.Status.ToString(), r.CreatedAt));
+                Id:              r.Id,
+                CourseId:        r.CourseId,
+                StudentUserId:   r.StudentId,
+                StudentName:     student?.Profile?.FullName ?? "Unknown student",
+                StudentEmail:    student?.Email ?? "",
+                StudentIdNumber: student?.Profile?.StudentId,
+                ProfilePhotoUrl: student?.Profile?.ProfilePhotoUrl,
+                Status:          r.Status.ToString(),
+                CreatedAt:       r.CreatedAt));
         }
 
         return ApiResponse<List<JoinRequestDto>>.Ok(dtos);
