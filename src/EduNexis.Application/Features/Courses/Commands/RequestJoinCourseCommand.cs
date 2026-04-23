@@ -1,4 +1,4 @@
-using EduNexis.Application.Features.Notifications.Commands;
+﻿using EduNexis.Application.Features.Notifications.Commands;
 using EduNexis.Domain.Entities;
 
 namespace EduNexis.Application.Features.Courses.Commands;
@@ -54,9 +54,10 @@ public sealed class RequestJoinCourseCommandHandler(
             Title: "New Join Request",
             Body: $"{studentName} has requested to join {course.Title}.",
             Type: NotificationType.JoinRequestReceived,
-            RedirectUrl: $"/courses/{course.Id}/members"
+            RedirectUrl: $"/courses/{course.Id}/members?view=requests"
         ), ct);
 
         return ApiResponse.Ok("Join request sent successfully.");
     }
 }
+
