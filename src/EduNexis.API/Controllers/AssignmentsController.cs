@@ -1,4 +1,4 @@
-using EduNexis.Application.Features.Assignments.Commands;
+﻿using EduNexis.Application.Features.Assignments.Commands;
 using EduNexis.Application.Features.Assignments.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +10,7 @@ public class AssignmentsController : BaseController
 {
     [HttpGet("courses/{courseId:guid}/assignments")]
     public async Task<IActionResult> GetAll(Guid courseId, CancellationToken ct) =>
-        Ok(await Mediator.Send(new GetAssignmentsQuery(courseId), ct));
+        Ok(await Mediator.Send(new GetAssignmentsQuery(courseId, CurrentUserId, IsTeacher), ct));
 
     [HttpPost("courses/{courseId:guid}/assignments")]
     [Authorize(Roles = "Teacher,Admin")]
@@ -110,3 +110,4 @@ public class AssignmentsController : BaseController
         Guid assignmentId, CancellationToken ct) =>
         Ok(await Mediator.Send(new GetMySubmissionQuery(assignmentId, CurrentUserId), ct));
 }
+

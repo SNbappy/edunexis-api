@@ -1,4 +1,4 @@
-using EduNexis.API.Extensions;
+﻿using EduNexis.API.Extensions;
 using Mediator;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,4 +16,6 @@ public abstract class BaseController : ControllerBase
     protected Guid CurrentUserId => User.GetUserId();
     protected string CurrentUserEmail => User.GetEmail();
     protected string CurrentFirebaseUid => User.GetFirebaseUid();
+    protected bool IsTeacher => User.GetIsTeacher();
 }
+

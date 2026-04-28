@@ -1,4 +1,11 @@
-namespace EduNexis.Application.DTOs;
+﻿namespace EduNexis.Application.DTOs;
+
+public enum AssignmentMyStatus
+{
+    NotSubmitted,
+    Submitted,
+    Graded
+}
 
 public record AssignmentDto(
     Guid Id,
@@ -12,6 +19,11 @@ public record AssignmentDto(
     string? ReferenceFileUrl,
     bool IsOpen,
     int SubmissionCount,
+    int GradedCount,
+    AssignmentMyStatus? MyStatus,
+    decimal? MyMarks,
+    DateTime? MySubmittedAt,
+    bool? MyIsLate,
     DateTime CreatedAt
 );
 

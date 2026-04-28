@@ -1,4 +1,4 @@
-using EduNexis.Application.DTOs;
+﻿using EduNexis.Application.DTOs;
 
 namespace EduNexis.Application.Features.Assignments.Commands;
 
@@ -47,14 +47,17 @@ public sealed class UpdateAssignmentCommandHandler(
         uow.GetRepository<Assignment>().Update(assignment);
         await uow.SaveChangesAsync(ct);
 
-        var subCount = (await uow.GetRepository<AssignmentSubmission>()
-            .FindAsync(s => s.AssignmentId == assignment.Id, ct)).Count();
+        var subs = (await uow.GetRepository<AssignmentSubmission>()
+            .FindAsync(s => s.AssignmentId == assignment.Id, ct)).ToList();
+        var subCount = subs.Count;
+        var gradedCount = subs.Count(s => s.IsGraded);
 
         return ApiResponse<AssignmentDto>.Ok(new AssignmentDto(
             assignment.Id, assignment.CourseId, assignment.Title,
             assignment.Instructions, assignment.Deadline,
             assignment.AllowLateSubmission, assignment.MaxMarks,
             assignment.RubricNotes, assignment.ReferenceFileUrl,
-            assignment.IsOpen(), subCount, assignment.CreatedAt));
+            assignment.IsOpen(), subCount, gradedCount, null, null, null, null, assignment.CreatedAt));
     }
 }
+

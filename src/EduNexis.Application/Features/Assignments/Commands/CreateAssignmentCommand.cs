@@ -76,6 +76,7 @@ public sealed class CreateAssignmentCommandHandler(
             assignment.Instructions, assignment.Deadline,
             assignment.AllowLateSubmission, assignment.MaxMarks,
             assignment.RubricNotes, assignment.ReferenceFileUrl,
-            assignment.IsOpen(), 0, assignment.CreatedAt));
+            assignment.IsOpen(), 0, 0, null, null, null, null, assignment.CreatedAt));
     }
 }
+
