@@ -1,4 +1,6 @@
-﻿namespace EduNexis.Application.Features.CT.Commands;
+﻿using EduNexis.Application.Features.Notifications.Commands;
+
+namespace EduNexis.Application.Features.CT.Commands;
 
 public record PublishCTCommand(
     Guid CTEventId,
@@ -6,7 +8,8 @@ public record PublishCTCommand(
 ) : ICommand<ApiResponse>;
 
 public sealed class PublishCTCommandHandler(
-    IUnitOfWork uow
+    IUnitOfWork uow,
+    ISender sender
 ) : ICommandHandler<PublishCTCommand, ApiResponse>
 {
     public async ValueTask<ApiResponse> Handle(
@@ -27,6 +30,20 @@ public sealed class PublishCTCommandHandler(
         ctEvent.Publish();
         uow.GetRepository<CTEvent>().Update(ctEvent);
         await uow.SaveChangesAsync(ct);
+
+        // Notify all active students that results are published
+        var members = await uow.CourseMembers.GetByCourseAsync(ctEvent.CourseId, ct);
+        var notifyTasks = members
+            .Where(m => m.IsActive)
+            .Select(m => sender.Send(new SendNotificationCommand(
+                UserId: m.UserId,
+                Title: $"CT results published in {course.Title}",
+                Body: $"CT {ctEvent.CTNumber}: \"{ctEvent.Title}\" — your marks are now available.",
+                Type: NotificationType.General,
+                RedirectUrl: $"/courses/{course.Id}/ct"
+            ), ct).AsTask());
+
+        await Task.WhenAll(notifyTasks);
 
         return ApiResponse.Ok("CT published. Students can now view their marks.");
     }
