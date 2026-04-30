@@ -15,9 +15,14 @@ public record UserProfileDto(
     string? Designation,
     string? StudentId,
     string? Bio,
+    string? Headline,
     string? ProfilePhotoUrl,
     string? CoverPhotoUrl,
     string? PhoneNumber,
+    string? OfficeLocation,
+    string? OfficeHours,
+    string? ResearchInterestsCsv,
+    string? FieldsOfWorkCsv,
     string? LinkedInUrl,
     string? FacebookUrl,
     string? TwitterUrl,
@@ -36,13 +41,25 @@ public record UserEducationDto(
     string? Description
 );
 
+public record UserPublicationDto(
+    Guid Id,
+    string Title,
+    string Authors,
+    string? Venue,
+    int Year,
+    string? Url,
+    string Type,
+    int OrderIndex
+);
+
 public record PublicCourseDto(
     Guid Id,
     string Title,
     string CourseCode,
     string Department,
     string Semester,
-    string CourseType
+    string CourseType,
+    bool IsArchived
 );
 
 /// <summary>
@@ -55,19 +72,27 @@ public record PublicProfileDto(
     string FullName,
     string? Department,
     string? Designation,
-    string? StudentId,        // null unless viewer is Self or CourseMate
+    string? StudentId,
     string? Bio,
+    string? Headline,
     string? ProfilePhotoUrl,
     string? CoverPhotoUrl,
-    string? PhoneNumber,      // null unless viewer is Self or CourseMate
+    string? PhoneNumber,
+    string? OfficeLocation,
+    string? OfficeHours,
+    string? ResearchInterestsCsv,
+    string? FieldsOfWorkCsv,
     string? LinkedInUrl,
     string? FacebookUrl,
     string? TwitterUrl,
     string? GitHubUrl,
     string? WebsiteUrl,
-    string? Email,            // null unless viewer is Self or CourseMate
+    string? Email,
     string Role,
     List<UserEducationDto> Education,
-    List<PublicCourseDto> Courses,    // teachers: always shown; students: only if viewer is Self or CourseMate
-    string ViewerRelation     // "Self" | "CourseMate" | "Stranger"
+    List<UserPublicationDto> Publications,
+    List<PublicCourseDto> Courses,
+    int RunningCoursesCount,
+    int ArchivedCoursesCount,
+    string ViewerRelation
 );

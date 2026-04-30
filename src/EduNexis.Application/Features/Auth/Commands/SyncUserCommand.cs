@@ -1,4 +1,4 @@
-﻿using EduNexis.Application.DTOs;
+using EduNexis.Application.DTOs;
 using EduNexis.Application.Features.Profile.Commands;
 
 namespace EduNexis.Application.Features.Auth.Commands;
@@ -26,8 +26,11 @@ public sealed class SyncUserCommandHandler(IUnitOfWork uow) : ICommandHandler<Sy
 
         if (profile.FullName != command.FullName)
             profile.Update(command.FullName, profile.Department, profile.Designation,
-                profile.StudentId, profile.Bio, profile.PhoneNumber, profile.LinkedInUrl,
-                profile.FacebookUrl, profile.TwitterUrl, profile.GitHubUrl, profile.WebsiteUrl);
+                profile.StudentId, profile.Bio, profile.Headline, profile.PhoneNumber,
+                profile.OfficeLocation, profile.OfficeHours,
+                profile.ResearchInterestsCsv, profile.FieldsOfWorkCsv,
+                profile.LinkedInUrl, profile.FacebookUrl, profile.TwitterUrl,
+                profile.GitHubUrl, profile.WebsiteUrl);
 
         await uow.SaveChangesAsync(ct);
 

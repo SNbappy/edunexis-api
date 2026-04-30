@@ -9,7 +9,12 @@ public record UpdateProfileCommand(
     string? Designation,
     string? StudentId,
     string? Bio,
+    string? Headline,
     string? PhoneNumber,
+    string? OfficeLocation,
+    string? OfficeHours,
+    string? ResearchInterestsCsv,
+    string? FieldsOfWorkCsv,
     string? LinkedInUrl,
     string? FacebookUrl,
     string? TwitterUrl,
@@ -23,14 +28,32 @@ public sealed class UpdateProfileCommandValidator : AbstractValidator<UpdateProf
     {
         RuleFor(x => x.FullName).NotEmpty().MaximumLength(100);
         RuleFor(x => x.Department).NotEmpty().MaximumLength(100);
+        RuleFor(x => x.Headline).MaximumLength(160);
+        RuleFor(x => x.OfficeLocation).MaximumLength(120);
+        RuleFor(x => x.OfficeHours).MaximumLength(160);
+        RuleFor(x => x.ResearchInterestsCsv).MaximumLength(500);
+        RuleFor(x => x.FieldsOfWorkCsv).MaximumLength(500);
+
         RuleFor(x => x.PhoneNumber)
             .Matches(@"^\+?[0-9]{7,15}$")
             .When(x => !string.IsNullOrEmpty(x.PhoneNumber))
             .WithMessage("Invalid phone number format.");
-        foreach (var prop in new[] { "LinkedInUrl", "FacebookUrl", "TwitterUrl", "WebsiteUrl" })
-            RuleFor(x => x.LinkedInUrl)
-                .Must(url => string.IsNullOrEmpty(url) || Uri.TryCreate(url, UriKind.Absolute, out _))
-                .WithMessage("Invalid URL.");
+
+        RuleFor(x => x.LinkedInUrl)
+            .Must(url => string.IsNullOrEmpty(url) || Uri.TryCreate(url, UriKind.Absolute, out _))
+            .WithMessage("Invalid LinkedIn URL.");
+        RuleFor(x => x.FacebookUrl)
+            .Must(url => string.IsNullOrEmpty(url) || Uri.TryCreate(url, UriKind.Absolute, out _))
+            .WithMessage("Invalid Facebook URL.");
+        RuleFor(x => x.TwitterUrl)
+            .Must(url => string.IsNullOrEmpty(url) || Uri.TryCreate(url, UriKind.Absolute, out _))
+            .WithMessage("Invalid Twitter URL.");
+        RuleFor(x => x.GitHubUrl)
+            .Must(url => string.IsNullOrEmpty(url) || Uri.TryCreate(url, UriKind.Absolute, out _))
+            .WithMessage("Invalid GitHub URL.");
+        RuleFor(x => x.WebsiteUrl)
+            .Must(url => string.IsNullOrEmpty(url) || Uri.TryCreate(url, UriKind.Absolute, out _))
+            .WithMessage("Invalid Website URL.");
     }
 }
 
@@ -47,7 +70,9 @@ public sealed class UpdateProfileCommandHandler(IUnitOfWork uow)
         profile.Update(
             command.FullName, command.Department,
             command.Designation, command.StudentId,
-            command.Bio, command.PhoneNumber,
+            command.Bio, command.Headline, command.PhoneNumber,
+            command.OfficeLocation, command.OfficeHours,
+            command.ResearchInterestsCsv, command.FieldsOfWorkCsv,
             command.LinkedInUrl, command.FacebookUrl,
             command.TwitterUrl, command.GitHubUrl, command.WebsiteUrl);
 
@@ -63,7 +88,8 @@ public sealed class UpdateProfileCommandHandler(IUnitOfWork uow)
 
     internal static UserProfileDto MapToDto(UserProfile p) =>
         new(p.Id, p.FullName, p.Department, p.Designation, p.StudentId,
-            p.Bio, p.ProfilePhotoUrl, p.CoverPhotoUrl, p.PhoneNumber,
+            p.Bio, p.Headline, p.ProfilePhotoUrl, p.CoverPhotoUrl, p.PhoneNumber,
+            p.OfficeLocation, p.OfficeHours, p.ResearchInterestsCsv, p.FieldsOfWorkCsv,
             p.LinkedInUrl, p.FacebookUrl, p.TwitterUrl, p.GitHubUrl,
             p.WebsiteUrl, p.ProfileCompletionPercent);
 }

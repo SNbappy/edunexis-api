@@ -1,4 +1,4 @@
-﻿namespace EduNexis.Domain.Entities;
+namespace EduNexis.Domain.Entities;
 
 public class User : BaseEntity
 {
@@ -16,6 +16,7 @@ public class User : BaseEntity
     public ICollection<TeacherQuota> TeacherQuotas { get; private set; } = [];
     public ICollection<Notification> Notifications { get; private set; } = [];
     public ICollection<UserEducation> Educations { get; private set; } = [];
+    public ICollection<UserPublication> Publications { get; private set; } = [];
 
     protected User() { }
 

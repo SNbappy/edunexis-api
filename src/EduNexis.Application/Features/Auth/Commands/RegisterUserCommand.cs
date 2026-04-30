@@ -1,4 +1,4 @@
-﻿using EduNexis.Application.DTOs;
+using EduNexis.Application.DTOs;
 using EduNexis.Domain.Interfaces.Services;
 
 namespace EduNexis.Application.Features.Auth.Commands;
@@ -48,7 +48,8 @@ public sealed class RegisterUserCommandHandler(
             AccessToken: accessToken, RefreshToken: refreshToken, ExpiresIn: 3600,
             User: new UserDto(user.Id, user.Email, role.ToString(), false,
                 new UserProfileDto(profile.Id, command.FullName, null, null, null,
-                    null, null, null, null, null, null, null, null, null, 30))),
+                    null, null, null, null, null, null, null, null, null,
+                    null, null, null, null, null, 30))),
             "Registration successful.");
     }
 }

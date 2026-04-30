@@ -1,4 +1,4 @@
-﻿using EduNexis.Domain.Entities;
+using EduNexis.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace EduNexis.Infrastructure.Persistence;
@@ -33,6 +33,7 @@ public class AppDbContext : DbContext
     public DbSet<Notification> Notifications => Set<Notification>();
     public DbSet<AuditLog> AuditLogs => Set<AuditLog>();
     public DbSet<UserEducation> UserEducations => Set<UserEducation>();
+    public DbSet<UserPublication> UserPublications => Set<UserPublication>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -50,6 +51,7 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Course>().Property(c => c.CourseType).HasConversion<string>();
         modelBuilder.Entity<PresentationEvent>().Property(p => p.Status).HasConversion<string>();
         modelBuilder.Entity<PresentationEvent>().Property(p => p.Format).HasConversion<string>();
+        modelBuilder.Entity<UserPublication>().Property(p => p.Type).HasConversion<string>();
 
         // Unique indexes
         modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();

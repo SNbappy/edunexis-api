@@ -1,4 +1,4 @@
-﻿using EduNexis.Application.Features.Profile.Commands;
+using EduNexis.Application.Features.Profile.Commands;
 using EduNexis.Application.Features.Profile.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -47,4 +47,19 @@ public class ProfileController : BaseController
     [HttpDelete("education/{id:guid}")]
     public async Task<IActionResult> DeleteEducation(Guid id, CancellationToken ct) =>
         Ok(await Mediator.Send(new DeleteEducationCommand(CurrentUserId, id), ct));
+    [HttpPost("publications")]
+    public async Task<IActionResult> AddPublication([FromBody] AddPublicationCommand command, CancellationToken ct) =>
+        Ok(await Mediator.Send(command with { UserId = CurrentUserId }, ct));
+
+    [HttpPut("publications/{id:guid}")]
+    public async Task<IActionResult> UpdatePublication(Guid id, [FromBody] UpdatePublicationCommand command, CancellationToken ct) =>
+        Ok(await Mediator.Send(command with { UserId = CurrentUserId, Id = id }, ct));
+
+    [HttpDelete("publications/{id:guid}")]
+    public async Task<IActionResult> DeletePublication(Guid id, CancellationToken ct) =>
+        Ok(await Mediator.Send(new DeletePublicationCommand(id, CurrentUserId), ct));
+
+    [HttpGet("{userId:guid}/courses")]
+    public async Task<IActionResult> GetUserCourses(Guid userId, [FromQuery] string? status, CancellationToken ct) =>
+        Ok(await Mediator.Send(new GetUserCoursesQuery(userId, status), ct));
 }

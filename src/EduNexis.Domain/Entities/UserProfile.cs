@@ -8,9 +8,14 @@ public class UserProfile : BaseEntity
     public string? Designation { get; private set; }
     public string? StudentId { get; private set; }
     public string? Bio { get; private set; }
+    public string? Headline { get; private set; }
     public string? ProfilePhotoUrl { get; private set; }
     public string? CoverPhotoUrl { get; private set; }
     public string? PhoneNumber { get; private set; }
+    public string? OfficeLocation { get; private set; }
+    public string? OfficeHours { get; private set; }
+    public string? ResearchInterestsCsv { get; private set; }
+    public string? FieldsOfWorkCsv { get; private set; }
     public string? LinkedInUrl { get; private set; }
     public string? FacebookUrl { get; private set; }
     public string? TwitterUrl { get; private set; }
@@ -33,7 +38,9 @@ public class UserProfile : BaseEntity
     public void Update(
         string fullName, string department,
         string? designation, string? studentId,
-        string? bio, string? phoneNumber,
+        string? bio, string? headline, string? phoneNumber,
+        string? officeLocation, string? officeHours,
+        string? researchInterestsCsv, string? fieldsOfWorkCsv,
         string? linkedInUrl, string? facebookUrl,
         string? twitterUrl, string? gitHubUrl, string? websiteUrl)
     {
@@ -42,7 +49,12 @@ public class UserProfile : BaseEntity
         Designation = designation;
         StudentId = studentId;
         Bio = bio;
+        Headline = headline;
         PhoneNumber = phoneNumber;
+        OfficeLocation = officeLocation;
+        OfficeHours = officeHours;
+        ResearchInterestsCsv = researchInterestsCsv;
+        FieldsOfWorkCsv = fieldsOfWorkCsv;
         LinkedInUrl = linkedInUrl;
         FacebookUrl = facebookUrl;
         TwitterUrl = twitterUrl;
@@ -87,12 +99,18 @@ public class UserProfile : BaseEntity
     private void RecalculateCompletion()
     {
         var score = 0;
-        if (!string.IsNullOrWhiteSpace(FullName)) score += 30;
-        if (!string.IsNullOrWhiteSpace(Department)) score += 25;
-        if (!string.IsNullOrWhiteSpace(Designation) || !string.IsNullOrWhiteSpace(StudentId)) score += 25;
+        if (!string.IsNullOrWhiteSpace(FullName)) score += 25;
+        if (!string.IsNullOrWhiteSpace(Department)) score += 20;
+        if (!string.IsNullOrWhiteSpace(Designation) || !string.IsNullOrWhiteSpace(StudentId)) score += 20;
         if (!string.IsNullOrWhiteSpace(ProfilePhotoUrl)) score += 10;
         if (!string.IsNullOrWhiteSpace(Bio)) score += 5;
+        if (!string.IsNullOrWhiteSpace(Headline)) score += 5;
         if (!string.IsNullOrWhiteSpace(PhoneNumber)) score += 5;
+        if (!string.IsNullOrWhiteSpace(LinkedInUrl) ||
+            !string.IsNullOrWhiteSpace(GitHubUrl) ||
+            !string.IsNullOrWhiteSpace(WebsiteUrl)) score += 5;
+        if (!string.IsNullOrWhiteSpace(ResearchInterestsCsv) ||
+            !string.IsNullOrWhiteSpace(FieldsOfWorkCsv)) score += 5;
         ProfileCompletionPercent = score;
     }
 }

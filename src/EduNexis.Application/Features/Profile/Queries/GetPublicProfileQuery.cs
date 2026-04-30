@@ -34,7 +34,6 @@ public sealed class GetPublicProfileQueryHandler(
         }
         else
         {
-            // CourseMate = share at least one active course membership or teacher relationship
             var viewerMemberships = await uow.CourseMembers.FindAsync(
                 m => m.UserId == viewerId && m.IsActive, ct);
             var viewerCourseIds = viewerMemberships.Select(m => m.CourseId).ToHashSet();
@@ -43,7 +42,6 @@ public sealed class GetPublicProfileQueryHandler(
                 m => m.UserId == query.UserId && m.IsActive, ct);
             var ownerCourseIds = ownerMemberships.Select(m => m.CourseId).ToHashSet();
 
-            // Also check teacher-of-viewer's-course relationship
             var viewerTaughtCourses = await uow.Courses.FindAsync(
                 c => c.TeacherId == viewerId, ct);
             var viewerTaughtIds = viewerTaughtCourses.Select(c => c.Id).ToHashSet();
@@ -53,9 +51,9 @@ public sealed class GetPublicProfileQueryHandler(
             var ownerTaughtIds = ownerTaughtCourses.Select(c => c.Id).ToHashSet();
 
             var sharesCourse =
-                viewerCourseIds.Overlaps(ownerCourseIds) ||       // both enrolled as students
-                viewerCourseIds.Overlaps(ownerTaughtIds)  ||      // viewer student in owner's taught course
-                viewerTaughtIds.Overlaps(ownerCourseIds);         // viewer teacher of owner's enrolled course
+                viewerCourseIds.Overlaps(ownerCourseIds) ||
+                viewerCourseIds.Overlaps(ownerTaughtIds) ||
+                viewerTaughtIds.Overlaps(ownerCourseIds);
 
             relation = sharesCourse ? "CourseMate" : "Stranger";
             canSeeContact = sharesCourse;
@@ -67,56 +65,87 @@ public sealed class GetPublicProfileQueryHandler(
             .OrderByDescending(e => e.StartYear)
             .ToList();
 
-        // ── Courses visibility rules ──
-        // Teachers: their taught courses are always visible (it's their public portfolio).
-        // Students: enrolled courses only visible to Self + CourseMate (privacy).
-        List<PublicCourseDto> courses;
+        // ── Publications (always visible) ──
+        var publications = (await uow.GetRepository<UserPublication>()
+            .FindAsync(p => p.UserId == query.UserId, ct))
+            .OrderBy(p => p.OrderIndex)
+            .ThenByDescending(p => p.Year)
+            .ToList();
+
+        // ── Courses ──
+        // Show preview list (max 6) + counts. Full lists fetched on /users/{id}/courses page.
+        List<PublicCourseDto> courses = new();
+        int runningCount = 0;
+        int archivedCount = 0;
+
         if (user.Role == UserRole.Teacher)
         {
-            var taught = await uow.Courses.FindAsync(
-                c => c.TeacherId == query.UserId && !c.IsArchived, ct);
-            courses = taught.Select(c => new PublicCourseDto(
-                c.Id, c.Title, c.CourseCode, c.Department, c.Semester, c.CourseType.ToString()
-            )).ToList();
+            var taught = await uow.Courses.FindAsync(c => c.TeacherId == query.UserId, ct);
+            var taughtList = taught.ToList();
+            runningCount = taughtList.Count(c => !c.IsArchived);
+            archivedCount = taughtList.Count(c => c.IsArchived);
+
+            courses = taughtList
+                .OrderByDescending(c => !c.IsArchived)
+                .ThenByDescending(c => c.CreatedAt)
+                .Take(6)
+                .Select(c => new PublicCourseDto(
+                    c.Id, c.Title, c.CourseCode, c.Department,
+                    c.Semester, c.CourseType.ToString(), c.IsArchived))
+                .ToList();
         }
         else if (canSeeContact)
         {
             var memberships = await uow.CourseMembers.FindAsync(
                 cm => cm.UserId == query.UserId && cm.IsActive, ct);
             var ids = memberships.Select(cm => cm.CourseId).ToHashSet();
-            var enrolled = await uow.Courses.FindAsync(
-                c => ids.Contains(c.Id) && !c.IsArchived, ct);
-            courses = enrolled.Select(c => new PublicCourseDto(
-                c.Id, c.Title, c.CourseCode, c.Department, c.Semester, c.CourseType.ToString()
-            )).ToList();
-        }
-        else
-        {
-            courses = new List<PublicCourseDto>();
+            var enrolled = await uow.Courses.FindAsync(c => ids.Contains(c.Id), ct);
+            var enrolledList = enrolled.ToList();
+            runningCount = enrolledList.Count(c => !c.IsArchived);
+            archivedCount = enrolledList.Count(c => c.IsArchived);
+
+            courses = enrolledList
+                .OrderByDescending(c => !c.IsArchived)
+                .ThenByDescending(c => c.CreatedAt)
+                .Take(6)
+                .Select(c => new PublicCourseDto(
+                    c.Id, c.Title, c.CourseCode, c.Department,
+                    c.Semester, c.CourseType.ToString(), c.IsArchived))
+                .ToList();
         }
 
         return ApiResponse<PublicProfileDto>.Ok(new PublicProfileDto(
-            UserId:           query.UserId,
-            FullName:         profile.FullName,
-            Department:       profile.Department,
-            Designation:      profile.Designation,
-            StudentId:        canSeeContact ? profile.StudentId : null,
-            Bio:              profile.Bio,
-            ProfilePhotoUrl:  profile.ProfilePhotoUrl,
-            CoverPhotoUrl:    profile.CoverPhotoUrl,
-            PhoneNumber:      canSeeContact ? profile.PhoneNumber : null,
-            LinkedInUrl:      profile.LinkedInUrl,
-            FacebookUrl:      profile.FacebookUrl,
-            TwitterUrl:       profile.TwitterUrl,
-            GitHubUrl:        profile.GitHubUrl,
-            WebsiteUrl:       profile.WebsiteUrl,
-            Email:            canSeeContact ? user.Email : null,
-            Role:             user.Role.ToString(),
-            Education:        educations.Select(e => new UserEducationDto(
-                e.Id, e.Institution, e.Degree, e.FieldOfStudy,
-                e.StartYear, e.EndYear, e.Description)).ToList(),
-            Courses:          courses,
-            ViewerRelation:   relation
+            UserId: query.UserId,
+            FullName: profile.FullName,
+            Department: profile.Department,
+            Designation: profile.Designation,
+            StudentId: canSeeContact ? profile.StudentId : null,
+            Bio: profile.Bio,
+            Headline: profile.Headline,
+            ProfilePhotoUrl: profile.ProfilePhotoUrl,
+            CoverPhotoUrl: profile.CoverPhotoUrl,
+            PhoneNumber: canSeeContact ? profile.PhoneNumber : null,
+            OfficeLocation: user.Role == UserRole.Teacher ? profile.OfficeLocation : null,
+            OfficeHours: user.Role == UserRole.Teacher ? profile.OfficeHours : null,
+            ResearchInterestsCsv: user.Role == UserRole.Teacher ? profile.ResearchInterestsCsv : null,
+            FieldsOfWorkCsv: user.Role == UserRole.Teacher ? profile.FieldsOfWorkCsv : null,
+            LinkedInUrl: profile.LinkedInUrl,
+            FacebookUrl: profile.FacebookUrl,
+            TwitterUrl: profile.TwitterUrl,
+            GitHubUrl: profile.GitHubUrl,
+            WebsiteUrl: profile.WebsiteUrl,
+            Email: canSeeContact ? user.Email : null,
+            Role: user.Role.ToString(),
+            Education: educations.Select(e => new UserEducationDto(
+                                      e.Id, e.Institution, e.Degree, e.FieldOfStudy,
+                                      e.StartYear, e.EndYear, e.Description)).ToList(),
+            Publications: publications.Select(p => new UserPublicationDto(
+                                      p.Id, p.Title, p.Authors, p.Venue, p.Year,
+                                      p.Url, p.Type.ToString(), p.OrderIndex)).ToList(),
+            Courses: courses,
+            RunningCoursesCount: runningCount,
+            ArchivedCoursesCount: archivedCount,
+            ViewerRelation: relation
         ));
     }
 }
