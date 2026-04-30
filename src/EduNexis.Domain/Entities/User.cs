@@ -50,6 +50,14 @@ public class User : BaseEntity
         RefreshTokenExpiry.HasValue &&
         RefreshTokenExpiry.Value > DateTime.UtcNow;
 
+    public void ChangePassword(string newPasswordHash)
+    {
+        if (string.IsNullOrWhiteSpace(newPasswordHash))
+            throw new DomainException("Password hash cannot be empty.");
+        PasswordHash = newPasswordHash;
+        SetUpdatedAt();
+    }
+
     public void MarkProfileComplete() { IsProfileComplete = true; SetUpdatedAt(); }
     public void MarkProfileIncomplete() { IsProfileComplete = false; SetUpdatedAt(); }
     public void Deactivate() { IsActive = false; SetUpdatedAt(); }

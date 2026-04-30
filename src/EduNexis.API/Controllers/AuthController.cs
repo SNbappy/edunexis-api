@@ -33,6 +33,11 @@ public class AuthController : BaseController
         Ok(await Mediator.Send(command, ct));
 
     [Authorize]
+    [HttpPost("change-password")]
+    public async Task<IActionResult> ChangePassword(
+        [FromBody] ChangePasswordCommand command, CancellationToken ct) =>
+        Ok(await Mediator.Send(command with { UserId = CurrentUserId }, ct));
+    [Authorize]
     [HttpGet("me")]
     public async Task<IActionResult> Me(CancellationToken ct) =>
         Ok(await Mediator.Send(new GetCurrentUserQuery(CurrentUserId), ct));
