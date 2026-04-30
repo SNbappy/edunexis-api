@@ -58,6 +58,7 @@ public static class DependencyInjection
                 emailConfig["Username"],
                 emailConfig["Password"]);
         services.AddScoped<IEmailService, EmailService>();
+        services.AddSingleton<IEmailTemplateBuilder, EmailTemplateBuilder>();
 
         // Redis Cache (optional, falls back to in-memory if no Redis URL)
         var redisConn = configuration.GetConnectionString("Redis");
