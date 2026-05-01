@@ -47,16 +47,8 @@ public static class DependencyInjection
         // Cloudinary Storage
         services.AddScoped<IFileStorageService, CloudinaryStorageService>();
 
-        // Email via FluentEmail
-        var emailConfig = configuration.GetSection("Email");
-        services.AddFluentEmail(
-                emailConfig["From"] ?? "noreply@edunexis.com",
-                emailConfig["SenderName"] ?? "EduNexis")
-            .AddSmtpSender(
-                emailConfig["Host"] ?? "smtp.gmail.com",
-                int.Parse(emailConfig["Port"] ?? "587"),
-                emailConfig["Username"],
-                emailConfig["Password"]);
+        // Email via Brevo HTTP API (SMTP blocked on Render free tier)
+        services.AddHttpClient("brevo-email");
         services.AddScoped<IEmailService, EmailService>();
         services.AddSingleton<IEmailTemplateBuilder, EmailTemplateBuilder>();
 
