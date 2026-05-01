@@ -1,5 +1,4 @@
 ﻿using EduNexis.Domain.Interfaces.Services;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace EduNexis.Application.Features.Notifications.Commands;
@@ -21,7 +20,6 @@ public sealed class SendNotificationCommandHandler(
     IUnitOfWork uow,
     IEmailService emailService,
     IEmailTemplateBuilder templateBuilder,
-    IConfiguration configuration,
     ILogger<SendNotificationCommandHandler> logger
 ) : ICommandHandler<SendNotificationCommand, ApiResponse>
 {
@@ -73,17 +71,13 @@ public sealed class SendNotificationCommandHandler(
                 return;
             }
 
-            var frontendBase = (configuration["Frontend:BaseUrl"] ?? "http://localhost:5173")
-                .TrimEnd('/');
-
-            var bodyHtml =
-                "<p>" + EscapeHtml(command.Body) + "</p>";
+            var bodyHtml = "<p>" + EscapeHtml(command.Body) + "</p>";
 
             if (!string.IsNullOrWhiteSpace(command.RedirectUrl))
             {
                 var fullUrl = command.RedirectUrl.StartsWith("http")
                     ? command.RedirectUrl
-                    : frontendBase + command.RedirectUrl;
+                    : templateBuilder.FrontendBaseUrl + command.RedirectUrl;
                 bodyHtml += templateBuilder.Button(fullUrl, "Open in EduNexis");
             }
 

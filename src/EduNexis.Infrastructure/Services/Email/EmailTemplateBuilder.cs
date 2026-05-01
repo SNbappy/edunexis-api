@@ -1,10 +1,19 @@
-ï»¿using EduNexis.Domain.Interfaces.Services;
+using EduNexis.Domain.Interfaces.Services;
+using Microsoft.Extensions.Configuration;
 using System.Text;
 
 namespace EduNexis.Infrastructure.Services.Email;
 
 public class EmailTemplateBuilder : IEmailTemplateBuilder
 {
+    public string FrontendBaseUrl { get; }
+
+    public EmailTemplateBuilder(IConfiguration configuration)
+    {
+        FrontendBaseUrl = (configuration["Frontend:BaseUrl"] ?? "http://localhost:5173")
+            .TrimEnd('/');
+    }
+
     private const string TealColor = "#0d9488"; // Tailwind teal-600
     private const string TealDark = "#0f766e";  // teal-700
     private const string TextDark = "#1c1917";  // stone-900
@@ -27,11 +36,11 @@ public class EmailTemplateBuilder : IEmailTemplateBuilder
         sb.AppendLine("</head>");
         sb.AppendLine($"<body style=\"margin:0;padding:0;background:{Bg};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;color:{TextDark};\">");
 
-        // Outer wrapper â€” full-width
+        // Outer wrapper — full-width
         sb.AppendLine($"<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"background:{Bg};padding:32px 16px;\">");
         sb.AppendLine("<tr><td align=\"center\">");
 
-        // Card â€” fixed max-width
+        // Card — fixed max-width
         sb.AppendLine($"<table role=\"presentation\" width=\"560\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"max-width:560px;width:100%;background:{Card};border:1px solid {Border};border-radius:16px;overflow:hidden;\">");
 
         // Brand header

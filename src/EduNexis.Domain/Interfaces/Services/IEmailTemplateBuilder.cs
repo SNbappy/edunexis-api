@@ -3,10 +3,14 @@
 public interface IEmailTemplateBuilder
 {
     /// <summary>
+    /// Frontend base URL for building absolute links in emails.
+    /// Configured via Frontend:BaseUrl setting.
+    /// </summary>
+    string FrontendBaseUrl { get; }
+
+    /// <summary>
     /// Wraps content in EduNexis-branded HTML layout (header, footer, styling).
     /// </summary>
-    /// <param name="title">Heading shown above content (e.g. "Verify your email")</param>
-    /// <param name="bodyHtml">Inner HTML — paragraphs, buttons, etc.</param>
     string Build(string title, string bodyHtml);
 
     /// <summary>
