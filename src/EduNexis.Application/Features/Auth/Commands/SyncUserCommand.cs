@@ -1,4 +1,4 @@
-using EduNexis.Application.DTOs;
+﻿using EduNexis.Application.DTOs;
 using EduNexis.Application.Features.Profile.Commands;
 
 namespace EduNexis.Application.Features.Auth.Commands;
@@ -20,6 +20,13 @@ public sealed class SyncUserCommandHandler(IUnitOfWork uow) : ICommandHandler<Sy
     {
         var user = await uow.Users.GetByEmailAsync(command.Email, ct);
         if (user is null) return ApiResponse<UserDto>.Fail("User not found. Please register first.");
+
+        // Firebase users are auto-verified: Google has already verified the email,
+        // so re-asking via OTP is friction with no security benefit.
+        if (!user.IsEmailVerified)
+        {
+            user.MarkEmailVerified();
+        }
 
         var profile = await uow.UserProfiles.GetByUserIdAsync(user.Id, ct)
                       ?? UserProfile.Create(user.Id, command.FullName);

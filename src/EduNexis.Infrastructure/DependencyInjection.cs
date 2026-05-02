@@ -40,6 +40,8 @@ public static class DependencyInjection
         // Auth services (JWT + password hashing)
         services.AddSingleton<IJwtTokenService, JwtTokenService>();
         services.AddSingleton<IPasswordHasher, PasswordHasher>();
+        services.AddSingleton<IOtpGenerator, OtpGenerator>();
+        services.AddSingleton<IAuthSettings, AuthSettings>();
 
         // Firebase Auth
         services.AddScoped<IFirebaseAuthService, FirebaseAuthService>();
