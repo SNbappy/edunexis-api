@@ -34,6 +34,7 @@ public class AppDbContext : DbContext
     public DbSet<AuditLog> AuditLogs => Set<AuditLog>();
     public DbSet<UserEducation> UserEducations => Set<UserEducation>();
     public DbSet<UserPublication> UserPublications => Set<UserPublication>();
+    public DbSet<PasswordResetToken> PasswordResetTokens => Set<PasswordResetToken>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -52,6 +53,15 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<PresentationEvent>().Property(p => p.Status).HasConversion<string>();
         modelBuilder.Entity<PresentationEvent>().Property(p => p.Format).HasConversion<string>();
         modelBuilder.Entity<UserPublication>().Property(p => p.Type).HasConversion<string>();
+        modelBuilder.Entity<PasswordResetToken>(entity =>
+        {
+            entity.HasOne(t => t.User)
+                .WithMany()
+                .HasForeignKey(t => t.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+            entity.HasIndex(t => t.UserId);
+            entity.HasIndex(t => new { t.UsedAt, t.ExpiresAt });
+        });
 
         // Unique indexes
         modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();

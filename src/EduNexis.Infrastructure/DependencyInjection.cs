@@ -41,6 +41,7 @@ public static class DependencyInjection
         services.AddSingleton<IJwtTokenService, JwtTokenService>();
         services.AddSingleton<IPasswordHasher, PasswordHasher>();
         services.AddSingleton<IOtpGenerator, OtpGenerator>();
+        services.AddSingleton<IResetTokenGenerator, ResetTokenGenerator>();
         services.AddSingleton<IAuthSettings, AuthSettings>();
 
         // Firebase Auth

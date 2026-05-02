@@ -1,4 +1,4 @@
-﻿using EduNexis.Application.Features.Auth.Commands;
+using EduNexis.Application.Features.Auth.Commands;
 using EduNexis.Application.Features.Auth.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +22,15 @@ public class AuthController : BaseController
         [FromBody] VerifyEmailOtpCommand command, CancellationToken ct) =>
         Ok(await Mediator.Send(command, ct));
 
+    [HttpPost("forgot-password")]
+    public async Task<IActionResult> ForgotPassword(
+        [FromBody] ForgotPasswordCommand command, CancellationToken ct) =>
+        Ok(await Mediator.Send(command, ct));
+
+    [HttpPost("reset-password")]
+    public async Task<IActionResult> ResetPassword(
+        [FromBody] ResetPasswordCommand command, CancellationToken ct) =>
+        Ok(await Mediator.Send(command, ct));
     [HttpPost("resend-otp")]
     public async Task<IActionResult> ResendOtp(
         [FromBody] ResendOtpCommand command, CancellationToken ct) =>
