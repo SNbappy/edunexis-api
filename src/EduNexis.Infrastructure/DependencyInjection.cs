@@ -1,11 +1,11 @@
-using EduNexis.Application.Abstractions;
+﻿using EduNexis.Application.Abstractions;
 using EduNexis.Domain.Interfaces.Repositories;
-using EduNexis.Domain.Interfaces.Services;
 using EduNexis.Infrastructure.Persistence;
 using EduNexis.Infrastructure.Persistence.Repositories;
-using EduNexis.Infrastructure.Services.Auth;
 using EduNexis.Infrastructure.Services.Cache;
 using EduNexis.Infrastructure.Services.Email;
+using EduNexis.Infrastructure.Services;
+using EduNexis.Infrastructure.Services.Auth;
 using EduNexis.Infrastructure.Services.Storage;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -44,8 +44,6 @@ public static class DependencyInjection
         services.AddSingleton<IResetTokenGenerator, ResetTokenGenerator>();
         services.AddSingleton<IAuthSettings, AuthSettings>();
 
-        // Firebase Auth
-        services.AddScoped<IFirebaseAuthService, FirebaseAuthService>();
 
         // Cloudinary Storage
         services.AddScoped<IFileStorageService, CloudinaryStorageService>();
