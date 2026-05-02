@@ -1,4 +1,4 @@
-﻿namespace EduNexis.Domain.Entities;
+namespace EduNexis.Domain.Entities;
 
 public class UserProfile : BaseEntity
 {
@@ -90,11 +90,19 @@ public class UserProfile : BaseEntity
         SetUpdatedAt();
     }
 
-    public bool MeetsRequirement() =>
-        !string.IsNullOrWhiteSpace(FullName) &&
-        !string.IsNullOrWhiteSpace(Department) &&
-        (!string.IsNullOrWhiteSpace(Designation) ||
-         !string.IsNullOrWhiteSpace(StudentId));
+    /// <summary>
+    /// Role-aware completeness check.
+    /// Teachers must have Designation; students must have StudentId.
+    /// Both must have FullName + Department.
+    /// </summary>
+    public bool MeetsRequirement(UserRole role)
+    {
+        if (string.IsNullOrWhiteSpace(FullName)) return false;
+        if (string.IsNullOrWhiteSpace(Department)) return false;
+        if (role == UserRole.Teacher && string.IsNullOrWhiteSpace(Designation)) return false;
+        if (role == UserRole.Student && string.IsNullOrWhiteSpace(StudentId)) return false;
+        return true;
+    }
 
     private void RecalculateCompletion()
     {

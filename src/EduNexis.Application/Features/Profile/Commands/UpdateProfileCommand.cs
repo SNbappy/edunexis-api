@@ -1,4 +1,4 @@
-﻿using EduNexis.Application.DTOs;
+using EduNexis.Application.DTOs;
 
 namespace EduNexis.Application.Features.Profile.Commands;
 
@@ -67,6 +67,12 @@ public sealed class UpdateProfileCommandHandler(IUnitOfWork uow)
             ?? throw new NotFoundException("User", command.UserId);
         var profile = user.Profile ?? throw new NotFoundException("UserProfile", command.UserId);
 
+        // Role-aware required field enforcement
+        if (user.Role == UserRole.Teacher && string.IsNullOrWhiteSpace(command.Designation))
+            return ApiResponse<UserProfileDto>.Fail("Designation is required for teachers.");
+        if (user.Role == UserRole.Student && string.IsNullOrWhiteSpace(command.StudentId))
+            return ApiResponse<UserProfileDto>.Fail("Student ID is required for students.");
+
         profile.Update(
             command.FullName, command.Department,
             command.Designation, command.StudentId,
@@ -76,7 +82,7 @@ public sealed class UpdateProfileCommandHandler(IUnitOfWork uow)
             command.LinkedInUrl, command.FacebookUrl,
             command.TwitterUrl, command.GitHubUrl, command.WebsiteUrl);
 
-        if (profile.MeetsRequirement()) user.MarkProfileComplete();
+        if (profile.MeetsRequirement(user.Role)) user.MarkProfileComplete();
         else user.MarkProfileIncomplete();
 
         uow.UserProfiles.Update(profile);
