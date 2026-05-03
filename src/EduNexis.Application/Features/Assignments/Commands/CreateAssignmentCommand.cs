@@ -1,4 +1,4 @@
-﻿using EduNexis.Application.DTOs;
+using EduNexis.Application.DTOs;
 using EduNexis.Application.Features.Notifications.Commands;
 
 namespace EduNexis.Application.Features.Assignments.Commands;
@@ -59,17 +59,16 @@ public sealed class CreateAssignmentCommandHandler(
         await uow.SaveChangesAsync(ct);
 
         var members = await uow.CourseMembers.GetByCourseAsync(command.CourseId, ct);
-        var tasks = members
-            .Where(m => m.IsActive)
-            .Select(m => sender.Send(new SendNotificationCommand(
+        foreach (var m in members.Where(x => x.IsActive))
+        {
+            await sender.Send(new SendNotificationCommand(
                 UserId: m.UserId,
                 Title: $"New Assignment in {course.Title}",
                 Body: $"\"{command.Title}\" is due by {command.Deadline:MMM dd, yyyy}.",
                 Type: NotificationType.NewAssignment,
                 RedirectUrl: $"/courses/{course.Id}/assignments"
-            ), ct).AsTask());
-
-        await Task.WhenAll(tasks);
+            ), ct);
+        }
 
         return ApiResponse<AssignmentDto>.Ok(new AssignmentDto(
             assignment.Id, assignment.CourseId, assignment.Title,

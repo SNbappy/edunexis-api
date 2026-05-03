@@ -1,4 +1,4 @@
-﻿using EduNexis.Application.Features.Notifications.Commands;
+using EduNexis.Application.Features.Notifications.Commands;
 
 namespace EduNexis.Application.Features.Materials.Commands;
 
@@ -71,17 +71,16 @@ public sealed class UploadMaterialCommandHandler(
         await uow.SaveChangesAsync(ct);
 
         var members = await uow.CourseMembers.GetByCourseAsync(command.CourseId, ct);
-        var tasks = members
-            .Where(m => m.IsActive && m.UserId != command.UploadedById)
-            .Select(m => sender.Send(new SendNotificationCommand(
+        foreach (var m in members.Where(x => x.IsActive && x.UserId != command.UploadedById))
+        {
+            await sender.Send(new SendNotificationCommand(
                 UserId: m.UserId,
                 Title: $"New Material in {course.Title}",
                 Body: $"\"{command.Title}\" has been uploaded.",
                 Type: NotificationType.NewMaterial,
                 RedirectUrl: $"/courses/{course.Id}/materials"
-            ), ct).AsTask());
-
-        await Task.WhenAll(tasks);
+            ), ct);
+        }
 
         return ApiResponse.Ok("Material uploaded successfully.");
     }

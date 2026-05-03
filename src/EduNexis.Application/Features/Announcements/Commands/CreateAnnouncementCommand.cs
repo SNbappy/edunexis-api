@@ -1,4 +1,4 @@
-﻿using EduNexis.Application.Features.Notifications.Commands;
+using EduNexis.Application.Features.Notifications.Commands;
 
 namespace EduNexis.Application.Features.Announcements.Commands;
 
@@ -61,17 +61,16 @@ public sealed class CreateAnnouncementCommandHandler(
         var authorName = author?.Profile?.FullName ?? "Someone";
 
         var members = await uow.CourseMembers.GetByCourseAsync(command.CourseId, ct);
-        var tasks = members
-            .Where(m => m.IsActive && m.UserId != command.AuthorId)
-            .Select(m => sender.Send(new SendNotificationCommand(
+        foreach (var m in members.Where(x => x.IsActive && x.UserId != command.AuthorId))
+        {
+            await sender.Send(new SendNotificationCommand(
                 UserId: m.UserId,
                 Title: $"New Announcement in {course.Title}",
                 Body: $"{authorName}: {command.Content[..Math.Min(80, command.Content.Length)]}...",
                 Type: NotificationType.NewAnnouncement,
                 RedirectUrl: $"/courses/{course.Id}/stream"
-            ), ct).AsTask());
-
-        await Task.WhenAll(tasks);
+            ), ct);
+        }
 
         return ApiResponse<AnnouncementDto>.Ok(new AnnouncementDto(
             announcement.Id, announcement.CourseId, announcement.AuthorId,

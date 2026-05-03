@@ -1,4 +1,4 @@
-﻿using EduNexis.Application.Features.Notifications.Commands;
+using EduNexis.Application.Features.Notifications.Commands;
 using EduNexis.Application.Features.Presentations.Queries;
 
 namespace EduNexis.Application.Features.Presentations.Commands;
@@ -54,17 +54,16 @@ public sealed class CreatePresentationEventCommandHandler(
         var scheduledText = command.ScheduledDate.HasValue
             ? $" on {command.ScheduledDate.Value:MMM dd, yyyy}"
             : string.Empty;
-        var tasks = members
-            .Where(m => m.IsActive)
-            .Select(m => sender.Send(new SendNotificationCommand(
+        foreach (var m in members.Where(x => x.IsActive))
+        {
+            await sender.Send(new SendNotificationCommand(
                 UserId: m.UserId,
                 Title: $"New Presentation in {course.Title}",
                 Body: $"\"{command.Title}\"{scheduledText}.",
                 Type: NotificationType.General,
                 RedirectUrl: $"/courses/{course.Id}/presentations"
-            ), ct).AsTask());
-
-        await Task.WhenAll(tasks);
+            ), ct);
+        }
 
         return ApiResponse<PresentationEventDto>.Ok(PresentationEventDto.From(ev, null, 0));
     }
