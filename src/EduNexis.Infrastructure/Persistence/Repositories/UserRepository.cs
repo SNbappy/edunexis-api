@@ -1,9 +1,7 @@
 using EduNexis.Domain.Entities;
 using EduNexis.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
-
 namespace EduNexis.Infrastructure.Persistence.Repositories;
-
 public class UserRepository : BaseRepository<User>, IUserRepository
 {
     public UserRepository(AppDbContext context) : base(context) { }
@@ -26,4 +24,7 @@ public class UserRepository : BaseRepository<User>, IUserRepository
         await DbSet
             .Include(u => u.Profile)
             .FirstOrDefaultAsync(u => u.Id == userId, ct);
+
+    public async Task<int> CountActiveByRoleAsync(UserRole role, CancellationToken ct = default) =>
+        await DbSet.AsNoTracking().CountAsync(u => u.Role == role && u.IsActive, ct);
 }

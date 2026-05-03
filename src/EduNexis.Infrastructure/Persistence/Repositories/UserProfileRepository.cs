@@ -12,4 +12,32 @@ public class UserProfileRepository : BaseRepository<UserProfile>, IUserProfileRe
 
     public async Task<bool> IsSlugTakenAsync(string slug, Guid excludeUserId, CancellationToken ct = default) =>
         await DbSet.AnyAsync(p => p.PublicSlug == slug && p.UserId != excludeUserId, ct);
+
+    public async Task<List<UserProfile>> ListPublicTeachersAsync(
+        string? department, int page, int pageSize, CancellationToken ct = default)
+    {
+        // Only return UserProfiles where the linked User is an active Teacher.
+        // Cross-table join via subquery on Users.
+        var query = DbSet.AsNoTracking()
+            .Where(p => p.IsPublicProfile)
+            .Where(p => Context.Users.Any(u => u.Id == p.UserId && u.Role == UserRole.Teacher && u.IsActive));
+
+        if (!string.IsNullOrWhiteSpace(department))
+            query = query.Where(p => p.Department == department);
+
+        return await query
+            .OrderBy(p => p.FullName)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync(ct);
+    }
+
+    public async Task<List<string>> ListPublicDepartmentsAsync(CancellationToken ct = default) =>
+        await DbSet.AsNoTracking()
+            .Where(p => p.IsPublicProfile)
+            .Where(p => Context.Users.Any(u => u.Id == p.UserId && u.Role == UserRole.Teacher && u.IsActive))
+            .Select(p => p.Department)
+            .Distinct()
+            .OrderBy(d => d)
+            .ToListAsync(ct);
 }

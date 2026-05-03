@@ -1,4 +1,5 @@
 using EduNexis.Application.Features.Public.Queries;
+using Mediator;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

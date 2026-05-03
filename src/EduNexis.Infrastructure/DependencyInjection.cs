@@ -1,4 +1,4 @@
-﻿using EduNexis.Application.Abstractions;
+using EduNexis.Application.Abstractions;
 using EduNexis.Domain.Interfaces.Repositories;
 using EduNexis.Infrastructure.Persistence;
 using EduNexis.Infrastructure.Persistence.Repositories;

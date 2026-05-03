@@ -1,11 +1,10 @@
 using EduNexis.Application.DTOs;
-using EduNexis.Application.Features.Profile.Commands;
 
 namespace EduNexis.Application.Features.Public.Queries;
 
 public record GetPublicFacultyBySlugQuery(string Slug) : IQuery<ApiResponse<PublicFacultyProfileDto>>;
 
-public sealed class GetPublicFacultyBySlugQueryHandler(IUnitOfWork uow, AppDbContext db)
+public sealed class GetPublicFacultyBySlugQueryHandler(IUnitOfWork uow)
     : IQueryHandler<GetPublicFacultyBySlugQuery, ApiResponse<PublicFacultyProfileDto>>
 {
     public async ValueTask<ApiResponse<PublicFacultyProfileDto>> Handle(
@@ -19,31 +18,34 @@ public sealed class GetPublicFacultyBySlugQueryHandler(IUnitOfWork uow, AppDbCon
         if (user is null || user.Role != UserRole.Teacher || !user.IsActive)
             return ApiResponse<PublicFacultyProfileDto>.Fail("Faculty profile not found.");
 
-        // Education + publications via direct DbContext (no auth, no domain logic needed)
-        var education = await db.UserEducations.AsNoTracking()
-            .Where(e => e.UserId == user.Id)
+        // Education + Publications via generic repo (no dedicated interface needed)
+        var educationRows = await uow.GetRepository<UserEducation>()
+            .FindAsync(e => e.UserId == user.Id, ct);
+        var education = educationRows
             .OrderByDescending(e => e.StartYear)
             .Select(e => new UserEducationDto(
                 e.Id, e.Institution, e.Degree, e.FieldOfStudy,
                 e.StartYear, e.EndYear, e.Description))
-            .ToListAsync(ct);
+            .ToList();
 
-        var publications = await db.UserPublications.AsNoTracking()
-            .Where(p => p.UserId == user.Id)
+        var publicationRows = await uow.GetRepository<UserPublication>()
+            .FindAsync(p => p.UserId == user.Id, ct);
+        var publications = publicationRows
             .OrderBy(p => p.OrderIndex)
             .ThenByDescending(p => p.Year)
             .Select(p => new UserPublicationDto(
                 p.Id, p.Title, p.Authors, p.Venue,
                 p.Year, p.Url, p.Type.ToString(), p.OrderIndex))
-            .ToListAsync(ct);
+            .ToList();
 
-        var courses = await db.Courses.AsNoTracking()
-            .Where(c => c.TeacherId == user.Id)
+        // Courses via dedicated repo
+        var courseRows = await uow.Courses.GetByTeacherAsync(user.Id, ct);
+        var courses = courseRows
             .OrderByDescending(c => c.CreatedAt)
             .Select(c => new PublicCourseDto(
                 c.Id, c.Title, c.CourseCode, c.Department,
                 c.Semester, c.CourseType.ToString(), c.IsArchived))
-            .ToListAsync(ct);
+            .ToList();
 
         var coursesTaught = courses.Count(c => !c.IsArchived);
 

@@ -43,4 +43,17 @@ public class CourseRepository : BaseRepository<Course>, ICourseRepository
             .Include(c => c.Members)
             .OrderByDescending(c => c.CreatedAt)
             .ToListAsync(ct);
+public async Task<Dictionary<Guid, int>> GetActiveCountsByTeacherIdsAsync(
+        IEnumerable<Guid> teacherIds, CancellationToken ct = default)
+    {
+        var ids = teacherIds.ToList();
+        return await DbSet.AsNoTracking()
+            .Where(c => ids.Contains(c.TeacherId) && !c.IsArchived)
+            .GroupBy(c => c.TeacherId)
+            .Select(g => new { TeacherId = g.Key, Count = g.Count() })
+            .ToDictionaryAsync(x => x.TeacherId, x => x.Count, ct);
+    }
+
+    public async Task<int> CountActiveAsync(CancellationToken ct = default) =>
+        await DbSet.AsNoTracking().CountAsync(c => !c.IsArchived, ct);
 }
