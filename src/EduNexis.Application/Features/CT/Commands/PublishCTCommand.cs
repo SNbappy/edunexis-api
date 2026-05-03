@@ -1,4 +1,4 @@
-﻿using EduNexis.Application.Features.Notifications.Commands;
+using EduNexis.Application.Features.Notifications.Commands;
 
 namespace EduNexis.Application.Features.CT.Commands;
 
@@ -33,17 +33,16 @@ public sealed class PublishCTCommandHandler(
 
         // Notify all active students that results are published
         var members = await uow.CourseMembers.GetByCourseAsync(ctEvent.CourseId, ct);
-        var notifyTasks = members
-            .Where(m => m.IsActive)
-            .Select(m => sender.Send(new SendNotificationCommand(
+        foreach (var m in members.Where(x => x.IsActive))
+        {
+            await sender.Send(new SendNotificationCommand(
                 UserId: m.UserId,
                 Title: $"CT results published in {course.Title}",
                 Body: $"CT {ctEvent.CTNumber}: \"{ctEvent.Title}\" — your marks are now available.",
                 Type: NotificationType.General,
                 RedirectUrl: $"/courses/{course.Id}/ct"
-            ), ct).AsTask());
-
-        await Task.WhenAll(notifyTasks);
+            ), ct);
+        }
 
         return ApiResponse.Ok("CT published. Students can now view their marks.");
     }

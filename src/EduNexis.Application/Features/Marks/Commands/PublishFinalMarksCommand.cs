@@ -1,4 +1,4 @@
-﻿using EduNexis.Application.Features.Notifications.Commands;
+using EduNexis.Application.Features.Notifications.Commands;
 
 namespace EduNexis.Application.Features.Marks.Commands;
 
@@ -33,15 +33,16 @@ public sealed class PublishFinalMarksCommandHandler(
 
         await uow.SaveChangesAsync(ct);
 
-        var tasks = markList.Select(mark => sender.Send(new SendNotificationCommand(
-            UserId: mark.StudentId,
-            Title: $"Final Marks Published — {course.Title}",
-            Body: $"Your final mark is {mark.FinalMarkValue:F2}. Check your result now.",
-            Type: NotificationType.MarksPublished,
-            RedirectUrl: $"/courses/{course.Id}/marks"
-        ), ct).AsTask());
-
-        await Task.WhenAll(tasks);
+        foreach (var mark in markList)
+        {
+            await sender.Send(new SendNotificationCommand(
+                UserId: mark.StudentId,
+                Title: $"Final Marks Published — {course.Title}",
+                Body: $"Your final mark is {mark.FinalMarkValue:F2}. Check your result now.",
+                Type: NotificationType.MarksPublished,
+                RedirectUrl: $"/courses/{course.Id}/marks"
+            ), ct);
+        }
 
         return ApiResponse.Ok($"Final marks published for {markList.Count} student(s).");
     }
