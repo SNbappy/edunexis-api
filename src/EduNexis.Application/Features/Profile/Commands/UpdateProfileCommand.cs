@@ -1,3 +1,4 @@
+using EduNexis.Application.Common.Slugs;
 using EduNexis.Application.DTOs;
 
 namespace EduNexis.Application.Features.Profile.Commands;
@@ -67,6 +68,9 @@ public sealed class UpdateProfileCommandHandler(IUnitOfWork uow)
             ?? throw new NotFoundException("User", command.UserId);
         var profile = user.Profile ?? throw new NotFoundException("UserProfile", command.UserId);
 
+        // Snapshot before mutation: are we completing the profile for the first time?
+        var wasProfileComplete = user.IsProfileComplete;
+
         // Role-aware required field enforcement
         if (user.Role == UserRole.Teacher && string.IsNullOrWhiteSpace(command.Designation))
             return ApiResponse<UserProfileDto>.Fail("Designation is required for teachers.");
@@ -81,6 +85,20 @@ public sealed class UpdateProfileCommandHandler(IUnitOfWork uow)
             command.ResearchInterestsCsv, command.FieldsOfWorkCsv,
             command.LinkedInUrl, command.FacebookUrl,
             command.TwitterUrl, command.GitHubUrl, command.WebsiteUrl);
+
+        // First-time auto-public for new teachers: when a teacher transitions
+        // from incomplete to complete profile for the first time, opt them in
+        // by default. Existing teachers (already complete) never trigger this;
+        // they must opt in manually via Settings.
+        if (!wasProfileComplete
+            && user.Role == UserRole.Teacher
+            && string.IsNullOrEmpty(profile.PublicSlug)
+            && profile.MeetsRequirement(user.Role))
+        {
+            var slug = await SlugGenerator.GenerateUniqueAsync(
+                profile.FullName, command.UserId, uow.UserProfiles, ct);
+            profile.MakePublic(slug);
+        }
 
         if (profile.MeetsRequirement(user.Role)) user.MarkProfileComplete();
         else user.MarkProfileIncomplete();
