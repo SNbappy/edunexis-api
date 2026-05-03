@@ -1,4 +1,4 @@
-﻿using EduNexis.API.Middleware;
+using EduNexis.API.Middleware;
 using EduNexis.Application;
 using EduNexis.Infrastructure;
 using EduNexis.Infrastructure.Persistence;
@@ -120,19 +120,32 @@ var app = builder.Build();
 // Apply pending EF Core migrations on startup
 // so schema changes ship with code deploys.
 // ─────────────────────────────────────────────
-using (var scope = app.Services.CreateScope())
+// Skip auto-migration in production by default. Schema is managed manually
+// against Clever Cloud free MySQL (5-connection cap) — auto-migration on every
+// container restart competes with the running instance for connections and
+// crashes the new deploy. Enable explicitly via Database:RunMigrationsOnStartup=true
+// when you genuinely need to apply pending migrations.
+var runMigrations = builder.Configuration.GetValue<bool>("Database:RunMigrationsOnStartup", false);
+if (runMigrations)
 {
-    try
+    using (var scope = app.Services.CreateScope())
     {
-        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        db.Database.Migrate();
-        Log.Information("Database migrations applied successfully.");
+        try
+        {
+            var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+            db.Database.Migrate();
+            Log.Information("Database migrations applied successfully.");
+        }
+        catch (Exception ex)
+        {
+            Log.Fatal(ex, "Database migration failed on startup.");
+            throw;
+        }
     }
-    catch (Exception ex)
-    {
-        Log.Fatal(ex, "Database migration failed on startup.");
-        throw;
-    }
+}
+else
+{
+    Log.Information("Skipping startup migrations (Database:RunMigrationsOnStartup=false).");
 }
 
 app.UseMiddleware<ExceptionMiddleware>();
