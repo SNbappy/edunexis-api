@@ -59,6 +59,14 @@ public class ProfileController : BaseController
     public async Task<IActionResult> DeletePublication(Guid id, CancellationToken ct) =>
         Ok(await Mediator.Send(new DeletePublicationCommand(id, CurrentUserId), ct));
 
+    [HttpPatch("visibility")]
+    public async Task<IActionResult> UpdateVisibility(
+        [FromBody] UpdateVisibilityRequest request, CancellationToken ct) =>
+        Ok(await Mediator.Send(new UpdateProfileVisibilityCommand(
+            CurrentUserId, request.IsPublic, request.Slug), ct));
+
+    public record UpdateVisibilityRequest(bool IsPublic, string? Slug);
+
     [HttpGet("{userId:guid}/courses")]
     public async Task<IActionResult> GetUserCourses(Guid userId, [FromQuery] string? status, CancellationToken ct) =>
         Ok(await Mediator.Send(new GetUserCoursesQuery(userId, status), ct));

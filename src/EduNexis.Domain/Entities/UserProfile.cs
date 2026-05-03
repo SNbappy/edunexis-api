@@ -22,6 +22,8 @@ public class UserProfile : BaseEntity
     public string? GitHubUrl { get; private set; }
     public string? WebsiteUrl { get; private set; }
     public int ProfileCompletionPercent { get; private set; }
+    public bool IsPublicProfile { get; private set; } = false;
+    public string? PublicSlug { get; private set; }
 
     public User User { get; private set; } = null!;
 
@@ -120,5 +122,32 @@ public class UserProfile : BaseEntity
         if (!string.IsNullOrWhiteSpace(ResearchInterestsCsv) ||
             !string.IsNullOrWhiteSpace(FieldsOfWorkCsv)) score += 5;
         ProfileCompletionPercent = score;
+    }
+
+    /// <summary>
+    /// Make this profile visible on the public faculty directory. Slug must
+    /// be pre-validated (format + uniqueness) by the caller in the Application layer.
+    /// </summary>
+    public void MakePublic(string slug)
+    {
+        if (string.IsNullOrWhiteSpace(slug))
+            throw new DomainException("Slug is required to make profile public.");
+        IsPublicProfile = true;
+        PublicSlug = slug;
+        SetUpdatedAt();
+    }
+
+    public void MakePrivate()
+    {
+        IsPublicProfile = false;
+        SetUpdatedAt();
+    }
+
+    public void UpdateSlug(string slug)
+    {
+        if (string.IsNullOrWhiteSpace(slug))
+            throw new DomainException("Slug is required.");
+        PublicSlug = slug;
+        SetUpdatedAt();
     }
 }
