@@ -59,6 +59,23 @@ public class ProfileController : BaseController
     public async Task<IActionResult> DeletePublication(Guid id, CancellationToken ct) =>
         Ok(await Mediator.Send(new DeletePublicationCommand(id, CurrentUserId), ct));
 
+    [HttpPost("publications/{id:guid}/pdf")]
+    public async Task<IActionResult> UploadPublicationPdf(Guid id, IFormFile file, CancellationToken ct) =>
+        Ok(await Mediator.Send(new UploadPublicationPdfCommand(
+            id, CurrentUserId, file.OpenReadStream(), file.FileName, file.Length), ct));
+
+    [HttpDelete("publications/{id:guid}/pdf")]
+    public async Task<IActionResult> RemovePublicationPdf(Guid id, CancellationToken ct) =>
+        Ok(await Mediator.Send(new RemovePublicationPdfCommand(id, CurrentUserId), ct));
+
+    [HttpPatch("publications/{id:guid}/pdf-visibility")]
+    public async Task<IActionResult> UpdatePublicationPdfVisibility(
+        Guid id, [FromBody] UpdatePublicationPdfVisibilityRequest request, CancellationToken ct) =>
+        Ok(await Mediator.Send(new UpdatePublicationPdfVisibilityCommand(
+            id, CurrentUserId, request.IsPublic), ct));
+
+    public record UpdatePublicationPdfVisibilityRequest(bool IsPublic);
+
     [HttpPatch("visibility")]
     public async Task<IActionResult> UpdateVisibility(
         [FromBody] UpdateVisibilityRequest request, CancellationToken ct) =>

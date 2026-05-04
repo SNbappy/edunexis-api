@@ -35,7 +35,11 @@ public sealed class GetPublicFacultyBySlugQueryHandler(IUnitOfWork uow)
             .ThenByDescending(p => p.Year)
             .Select(p => new UserPublicationDto(
                 p.Id, p.Title, p.Authors, p.Venue,
-                p.Year, p.Url, p.Type.ToString(), p.OrderIndex))
+                p.Year, p.Url, p.Type.ToString(), p.OrderIndex,
+                p.IsPdfPublic ? p.PdfUrl : null,
+                p.IsPdfPublic ? p.PdfSizeBytes : null,
+                p.IsPdfPublic ? p.PdfUploadedAt : null,
+                p.IsPdfPublic))
             .ToList();
 
         // Courses via dedicated repo

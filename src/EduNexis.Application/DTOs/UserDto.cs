@@ -1,4 +1,4 @@
-﻿namespace EduNexis.Application.DTOs;
+namespace EduNexis.Application.DTOs;
 
 public record UserDto(
     Guid Id,
@@ -49,7 +49,11 @@ public record UserPublicationDto(
     int Year,
     string? Url,
     string Type,
-    int OrderIndex
+    int OrderIndex,
+    string? PdfUrl,
+    long? PdfSizeBytes,
+    DateTime? PdfUploadedAt,
+    bool IsPdfPublic
 );
 
 public record PublicCourseDto(

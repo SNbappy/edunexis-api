@@ -10,6 +10,14 @@ public class UserPublication : BaseEntity
     public string? Venue { get; private set; }
     public int Year { get; private set; }
     public string? Url { get; private set; }
+
+    // PDF storage (Cloudinary)
+    public string? PdfUrl { get; private set; }
+    public string? PdfPublicId { get; private set; }
+    public long? PdfSizeBytes { get; private set; }
+    public DateTime? PdfUploadedAt { get; private set; }
+    public bool IsPdfPublic { get; private set; } = true;
+
     public PublicationType Type { get; private set; }
     public int OrderIndex { get; private set; }
 
@@ -38,7 +46,8 @@ public class UserPublication : BaseEntity
             Year = year,
             Url = string.IsNullOrWhiteSpace(url) ? null : url.Trim(),
             Type = type,
-            OrderIndex = orderIndex
+            OrderIndex = orderIndex,
+            IsPdfPublic = true
         };
     }
 
@@ -66,6 +75,37 @@ public class UserPublication : BaseEntity
     public void SetOrderIndex(int orderIndex)
     {
         OrderIndex = orderIndex;
+        SetUpdatedAt();
+    }
+
+    // ── PDF management ────────────────────────────────────────────
+
+    public void SetPdf(string url, string publicId, long sizeBytes)
+    {
+        if (string.IsNullOrWhiteSpace(url))
+            throw new DomainException("PDF URL is required");
+        if (string.IsNullOrWhiteSpace(publicId))
+            throw new DomainException("PDF public ID is required");
+
+        PdfUrl = url;
+        PdfPublicId = publicId;
+        PdfSizeBytes = sizeBytes;
+        PdfUploadedAt = DateTime.UtcNow;
+        SetUpdatedAt();
+    }
+
+    public void RemovePdf()
+    {
+        PdfUrl = null;
+        PdfPublicId = null;
+        PdfSizeBytes = null;
+        PdfUploadedAt = null;
+        SetUpdatedAt();
+    }
+
+    public void SetPdfPublic(bool isPublic)
+    {
+        IsPdfPublic = isPublic;
         SetUpdatedAt();
     }
 }

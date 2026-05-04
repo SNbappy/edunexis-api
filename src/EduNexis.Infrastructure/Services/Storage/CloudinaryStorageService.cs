@@ -27,6 +27,14 @@ public class CloudinaryStorageService : IFileStorageService
         Stream fileStream, string fileName,
         string folder, CancellationToken ct = default)
     {
+        var result = await UploadWithIdAsync(fileStream, fileName, folder, ct);
+        return result.Url;
+    }
+
+    public async Task<FileUploadResult> UploadWithIdAsync(
+        Stream fileStream, string fileName,
+        string folder, CancellationToken ct = default)
+    {
         var extension = Path.GetExtension(fileName).ToLowerInvariant();
         var isImage = ImageExtensions.Contains(extension);
 
@@ -45,7 +53,10 @@ public class CloudinaryStorageService : IFileStorageService
             if (imageResult.Error is not null)
                 throw new DomainException($"Image upload failed: {imageResult.Error.Message}");
 
-            return imageResult.SecureUrl.ToString();
+            return new FileUploadResult(
+                Url: imageResult.SecureUrl.ToString(),
+                PublicId: imageResult.PublicId,
+                SizeBytes: imageResult.Bytes);
         }
         else
         {
@@ -62,14 +73,29 @@ public class CloudinaryStorageService : IFileStorageService
             if (rawResult.Error is not null)
                 throw new DomainException($"File upload failed: {rawResult.Error.Message}");
 
-            return rawResult.SecureUrl.ToString();
+            return new FileUploadResult(
+                Url: rawResult.SecureUrl.ToString(),
+                PublicId: rawResult.PublicId,
+                SizeBytes: rawResult.Bytes);
         }
     }
 
     public async Task DeleteAsync(string publicId, CancellationToken ct = default)
     {
-        var deleteParams = new DeletionParams(publicId);
+        // For raw resources (PDFs), need to specify ResourceType
+        var deleteParams = new DeletionParams(publicId)
+        {
+            ResourceType = ResourceType.Raw
+        };
         await _cloudinary.DestroyAsync(deleteParams);
+
+        // Also try image deletion as fallback (for legacy uploads with no resource type)
+        // — silently ignored if not found
+        var imageDeleteParams = new DeletionParams(publicId)
+        {
+            ResourceType = ResourceType.Image
+        };
+        await _cloudinary.DestroyAsync(imageDeleteParams);
     }
 
     public string GetDefaultCoverImageUrl() => _defaultCoverUrl;

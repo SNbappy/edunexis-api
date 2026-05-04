@@ -1,4 +1,4 @@
-﻿using EduNexis.Application.Abstractions;
+using EduNexis.Application.Abstractions;
 using EduNexis.Application.DTOs;
 using EduNexis.Domain.Entities;
 using EduNexis.Domain.Enums;
@@ -141,7 +141,8 @@ public sealed class GetPublicProfileQueryHandler(
                                       e.StartYear, e.EndYear, e.Description)).ToList(),
             Publications: publications.Select(p => new UserPublicationDto(
                                       p.Id, p.Title, p.Authors, p.Venue, p.Year,
-                                      p.Url, p.Type.ToString(), p.OrderIndex)).ToList(),
+                                      p.Url, p.Type.ToString(), p.OrderIndex,
+                                      p.PdfUrl, p.PdfSizeBytes, p.PdfUploadedAt, p.IsPdfPublic)).ToList(),
             Courses: courses,
             RunningCoursesCount: runningCount,
             ArchivedCoursesCount: archivedCount,
