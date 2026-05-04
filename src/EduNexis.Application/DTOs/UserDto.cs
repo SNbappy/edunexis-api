@@ -28,7 +28,9 @@ public record UserProfileDto(
     string? TwitterUrl,
     string? GitHubUrl,
     string? WebsiteUrl,
-    int ProfileCompletionPercent
+    int ProfileCompletionPercent,
+    bool IsPublicProfile,
+    string? PublicSlug
 );
 
 public record UserEducationDto(

@@ -115,5 +115,6 @@ public sealed class UpdateProfileCommandHandler(IUnitOfWork uow)
             p.Bio, p.Headline, p.ProfilePhotoUrl, p.CoverPhotoUrl, p.PhoneNumber,
             p.OfficeLocation, p.OfficeHours, p.ResearchInterestsCsv, p.FieldsOfWorkCsv,
             p.LinkedInUrl, p.FacebookUrl, p.TwitterUrl, p.GitHubUrl,
-            p.WebsiteUrl, p.ProfileCompletionPercent);
+            p.WebsiteUrl, p.ProfileCompletionPercent,
+            p.IsPublicProfile, p.PublicSlug);
 }
