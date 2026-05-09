@@ -1,4 +1,4 @@
-﻿using EduNexis.Application.Features.Presentations.Commands;
+using EduNexis.Application.Features.Presentations.Commands;
 
 namespace EduNexis.Application.Features.Presentations.Queries;
 
@@ -30,7 +30,9 @@ public record PresentationEventDto(
     int? DurationPerGroupMinutes,
     string CreatedAt,
     PresentationResultDto? MyResult,
-    int SubmittedCount
+    int SubmittedCount,
+    bool IsPublished,
+    string? PublishedAt
 )
 {
     public static PresentationEventDto From(
@@ -42,7 +44,8 @@ public record PresentationEventDto(
             ev.Status.ToString(), ev.Format.ToString(),
             ev.Venue, ev.TopicsAllowed, ev.DurationPerGroupMinutes,
             ev.CreatedAt.ToString("O"),
-            myResult, submittedCount);
+            myResult, submittedCount,
+            ev.IsPublished, ev.PublishedAt?.ToString("O"));
 }
 
 public record GetPresentationsQuery(
@@ -82,7 +85,7 @@ public sealed class GetPresentationsQueryHandler(
                     .FindAsync(m => m.PresentationEventId == ev.Id, ct);
                 submittedCount = marks.Count(m => !m.IsAbsent);
             }
-            else
+else if (ev.IsPublished)
             {
                 var mark = await uow.GetRepository<PresentationMark>()
                     .FirstOrDefaultAsync(m =>
