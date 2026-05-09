@@ -1,4 +1,4 @@
-﻿using EduNexis.Application.Features.Presentations.Commands;
+using EduNexis.Application.Features.Presentations.Commands;
 using EduNexis.Application.Features.Presentations.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -40,4 +40,12 @@ public class PresentationsController : BaseController
     public async Task<IActionResult> Grade(
         Guid presentationId, [FromBody] GradePresentationCommand command, CancellationToken ct) =>
         Ok(await Mediator.Send(command with { PresentationEventId = presentationId, TeacherId = CurrentUserId }, ct));
+
+    [HttpPost("presentations/{presentationId:guid}/publish")]
+    public async Task<IActionResult> Publish(Guid presentationId, CancellationToken ct) =>
+        Ok(await Mediator.Send(new PublishPresentationCommand(presentationId, CurrentUserId), ct));
+
+    [HttpPost("presentations/{presentationId:guid}/unpublish")]
+    public async Task<IActionResult> Unpublish(Guid presentationId, CancellationToken ct) =>
+        Ok(await Mediator.Send(new UnpublishPresentationCommand(presentationId, CurrentUserId), ct));
 }

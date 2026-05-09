@@ -1,4 +1,4 @@
-﻿using EduNexis.Application.Features.Presentations.Queries;
+using EduNexis.Application.Features.Presentations.Queries;
 
 namespace EduNexis.Application.Features.Presentations.Queries;
 
@@ -22,6 +22,18 @@ public sealed class GetPresentationResultsQueryHandler(
             ?? throw new NotFoundException("Course", presentation.CourseId);
 
         bool isTeacher = course.TeacherId == query.RequesterId;
+
+        // Students cannot see marks until the test is published.
+        if (!isTeacher && !presentation.IsPublished)
+            return ApiResponse<List<PresentationResultDto>>.Ok(
+                new List<PresentationResultDto>(),
+                "Marks not yet published.");
+
+        // Students cannot see marks until the test is published.
+        if (!isTeacher && !presentation.IsPublished)
+            return ApiResponse<List<PresentationResultDto>>.Ok(
+                new List<PresentationResultDto>(),
+                "Marks not yet published.");
 
         var marks = await uow.GetRepository<PresentationMark>()
             .FindAsync(m => m.PresentationEventId == query.PresentationEventId, ct);
