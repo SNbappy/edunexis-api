@@ -1,4 +1,4 @@
-﻿namespace EduNexis.Domain.Entities;
+namespace EduNexis.Domain.Entities;
 
 public class PresentationEvent : BaseEntity
 {
@@ -13,6 +13,9 @@ public class PresentationEvent : BaseEntity
     public bool TopicsAllowed { get; private set; }
     public int? DurationPerGroupMinutes { get; private set; }
     public Guid CreatedById { get; private set; }
+    public bool IsPublished { get; private set; }
+    public DateTime? PublishedAt { get; private set; }
+    public string? LastPublishedMarksHash { get; private set; }
 
     public Course Course { get; private set; } = null!;
     public User CreatedBy { get; private set; } = null!;
@@ -49,6 +52,20 @@ public class PresentationEvent : BaseEntity
     public void UpdateStatus(PresentationStatus status)
     {
         Status = status;
+        SetUpdatedAt();
+    }
+
+    public void Publish(string marksHash)
+    {
+        IsPublished = true;
+        PublishedAt = DateTime.UtcNow;
+        LastPublishedMarksHash = marksHash;
+        SetUpdatedAt();
+    }
+
+    public void Unpublish()
+    {
+        IsPublished = false;
         SetUpdatedAt();
     }
 }
