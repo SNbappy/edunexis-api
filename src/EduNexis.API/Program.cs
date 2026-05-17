@@ -20,30 +20,14 @@ builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 builder.Host.UseSerilog((ctx, config) =>
     config.ReadFrom.Configuration(ctx.Configuration));
 
-// builder.Services.AddCors(options =>
-//     options.AddPolicy("AllowFrontend", policy =>
-//         policy.WithOrigins(
-//             builder.Configuration.GetSection("Cors:AllowedOrigins")
-//                 .Get<string[]>() ?? [])
-//         .AllowAnyHeader()
-//         .AllowAnyMethod()
-//         .AllowCredentials()));
-
-// added for netlify down code
-var allowedOrigins =
-    builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? [];
-
 builder.Services.AddCors(options =>
-{
     options.AddPolicy("AllowFrontend", policy =>
-    {
-        policy.WithOrigins(allowedOrigins)
-              .AllowAnyHeader()
-              .AllowAnyMethod()
-              .AllowCredentials();
-    });
-});
-// added for netlify upper code
+        policy.WithOrigins(
+            builder.Configuration.GetSection("Cors:AllowedOrigins")
+                .Get<string[]>() ?? [])
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials()));
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
