@@ -1,4 +1,4 @@
-# EduNexis — Smart Learning & Course Management Platform (API Backend)
+# EduNexis - University Course Management Platform
 
 EduNexis is the backend service powering the EduNexis Course Management Platform. It is built using **ASP.NET Core (.NET 10)** following **Clean Architecture** guidelines, incorporating CQRS patterns, custom database caching, and robust security protocols.
 
