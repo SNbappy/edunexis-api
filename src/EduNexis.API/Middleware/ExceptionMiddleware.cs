@@ -45,6 +45,16 @@ public class ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddlewa
                 pie.Message,
                 (List<string>?)null),
 
+            QuotaExceededException qee => (
+                HttpStatusCode.Forbidden,
+                qee.Message,
+                (List<string>?)null),
+
+            AccessExpiredException aee => (
+                HttpStatusCode.Forbidden,
+                aee.Message,
+                (List<string>?)null),
+
             DomainException de => (
                 HttpStatusCode.BadRequest,
                 de.Message,

@@ -1,5 +1,6 @@
 using EduNexis.Application.DTOs;
 using EduNexis.Application.Extensions;
+using EduNexis.Domain.Entities;
 
 namespace EduNexis.Application.Features.Courses.Commands;
 
@@ -35,12 +36,41 @@ public sealed class CreateCourseCommandHandler(
     IUnitOfWork uow
 ) : ICommandHandler<CreateCourseCommand, ApiResponse<CourseDto>>
 {
+    // Starter quota granted automatically on first course creation attempt.
+    // Teachers get 1 free class; more must be requested from an admin.
+    private const int StarterCourseCount = 1;
+    private const int StarterAccessYears = 100;
+
     public async ValueTask<ApiResponse<CourseDto>> Handle(
         CreateCourseCommand cmd, CancellationToken ct)
     {
-        var exists = await uow.Courses.ExistsAsync(c => c.CourseCode == cmd.CourseCode && c.TeacherId == cmd.TeacherId && c.AcademicSession == cmd.AcademicSession && c.Semester == cmd.Semester, ct);
+        var exists = await uow.Courses.ExistsAsync(
+            c => c.CourseCode == cmd.CourseCode
+              && c.TeacherId == cmd.TeacherId
+              && c.AcademicSession == cmd.AcademicSession
+              && c.Semester == cmd.Semester,
+            ct);
         if (exists)
             return ApiResponse<CourseDto>.Fail("Course code already exists.");
+
+        // Quota enforcement.
+        // First-time creators get an auto-provisioned starter quota (1 course,
+        // ~100 year validity, self-assigned). Any grants beyond that come from
+        // an admin via the QuotaRequest flow.
+        var quota = await uow.TeacherQuotas.GetActiveQuotaAsync(cmd.TeacherId, ct);
+        if (quota is null)
+        {
+            quota = TeacherQuota.Create(
+                teacherId: cmd.TeacherId,
+                assignedById: cmd.TeacherId,
+                totalQuota: StarterCourseCount,
+                startDate: DateTime.UtcNow,
+                endDate: DateTime.UtcNow.AddYears(StarterAccessYears));
+            await uow.TeacherQuotas.AddAsync(quota, ct);
+        }
+
+        // Throws QuotaExceededException / AccessExpiredException; middleware maps to 403.
+        quota.ConsumeOne();
 
         var course = Course.Create(
             cmd.Title, cmd.CourseCode, cmd.CreditHours,
@@ -54,4 +84,3 @@ public sealed class CreateCourseCommandHandler(
         return ApiResponse<CourseDto>.Ok(course.ToDto(), "Course created.");
     }
 }
-

@@ -1,4 +1,4 @@
-﻿using EduNexis.Application.Abstractions;
+using EduNexis.Application.Abstractions;
 using EduNexis.Application.Features.Courses.Commands;
 using EduNexis.Application.Features.Courses.Queries;
 using EduNexis.Domain.Enums;
@@ -40,6 +40,15 @@ public class CoursesController : BaseController
         var userId = Guid.Parse(_currentUser.UserId);
         var role   = Enum.Parse<UserRole>(_currentUser.Role ?? "Student");
         return Ok(await Mediator.Send(new GetMyCoursesQuery(userId, role), ct));
+    }
+
+    /// <summary>Returns the caller's current course-creation quota status.</summary>
+    [HttpGet("my-quota")]
+    [Authorize(Roles = "Teacher,SuperAdmin,DepartmentAdmin")]
+    public async Task<IActionResult> GetMyQuota(CancellationToken ct)
+    {
+        var teacherId = Guid.Parse(_currentUser.UserId);
+        return Ok(await Mediator.Send(new GetMyQuotaQuery(teacherId), ct));
     }
 
     [HttpGet("{id:guid}")]
