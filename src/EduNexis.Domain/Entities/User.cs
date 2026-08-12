@@ -1,4 +1,4 @@
-﻿using EduNexis.Domain.Interfaces.Services;
+using EduNexis.Domain.Interfaces.Services;
 
 namespace EduNexis.Domain.Entities;
 
@@ -146,6 +146,14 @@ public class User : BaseEntity
     public void MarkProfileComplete() { IsProfileComplete = true; SetUpdatedAt(); }
     public void MarkProfileIncomplete() { IsProfileComplete = false; SetUpdatedAt(); }
     public void Deactivate() { IsActive = false; SetUpdatedAt(); }
+
+    /// <summary>
+    /// Promotes/changes this user's role directly, bypassing the email-pattern
+    /// validation that only applies at account creation. Used for admin
+    /// bootstrap (auto-promoting configured admin emails on login) and any
+    /// future admin-driven role management.
+    /// </summary>
+    public void SetRole(UserRole newRole) { Role = newRole; SetUpdatedAt(); }
     public void Activate() { IsActive = true; SetUpdatedAt(); }
 
     /* ── Validation ─────────────────────────────────────── */

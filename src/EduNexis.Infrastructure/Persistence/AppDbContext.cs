@@ -10,6 +10,7 @@ public class AppDbContext : DbContext
     public DbSet<User> Users => Set<User>();
     public DbSet<UserProfile> UserProfiles => Set<UserProfile>();
     public DbSet<TeacherQuota> TeacherQuotas => Set<TeacherQuota>();
+    public DbSet<PlatformSetting> PlatformSettings => Set<PlatformSetting>();
     public DbSet<Course> Courses => Set<Course>();
     public DbSet<CourseMember> CourseMembers => Set<CourseMember>();
     public DbSet<JoinRequest> JoinRequests => Set<JoinRequest>();

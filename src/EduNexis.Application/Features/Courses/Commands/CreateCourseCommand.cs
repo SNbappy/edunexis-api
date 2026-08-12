@@ -53,24 +53,34 @@ public sealed class CreateCourseCommandHandler(
         if (exists)
             return ApiResponse<CourseDto>.Fail("Course code already exists.");
 
-        // Quota enforcement.
-        // First-time creators get an auto-provisioned starter quota (1 course,
-        // ~100 year validity, self-assigned). Any grants beyond that come from
-        // an admin via the QuotaRequest flow.
-        var quota = await uow.TeacherQuotas.GetActiveQuotaAsync(cmd.TeacherId, ct);
-        if (quota is null)
-        {
-            quota = TeacherQuota.Create(
-                teacherId: cmd.TeacherId,
-                assignedById: cmd.TeacherId,
-                totalQuota: StarterCourseCount,
-                startDate: DateTime.UtcNow,
-                endDate: DateTime.UtcNow.AddYears(StarterAccessYears));
-            await uow.TeacherQuotas.AddAsync(quota, ct);
-        }
+        // Quota enforcement is a platform-wide switch an admin controls at
+        // runtime (PlatformSetting.CourseQuotaEnforced). While off, every
+        // teacher creates unlimited courses - the pre-launch/free-rollout
+        // state. Once an admin turns it on, the 1-free-course + admin-grant
+        // system below applies to every teacher going forward.
+        var settings = (await uow.GetRepository<PlatformSetting>().GetAllAsync(ct))
+            .FirstOrDefault();
+        var quotaEnforced = settings?.CourseQuotaEnforced ?? false;
 
-        // Throws QuotaExceededException / AccessExpiredException; middleware maps to 403.
-        quota.ConsumeOne();
+        if (quotaEnforced)
+        {
+            // First-time creators get an auto-provisioned starter quota (1 course,
+            // ~100 year validity, self-assigned). Any grants beyond that come from
+            // an admin via the QuotaRequest flow.
+            var quota = await uow.TeacherQuotas.GetActiveQuotaAsync(cmd.TeacherId, ct);
+            if (quota is null)
+            {
+                quota = TeacherQuota.Create(
+                    teacherId: cmd.TeacherId,
+                    assignedById: cmd.TeacherId,
+                    totalQuota: StarterCourseCount,
+                    startDate: DateTime.UtcNow,
+                    endDate: DateTime.UtcNow.AddYears(StarterAccessYears));
+                await uow.TeacherQuotas.AddAsync(quota, ct);
+            }
+            // Throws QuotaExceededException / AccessExpiredException; middleware maps to 403.
+            quota.ConsumeOne();
+        }
 
         var course = Course.Create(
             cmd.Title, cmd.CourseCode, cmd.CreditHours,

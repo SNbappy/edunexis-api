@@ -1,6 +1,7 @@
-﻿using EduNexis.Application.Abstractions;
+using EduNexis.Application.Abstractions;
 using EduNexis.Application.DTOs;
 using EduNexis.Application.Features.Profile.Commands;
+using EduNexis.Domain.Enums;
 using EduNexis.Domain.Interfaces.Services;
 using Microsoft.Extensions.Logging;
 
@@ -30,6 +31,14 @@ public sealed class LoginUserCommandHandler(
 {
     private const int OtpExpiryMinutes = 10;
 
+    // Emails auto-promoted to SuperAdmin on successful login. Not user-manageable
+    // via UI by design - changing who bootstraps as admin is a deploy-time decision.
+    private static readonly HashSet<string> AdminEmails = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "n.amin@just.edu.bd",
+        "200109.cse@student.just.edu.bd",
+    };
+
     public async ValueTask<ApiResponse<AuthResponseDto>> Handle(LoginUserCommand command, CancellationToken ct)
     {
         var user = await uow.Users.GetByEmailAsync(command.Email, ct)
@@ -40,6 +49,16 @@ public sealed class LoginUserCommandHandler(
 
         if (!user.IsActive)
             throw new UnauthorizedException("Account is deactivated.");
+
+        // Admin bootstrap: configured admin emails are auto-promoted to
+        // SuperAdmin on login if not already. Idempotent - only writes when
+        // the role actually needs to change.
+        if (AdminEmails.Contains(user.Email) && user.Role != UserRole.SuperAdmin)
+        {
+            user.SetRole(UserRole.SuperAdmin);
+            await uow.SaveChangesAsync(ct);
+            logger.LogInformation("Auto-promoted {Email} to SuperAdmin on login.", user.Email);
+        }
 
         // Block unverified users when OTP is required
         if (authSettings.OtpRequired && !user.IsEmailVerified)
