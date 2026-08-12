@@ -12,7 +12,22 @@ using System.Text.Json.Serialization;
 
 Directory.CreateDirectory("logs");
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(new WebApplicationOptions
+{
+    Args = args,
+    // Disable appsettings.json file-watching. Render's free tier has a low
+    // per-container inotify watch limit; repeated restarts under memory
+    // pressure were exhausting it, causing every subsequent boot to crash
+    // immediately with "configured user limit (128) on the number of
+    // inotify instances has been reached" before the app could even start.
+    // We always redeploy the whole container on config changes anyway, so
+    // hot-reload of config files is not needed here.
+});
+builder.Configuration.Sources.Clear();
+builder.Configuration
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: false)
+    .AddEnvironmentVariables();
 
 var port = Environment.GetEnvironmentVariable("PORT") ?? "5041";
 builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
