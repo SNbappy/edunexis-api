@@ -1,4 +1,4 @@
-﻿using EduNexis.Application.Abstractions;
+using EduNexis.Application.Abstractions;
 using EduNexis.Application.DTOs;
 using EduNexis.Application.Extensions;
 using EduNexis.Domain.Enums;
@@ -20,7 +20,7 @@ public sealed class GetCourseQueryHandler(
             return ApiResponse<CourseDto>.Fail("Course not found.");
 
         var viewerId    = Guid.Parse(currentUser.UserId);
-        var isAdmin     = currentUser.Role is "Admin" or "SuperAdmin";
+        var isAdmin     = currentUser.Role is "SuperAdmin" or "DepartmentAdmin";
         var isOwner     = course.TeacherId == viewerId;
         var membership  = await uow.CourseMembers.GetMemberAsync(course.Id, viewerId, ct);
         var isMember    = membership is not null && membership.IsActive;

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EduNexis.API.Controllers;
 
 public record ReviewJoinRequestBody(bool Approve);
+public record DeleteCourseBody(string Password, string CourseCodeConfirmation);
 public record RequestJoinBody(string JoiningCode);
 
 [Authorize]
@@ -26,7 +27,7 @@ public class CoursesController : BaseController
 
     /// <summary>Admin-only course listing. Regular users use /my-courses.</summary>
     [HttpGet]
-    [Authorize(Roles = "Admin,SuperAdmin")]
+    [Authorize(Roles = "SuperAdmin,DepartmentAdmin")]
     public async Task<IActionResult> GetAll(
         [FromQuery] Guid? teacherId,
         [FromQuery] Guid? studentId,
@@ -65,7 +66,7 @@ public class CoursesController : BaseController
         Ok(await Mediator.Send(new GetCourseMembersQuery(id), ct));
 
     [HttpGet("{id:guid}/join-requests")]
-    [Authorize(Roles = "Teacher,Admin")]
+    [Authorize(Roles = "Teacher,SuperAdmin,DepartmentAdmin")]
     public async Task<IActionResult> GetJoinRequests(Guid id, CancellationToken ct) =>
         Ok(await Mediator.Send(
             new GetPendingJoinRequestsQuery(id, Guid.Parse(_currentUser.UserId)), ct));
@@ -75,30 +76,31 @@ public class CoursesController : BaseController
     // ──────────────────────────────────────────────────────────────
 
     [HttpPost]
-    [Authorize(Roles = "Teacher,Admin")]
+    [Authorize(Roles = "Teacher,SuperAdmin,DepartmentAdmin")]
     public async Task<IActionResult> Create(
         [FromBody] CreateCourseCommand command, CancellationToken ct) =>
         Ok(await Mediator.Send(command, ct));
 
     [HttpPut("{id:guid}")]
-    [Authorize(Roles = "Teacher,Admin")]
+    [Authorize(Roles = "Teacher,SuperAdmin,DepartmentAdmin")]
     public async Task<IActionResult> Update(
         Guid id, [FromBody] UpdateCourseCommand command, CancellationToken ct) =>
         Ok(await Mediator.Send(command with { Id = id }, ct));
 
     [HttpDelete("{id:guid}")]
-    [Authorize(Roles = "Teacher,Admin")]
-    public async Task<IActionResult> Delete(Guid id, CancellationToken ct) =>
-        Ok(await Mediator.Send(new DeleteCourseCommand(id), ct));
+    [Authorize(Roles = "SuperAdmin,DepartmentAdmin")]
+    public async Task<IActionResult> Delete(
+        Guid id, [FromBody] DeleteCourseBody body, CancellationToken ct) =>
+        Ok(await Mediator.Send(new DeleteCourseCommand(id, body.Password, body.CourseCodeConfirmation), ct));
 
     [HttpPatch("{id:guid}/archive")]
-    [Authorize(Roles = "Teacher,Admin")]
+    [Authorize(Roles = "Teacher,SuperAdmin,DepartmentAdmin")]
     public async Task<IActionResult> Archive(Guid id, CancellationToken ct) =>
         Ok(await Mediator.Send(
             new ArchiveCourseCommand(id, Guid.Parse(_currentUser.UserId)), ct));
 
     [HttpPatch("{id:guid}/unarchive")]
-    [Authorize(Roles = "Teacher,Admin")]
+    [Authorize(Roles = "Teacher,SuperAdmin,DepartmentAdmin")]
     public async Task<IActionResult> Unarchive(Guid id, CancellationToken ct) =>
         Ok(await Mediator.Send(new UnarchiveCourseCommand(id), ct));
 
@@ -108,12 +110,12 @@ public class CoursesController : BaseController
 
     
     [HttpDelete("{id:guid}/members/{studentId:guid}")]
-    [Authorize(Roles = "Teacher,Admin")]
+    [Authorize(Roles = "Teacher,SuperAdmin,DepartmentAdmin")]
     public async Task<IActionResult> RemoveMember(
         Guid id, Guid studentId, CancellationToken ct) =>
         Ok(await Mediator.Send(new RemoveCourseMemberCommand(id, studentId), ct));
     [HttpPost("{id:guid}/join-requests/{requestId:guid}/review")]
-    [Authorize(Roles = "Teacher,Admin")]
+    [Authorize(Roles = "Teacher,SuperAdmin,DepartmentAdmin")]
     public async Task<IActionResult> ReviewJoinRequest(
         Guid id, Guid requestId,
         [FromBody] ReviewJoinRequestBody body, CancellationToken ct) =>

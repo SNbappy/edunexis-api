@@ -1,4 +1,4 @@
-﻿using EduNexis.Application.Abstractions;
+using EduNexis.Application.Abstractions;
 
 namespace EduNexis.Application.Features.Courses.Commands;
 
@@ -21,7 +21,7 @@ public sealed class UnarchiveCourseCommandHandler(
         UnarchiveCourseCommand cmd, CancellationToken ct)
     {
         var userId  = Guid.Parse(currentUser.UserId);
-        var isAdmin = currentUser.Role is "Admin" or "SuperAdmin";
+        var isAdmin = currentUser.Role is "SuperAdmin" or "DepartmentAdmin";
 
         var course = await uow.Courses.GetByIdAsync(cmd.CourseId, ct);
         if (course is null)

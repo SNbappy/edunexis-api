@@ -32,7 +32,7 @@ public class AnnouncementsController : BaseController
         Ok(await Mediator.Send(new DeleteAnnouncementCommand(courseId, id), ct));
 
     [HttpPatch("courses/{courseId:guid}/announcements/{id:guid}/pin")]
-    [Authorize(Roles = "Teacher,Admin")]
+    [Authorize(Roles = "Teacher,SuperAdmin,DepartmentAdmin")]
     public async Task<IActionResult> TogglePin(Guid courseId, Guid id, CancellationToken ct) =>
         Ok(await Mediator.Send(new PinAnnouncementCommand(courseId, id), ct));
 }

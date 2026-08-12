@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace EduNexis.API.Controllers;
 
-[Authorize(Roles = "Teacher,Admin")]
+[Authorize(Roles = "Teacher,SuperAdmin,DepartmentAdmin")]
 public class AnalysisController : BaseController
 {
     private readonly IConfiguration _config;

@@ -36,7 +36,7 @@ public class AttendanceController : BaseController
         }, ct));
 
     [HttpDelete("courses/{courseId:guid}/sessions/{sessionId:guid}")]
-    [Authorize(Roles = "Teacher,Admin")]
+    [Authorize(Roles = "Teacher,SuperAdmin,DepartmentAdmin")]
     public async Task<IActionResult> DeleteSession(
         Guid courseId, Guid sessionId, CancellationToken ct) =>
         Ok(await Mediator.Send(new DeleteAttendanceSessionCommand(courseId, sessionId), ct));

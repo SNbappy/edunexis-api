@@ -1,4 +1,4 @@
-﻿using EduNexis.Application.Abstractions;
+using EduNexis.Application.Abstractions;
 using EduNexis.Application.DTOs;
 using EduNexis.Application.Extensions;
 
@@ -20,7 +20,7 @@ public sealed class GetCoursesQueryHandler(
     public async ValueTask<ApiResponse<List<CourseSummaryDto>>> Handle(
         GetCoursesQuery query, CancellationToken ct)
     {
-        var isAdmin = currentUser.Role is "Admin" or "SuperAdmin";
+        var isAdmin = currentUser.Role is "SuperAdmin" or "DepartmentAdmin";
         if (!isAdmin)
             return ApiResponse<List<CourseSummaryDto>>.Fail("Forbidden.");
 
