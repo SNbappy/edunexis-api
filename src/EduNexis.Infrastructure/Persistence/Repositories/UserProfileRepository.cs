@@ -20,7 +20,7 @@ public class UserProfileRepository : BaseRepository<UserProfile>, IUserProfileRe
         // Cross-table join via subquery on Users.
         var query = DbSet.AsNoTracking()
             .Where(p => p.IsPublicProfile)
-            .Where(p => Context.Users.Any(u => u.Id == p.UserId && u.Role == UserRole.Teacher && u.IsActive));
+            .Where(p => Context.Users.Any(u => u.Id == p.UserId && (u.Role == UserRole.Teacher || u.Role == UserRole.SuperAdmin || u.Role == UserRole.DepartmentAdmin) && u.IsActive));
 
         if (!string.IsNullOrWhiteSpace(department))
             query = query.Where(p => p.Department == department);
@@ -35,7 +35,7 @@ public class UserProfileRepository : BaseRepository<UserProfile>, IUserProfileRe
     public async Task<List<string>> ListPublicDepartmentsAsync(CancellationToken ct = default) =>
         await DbSet.AsNoTracking()
             .Where(p => p.IsPublicProfile)
-            .Where(p => Context.Users.Any(u => u.Id == p.UserId && u.Role == UserRole.Teacher && u.IsActive))
+            .Where(p => Context.Users.Any(u => u.Id == p.UserId && (u.Role == UserRole.Teacher || u.Role == UserRole.SuperAdmin || u.Role == UserRole.DepartmentAdmin) && u.IsActive))
             .Select(p => p.Department)
             .Distinct()
             .OrderBy(d => d)
