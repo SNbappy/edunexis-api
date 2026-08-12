@@ -103,6 +103,10 @@ public class CoursesController : BaseController
     public async Task<IActionResult> Restore(Guid id, CancellationToken ct) =>
         Ok(await Mediator.Send(new RestoreDeletedCourseCommand(id), ct));
 
+    [HttpDelete("{id:guid}/permanent")]
+    public async Task<IActionResult> PermanentlyDelete(Guid id, CancellationToken ct) =>
+        Ok(await Mediator.Send(new PermanentlyDeleteCourseCommand(id), ct));
+
     [HttpPatch("{id:guid}/archive")]
     [Authorize(Roles = "Teacher,SuperAdmin,DepartmentAdmin")]
     public async Task<IActionResult> Archive(Guid id, CancellationToken ct) =>
