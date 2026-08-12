@@ -88,10 +88,20 @@ public class CoursesController : BaseController
         Ok(await Mediator.Send(command with { Id = id }, ct));
 
     [HttpDelete("{id:guid}")]
-    [Authorize(Roles = "SuperAdmin,DepartmentAdmin")]
     public async Task<IActionResult> Delete(
         Guid id, [FromBody] DeleteCourseBody body, CancellationToken ct) =>
         Ok(await Mediator.Send(new DeleteCourseCommand(id, body.Password, body.CourseCodeConfirmation), ct));
+
+    [HttpGet("deleted")]
+    public async Task<IActionResult> GetDeleted(CancellationToken ct)
+    {
+        var teacherId = Guid.Parse(_currentUser.UserId);
+        return Ok(await Mediator.Send(new GetMyDeletedCoursesQuery(teacherId), ct));
+    }
+
+    [HttpPost("{id:guid}/restore")]
+    public async Task<IActionResult> Restore(Guid id, CancellationToken ct) =>
+        Ok(await Mediator.Send(new RestoreDeletedCourseCommand(id), ct));
 
     [HttpPatch("{id:guid}/archive")]
     [Authorize(Roles = "Teacher,SuperAdmin,DepartmentAdmin")]

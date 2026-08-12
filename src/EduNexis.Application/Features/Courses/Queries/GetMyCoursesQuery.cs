@@ -1,4 +1,4 @@
-﻿using EduNexis.Application.DTOs;
+using EduNexis.Application.DTOs;
 using EduNexis.Application.Extensions;
 using EduNexis.Domain.Entities;
 using EduNexis.Domain.Enums;
@@ -21,6 +21,10 @@ public sealed class GetMyCoursesQueryHandler(
         IEnumerable<Course> enrolledCourses = query.Role == UserRole.Teacher
             ? await uow.Courses.GetByTeacherAsync(query.UserId, ct)
             : await uow.Courses.GetByStudentAsync(query.UserId, ct);
+
+        // Soft-deleted courses never appear in the active list; they live in
+        // the teacher's Recently Deleted view (GetMyDeletedCoursesQuery).
+        enrolledCourses = enrolledCourses.Where(c => !c.IsDeletedByOwner);
 
         var enrolled = new List<CourseSummaryDto>();
         foreach (var course in enrolledCourses)

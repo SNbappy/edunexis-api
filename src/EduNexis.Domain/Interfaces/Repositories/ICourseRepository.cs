@@ -9,6 +9,8 @@ public interface ICourseRepository : IBaseRepository<Course>
     Task<Course?> GetWithMembersAsync(Guid courseId, CancellationToken ct = default);
     Task<IEnumerable<Course>> GetByTeacherAsync(Guid teacherId, CancellationToken ct = default);
     Task<IEnumerable<Course>> GetByStudentAsync(Guid studentId, CancellationToken ct = default);
+    /// <summary>Courses the teacher has soft-deleted (Recently Deleted list), regardless of the 30-day window.</summary>
+    Task<IEnumerable<Course>> GetDeletedByTeacherAsync(Guid teacherId, CancellationToken ct = default);
     new Task<IEnumerable<Course>> GetAllAsync(CancellationToken ct = default);
 
     /// <summary>Active (non-archived) course counts for a set of teacher IDs.</summary>

@@ -1,4 +1,4 @@
-﻿namespace EduNexis.Domain.Entities;
+namespace EduNexis.Domain.Entities;
 
 public class Course : BaseEntity
 {
@@ -15,6 +15,8 @@ public class Course : BaseEntity
     public string JoiningCode { get; private set; } = string.Empty;
     public Guid TeacherId { get; private set; }
     public bool IsArchived { get; private set; } = false;
+    public bool IsDeletedByOwner { get; private set; } = false;
+    public DateTime? DeletedByOwnerAt { get; private set; }
 
     // Navigation
     public User Teacher { get; private set; } = null!;
@@ -88,6 +90,35 @@ public class Course : BaseEntity
         IsArchived = false;
         SetUpdatedAt();
     }
+
+    /// <summary>
+    /// Owner-initiated soft delete. Course moves to the teacher's "Recently
+    /// deleted" list and can be restored within 30 days via RestoreByOwner().
+    /// After the window elapses it becomes eligible for permanent purge.
+    /// </summary>
+    public void SoftDeleteByOwner()
+    {
+        if (IsDeletedByOwner) throw new DomainException("Course is already deleted.");
+        IsDeletedByOwner = true;
+        DeletedByOwnerAt = DateTime.UtcNow;
+        SetUpdatedAt();
+    }
+
+    public void RestoreByOwner()
+    {
+        if (!IsDeletedByOwner) throw new DomainException("Course is not deleted.");
+        if (DeletedByOwnerAt is null || DateTime.UtcNow > DeletedByOwnerAt.Value.AddDays(30))
+            throw new DomainException("The 30-day restore window has expired.");
+        IsDeletedByOwner = false;
+        DeletedByOwnerAt = null;
+        SetUpdatedAt();
+    }
+
+    /// <summary>True once the 30-day restore window has elapsed. Callers use
+    /// this to decide whether a soft-deleted course is eligible for purge.</summary>
+    public bool IsPastRestoreWindow =>
+        IsDeletedByOwner && DeletedByOwnerAt is not null &&
+        DateTime.UtcNow > DeletedByOwnerAt.Value.AddDays(30);
 
     public void RegenerateJoiningCode() { JoiningCode = GenerateJoiningCode(); SetUpdatedAt(); }
 

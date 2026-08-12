@@ -30,36 +30,34 @@ public sealed class DeleteCourseCommandHandler(
         DeleteCourseCommand cmd, CancellationToken ct)
     {
         var viewerId = Guid.Parse(currentUser.UserId);
-        var isAdmin  = currentUser.Role is "SuperAdmin" or "DepartmentAdmin";
-
-        // Hard delete is intentionally restricted to admins only. Teachers use
-        // Archive/Unarchive, which preserves all records (attendance, grades,
-        // submissions) and is fully reversible. This endpoint is for admin-driven
-        // permanent removal of courses that genuinely should not exist.
-        if (!isAdmin)
-            return ApiResponse.Fail("Only an administrator can permanently delete a course. Use Archive instead.");
 
         var course = await uow.Courses.GetByIdAsync(cmd.Id, ct);
         if (course is null)
             return ApiResponse.Fail("Course not found.");
 
+        // Only the owning teacher can soft-delete their own course.
+        if (course.TeacherId != viewerId)
+            return ApiResponse.Fail("You don't have permission to delete this course.");
+
         // Defense in depth: never trust the client's confirmation UI alone.
-        // Re-verify both the course code and the admin's password server-side.
+        // Re-verify both the course code and the teacher's password server-side.
         if (!string.Equals(cmd.CourseCodeConfirmation.Trim(), course.CourseCode, StringComparison.Ordinal))
             return ApiResponse.Fail("Course code confirmation does not match. Nothing was deleted.");
 
-        var admin = await uow.Users.GetByIdAsync(viewerId, ct)
+        var teacher = await uow.Users.GetByIdAsync(viewerId, ct)
             ?? throw new NotFoundException("User", viewerId);
 
-        if (!passwordHasher.Verify(cmd.Password, admin.PasswordHash))
+        if (!passwordHasher.Verify(cmd.Password, teacher.PasswordHash))
             return ApiResponse.Fail("Incorrect password. Nothing was deleted.");
 
-        // Cascading behavior for related entities is defined in AppDbContext:
-        // members, attendance sessions, materials, assignments, etc. will
-        // cascade-delete per EF's default behavior for owning relationships.
-        uow.Courses.Delete(course);
+        // Soft delete: course moves to the teacher's "Recently deleted" list.
+        // Restorable within 30 days via RestoreDeletedCourseCommand; after
+        // that it becomes eligible for permanent purge. All attendance,
+        // grades, and submissions are preserved throughout.
+        course.SoftDeleteByOwner();
+        uow.Courses.Update(course);
         await uow.SaveChangesAsync(ct);
 
-        return ApiResponse.Ok("Course permanently deleted.");
+        return ApiResponse.Ok("Course moved to Recently Deleted. You can restore it within 30 days.");
     }
 }
