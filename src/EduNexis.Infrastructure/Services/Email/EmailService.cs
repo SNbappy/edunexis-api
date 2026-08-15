@@ -37,26 +37,26 @@ public class EmailService : IEmailService
         _fromName = configuration["Email:SenderName"] ?? "EduNexis";
     }
 
-    public async Task SendAsync(
+    public async Task<bool> SendAsync(
         string to, string subject, string body,
         CancellationToken ct = default)
     {
         if (!_enabled)
         {
             _logger.LogInformation("Email disabled by config. Skipping send to {Email}.", to);
-            return;
+            return false;
         }
 
         if (string.IsNullOrWhiteSpace(to))
         {
             _logger.LogWarning("SendAsync called with empty recipient. Skipping.");
-            return;
+            return false;
         }
 
         if (string.IsNullOrWhiteSpace(_apiKey))
         {
             _logger.LogError("Brevo API key not configured. Set Email:ApiKey environment variable.");
-            return;
+            return false;
         }
 
         var payload = new BrevoEmailPayload
@@ -67,7 +67,7 @@ public class EmailService : IEmailService
             HtmlContent = body,
         };
 
-        await SendInternalAsync(payload, to, ct);
+        return await SendInternalAsync(payload, to, ct);
     }
 
     public async Task SendAsync(
@@ -99,6 +99,7 @@ public class EmailService : IEmailService
 
         // Brevo accepts up to 99 recipients per call, but each appears in the To header
         // for everyone (privacy leak). For notifications we send one call per recipient.
+        var accepted = 0;
         foreach (var recipient in recipients)
         {
             var payload = new BrevoEmailPayload
@@ -108,14 +109,34 @@ public class EmailService : IEmailService
                 Subject = subject,
                 HtmlContent = body,
             };
-            await SendInternalAsync(payload, recipient, ct);
+            if (await SendInternalAsync(payload, recipient, ct)) accepted++;
         }
 
-        _logger.LogInformation("Batch email completed: {Count} recipients, subject {Subject}",
-            recipients.Count, subject);
+        // Report accepted vs attempted. Logging only the attempt count meant a
+        // batch where every single send was rejected still read as "completed".
+        if (accepted == recipients.Count)
+        {
+            _logger.LogInformation("Batch email sent to {Count} recipients, subject {Subject}",
+                recipients.Count, subject);
+        }
+        else
+        {
+            _logger.LogWarning(
+                "Batch email partially failed: {Accepted}/{Total} accepted, subject {Subject}",
+                accepted, recipients.Count, subject);
+        }
     }
 
-    private async Task SendInternalAsync(
+    /// <summary>
+    /// Returns whether the message was actually accepted by Brevo.
+    ///
+    /// This used to return a bare Task, logging a warning on rejection and
+    /// otherwise saying nothing — so callers could not tell success from
+    /// failure and logged "OTP email sent" even when Brevo answered 401.
+    /// Delivery still is not guaranteed by a 2xx, but "the provider accepted
+    /// it" is a far more honest signal than "we called the method".
+    /// </summary>
+    private async Task<bool> SendInternalAsync(
         BrevoEmailPayload payload, string recipient, CancellationToken ct)
     {
         try
@@ -131,18 +152,19 @@ public class EmailService : IEmailService
             {
                 _logger.LogInformation("Email sent via Brevo to {Email}: {Subject}",
                     recipient, payload.Subject);
+                return true;
             }
-            else
-            {
-                var error = await response.Content.ReadAsStringAsync(ct);
-                _logger.LogWarning(
-                    "Brevo rejected email to {Email}: HTTP {Status} {Error}",
-                    recipient, (int)response.StatusCode, error);
-            }
+
+            var error = await response.Content.ReadAsStringAsync(ct);
+            _logger.LogWarning(
+                "Brevo rejected email to {Email}: HTTP {Status} {Error}",
+                recipient, (int)response.StatusCode, error);
+            return false;
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to send email to {Email} via Brevo HTTP API", recipient);
+            return false;
         }
     }
 }

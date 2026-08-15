@@ -36,11 +36,11 @@ public class EmailTemplateBuilder : IEmailTemplateBuilder
         sb.AppendLine("</head>");
         sb.AppendLine($"<body style=\"margin:0;padding:0;background:{Bg};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;color:{TextDark};\">");
 
-        // Outer wrapper — full-width
+        // Outer wrapper â€” full-width
         sb.AppendLine($"<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"background:{Bg};padding:32px 16px;\">");
         sb.AppendLine("<tr><td align=\"center\">");
 
-        // Card — fixed max-width
+        // Card â€” fixed max-width
         sb.AppendLine($"<table role=\"presentation\" width=\"560\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"max-width:560px;width:100%;background:{Card};border:1px solid {Border};border-radius:16px;overflow:hidden;\">");
 
         // Brand header

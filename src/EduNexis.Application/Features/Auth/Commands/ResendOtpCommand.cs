@@ -53,8 +53,15 @@ public sealed class ResendOtpCommandHandler(
                 "<p style=\"color:#78716c;font-size:13px;\">Previous codes are no longer valid.</p>";
 
             var html = templateBuilder.Build("New verification code", bodyHtml);
-            await emailService.SendAsync(user.Email, "EduNexis verification code: " + plainOtp, html, ct);
-            logger.LogInformation("OTP resent to {Email}", user.Email);
+            // Code stays out of the subject - see RegisterUserCommand for why.
+            var sent = await emailService.SendAsync(user.Email, "Your new EduNexis verification code", html, ct);
+
+            if (sent)
+                logger.LogInformation("OTP resent to {Email}", user.Email);
+            else
+                logger.LogError(
+                    "Resent OTP to {Email} was NOT delivered - the provider rejected it.",
+                    user.Email);
         }
         catch (Exception ex)
         {

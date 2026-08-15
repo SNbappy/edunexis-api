@@ -23,9 +23,15 @@ public sealed class UploadMaterialCommandValidator : AbstractValidator<UploadMat
         RuleFor(x => x.FileStream)
             .NotNull().When(x => x.Type == MaterialType.File)
             .WithMessage("File is required for File type materials.");
+        // Every link-shaped material needs a URL, not just Link — YouTube and
+        // GoogleDrive are stored the same way and were previously accepted
+        // with an empty EmbedUrl, producing a material that pointed nowhere.
         RuleFor(x => x.EmbedUrl)
-            .NotEmpty().When(x => x.Type == MaterialType.Link)
-            .WithMessage("Embed URL is required for Link type materials.");
+            .NotEmpty()
+            .When(x => x.Type is MaterialType.Link
+                              or MaterialType.YouTube
+                              or MaterialType.GoogleDrive)
+            .WithMessage("A URL is required for link, YouTube and Drive materials.");
     }
 }
 

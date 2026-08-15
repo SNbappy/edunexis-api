@@ -78,8 +78,16 @@ public class CoursesController : BaseController
     [HttpPost]
     [Authorize(Roles = "Teacher,SuperAdmin,DepartmentAdmin")]
     public async Task<IActionResult> Create(
-        [FromBody] CreateCourseCommand command, CancellationToken ct) =>
-        Ok(await Mediator.Send(command, ct));
+        [FromBody] CreateCourseCommand command, CancellationToken ct)
+    {
+        // The owner is always the caller. TeacherId arrives on the body and was
+        // previously trusted as sent, so a teacher could pass a colleague's id
+        // and create a course owned by them — and, once quota enforcement is on,
+        // spend that colleague's course allowance. There is no create-on-behalf
+        // flow, so the value from the token wins unconditionally.
+        var teacherId = Guid.Parse(_currentUser.UserId);
+        return Ok(await Mediator.Send(command with { TeacherId = teacherId }, ct));
+    }
 
     [HttpPut("{id:guid}")]
     [Authorize(Roles = "Teacher,SuperAdmin,DepartmentAdmin")]

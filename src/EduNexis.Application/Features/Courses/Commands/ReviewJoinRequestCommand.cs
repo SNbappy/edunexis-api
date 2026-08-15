@@ -69,7 +69,10 @@ public sealed class ReviewJoinRequestCommandHandler(
 
         // Notify student of decision
         var (title, body, type) = cmd.Approve
-            ? ("Join Request Approved ??",
+            // Was "Join Request Approved ??" - an emoji that an ANSI save had
+            // already flattened to two literal question marks, which then went
+            // into the database and showed as "??" in the student's feed.
+            ? ("Join Request Approved",
                $"Your request to join {course.Title} has been approved. Welcome!",
                NotificationType.CourseJoinApproved)
             : ("Join Request Rejected",

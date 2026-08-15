@@ -16,6 +16,8 @@ public sealed class UpdatePlatformSettingsCommandHandler(
         var repo = uow.GetRepository<PlatformSetting>();
 
         var settings = (await repo.GetAllAsync(ct)).FirstOrDefault();
+        var isNew = settings is null;
+
         if (settings is null)
         {
             settings = PlatformSetting.CreateDefault();
@@ -23,7 +25,16 @@ public sealed class UpdatePlatformSettingsCommandHandler(
         }
 
         settings.SetCourseQuotaEnforced(cmd.CourseQuotaEnforced, adminId);
-        repo.Update(settings);
+
+        // Only mark Modified for a row that already exists. Calling Update() on
+        // a freshly Added entity flips its state from Added to Modified, so EF
+        // emitted an UPDATE against a row that was never inserted — 0 rows
+        // affected, DbUpdateConcurrencyException, 500. Because this method is
+        // the only thing that creates the settings row, the very first toggle
+        // always failed and the switch could never be turned on.
+        if (!isNew)
+            repo.Update(settings);
+
         await uow.SaveChangesAsync(ct);
 
         var message = cmd.CourseQuotaEnforced

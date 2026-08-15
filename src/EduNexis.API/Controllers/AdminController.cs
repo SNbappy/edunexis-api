@@ -21,11 +21,23 @@ public class AdminController : BaseController
     public async Task<IActionResult> GetTeachers(CancellationToken ct) =>
         Ok(await Mediator.Send(new GetTeachersQuery(), ct));
 
+    /// <summary>Full grant history for one teacher, newest first.</summary>
+    [HttpGet("teachers/{teacherId:guid}/quota")]
+    public async Task<IActionResult> GetTeacherGrants(Guid teacherId, CancellationToken ct) =>
+        Ok(await Mediator.Send(new GetTeacherGrantsQuery(teacherId), ct));
+
+    /// <summary>Issues a new grant. Additive — `courses` is how many to add.</summary>
     [HttpPost("teachers/{teacherId:guid}/quota")]
     public async Task<IActionResult> GrantQuota(
         Guid teacherId, [FromBody] GrantTeacherQuotaBody body, CancellationToken ct) =>
         Ok(await Mediator.Send(
-            new GrantTeacherQuotaCommand(teacherId, body.TotalQuota, body.AccessDurationDays), ct));
+            new GrantTeacherQuotaCommand(
+                teacherId, body.Courses, body.AccessDurationDays, body.Note), ct));
+
+    /// <summary>Withdraws a grant's unspent allowance. Existing courses are unaffected.</summary>
+    [HttpDelete("quota/{grantId:guid}")]
+    public async Task<IActionResult> RevokeGrant(Guid grantId, CancellationToken ct) =>
+        Ok(await Mediator.Send(new RevokeTeacherQuotaCommand(grantId), ct));
 }
 
-public record GrantTeacherQuotaBody(int TotalQuota, int AccessDurationDays);
+public record GrantTeacherQuotaBody(int Courses, int AccessDurationDays, string? Note = null);

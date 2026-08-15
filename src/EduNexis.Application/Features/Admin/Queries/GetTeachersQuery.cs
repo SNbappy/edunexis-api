@@ -3,6 +3,11 @@ using EduNexis.Domain.Enums;
 
 namespace EduNexis.Application.Features.Admin.Queries;
 
+/// <summary>
+/// Quota figures are aggregated across every active grant a teacher holds,
+/// rather than read off one row. <see cref="ExpiresInDays"/> counts down to the
+/// grant that lapses first, which is the date that actually matters to them.
+/// </summary>
 public record TeacherAdminDto(
     Guid Id,
     string Email,
@@ -11,7 +16,10 @@ public record TeacherAdminDto(
     int? TotalQuota,
     int? UsedQuota,
     int? RemainingQuota,
-    bool HasActiveQuota
+    bool HasActiveQuota,
+    DateTime? NextExpiryDate,
+    int? ExpiresInDays,
+    int ActiveGrantCount
 );
 
 public record GetTeachersQuery : IQuery<ApiResponse<List<TeacherAdminDto>>>;
@@ -29,31 +37,40 @@ public sealed class GetTeachersQueryHandler(
 
         var activeCounts = await uow.Courses.GetActiveCountsByTeacherIdsAsync(teacherIds, ct);
 
-        var quotas = await uow.GetRepository<TeacherQuota>()
-            .FindAsync(q => teacherIds.Contains(q.TeacherId), ct);
-        var quotaByTeacher = quotas
-            .Where(q => q.IsAccessActive)
-            .GroupBy(q => q.TeacherId)
-            .ToDictionary(g => g.Key, g => g.OrderByDescending(q => q.CreatedAt).First());
+        var activeGrants = await uow.TeacherQuotas.GetActiveGrantsForTeachersAsync(teacherIds, ct);
+        var grantsByTeacher = activeGrants
+            .GroupBy(g => g.TeacherId)
+            .ToDictionary(g => g.Key, g => g.ToList());
 
         var profiles = await uow.UserProfiles.FindAsync(p => teacherIds.Contains(p.UserId), ct);
         var profileByUser = profiles.ToDictionary(p => p.UserId, p => p.FullName);
 
+        var now = DateTime.UtcNow;
+
         var dtos = teacherList.Select(t =>
         {
-            quotaByTeacher.TryGetValue(t.Id, out var quota);
             profileByUser.TryGetValue(t.Id, out var fullName);
             activeCounts.TryGetValue(t.Id, out var activeCount);
+            grantsByTeacher.TryGetValue(t.Id, out var grants);
+
+            var has = grants is { Count: > 0 };
+            DateTime? nextExpiry = has ? grants!.Min(g => g.AccessEndDate) : null;
 
             return new TeacherAdminDto(
                 Id: t.Id,
                 Email: t.Email,
                 FullName: fullName,
                 ActiveCourseCount: activeCount,
-                TotalQuota: quota?.TotalQuota,
-                UsedQuota: quota?.UsedQuota,
-                RemainingQuota: quota?.RemainingQuota,
-                HasActiveQuota: quota is not null
+                TotalQuota: has ? grants!.Sum(g => g.TotalQuota) : null,
+                UsedQuota: has ? grants!.Sum(g => g.UsedQuota) : null,
+                RemainingQuota: has ? grants!.Sum(g => g.RemainingQuota) : null,
+                HasActiveQuota: has,
+                NextExpiryDate: nextExpiry,
+                // Rounded up, so "expires today" reads as 1 day rather than 0.
+                ExpiresInDays: nextExpiry is null
+                    ? null
+                    : Math.Max(0, (int)Math.Ceiling((nextExpiry.Value - now).TotalDays)),
+                ActiveGrantCount: has ? grants!.Count : 0
             );
         })
         .OrderByDescending(t => t.ActiveCourseCount)

@@ -31,13 +31,15 @@ public sealed class LoginUserCommandHandler(
 {
     private const int OtpExpiryMinutes = 10;
 
-    // Emails auto-promoted to SuperAdmin on successful login. Not user-manageable
-    // via UI by design - changing who bootstraps as admin is a deploy-time decision.
-    private static readonly HashSet<string> AdminEmails = new(StringComparer.OrdinalIgnoreCase)
-    {
-        "n.amin@just.edu.bd",
-        "200109.cse@student.just.edu.bd",
-    };
+    /// <summary>
+    /// Student addresses can never be promoted, whatever the configuration says.
+    /// A student account holding SuperAdmin is the exact failure this guard
+    /// exists to prevent, and a typo in an env var should not be able to cause
+    /// it. The domain layer already refuses to *create* a Student on any other
+    /// domain (User.ValidateEmailMatchesRole), so this closes the same rule on
+    /// the promotion path.
+    /// </summary>
+    private const string StudentEmailDomain = "@student.just.edu.bd";
 
     public async ValueTask<ApiResponse<AuthResponseDto>> Handle(LoginUserCommand command, CancellationToken ct)
     {
@@ -50,14 +52,24 @@ public sealed class LoginUserCommandHandler(
         if (!user.IsActive)
             throw new UnauthorizedException("Account is deactivated.");
 
-        // Admin bootstrap: configured admin emails are auto-promoted to
-        // SuperAdmin on login if not already. Idempotent - only writes when
-        // the role actually needs to change.
-        if (AdminEmails.Contains(user.Email) && user.Role != UserRole.SuperAdmin)
+        // Admin bootstrap: emails listed in Auth:AdminEmails are promoted to
+        // SuperAdmin on login. Idempotent — only writes when the role actually
+        // needs to change, and the list is empty unless a deployment sets it.
+        if (authSettings.AdminEmails.Contains(user.Email) && user.Role != UserRole.SuperAdmin)
         {
-            user.SetRole(UserRole.SuperAdmin);
-            await uow.SaveChangesAsync(ct);
-            logger.LogInformation("Auto-promoted {Email} to SuperAdmin on login.", user.Email);
+            if (user.Email.EndsWith(StudentEmailDomain, StringComparison.OrdinalIgnoreCase))
+            {
+                logger.LogWarning(
+                    "Refusing to promote {Email} to SuperAdmin: student accounts are never " +
+                    "eligible. Remove it from Auth:AdminEmails and use a dedicated admin address.",
+                    user.Email);
+            }
+            else
+            {
+                user.SetRole(UserRole.SuperAdmin);
+                await uow.SaveChangesAsync(ct);
+                logger.LogInformation("Promoted {Email} to SuperAdmin on login.", user.Email);
+            }
         }
 
         // Block unverified users when OTP is required
@@ -109,8 +121,15 @@ public sealed class LoginUserCommandHandler(
                 $"<p>This code will expire in <strong>{OtpExpiryMinutes} minutes</strong>.</p>";
 
             var html = templateBuilder.Build("Verify your email", bodyHtml);
-            await emailService.SendAsync(email, "EduNexis verification code: " + otp, html, ct);
-            logger.LogInformation("OTP email re-sent on login to {Email}", email);
+            // Code stays out of the subject - see RegisterUserCommand for why.
+            var sent = await emailService.SendAsync(email, "Verify your EduNexis email", html, ct);
+
+            if (sent)
+                logger.LogInformation("OTP email re-sent on login to {Email}", email);
+            else
+                logger.LogError(
+                    "Login OTP to {Email} was NOT delivered - the provider rejected it.",
+                    email);
         }
         catch (Exception ex)
         {

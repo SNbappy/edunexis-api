@@ -58,7 +58,7 @@ public sealed class RegisterUserCommandHandler(
         // Send OTP email (errors swallowed inside EmailService, but log here for clarity)
         await SendOtpEmailAsync(user.Email, plainOtp, ct);
 
-        // Return WITHOUT auth tokens — user must verify first
+        // Return WITHOUT auth tokens â€” user must verify first
         return ApiResponse<AuthResponseDto>.Ok(
             new AuthResponseDto(
                 AccessToken: string.Empty,
@@ -79,11 +79,23 @@ public sealed class RegisterUserCommandHandler(
                 "<p>Your verification code is:</p>" +
                 $"<div style=\"font-size:32px;font-weight:700;letter-spacing:8px;color:#0d9488;background:#f0fdfa;padding:16px 24px;border-radius:12px;text-align:center;margin:24px 0;border:1px solid #99f6e4;\">{otp}</div>" +
                 $"<p>This code will expire in <strong>{OtpExpiryMinutes} minutes</strong>.</p>" +
-                "<p style=\"color:#78716c;font-size:13px;\">If you didn't request this, please ignore this email — someone may have entered your email by mistake.</p>";
+                "<p style=\"color:#78716c;font-size:13px;\">If you didn't request this, please ignore this email â€” someone may have entered your email by mistake.</p>";
 
             var html = templateBuilder.Build("Verify your email", bodyHtml);
-            await emailService.SendAsync(email, "EduNexis verification code: " + otp, html, ct);
-            logger.LogInformation("OTP email sent to {Email}", email);
+
+            // The subject deliberately does NOT carry the code. It used to read
+            // "EduNexis verification code: 123456", which put a one-time secret into
+            // lock-screen notification previews and inbox list rows, where it can be
+            // read without unlocking the device or even opening the message.
+            var sent = await emailService.SendAsync(email, "Verify your EduNexis email", html, ct);
+
+            if (sent)
+                logger.LogInformation("OTP email sent to {Email}", email);
+            else
+                logger.LogError(
+                    "OTP email to {Email} was NOT delivered - the provider rejected it. "
+                    + "This account cannot be verified until email delivery is fixed.",
+                    email);
         }
         catch (Exception ex)
         {

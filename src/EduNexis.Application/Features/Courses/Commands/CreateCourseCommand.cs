@@ -64,22 +64,40 @@ public sealed class CreateCourseCommandHandler(
 
         if (quotaEnforced)
         {
-            // First-time creators get an auto-provisioned starter quota (1 course,
-            // ~100 year validity, self-assigned). Any grants beyond that come from
-            // an admin via the QuotaRequest flow.
-            var quota = await uow.TeacherQuotas.GetActiveQuotaAsync(cmd.TeacherId, ct);
-            if (quota is null)
+            // Spend the grant that expires soonest, so allowance is never left
+            // to lapse while a longer-dated grant is drawn down first.
+            var grants = await uow.TeacherQuotas.GetSpendableGrantsAsync(cmd.TeacherId, ct);
+            var grant = grants.FirstOrDefault();
+
+            if (grant is null)
             {
-                quota = TeacherQuota.Create(
+                // Nothing spendable. If the teacher has never had a grant at
+                // all, provision the free-tier starter allowance now; this is
+                // also what makes enforcement non-retroactive — a teacher with
+                // existing courses is not penalised for them, they simply get
+                // their starter allowance from this point forward.
+                var everGranted = await uow.TeacherQuotas.GetAllGrantsAsync(cmd.TeacherId, ct);
+                if (everGranted.Count > 0)
+                {
+                    // They have had grants; all are spent, expired or revoked.
+                    // Distinguish the two so the message is actionable.
+                    throw everGranted.Any(g => g.IsAccessActive)
+                        ? new QuotaExceededException()
+                        : new AccessExpiredException();
+                }
+
+                grant = TeacherQuota.Create(
                     teacherId: cmd.TeacherId,
                     assignedById: cmd.TeacherId,
                     totalQuota: StarterCourseCount,
                     startDate: DateTime.UtcNow,
-                    endDate: DateTime.UtcNow.AddYears(StarterAccessYears));
-                await uow.TeacherQuotas.AddAsync(quota, ct);
+                    endDate: DateTime.UtcNow.AddYears(StarterAccessYears),
+                    note: "Free tier starter allowance");
+                await uow.TeacherQuotas.AddAsync(grant, ct);
             }
+
             // Throws QuotaExceededException / AccessExpiredException; middleware maps to 403.
-            quota.ConsumeOne();
+            grant.ConsumeOne();
         }
 
         var course = Course.Create(
