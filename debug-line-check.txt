@@ -1,9 +1,0 @@
-﻿
-        await uow.GetRepository<UserPublication>().AddAsync(pub, ct);
-        await uow.SaveChangesAsync(ct);
-
-        return ApiResponse<UserPublicationDto>.Ok(new UserPublicationDto(
-            pub.Id, pub.Title, pub.Authors, pub.Venue, pub.Year,
-            pub.Url, pub.Type.ToString(), pub.OrderIndex));
-    }
-}
