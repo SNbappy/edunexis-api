@@ -2,7 +2,14 @@
 
 namespace EduNexis.Application.Features.Courses.Commands;
 
-public record DismissJoinRequestCommand(Guid RequestId) : ICommand<ApiResponse>;
+public record DismissJoinRequestCommand(Guid RequestId) : ICommand<ApiResponse>, ICourseScopedWrite
+{
+    public async ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
+    {
+        var e = await uow.GetRepository<JoinRequest>().GetByIdAsync(RequestId, ct);
+        return e?.CourseId;
+    }
+}
 
 public sealed class DismissJoinRequestCommandValidator : AbstractValidator<DismissJoinRequestCommand>
 {

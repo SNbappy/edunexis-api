@@ -1,3 +1,4 @@
+using EduNexis.Application.Abstractions;
 using EduNexis.Application.Features.Notifications.Commands;
 using EduNexis.Domain.Entities;
 
@@ -7,7 +8,11 @@ public record ReviewJoinRequestCommand(
     Guid CourseId,
     Guid RequestId,
     bool Approve
-) : ICommand<ApiResponse>;
+) : ICommand<ApiResponse>, ICourseScopedWrite
+{
+    public ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
+        => ValueTask.FromResult<Guid?>(CourseId);
+}
 
 public sealed class ReviewJoinRequestCommandValidator : AbstractValidator<ReviewJoinRequestCommand>
 {

@@ -1,3 +1,4 @@
+using EduNexis.Application.Abstractions;
 using EduNexis.Application.DTOs;
 
 namespace EduNexis.Application.Features.Attendance.Commands;
@@ -8,7 +9,11 @@ public record UpdateAttendanceEntryCommand(
     Guid RequesterId,
     string? Topic,
     List<AttendanceEntry> Entries
-) : ICommand<ApiResponse<AttendanceSessionDto>>;
+) : ICommand<ApiResponse<AttendanceSessionDto>>, ICourseScopedWrite
+{
+    public ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
+        => ValueTask.FromResult<Guid?>(CourseId);
+}
 
 public sealed class UpdateAttendanceEntryCommandHandler(
     IUnitOfWork uow

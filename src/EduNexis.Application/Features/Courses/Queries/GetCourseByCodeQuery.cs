@@ -37,7 +37,11 @@ public sealed class GetCourseByCodeQueryHandler(
         var normalized = query.Code.Trim().ToUpperInvariant();
         var course = await uow.Courses.GetByJoiningCodeAsync(normalized, ct);
 
-        if (course is null || course.IsArchived)
+        // Deleted as well as archived: a deleted course's joining code was still
+        // resolvable, so an old code could be used to request a place in a
+        // course that no longer exists. `IsDeletedByOwner` is the teacher's
+        // recycle bin; `IsDeleted` is an admin purge.
+        if (course is null || course.IsArchived || course.IsDeletedByOwner || course.IsDeleted)
             return ApiResponse<CourseByCodeDto>.Fail("No course found with that code.");
 
         var members = await uow.CourseMembers.FindAsync(

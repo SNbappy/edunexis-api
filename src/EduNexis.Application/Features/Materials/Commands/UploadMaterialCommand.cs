@@ -1,3 +1,4 @@
+using EduNexis.Application.Abstractions;
 using EduNexis.Application.Features.Notifications.Commands;
 
 namespace EduNexis.Application.Features.Materials.Commands;
@@ -13,7 +14,11 @@ public record UploadMaterialCommand(
     string? Description,
     string? Category,
     Guid? ParentFolderId
-) : ICommand<ApiResponse>;
+) : ICommand<ApiResponse>, ICourseScopedWrite
+{
+    public ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
+        => ValueTask.FromResult<Guid?>(CourseId);
+}
 
 public sealed class UploadMaterialCommandValidator : AbstractValidator<UploadMaterialCommand>
 {

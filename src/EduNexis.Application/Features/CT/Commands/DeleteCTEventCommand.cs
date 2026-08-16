@@ -1,9 +1,17 @@
+using EduNexis.Application.Abstractions;
 namespace EduNexis.Application.Features.CT.Commands;
 
 public record DeleteCTEventCommand(
     Guid CTEventId,
     Guid TeacherId
-) : ICommand<ApiResponse>;
+) : ICommand<ApiResponse>, ICourseScopedWrite
+{
+    public async ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
+    {
+        var e = await uow.GetRepository<CTEvent>().GetByIdAsync(CTEventId, ct);
+        return e?.CourseId;
+    }
+}
 
 public sealed class DeleteCTEventCommandHandler(
     IUnitOfWork uow

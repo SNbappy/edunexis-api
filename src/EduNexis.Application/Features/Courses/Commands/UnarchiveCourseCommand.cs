@@ -2,7 +2,10 @@ using EduNexis.Application.Abstractions;
 
 namespace EduNexis.Application.Features.Courses.Commands;
 
-public record UnarchiveCourseCommand(Guid CourseId) : ICommand<ApiResponse>;
+public record UnarchiveCourseCommand(Guid CourseId) : ICommand<ApiResponse>, IArchiveExempt
+{
+    public string ArchiveExemptionReason => "Unarchiving is the only way out of the freeze.";
+}
 
 public sealed class UnarchiveCourseCommandValidator : AbstractValidator<UnarchiveCourseCommand>
 {

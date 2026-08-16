@@ -35,4 +35,33 @@ public class AnnouncementsController : BaseController
     [Authorize(Roles = "Teacher,SuperAdmin,DepartmentAdmin")]
     public async Task<IActionResult> TogglePin(Guid courseId, Guid id, CancellationToken ct) =>
         Ok(await Mediator.Send(new PinAnnouncementCommand(courseId, id), ct));
+
+    /* ── Class comments ──────────────────────────────────────────────
+       Open to students as well as teachers: the point is a conversation
+       under the announcement, the way it works in a class group. The
+       handlers check course membership, and the archive guard freezes
+       all three on an archived course. */
+
+    [HttpGet("courses/{courseId:guid}/comments")]
+    public async Task<IActionResult> GetComments(Guid courseId, CancellationToken ct) =>
+        Ok(await Mediator.Send(new GetCommentsQuery(courseId, CurrentUserId), ct));
+
+    [HttpPost("courses/{courseId:guid}/announcements/{id:guid}/comments")]
+    public async Task<IActionResult> AddComment(
+        Guid courseId, Guid id,
+        [FromBody] AddCommentRequest body,
+        CancellationToken ct) =>
+        Ok(await Mediator.Send(new AddCommentCommand(
+            CourseId: courseId,
+            AnnouncementId: id,
+            AuthorId: CurrentUserId,
+            Content: body.Content
+        ), ct));
+
+    [HttpDelete("courses/{courseId:guid}/comments/{commentId:guid}")]
+    public async Task<IActionResult> DeleteComment(
+        Guid courseId, Guid commentId, CancellationToken ct) =>
+        Ok(await Mediator.Send(new DeleteCommentCommand(courseId, commentId, CurrentUserId), ct));
 }
+
+public record AddCommentRequest(string Content);

@@ -1,3 +1,4 @@
+using EduNexis.Application.Abstractions;
 using EduNexis.Application.DTOs;
 using EduNexis.Application.Extensions;
 using EduNexis.Domain.Entities;
@@ -16,7 +17,10 @@ public record CreateCourseCommand(
     string? Description,
     string CoverImageUrl,
     Guid TeacherId
-) : ICommand<ApiResponse<CourseDto>>;
+) : ICommand<ApiResponse<CourseDto>>, IArchiveExempt
+{
+    public string ArchiveExemptionReason => "No course exists yet.";
+}
 
 public sealed class CreateCourseCommandValidator : AbstractValidator<CreateCourseCommand>
 {

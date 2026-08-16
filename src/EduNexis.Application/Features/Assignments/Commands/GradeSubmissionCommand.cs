@@ -1,3 +1,4 @@
+using EduNexis.Application.Abstractions;
 using EduNexis.Application.DTOs;
 
 
@@ -9,7 +10,16 @@ public record GradeSubmissionCommand(
     Guid TeacherId,
     decimal Marks,
     string? Feedback
-) : ICommand<ApiResponse<SubmissionDto>>;
+) : ICommand<ApiResponse<SubmissionDto>>, ICourseScopedWrite
+{
+    public async ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
+    {
+        var sub = await uow.GetRepository<AssignmentSubmission>().GetByIdAsync(SubmissionId, ct);
+        if (sub is null) return null;
+        var assignment = await uow.GetRepository<Assignment>().GetByIdAsync(sub.AssignmentId, ct);
+        return assignment?.CourseId;
+    }
+}
 
 
 public sealed class GradeSubmissionCommandValidator : AbstractValidator<GradeSubmissionCommand>

@@ -1,3 +1,4 @@
+using EduNexis.Application.Abstractions;
 using EduNexis.Application.Features.Notifications.Commands;
 
 namespace EduNexis.Application.Features.Announcements.Commands;
@@ -14,7 +15,11 @@ public record CreateAnnouncementCommand(
     string Content,
     Stream? AttachmentStream,
     string? AttachmentFileName
-) : ICommand<ApiResponse<AnnouncementDto>>;
+) : ICommand<ApiResponse<AnnouncementDto>>, ICourseScopedWrite
+{
+    public ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
+        => ValueTask.FromResult<Guid?>(CourseId);
+}
 
 public sealed class CreateAnnouncementCommandValidator : AbstractValidator<CreateAnnouncementCommand>
 {

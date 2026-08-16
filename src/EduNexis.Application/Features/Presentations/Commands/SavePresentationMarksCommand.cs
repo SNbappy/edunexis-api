@@ -1,3 +1,4 @@
+using EduNexis.Application.Abstractions;
 ﻿namespace EduNexis.Application.Features.Presentations.Commands;
 
 public record PresentationMarkEntryRequest(
@@ -12,7 +13,14 @@ public record SavePresentationMarksCommand(
     Guid PresentationEventId,
     Guid TeacherId,
     List<PresentationMarkEntryRequest> Entries
-) : ICommand<ApiResponse>;
+) : ICommand<ApiResponse>, ICourseScopedWrite
+{
+    public async ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
+    {
+        var e = await uow.GetRepository<PresentationEvent>().GetByIdAsync(PresentationEventId, ct);
+        return e?.CourseId;
+    }
+}
 
 public sealed class SavePresentationMarksCommandHandler(
     IUnitOfWork uow

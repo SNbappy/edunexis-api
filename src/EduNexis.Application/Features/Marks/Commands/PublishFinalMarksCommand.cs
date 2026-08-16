@@ -1,3 +1,4 @@
+using EduNexis.Application.Abstractions;
 using EduNexis.Application.Features.Notifications.Commands;
 
 namespace EduNexis.Application.Features.Marks.Commands;
@@ -5,7 +6,11 @@ namespace EduNexis.Application.Features.Marks.Commands;
 public record PublishFinalMarksCommand(
     Guid CourseId,
     Guid TeacherId
-) : ICommand<ApiResponse>;
+) : ICommand<ApiResponse>, ICourseScopedWrite
+{
+    public ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
+        => ValueTask.FromResult<Guid?>(CourseId);
+}
 
 public sealed class PublishFinalMarksCommandHandler(
     IUnitOfWork uow,

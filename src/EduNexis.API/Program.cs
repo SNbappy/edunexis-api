@@ -1,5 +1,7 @@
 using EduNexis.API.Middleware;
 using EduNexis.Application;
+using EduNexis.Application.Behaviors;
+using Mediator;
 using EduNexis.Infrastructure;
 using EduNexis.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -49,6 +51,19 @@ builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddMediator(options =>
     options.ServiceLifetime = ServiceLifetime.Scoped);
+
+// Mediator's generated pipeline resolves behaviors from DI
+// (Services.GetServices<IPipelineBehavior<,>>()), so a behavior that is not
+// registered here simply never runs — it is not auto-discovered by the source
+// generator. Registration order is execution order.
+//
+// NOTE: EduNexis.Application.Behaviors.ValidationBehavior is deliberately NOT
+// registered. It has never been wired up, so FluentValidation validators have
+// only ever run where a controller invokes them; switching it on globally would
+// start rejecting requests across the whole API and needs its own testing pass.
+builder.Services.AddScoped(
+    typeof(IPipelineBehavior<,>),
+    typeof(ArchivedCourseGuardBehavior<,>));
 
 var jwtSecret   = builder.Configuration["Jwt:Secret"]!;
 var jwtIssuer   = builder.Configuration["Jwt:Issuer"]!;

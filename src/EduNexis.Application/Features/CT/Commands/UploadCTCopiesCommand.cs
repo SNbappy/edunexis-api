@@ -1,3 +1,4 @@
+using EduNexis.Application.Abstractions;
 namespace EduNexis.Application.Features.CT.Commands;
 
 public record UploadCTCopiesCommand(
@@ -12,7 +13,14 @@ public record UploadCTCopiesCommand(
     Stream? AvgCopyStream,
     string? AvgCopyFileName,
     Guid? AvgStudentId
-) : ICommand<ApiResponse>;
+) : ICommand<ApiResponse>, ICourseScopedWrite
+{
+    public async ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
+    {
+        var e = await uow.GetRepository<CTEvent>().GetByIdAsync(CTEventId, ct);
+        return e?.CourseId;
+    }
+}
 
 public sealed class UploadCTCopiesCommandHandler(
     IUnitOfWork uow,

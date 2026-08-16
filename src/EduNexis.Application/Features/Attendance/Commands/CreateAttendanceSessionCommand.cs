@@ -1,3 +1,4 @@
+using EduNexis.Application.Abstractions;
 ﻿using EduNexis.Application.DTOs;
 
 
@@ -13,7 +14,11 @@ public record CreateAttendanceSessionCommand(
     DateOnly Date,
     string? Topic,
     List<AttendanceEntry> Entries
-) : ICommand<ApiResponse<AttendanceSessionDto>>;
+) : ICommand<ApiResponse<AttendanceSessionDto>>, ICourseScopedWrite
+{
+    public ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
+        => ValueTask.FromResult<Guid?>(CourseId);
+}
 
 
 public sealed class CreateAttendanceSessionCommandValidator

@@ -1,3 +1,4 @@
+using EduNexis.Application.Abstractions;
 ﻿namespace EduNexis.Application.Features.CT.Commands;
 
 public record CTMarkEntry(
@@ -11,7 +12,14 @@ public record BulkGradeCTCommand(
     Guid CTEventId,
     Guid TeacherId,
     List<CTMarkEntry> Marks
-) : ICommand<ApiResponse>;
+) : ICommand<ApiResponse>, ICourseScopedWrite
+{
+    public async ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
+    {
+        var e = await uow.GetRepository<CTEvent>().GetByIdAsync(CTEventId, ct);
+        return e?.CourseId;
+    }
+}
 
 public sealed class BulkGradeCTCommandValidator : AbstractValidator<BulkGradeCTCommand>
 {

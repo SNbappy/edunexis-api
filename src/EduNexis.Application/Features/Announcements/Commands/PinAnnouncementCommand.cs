@@ -1,7 +1,12 @@
+using EduNexis.Application.Abstractions;
 namespace EduNexis.Application.Features.Announcements.Commands;
 
 public record PinAnnouncementCommand(Guid CourseId, Guid AnnouncementId)
-    : ICommand<ApiResponse>;
+    : ICommand<ApiResponse>, ICourseScopedWrite
+{
+    public ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
+        => ValueTask.FromResult<Guid?>(CourseId);
+}
 
 public sealed class PinAnnouncementCommandHandler(
     IUnitOfWork uow,

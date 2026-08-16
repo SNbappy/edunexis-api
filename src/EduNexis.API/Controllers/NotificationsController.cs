@@ -1,4 +1,5 @@
 using EduNexis.Application.Features.Notifications.Commands;
+using EduNexis.Application.Features.Notifications.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,4 +23,22 @@ public class NotificationsController : BaseController
     [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Delete(Guid id, CancellationToken ct) =>
         Ok(await Mediator.Send(new DeleteNotificationCommand(id, CurrentUserId), ct));
+
+    /* ── Preferences ─────────────────────────────────────────────────
+       Everything is on unless the user turns it off, so a brand-new
+       account and a brand-new notification type both start switched on. */
+
+    [HttpGet("preferences")]
+    public async Task<IActionResult> GetPreferences(CancellationToken ct) =>
+        Ok(await Mediator.Send(new GetNotificationPreferencesQuery(CurrentUserId), ct));
+
+    [HttpPut("preferences")]
+    public async Task<IActionResult> UpdatePreferences(
+        [FromBody] UpdateNotificationPreferencesRequest body,
+        CancellationToken ct) =>
+        Ok(await Mediator.Send(new UpdateNotificationPreferencesCommand(
+            CurrentUserId, body.Preferences ?? []), ct));
 }
+
+public record UpdateNotificationPreferencesRequest(
+    List<NotificationPreferenceInput> Preferences);

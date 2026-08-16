@@ -1,3 +1,4 @@
+using EduNexis.Application.Abstractions;
 using EduNexis.Application.DTOs;
 
 
@@ -12,7 +13,14 @@ public record SubmitAssignmentCommand(
     Stream? FileStream,
     string? FileName,
     string? LinkUrl
-) : ICommand<ApiResponse<SubmissionDto>>;
+) : ICommand<ApiResponse<SubmissionDto>>, ICourseScopedWrite
+{
+    public async ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
+    {
+        var e = await uow.GetRepository<Assignment>().GetByIdAsync(AssignmentId, ct);
+        return e?.CourseId;
+    }
+}
 
 
 public sealed class SubmitAssignmentCommandValidator : AbstractValidator<SubmitAssignmentCommand>

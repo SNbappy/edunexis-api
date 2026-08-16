@@ -1,3 +1,4 @@
+using EduNexis.Application.Abstractions;
 namespace EduNexis.Application.Features.CT.Commands;
 
 public record UpdateCTEventCommand(
@@ -6,7 +7,14 @@ public record UpdateCTEventCommand(
     string Title,
     decimal MaxMarks,
     DateTime? HeldOn
-) : ICommand<ApiResponse<CTEventDto>>;
+) : ICommand<ApiResponse<CTEventDto>>, ICourseScopedWrite
+{
+    public async ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
+    {
+        var e = await uow.GetRepository<CTEvent>().GetByIdAsync(CTEventId, ct);
+        return e?.CourseId;
+    }
+}
 
 public sealed class UpdateCTEventCommandValidator : AbstractValidator<UpdateCTEventCommand>
 {

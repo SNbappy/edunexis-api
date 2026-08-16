@@ -1,3 +1,4 @@
+using EduNexis.Application.Abstractions;
 using EduNexis.Domain.Entities;
 
 namespace EduNexis.Application.Features.Courses.Commands;
@@ -14,7 +15,10 @@ namespace EduNexis.Application.Features.Courses.Commands;
 /// Every dependent table is cleared explicitly, bottom-up, before the
 /// course row itself is removed.
 /// </summary>
-public record PermanentlyDeleteCourseCommand(Guid Id) : ICommand<ApiResponse>;
+public record PermanentlyDeleteCourseCommand(Guid Id) : ICommand<ApiResponse>, IArchiveExempt
+{
+    public string ArchiveExemptionReason => "Purging from the recycle bin is lifecycle, not content.";
+}
 
 public sealed class PermanentlyDeleteCourseCommandHandler(
     IUnitOfWork uow,

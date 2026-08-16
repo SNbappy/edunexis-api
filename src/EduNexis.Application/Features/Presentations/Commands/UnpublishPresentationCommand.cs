@@ -1,9 +1,17 @@
+using EduNexis.Application.Abstractions;
 namespace EduNexis.Application.Features.Presentations.Commands;
 
 public record UnpublishPresentationCommand(
     Guid PresentationEventId,
     Guid TeacherId
-) : ICommand<ApiResponse>;
+) : ICommand<ApiResponse>, ICourseScopedWrite
+{
+    public async ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
+    {
+        var e = await uow.GetRepository<PresentationEvent>().GetByIdAsync(PresentationEventId, ct);
+        return e?.CourseId;
+    }
+}
 
 public sealed class UnpublishPresentationCommandHandler(
     IUnitOfWork uow

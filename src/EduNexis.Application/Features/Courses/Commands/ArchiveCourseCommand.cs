@@ -1,9 +1,13 @@
+using EduNexis.Application.Abstractions;
 namespace EduNexis.Application.Features.Courses.Commands;
 
 public record ArchiveCourseCommand(
     Guid CourseId,
     Guid RequesterId
-) : ICommand<ApiResponse>;
+) : ICommand<ApiResponse>, IArchiveExempt
+{
+    public string ArchiveExemptionReason => "Archiving is the lifecycle action itself.";
+}
 
 public sealed class ArchiveCourseCommandHandler(
     IUnitOfWork uow

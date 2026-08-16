@@ -1,3 +1,4 @@
+using EduNexis.Application.Abstractions;
 ﻿using EduNexis.Application.DTOs;
 
 namespace EduNexis.Application.Features.Assignments.Commands;
@@ -12,7 +13,11 @@ public record UpdateAssignmentCommand(
     bool AllowLateSubmission,
     decimal MaxMarks,
     string? RubricNotes
-) : ICommand<ApiResponse<AssignmentDto>>;
+) : ICommand<ApiResponse<AssignmentDto>>, ICourseScopedWrite
+{
+    public ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
+        => ValueTask.FromResult<Guid?>(CourseId);
+}
 
 public sealed class UpdateAssignmentCommandValidator : AbstractValidator<UpdateAssignmentCommand>
 {

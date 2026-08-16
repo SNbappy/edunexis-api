@@ -41,16 +41,31 @@ public sealed class SendNotificationCommandHandler(
     public async ValueTask<ApiResponse> Handle(
         SendNotificationCommand command, CancellationToken ct)
     {
-        // 1) Save in-app notification (existing behavior)
-        var notification = Notification.Create(
-            command.UserId, command.Title, command.Body,
-            command.Type, command.RedirectUrl);
+        // 0) What has this user asked for?
+        //
+        // A missing row means "on", so someone who has never opened Settings —
+        // and any notification type added after they last did — keeps receiving
+        // everything. Only an explicit opt-out silences anything.
+        var pref = (await uow.GetRepository<NotificationPreference>()
+                .FindAsync(p => p.UserId == command.UserId && p.Type == command.Type, ct))
+            .FirstOrDefault();
 
-        await uow.GetRepository<Notification>().AddAsync(notification, ct);
-        await uow.SaveChangesAsync(ct);
+        var wantsInApp = pref?.InApp ?? true;
+        var wantsEmail = pref?.Email ?? true;
 
-        // 2) Fire-and-forget email if this notification type is email-eligible
-        if (EmailEligibleTypes.Contains(command.Type))
+        // 1) Save in-app notification
+        if (wantsInApp)
+        {
+            var notification = Notification.Create(
+                command.UserId, command.Title, command.Body,
+                command.Type, command.RedirectUrl);
+
+            await uow.GetRepository<Notification>().AddAsync(notification, ct);
+            await uow.SaveChangesAsync(ct);
+        }
+
+        // 2) Fire-and-forget email if this type is email-eligible and wanted
+        if (wantsEmail && EmailEligibleTypes.Contains(command.Type))
         {
             await SendEmailAsync(command, ct);
         }

@@ -1,3 +1,4 @@
+using EduNexis.Application.Abstractions;
 using System.Security.Cryptography;
 using System.Text;
 using EduNexis.Domain.Interfaces.Services;
@@ -8,7 +9,14 @@ namespace EduNexis.Application.Features.Presentations.Commands;
 public record PublishPresentationCommand(
     Guid PresentationEventId,
     Guid TeacherId
-) : ICommand<ApiResponse>;
+) : ICommand<ApiResponse>, ICourseScopedWrite
+{
+    public async ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
+    {
+        var e = await uow.GetRepository<PresentationEvent>().GetByIdAsync(PresentationEventId, ct);
+        return e?.CourseId;
+    }
+}
 
 public sealed class PublishPresentationCommandHandler(
     IUnitOfWork uow,

@@ -58,7 +58,12 @@ public sealed class GetUserCoursesQueryHandler(
             all = await uow.Courses.FindAsync(c => ids.Contains(c.Id), ct);
         }
 
-        var allList = all.OrderByDescending(c => c.CreatedAt).ToList();
+        // Deleted courses never appear in a profile's course lists — they live
+        // only in the owner's "Recently deleted" view until restored or purged.
+        var allList = all
+            .Where(c => !c.IsDeletedByOwner && !c.IsDeleted)
+            .OrderByDescending(c => c.CreatedAt)
+            .ToList();
 
         List<PublicCourseDto> ToDto(IEnumerable<Domain.Entities.Course> src) =>
             src.Select(c => new PublicCourseDto(

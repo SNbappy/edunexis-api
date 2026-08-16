@@ -55,6 +55,14 @@ public class ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddlewa
                 aee.Message,
                 (List<string>?)null),
 
+            // 409, not 403: the caller is allowed to do this in general — the
+            // course is simply in a state that refuses writes, and unarchiving
+            // resolves it. That is a conflict, not a permission problem.
+            CourseArchivedException cae => (
+                HttpStatusCode.Conflict,
+                cae.Message,
+                (List<string>?)null),
+
             DomainException de => (
                 HttpStatusCode.BadRequest,
                 de.Message,

@@ -1,8 +1,13 @@
+using EduNexis.Application.Abstractions;
 using EduNexis.Application.Features.Notifications.Commands;
 
 namespace EduNexis.Application.Features.Courses.Commands;
 
-public record RemoveCourseMemberCommand(Guid CourseId, Guid StudentId) : ICommand<ApiResponse>;
+public record RemoveCourseMemberCommand(Guid CourseId, Guid StudentId) : ICommand<ApiResponse>, ICourseScopedWrite
+{
+    public ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
+        => ValueTask.FromResult<Guid?>(CourseId);
+}
 
 public sealed class RemoveCourseMemberCommandHandler(
     IUnitOfWork uow,

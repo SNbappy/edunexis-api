@@ -1,3 +1,4 @@
+using EduNexis.Application.Abstractions;
 using EduNexis.Domain.Interfaces.Services;
 
 namespace EduNexis.Application.Features.Courses.Commands;
@@ -6,7 +7,10 @@ public record DeleteCourseCommand(
     Guid Id,
     string Password,
     string CourseCodeConfirmation
-) : ICommand<ApiResponse>;
+) : ICommand<ApiResponse>, IArchiveExempt
+{
+    public string ArchiveExemptionReason => "Deleting a finished course must stay possible.";
+}
 
 public sealed class DeleteCourseCommandValidator : AbstractValidator<DeleteCourseCommand>
 {

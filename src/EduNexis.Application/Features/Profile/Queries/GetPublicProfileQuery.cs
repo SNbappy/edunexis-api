@@ -80,7 +80,11 @@ public sealed class GetPublicProfileQueryHandler(
 
         if (user.Role == UserRole.Teacher)
         {
-            var taught = await uow.Courses.FindAsync(c => c.TeacherId == query.UserId, ct);
+            // Deleted courses are excluded: a course in the teacher's recycle
+            // bin was still listed on their profile, and counted in the
+            // running/archived totals.
+            var taught = await uow.Courses.FindAsync(
+                c => c.TeacherId == query.UserId && !c.IsDeletedByOwner && !c.IsDeleted, ct);
             var taughtList = taught.ToList();
             runningCount = taughtList.Count(c => !c.IsArchived);
             archivedCount = taughtList.Count(c => c.IsArchived);

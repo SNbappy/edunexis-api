@@ -16,8 +16,17 @@ public sealed class GetCourseQueryHandler(
         GetCourseQuery query, CancellationToken ct)
     {
         var course = await uow.Courses.GetByIdAsync(query.Id, ct);
-        if (course is null)
-            return ApiResponse<CourseDto>.Fail("Course not found.");
+
+        // Deleted counts as gone.
+        //
+        // Two separate flags: `IsDeletedByOwner` is the teacher's own 30-day
+        // recycle bin (what the Delete course button sets), while `IsDeleted` is
+        // the BaseEntity soft-delete used by an admin purge. Neither had a
+        // global query filter, so a deleted course stayed fully readable by id
+        // and following an old notification dropped you straight back inside a
+        // course that no longer exists.
+        if (course is null || course.IsDeletedByOwner || course.IsDeleted)
+            return ApiResponse<CourseDto>.Fail("This course no longer exists.");
 
         var viewerId    = Guid.Parse(currentUser.UserId);
         var isAdmin     = currentUser.Role is "SuperAdmin" or "DepartmentAdmin";

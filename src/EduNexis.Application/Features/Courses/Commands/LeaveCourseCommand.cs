@@ -1,6 +1,10 @@
+using EduNexis.Application.Abstractions;
 namespace EduNexis.Application.Features.Courses.Commands;
 
-public record LeaveCourseCommand(Guid CourseId) : ICommand<ApiResponse>;
+public record LeaveCourseCommand(Guid CourseId) : ICommand<ApiResponse>, IArchiveExempt
+{
+    public string ArchiveExemptionReason => "A student may always leave, including an archived course.";
+}
 
 public sealed class LeaveCourseCommandHandler(
     IUnitOfWork uow,

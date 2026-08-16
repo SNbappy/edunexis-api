@@ -1,10 +1,14 @@
+using EduNexis.Application.Abstractions;
 ﻿using EduNexis.Application.Features.Notifications.Commands;
 using EduNexis.Domain.Entities;
 using EduNexis.Domain.Enums;
 
 namespace EduNexis.Application.Features.Courses.Commands;
 
-public record RequestJoinCourseCommand(Guid CourseId, string JoiningCode) : ICommand<ApiResponse>;
+public record RequestJoinCourseCommand(Guid CourseId, string JoiningCode) : ICommand<ApiResponse>, IArchiveExempt
+{
+    public string ArchiveExemptionReason => "Already refuses archived courses with its own message.";
+}
 
 public sealed class RequestJoinCourseCommandValidator : AbstractValidator<RequestJoinCourseCommand>
 {

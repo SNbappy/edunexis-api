@@ -1,3 +1,4 @@
+using EduNexis.Application.Abstractions;
 using EduNexis.Application.DTOs;
 using EduNexis.Application.Extensions;
 
@@ -14,7 +15,11 @@ public record UpdateCourseCommand(
     string? Section,
     CourseType CourseType,
     string? Description
-) : ICommand<ApiResponse<CourseDto>>;
+) : ICommand<ApiResponse<CourseDto>>, ICourseScopedWrite
+{
+    public ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
+        => ValueTask.FromResult<Guid?>(Id);
+}
 
 public sealed class UpdateCourseCommandValidator : AbstractValidator<UpdateCourseCommand>
 {

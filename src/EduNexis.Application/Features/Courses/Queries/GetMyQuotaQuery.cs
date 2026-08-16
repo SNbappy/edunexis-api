@@ -20,7 +20,18 @@ public record TeacherQuotaDto(
     /// <summary>Days until the soonest-expiring active grant lapses.</summary>
     int? ExpiresInDays,
     /// <summary>How many separate active grants make up the total.</summary>
-    int ActiveGrantCount
+    int ActiveGrantCount,
+    /// <summary>
+    /// Whether the platform is actually enforcing quotas right now
+    /// (PlatformSetting.CourseQuotaEnforced, off by default).
+    ///
+    /// The numbers above are always computed, because an admin can switch
+    /// enforcement on at any moment and the ledger has to be ready. But while
+    /// this is false nothing is limited, so the UI must not announce a slot
+    /// count — it was telling every teacher "You have 1 free course slot" on a
+    /// platform where course creation is unlimited.
+    /// </summary>
+    bool IsEnforced
 );
 
 public sealed class GetMyQuotaQueryHandler(
@@ -36,6 +47,12 @@ public sealed class GetMyQuotaQueryHandler(
         var all = await uow.TeacherQuotas.GetAllGrantsAsync(query.TeacherId, ct);
         var active = all.Where(g => g.IsAccessActive).ToList();
         var now = DateTime.UtcNow;
+
+        // Same switch CreateCourseCommand obeys, so the UI can only ever claim a
+        // limit that is genuinely being applied.
+        var settings = (await uow.GetRepository<PlatformSetting>().GetAllAsync(ct))
+            .FirstOrDefault();
+        var isEnforced = settings?.CourseQuotaEnforced ?? false;
 
         if (active.Count == 0)
         {
@@ -53,7 +70,8 @@ public sealed class GetMyQuotaQueryHandler(
                 IsAccessActive:  neverGranted,
                 IsStarterQuota:  neverGranted,
                 ExpiresInDays:   null,
-                ActiveGrantCount: 0
+                ActiveGrantCount: 0,
+                IsEnforced:      isEnforced
             ));
         }
 
@@ -68,7 +86,8 @@ public sealed class GetMyQuotaQueryHandler(
             IsAccessActive:  true,
             IsStarterQuota:  active.All(g => g.IsStarterGrant),
             ExpiresInDays:   Math.Max(0, (int)Math.Ceiling((nextExpiry - now).TotalDays)),
-            ActiveGrantCount: active.Count
+            ActiveGrantCount: active.Count,
+            IsEnforced:      isEnforced
         ));
     }
 }

@@ -1,3 +1,4 @@
+using EduNexis.Application.Abstractions;
 using EduNexis.Application.DTOs;
 using EduNexis.Application.Features.Notifications.Commands;
 
@@ -14,7 +15,11 @@ public record CreateAssignmentCommand(
     string? RubricNotes,
     Stream? ReferenceFileStream,
     string? ReferenceFileName
-) : ICommand<ApiResponse<AssignmentDto>>;
+) : ICommand<ApiResponse<AssignmentDto>>, ICourseScopedWrite
+{
+    public ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
+        => ValueTask.FromResult<Guid?>(CourseId);
+}
 
 public sealed class CreateAssignmentCommandValidator : AbstractValidator<CreateAssignmentCommand>
 {

@@ -32,6 +32,7 @@ public class AppDbContext : DbContext
     public DbSet<Announcement> Announcements => Set<Announcement>();
     public DbSet<AnnouncementComment> AnnouncementComments => Set<AnnouncementComment>();
     public DbSet<Notification> Notifications => Set<Notification>();
+    public DbSet<NotificationPreference> NotificationPreferences => Set<NotificationPreference>();
     public DbSet<AuditLog> AuditLogs => Set<AuditLog>();
     public DbSet<UserEducation> UserEducations => Set<UserEducation>();
     public DbSet<UserPublication> UserPublications => Set<UserPublication>();
@@ -50,6 +51,13 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<AttendanceRecord>().Property(a => a.Status).HasConversion<string>();
         modelBuilder.Entity<FormulaComponent>().Property(f => f.ComponentType).HasConversion<string>();
         modelBuilder.Entity<Notification>().Property(n => n.Type).HasConversion<string>();
+        // Stored by name, like every other enum here: an int column would remap
+        // every saved preference the moment NotificationType is reordered.
+        modelBuilder.Entity<NotificationPreference>().Property(p => p.Type).HasConversion<string>();
+        // One row per user per type — the upsert in
+        // UpdateNotificationPreferencesCommand assumes it.
+        modelBuilder.Entity<NotificationPreference>()
+            .HasIndex(p => new { p.UserId, p.Type }).IsUnique();
         modelBuilder.Entity<Course>().Property(c => c.CourseType).HasConversion<string>();
         modelBuilder.Entity<PresentationEvent>().Property(p => p.Status).HasConversion<string>();
         modelBuilder.Entity<PresentationEvent>().Property(p => p.Format).HasConversion<string>();

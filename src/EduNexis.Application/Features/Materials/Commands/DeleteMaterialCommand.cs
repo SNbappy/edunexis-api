@@ -1,10 +1,15 @@
+using EduNexis.Application.Abstractions;
 ﻿namespace EduNexis.Application.Features.Materials.Commands;
 
 public record DeleteMaterialCommand(
     Guid CourseId,
     Guid MaterialId,
     Guid RequestedById
-) : ICommand<ApiResponse>;
+) : ICommand<ApiResponse>, ICourseScopedWrite
+{
+    public ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
+        => ValueTask.FromResult<Guid?>(CourseId);
+}
 
 public sealed class DeleteMaterialCommandHandler(
     IUnitOfWork uow

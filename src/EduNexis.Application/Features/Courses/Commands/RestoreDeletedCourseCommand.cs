@@ -1,6 +1,10 @@
+using EduNexis.Application.Abstractions;
 namespace EduNexis.Application.Features.Courses.Commands;
 
-public record RestoreDeletedCourseCommand(Guid Id) : ICommand<ApiResponse>;
+public record RestoreDeletedCourseCommand(Guid Id) : ICommand<ApiResponse>, IArchiveExempt
+{
+    public string ArchiveExemptionReason => "Restoring from the recycle bin is lifecycle, not content.";
+}
 
 public sealed class RestoreDeletedCourseCommandHandler(
     IUnitOfWork uow,

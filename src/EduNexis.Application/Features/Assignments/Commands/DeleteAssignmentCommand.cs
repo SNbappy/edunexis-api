@@ -1,10 +1,15 @@
+using EduNexis.Application.Abstractions;
 namespace EduNexis.Application.Features.Assignments.Commands;
 
 public record DeleteAssignmentCommand(
     Guid CourseId,
     Guid AssignmentId,
     Guid RequestedById
-) : ICommand<ApiResponse>;
+) : ICommand<ApiResponse>, ICourseScopedWrite
+{
+    public ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
+        => ValueTask.FromResult<Guid?>(CourseId);
+}
 
 public sealed class DeleteAssignmentCommandHandler(
     IUnitOfWork uow

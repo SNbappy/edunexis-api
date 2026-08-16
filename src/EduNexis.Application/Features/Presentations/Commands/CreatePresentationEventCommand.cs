@@ -1,3 +1,4 @@
+using EduNexis.Application.Abstractions;
 using EduNexis.Application.Features.Notifications.Commands;
 using EduNexis.Application.Features.Presentations.Queries;
 
@@ -14,7 +15,11 @@ public record CreatePresentationEventCommand(
     string? Venue,
     bool TopicsAllowed,
     int? DurationPerGroupMinutes
-) : ICommand<ApiResponse<PresentationEventDto>>;
+) : ICommand<ApiResponse<PresentationEventDto>>, ICourseScopedWrite
+{
+    public ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
+        => ValueTask.FromResult<Guid?>(CourseId);
+}
 
 public sealed class CreatePresentationEventCommandValidator : AbstractValidator<CreatePresentationEventCommand>
 {

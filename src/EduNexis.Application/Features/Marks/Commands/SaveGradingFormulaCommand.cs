@@ -1,3 +1,4 @@
+using EduNexis.Application.Abstractions;
 namespace EduNexis.Application.Features.Marks.Commands;
 
 public record FormulaComponentRequest(
@@ -12,7 +13,11 @@ public record SaveGradingFormulaCommand(
     Guid TeacherId,
     decimal TotalMarks,
     List<FormulaComponentRequest> Components
-) : ICommand<ApiResponse>;
+) : ICommand<ApiResponse>, ICourseScopedWrite
+{
+    public ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
+        => ValueTask.FromResult<Guid?>(CourseId);
+}
 
 public sealed class SaveGradingFormulaCommandValidator : AbstractValidator<SaveGradingFormulaCommand>
 {

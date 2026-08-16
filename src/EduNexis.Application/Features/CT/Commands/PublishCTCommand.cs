@@ -1,3 +1,4 @@
+using EduNexis.Application.Abstractions;
 using EduNexis.Application.Features.Notifications.Commands;
 
 namespace EduNexis.Application.Features.CT.Commands;
@@ -5,7 +6,14 @@ namespace EduNexis.Application.Features.CT.Commands;
 public record PublishCTCommand(
     Guid CTEventId,
     Guid TeacherId
-) : ICommand<ApiResponse>;
+) : ICommand<ApiResponse>, ICourseScopedWrite
+{
+    public async ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
+    {
+        var e = await uow.GetRepository<CTEvent>().GetByIdAsync(CTEventId, ct);
+        return e?.CourseId;
+    }
+}
 
 public sealed class PublishCTCommandHandler(
     IUnitOfWork uow,

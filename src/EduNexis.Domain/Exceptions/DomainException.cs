@@ -22,3 +22,15 @@ public class DuplicateJoinRequestException()
 
 public class AlreadyMemberException()
     : Exception("This student is already a member of the course.");
+
+/// <summary>
+/// Thrown when any write is attempted against an archived course.
+///
+/// Archiving is not deletion: teachers and students keep full read access to
+/// everything the course ever held. It freezes the course instead — nothing can
+/// be added, edited or removed until the teacher unarchives it. That makes an
+/// archived semester a dependable record rather than something that can quietly
+/// change months after it ended.
+/// </summary>
+public class CourseArchivedException()
+    : Exception("This course is archived. Unarchive it to make changes.");

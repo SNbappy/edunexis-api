@@ -1,10 +1,18 @@
+using EduNexis.Application.Abstractions;
 ﻿namespace EduNexis.Application.Features.Presentations.Commands;
 
 public record UpdatePresentationStatusCommand(
     Guid PresentationEventId,
     Guid TeacherId,
     string Status
-) : ICommand<ApiResponse>;
+) : ICommand<ApiResponse>, ICourseScopedWrite
+{
+    public async ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
+    {
+        var e = await uow.GetRepository<PresentationEvent>().GetByIdAsync(PresentationEventId, ct);
+        return e?.CourseId;
+    }
+}
 
 public sealed class UpdatePresentationStatusCommandHandler(
     IUnitOfWork uow
