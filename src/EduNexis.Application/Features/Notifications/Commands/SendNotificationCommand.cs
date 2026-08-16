@@ -99,12 +99,26 @@ public sealed class SendNotificationCommandHandler(
             bodyHtml +=
                 "<p style=\"color:#78716c;font-size:13px;margin-top:24px;\">" +
                 "You are receiving this because you have an account on EduNexis. " +
-                "Notification preferences can be managed from your account settings (coming soon)." +
+                // No longer "coming soon" — Settings > Notifications ships now.
+                "You can choose which notifications you receive in Settings > Notifications." +
                 "</p>";
 
             var html = templateBuilder.Build(command.Title, bodyHtml);
 
-            await emailService.SendAsync(user.Email, command.Title, html, ct);
+            // Same reason as the auth flows: a rejected send returns false
+            // rather than throwing, so discarding the result made a failed
+            // notification email indistinguishable from a delivered one.
+            var sent = await emailService.SendAsync(user.Email, command.Title, html, ct);
+
+            if (sent)
+                logger.LogInformation(
+                    "Notification email sent (UserId={UserId}, Type={Type})",
+                    command.UserId, command.Type);
+            else
+                logger.LogWarning(
+                    "Notification email NOT delivered - the provider rejected it "
+                    + "(UserId={UserId}, Type={Type}). The in-app notification was still saved.",
+                    command.UserId, command.Type);
         }
         catch (Exception ex)
         {

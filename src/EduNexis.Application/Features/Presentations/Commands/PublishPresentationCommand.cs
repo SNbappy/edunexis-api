@@ -93,11 +93,17 @@ public sealed class PublishPresentationCommandHandler(
             var html = templateBuilder.Build("Marks published", bodyHtml);
             var subject = $"Marks published: {testTitle}";
 
+            // Count what the provider actually accepted. SendAsync returns false
+            // on rejection instead of throwing, so the catch below only covers
+            // transport faults — and the summary previously reported every
+            // recipient as dispatched even when all of them were refused.
+            var accepted = 0;
+
             foreach (var email in recipients)
             {
                 try
                 {
-                    await emailService.SendAsync(email, subject, html, ct);
+                    if (await emailService.SendAsync(email, subject, html, ct)) accepted++;
                 }
                 catch (Exception ex)
                 {
@@ -105,7 +111,14 @@ public sealed class PublishPresentationCommandHandler(
                 }
             }
 
-            logger.LogInformation("Marks-published emails dispatched to {Count} recipients for course {CourseId}", recipients.Count, courseId);
+            if (accepted == recipients.Count)
+                logger.LogInformation(
+                    "Marks-published emails dispatched to {Count} recipients for course {CourseId}",
+                    recipients.Count, courseId);
+            else
+                logger.LogWarning(
+                    "Marks-published emails partially failed: {Accepted}/{Total} accepted for course {CourseId}",
+                    accepted, recipients.Count, courseId);
         }
         catch (Exception ex)
         {

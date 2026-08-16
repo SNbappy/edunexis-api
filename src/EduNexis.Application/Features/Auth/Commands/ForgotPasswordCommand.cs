@@ -69,8 +69,22 @@ public sealed class ForgotPasswordCommandHandler(
                 "</p>";
 
             var html = templateBuilder.Build("Reset your password", bodyHtml);
-            await emailService.SendAsync(user.Email, "Reset your EduNexis password", html, ct);
-            logger.LogInformation("Password reset email sent to {Email}", user.Email);
+
+            // The result is load-bearing: SendAsync returns false when the
+            // provider rejects the message rather than throwing, so discarding
+            // it logged "Password reset email sent" directly after a Brevo 401
+            // for the same request. The caller's response is deliberately
+            // unaffected — see the generic message above.
+            var sent = await emailService.SendAsync(
+                user.Email, "Reset your EduNexis password", html, ct);
+
+            if (sent)
+                logger.LogInformation("Password reset email sent to {Email}", user.Email);
+            else
+                logger.LogWarning(
+                    "Password reset email to {Email} was NOT delivered - the provider rejected it. "
+                    + "This user cannot reset their password until email delivery is fixed.",
+                    user.Email);
         }
         catch (Exception ex)
         {
