@@ -1,3 +1,4 @@
+using EduNexis.Application.Features.Notifications.Commands;
 using EduNexis.Application.Abstractions;
 ﻿using EduNexis.Application.DTOs;
 
@@ -34,7 +35,8 @@ public sealed class CreateAttendanceSessionCommandValidator
 
 
 public sealed class CreateAttendanceSessionCommandHandler(
-    IUnitOfWork uow
+    IUnitOfWork uow,
+    ISender sender
 ) : ICommandHandler<CreateAttendanceSessionCommand, ApiResponse<AttendanceSessionDto>>
 {
     public async ValueTask<ApiResponse<AttendanceSessionDto>> Handle(
@@ -72,8 +74,25 @@ public sealed class CreateAttendanceSessionCommandHandler(
 
         await uow.SaveChangesAsync(ct);
 
+        // Tell each student how they were marked.
+        //
+        // Per-student rather than one blanket "attendance was taken", because
+        // the thing a student needs to check is their own mark — being marked
+        // absent by mistake is the single most common attendance dispute, and
+        // it can only be corrected if they find out on the day.
+        foreach (var entry in command.Entries)
+        {
+            await sender.Send(new SendNotificationCommand(
+                UserId: entry.StudentId,
+                Title: $"Attendance recorded in {course.Title}",
+                Body: $"You were marked {entry.Status.ToString().ToLowerInvariant()} "
+                    + $"for {command.Date:MMM dd, yyyy}.",
+                Type: NotificationType.AttendanceRecorded,
+                RedirectUrl: $"/courses/{course.Id}/attendance"
+            ), ct);
+        }
 
-        // ✅ Fetch profiles and filter in memory
+        // Fetch profiles and filter in memory
         var studentIds = command.Entries.Select(e => e.StudentId).ToHashSet();
         var allProfiles = await uow.UserProfiles.GetAllAsync(ct);
         var profileMap = allProfiles

@@ -24,6 +24,13 @@ public sealed class GetMySubmissionQueryHandler(
             .FirstOrDefaultAsync(p => p.UserId == query.StudentId, ct);
         var studentName = profile?.FullName ?? "Unknown";
 
+        var attachments = (await uow.GetRepository<SubmissionAttachment>()
+                .FindAsync(a => a.SubmissionId == submission.Id, ct))
+            .OrderBy(a => a.SortOrder)
+            .Select(a => new SubmissionAttachmentDto(
+                a.Id, a.Kind.ToString(), a.Url, a.FileName, a.FileSizeBytes))
+            .ToList();
+
         return ApiResponse<SubmissionDto>.Ok(new SubmissionDto(
             submission.Id,
             submission.AssignmentId,
@@ -37,6 +44,7 @@ public sealed class GetMySubmissionQueryHandler(
             submission.IsLate,
             submission.Marks,
             submission.Feedback,
-            submission.IsGraded));
+            submission.IsGraded,
+            attachments));
     }
 }

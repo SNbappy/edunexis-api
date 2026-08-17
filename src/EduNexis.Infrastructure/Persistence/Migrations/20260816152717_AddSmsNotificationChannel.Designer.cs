@@ -4,6 +4,7 @@ using EduNexis.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EduNexis.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260816152717_AddSmsNotificationChannel")]
+    partial class AddSmsNotificationChannel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -155,43 +158,6 @@ namespace EduNexis.Infrastructure.Persistence.Migrations
                     b.HasIndex("CreatedById");
 
                     b.ToTable("Assignments");
-                });
-
-            modelBuilder.Entity("EduNexis.Domain.Entities.AssignmentComment", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("AssignmentId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("AuthorId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AssignmentId");
-
-                    b.HasIndex("AuthorId");
-
-                    b.ToTable("AssignmentComments");
                 });
 
             modelBuilder.Entity("EduNexis.Domain.Entities.AssignmentSubmission", b =>
@@ -1271,51 +1237,6 @@ namespace EduNexis.Infrastructure.Persistence.Migrations
                     b.ToTable("PresentationMarks");
                 });
 
-            modelBuilder.Entity("EduNexis.Domain.Entities.SubmissionAttachment", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("FileName")
-                        .HasColumnType("longtext");
-
-                    b.Property<long?>("FileSizeBytes")
-                        .HasColumnType("bigint");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("Kind")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("SortOrder")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("SubmissionId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SubmissionId");
-
-                    b.ToTable("SubmissionAttachments");
-                });
-
             modelBuilder.Entity("EduNexis.Domain.Entities.TeacherQuota", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1696,25 +1617,6 @@ namespace EduNexis.Infrastructure.Persistence.Migrations
                     b.Navigation("CreatedBy");
                 });
 
-            modelBuilder.Entity("EduNexis.Domain.Entities.AssignmentComment", b =>
-                {
-                    b.HasOne("EduNexis.Domain.Entities.Assignment", "Assignment")
-                        .WithMany()
-                        .HasForeignKey("AssignmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EduNexis.Domain.Entities.User", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Assignment");
-
-                    b.Navigation("Author");
-                });
-
             modelBuilder.Entity("EduNexis.Domain.Entities.AssignmentSubmission", b =>
                 {
                     b.HasOne("EduNexis.Domain.Entities.Assignment", "Assignment")
@@ -2054,17 +1956,6 @@ namespace EduNexis.Infrastructure.Persistence.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("EduNexis.Domain.Entities.SubmissionAttachment", b =>
-                {
-                    b.HasOne("EduNexis.Domain.Entities.AssignmentSubmission", "Submission")
-                        .WithMany("Attachments")
-                        .HasForeignKey("SubmissionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Submission");
-                });
-
             modelBuilder.Entity("EduNexis.Domain.Entities.TeacherQuota", b =>
                 {
                     b.HasOne("EduNexis.Domain.Entities.User", "AssignedBy")
@@ -2129,8 +2020,6 @@ namespace EduNexis.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("EduNexis.Domain.Entities.AssignmentSubmission", b =>
                 {
-                    b.Navigation("Attachments");
-
                     b.Navigation("GradeComplaint");
 
                     b.Navigation("PlagiarismReport");

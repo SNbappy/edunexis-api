@@ -21,6 +21,12 @@ public class AssignmentSubmission : BaseEntity
     public PlagiarismReport? PlagiarismReport { get; private set; }
     public GradeComplaint? GradeComplaint { get; private set; }
 
+    /// <summary>
+    /// Every file and link turned in. FileUrl/LinkUrl above mirror the first of
+    /// each so older readers keep working; this is the complete set.
+    /// </summary>
+    public ICollection<SubmissionAttachment> Attachments { get; private set; } = [];
+
     protected AssignmentSubmission() { }
 
     public static AssignmentSubmission Create(

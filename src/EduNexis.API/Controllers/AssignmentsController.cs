@@ -69,22 +69,69 @@ public class AssignmentsController : BaseController
 
     [HttpPost("assignments/{assignmentId:guid}/submit")]
     [Authorize(Roles = "Student")]
+    /// <param name="files">
+    /// Repeat the field to attach several. `file` (singular) is still accepted
+    /// so an older client keeps working.
+    /// </param>
+    /// <param name="linkUrls">Repeat for several links; `linkUrl` also accepted.</param>
     public async Task<IActionResult> Submit(
         Guid assignmentId,
         [FromForm] SubmissionType submissionType,
         [FromForm] string? textContent,
+        [FromForm] IFormFileCollection? files,
         IFormFile? file,
+        [FromForm] string[]? linkUrls,
         [FromForm] string? linkUrl,
-        CancellationToken ct) =>
-        Ok(await Mediator.Send(new SubmitAssignmentCommand(
+        CancellationToken ct)
+    {
+        var incoming = new List<IncomingFile>();
+        foreach (var f in (IEnumerable<IFormFile>?)files ?? [])
+            incoming.Add(new IncomingFile(f.OpenReadStream(), f.FileName, f.Length));
+        if (file is not null)
+            incoming.Add(new IncomingFile(file.OpenReadStream(), file.FileName, file.Length));
+
+        var links = new List<string>(linkUrls ?? []);
+        if (!string.IsNullOrWhiteSpace(linkUrl)) links.Add(linkUrl);
+
+        return Ok(await Mediator.Send(new SubmitAssignmentCommand(
             AssignmentId: assignmentId,
             StudentId: CurrentUserId,
             SubmissionType: submissionType,
             TextContent: textContent,
-            FileStream: file?.OpenReadStream(),
-            FileName: file?.FileName,
-            LinkUrl: linkUrl
+            Files: incoming,
+            Links: links
         ), ct));
+    }
+
+    /* ── Class comments on an assignment ──────────────────────────── */
+
+    [HttpGet("courses/{courseId:guid}/assignments/{assignmentId:guid}/comments")]
+    public async Task<IActionResult> GetComments(
+        Guid courseId, Guid assignmentId, CancellationToken ct) =>
+        Ok(await Mediator.Send(
+            new GetAssignmentCommentsQuery(courseId, assignmentId, CurrentUserId), ct));
+
+    [HttpPost("courses/{courseId:guid}/assignments/{assignmentId:guid}/comments")]
+    public async Task<IActionResult> AddComment(
+        Guid courseId, Guid assignmentId,
+        [FromBody] AssignmentCommentRequest body,
+        CancellationToken ct) =>
+        Ok(await Mediator.Send(new AddAssignmentCommentCommand(
+            courseId, assignmentId, CurrentUserId, body.Content), ct));
+
+    [HttpPut("courses/{courseId:guid}/comments/{commentId:guid}")]
+    public async Task<IActionResult> EditComment(
+        Guid courseId, Guid commentId,
+        [FromBody] AssignmentCommentRequest body,
+        CancellationToken ct) =>
+        Ok(await Mediator.Send(new EditAssignmentCommentCommand(
+            courseId, commentId, CurrentUserId, body.Content), ct));
+
+    [HttpDelete("courses/{courseId:guid}/comments/{commentId:guid}")]
+    public async Task<IActionResult> DeleteComment(
+        Guid courseId, Guid commentId, CancellationToken ct) =>
+        Ok(await Mediator.Send(new DeleteAssignmentCommentCommand(
+            courseId, commentId, CurrentUserId), ct));
 
     [HttpPost("submissions/{submissionId:guid}/grade")]
     [Authorize(Roles = "Teacher,SuperAdmin,DepartmentAdmin")]
@@ -111,3 +158,4 @@ public class AssignmentsController : BaseController
         Ok(await Mediator.Send(new GetMySubmissionQuery(assignmentId, CurrentUserId), ct));
 }
 
+public record AssignmentCommentRequest(string Content);

@@ -4,6 +4,7 @@ using EduNexis.Infrastructure.Persistence;
 using EduNexis.Infrastructure.Persistence.Repositories;
 using EduNexis.Infrastructure.Services.Cache;
 using EduNexis.Infrastructure.Services.Email;
+using EduNexis.Infrastructure.Services.Sms;
 using EduNexis.Infrastructure.Services;
 using EduNexis.Infrastructure.Services.Auth;
 using EduNexis.Infrastructure.Services.Storage;
@@ -51,6 +52,9 @@ public static class DependencyInjection
         // Email via Brevo HTTP API (SMTP blocked on Render free tier)
         services.AddHttpClient("brevo-email");
         services.AddScoped<IEmailService, EmailService>();
+
+        services.AddHttpClient("sms-gateway");
+        services.AddScoped<ISmsService, SmsService>();
         services.AddSingleton<IEmailTemplateBuilder, EmailTemplateBuilder>();
 
         // Redis Cache (optional, falls back to in-memory if no Redis URL)

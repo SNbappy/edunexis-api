@@ -25,4 +25,18 @@ public class AnnouncementComment : BaseEntity
             Content = content
         };
     }
+
+    /// <summary>
+    /// Rewrites the body. Only ever called for the comment's own author — a
+    /// teacher moderating a thread can delete a student's comment but must not
+    /// be able to change words attributed to them.
+    /// </summary>
+    public void Edit(string content)
+    {
+        if (string.IsNullOrWhiteSpace(content))
+            throw new DomainException("Comment cannot be empty.");
+
+        Content = content;
+        SetUpdatedAt();
+    }
 }

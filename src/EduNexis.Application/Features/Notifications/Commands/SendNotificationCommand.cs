@@ -19,23 +19,43 @@ public record SendNotificationCommand(
 public sealed class SendNotificationCommandHandler(
     IUnitOfWork uow,
     IEmailService emailService,
+    ISmsService smsService,
     IEmailTemplateBuilder templateBuilder,
     ILogger<SendNotificationCommandHandler> logger
 ) : ICommandHandler<SendNotificationCommand, ApiResponse>
 {
     /// <summary>
-    /// Notification types that should ALSO send an email.
+    /// Notification types that may ALSO send an email.
     /// Lower-noise types (announcements, generic) stay in-app only.
     /// </summary>
-    private static readonly HashSet<NotificationType> EmailEligibleTypes = new()
+    public static readonly HashSet<NotificationType> EmailEligibleTypes = new()
     {
         NotificationType.NewAssignment,
-        NotificationType.MarksPublished,
+        NotificationType.AssignmentUpdated,
         NotificationType.AssignmentDeadlineReminder,
+        NotificationType.AssignmentGraded,
+        NotificationType.MarksPublished,
         NotificationType.JoinRequestReceived,
         NotificationType.CourseJoinApproved,
         NotificationType.CourseJoinRejected,
         NotificationType.GradeComplaint,
+    };
+
+    /// <summary>
+    /// Types worth an SMS.
+    ///
+    /// A much shorter list than email on purpose: every message costs money and
+    /// interrupts someone's phone, so this is limited to things with a deadline
+    /// or a result attached — the cases where being told hours earlier actually
+    /// changes what a student does.
+    /// </summary>
+    public static readonly HashSet<NotificationType> SmsEligibleTypes = new()
+    {
+        NotificationType.NewAssignment,
+        NotificationType.AssignmentUpdated,
+        NotificationType.AssignmentDeadlineReminder,
+        NotificationType.MarksPublished,
+        NotificationType.AssignmentGraded,
     };
 
     public async ValueTask<ApiResponse> Handle(
@@ -50,8 +70,13 @@ public sealed class SendNotificationCommandHandler(
                 .FindAsync(p => p.UserId == command.UserId && p.Type == command.Type, ct))
             .FirstOrDefault();
 
+        // Defaults differ by channel, and deliberately so:
+        //   in-app  on   — the product's own surface, costs nothing
+        //   email   off  — opt-in, or a new course reads as spam
+        //   sms     off  — opt-in, costs money and needs a phone number
         var wantsInApp = pref?.InApp ?? true;
-        var wantsEmail = pref?.Email ?? true;
+        var wantsEmail = pref?.Email ?? false;
+        var wantsSms   = pref?.Sms   ?? false;
 
         // 1) Save in-app notification
         if (wantsInApp)
@@ -70,7 +95,54 @@ public sealed class SendNotificationCommandHandler(
             await SendEmailAsync(command, ct);
         }
 
+        // 3) SMS, same rules. Silently a no-op when no gateway is configured.
+        if (wantsSms && SmsEligibleTypes.Contains(command.Type))
+        {
+            await SendSmsAsync(command, ct);
+        }
+
         return ApiResponse.Ok("Notification sent.");
+    }
+
+    /// <summary>
+    /// One short SMS. No links, no HTML — these are read on a lock screen and
+    /// every extra character can cost another message segment.
+    /// </summary>
+    private async Task SendSmsAsync(SendNotificationCommand command, CancellationToken ct)
+    {
+        try
+        {
+            if (!smsService.IsConfigured) return;
+
+            var user = await uow.Users.GetWithProfileAsync(command.UserId, ct);
+            var phone = user?.Profile?.PhoneNumber;
+
+            if (string.IsNullOrWhiteSpace(phone))
+            {
+                logger.LogDebug(
+                    "SMS wanted but no phone number on profile (UserId={UserId}, Type={Type})",
+                    command.UserId, command.Type);
+                return;
+            }
+
+            var text = $"EduNexis: {command.Title}. {command.Body}";
+            if (text.Length > 300) text = text[..297] + "...";
+
+            var sent = await smsService.SendAsync(phone, text, ct);
+
+            if (!sent)
+                logger.LogWarning(
+                    "Notification SMS NOT delivered (UserId={UserId}, Type={Type}). "
+                    + "The in-app notification was still saved.",
+                    command.UserId, command.Type);
+        }
+        catch (Exception ex)
+        {
+            // SMS must never break the notification flow.
+            logger.LogError(ex,
+                "Failed to send SMS for notification (UserId={UserId}, Type={Type})",
+                command.UserId, command.Type);
+        }
     }
 
     private async Task SendEmailAsync(SendNotificationCommand command, CancellationToken ct)

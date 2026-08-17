@@ -50,7 +50,10 @@ public sealed class GetCommentsQueryHandler(
                 c.Id, c.AnnouncementId, c.AuthorId,
                 author.Name, author.Photo,
                 c.Content, c.CreatedAt,
-                CanDelete: isTeacher || c.AuthorId == query.RequesterId));
+                // Teacher moderates (delete anything); only the author rewrites.
+                CanDelete: isTeacher || c.AuthorId == query.RequesterId,
+                CanEdit:   c.AuthorId == query.RequesterId,
+                EditedAt:  c.UpdatedAt));
         }
 
         return ApiResponse<List<CommentDto>>.Ok(dtos);

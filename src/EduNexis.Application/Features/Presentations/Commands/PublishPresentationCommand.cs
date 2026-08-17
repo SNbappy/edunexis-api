@@ -1,7 +1,8 @@
 using EduNexis.Application.Abstractions;
 using System.Security.Cryptography;
 using System.Text;
-using EduNexis.Domain.Interfaces.Services;
+using EduNexis.Application.Features.Notifications.Commands;
+using EduNexis.Domain.Enums;
 using Microsoft.Extensions.Logging;
 
 namespace EduNexis.Application.Features.Presentations.Commands;
@@ -20,8 +21,7 @@ public record PublishPresentationCommand(
 
 public sealed class PublishPresentationCommandHandler(
     IUnitOfWork uow,
-    IEmailService emailService,
-    IEmailTemplateBuilder templateBuilder,
+    ISender sender,
     ILogger<PublishPresentationCommandHandler> logger
 ) : ICommandHandler<PublishPresentationCommand, ApiResponse>
 {
@@ -64,20 +64,23 @@ public sealed class PublishPresentationCommandHandler(
 
         return ApiResponse.Ok(shouldNotify
             ? "Published. Students notified."
-            : "Published. No marks changed since last publish; no email sent.");
+            : "Published. No marks changed since last publish; nobody was notified again.");
     }
 
+    /// <summary>
+    /// Goes through SendNotificationCommand rather than emailing directly.
+    /// The old version called IEmailService in a loop, which meant it ignored
+    /// the student's notification preferences entirely and left no in-app
+    /// record — a student who had switched email off still got mailed, and a
+    /// student who only wanted in-app notifications got nothing at all.
+    /// </summary>
     private async Task NotifyEnrolledStudentsAsync(
         Guid courseId, string courseTitle, string testTitle, CancellationToken ct)
     {
         try
         {
             var members = await uow.CourseMembers.GetByCourseAsync(courseId, ct);
-            var recipients = members
-                .Where(m => m.IsActive && m.User is not null && !string.IsNullOrWhiteSpace(m.User.Email))
-                .Select(m => m.User!.Email)
-                .Distinct()
-                .ToList();
+            var recipients = members.Where(m => m.IsActive).ToList();
 
             if (recipients.Count == 0)
             {
@@ -85,40 +88,20 @@ public sealed class PublishPresentationCommandHandler(
                 return;
             }
 
-            var bodyHtml =
-                $"<p>Your marks for <strong>{System.Net.WebUtility.HtmlEncode(testTitle)}</strong> in <strong>{System.Net.WebUtility.HtmlEncode(courseTitle)}</strong> are now available.</p>" +
-                "<p>Log in to EduNexis to view your result.</p>" +
-                "<p style=\"color:#78716c;font-size:13px;\">If you are not enrolled in this course, please ignore this email.</p>";
-
-            var html = templateBuilder.Build("Marks published", bodyHtml);
-            var subject = $"Marks published: {testTitle}";
-
-            // Count what the provider actually accepted. SendAsync returns false
-            // on rejection instead of throwing, so the catch below only covers
-            // transport faults — and the summary previously reported every
-            // recipient as dispatched even when all of them were refused.
-            var accepted = 0;
-
-            foreach (var email in recipients)
+            foreach (var m in recipients)
             {
-                try
-                {
-                    if (await emailService.SendAsync(email, subject, html, ct)) accepted++;
-                }
-                catch (Exception ex)
-                {
-                    logger.LogError(ex, "Failed to send marks-published email to {Email}", email);
-                }
+                await sender.Send(new SendNotificationCommand(
+                    UserId: m.UserId,
+                    Title: $"Marks published in {courseTitle}",
+                    Body: $"Your marks for \"{testTitle}\" are now available.",
+                    Type: NotificationType.MarksPublished,
+                    RedirectUrl: $"/courses/{courseId}/presentations"
+                ), ct);
             }
 
-            if (accepted == recipients.Count)
-                logger.LogInformation(
-                    "Marks-published emails dispatched to {Count} recipients for course {CourseId}",
-                    recipients.Count, courseId);
-            else
-                logger.LogWarning(
-                    "Marks-published emails partially failed: {Accepted}/{Total} accepted for course {CourseId}",
-                    accepted, recipients.Count, courseId);
+            logger.LogInformation(
+                "Marks-published notifications queued for {Count} recipients in course {CourseId}",
+                recipients.Count, courseId);
         }
         catch (Exception ex)
         {

@@ -1,3 +1,4 @@
+using EduNexis.Application.Features.Notifications.Commands;
 using EduNexis.Application.Abstractions;
 
 namespace EduNexis.Application.Features.Announcements.Commands;
@@ -10,8 +11,13 @@ public record CommentDto(
     string? AuthorPhotoUrl,
     string Content,
     DateTime CreatedAt,
-    /// <summary>Whether the caller may delete this comment.</summary>
-    bool CanDelete
+    /// <summary>Whether the caller may delete this comment (own comment, or teacher).</summary>
+    bool CanDelete,
+    /// <summary>Whether the caller may edit it. Authors only — a teacher may
+    /// remove a student's comment but never rewrite it in their name.</summary>
+    bool CanEdit,
+    /// <summary>Set once edited, so a changed comment says so.</summary>
+    DateTime? EditedAt = null
 );
 
 /// <summary>
@@ -41,7 +47,8 @@ public sealed class AddCommentCommandValidator : AbstractValidator<AddCommentCom
 }
 
 public sealed class AddCommentCommandHandler(
-    IUnitOfWork uow
+    IUnitOfWork uow,
+    ISender sender
 ) : ICommandHandler<AddCommentCommand, ApiResponse<CommentDto>>
 {
     public async ValueTask<ApiResponse<CommentDto>> Handle(
@@ -77,15 +84,37 @@ public sealed class AddCommentCommandHandler(
         await uow.SaveChangesAsync(ct);
 
         var author = await uow.Users.GetWithProfileAsync(cmd.AuthorId, ct);
+        var authorName = author?.Profile?.FullName ?? "Someone";
+
+        // Notify the announcement's author, and the teacher when somebody else
+        // replies — a comment nobody is told about is a question nobody answers.
+        var notifyIds = new HashSet<Guid> { announcement.AuthorId, course!.TeacherId };
+        notifyIds.Remove(cmd.AuthorId); // never notify yourself about your own comment
+
+        foreach (var userId in notifyIds)
+        {
+            await sender.Send(new SendNotificationCommand(
+                UserId: userId,
+                Title: $"New comment in {course.Title}",
+                Body: $"{authorName}: {Preview(content)}",
+                Type: NotificationType.NewComment,
+                RedirectUrl: $"/courses/{cmd.CourseId}/stream"
+            ), ct);
+        }
 
         return ApiResponse<CommentDto>.Ok(new CommentDto(
             comment.Id,
             comment.AnnouncementId,
             comment.AuthorId,
-            author?.Profile?.FullName ?? "Unknown",
+            authorName,
             author?.Profile?.ProfilePhotoUrl,
             comment.Content,
             comment.CreatedAt,
-            CanDelete: true), "Comment posted.");
+            CanDelete: true,
+            CanEdit: true), "Comment posted.");
     }
+
+    /// <summary>Keeps the notification body to a glance, not a wall of text.</summary>
+    private static string Preview(string text) =>
+        text.Length <= 90 ? text : text[..87] + "...";
 }

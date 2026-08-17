@@ -1,5 +1,4 @@
 using EduNexis.Application.Abstractions;
-using EduNexis.Application.Features.Notifications.Commands;
 using EduNexis.Application.Features.Presentations.Queries;
 
 namespace EduNexis.Application.Features.Presentations.Commands;
@@ -31,8 +30,7 @@ public sealed class CreatePresentationEventCommandValidator : AbstractValidator<
 }
 
 public sealed class CreatePresentationEventCommandHandler(
-    IUnitOfWork uow,
-    ISender sender
+    IUnitOfWork uow
 ) : ICommandHandler<CreatePresentationEventCommand, ApiResponse<PresentationEventDto>>
 {
     public async ValueTask<ApiResponse<PresentationEventDto>> Handle(
@@ -55,20 +53,10 @@ public sealed class CreatePresentationEventCommandHandler(
         await uow.GetRepository<PresentationEvent>().AddAsync(ev, ct);
         await uow.SaveChangesAsync(ct);
 
-        var members = await uow.CourseMembers.GetByCourseAsync(command.CourseId, ct);
-        var scheduledText = command.ScheduledDate.HasValue
-            ? $" on {command.ScheduledDate.Value:MMM dd, yyyy}"
-            : string.Empty;
-        foreach (var m in members.Where(x => x.IsActive))
-        {
-            await sender.Send(new SendNotificationCommand(
-                UserId: m.UserId,
-                Title: $"New Presentation in {course.Title}",
-                Body: $"\"{command.Title}\"{scheduledText}.",
-                Type: NotificationType.General,
-                RedirectUrl: $"/courses/{course.Id}/presentations"
-            ), ct);
-        }
+        // Deliberately silent. A newly created event is a draft that students
+        // cannot open yet, so announcing it sends them to a page showing
+        // nothing. PublishPresentationCommand notifies once it is actually
+        // visible.
 
         return ApiResponse<PresentationEventDto>.Ok(PresentationEventDto.From(ev, null, 0));
     }

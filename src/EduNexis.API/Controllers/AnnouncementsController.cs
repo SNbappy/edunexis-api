@@ -58,6 +58,14 @@ public class AnnouncementsController : BaseController
             Content: body.Content
         ), ct));
 
+    [HttpPut("courses/{courseId:guid}/comments/{commentId:guid}")]
+    public async Task<IActionResult> EditComment(
+        Guid courseId, Guid commentId,
+        [FromBody] AddCommentRequest body,
+        CancellationToken ct) =>
+        Ok(await Mediator.Send(new EditCommentCommand(
+            courseId, commentId, CurrentUserId, body.Content), ct));
+
     [HttpDelete("courses/{courseId:guid}/comments/{commentId:guid}")]
     public async Task<IActionResult> DeleteComment(
         Guid courseId, Guid commentId, CancellationToken ct) =>

@@ -1,3 +1,4 @@
+using EduNexis.Application.Features.Notifications.Commands;
 using EduNexis.Application.Abstractions;
 ﻿using EduNexis.Application.DTOs;
 
@@ -31,7 +32,8 @@ public sealed class UpdateAssignmentCommandValidator : AbstractValidator<UpdateA
 }
 
 public sealed class UpdateAssignmentCommandHandler(
-    IUnitOfWork uow
+    IUnitOfWork uow,
+    ISender sender
 ) : ICommandHandler<UpdateAssignmentCommand, ApiResponse<AssignmentDto>>
 {
     public async ValueTask<ApiResponse<AssignmentDto>> Handle(
@@ -46,11 +48,39 @@ public sealed class UpdateAssignmentCommandHandler(
         var assignment = await uow.GetRepository<Assignment>().GetByIdAsync(cmd.AssignmentId, ct)
             ?? throw new NotFoundException("Assignment", cmd.AssignmentId);
 
+        // Captured before the update so the notification can say what changed.
+        var oldDeadline = assignment.Deadline;
+        var oldMaxMarks = assignment.MaxMarks;
+
         assignment.Update(cmd.Title, cmd.Instructions, cmd.Deadline,
             cmd.AllowLateSubmission, cmd.MaxMarks, cmd.RubricNotes);
 
         uow.GetRepository<Assignment>().Update(assignment);
         await uow.SaveChangesAsync(ct);
+
+        // A moved deadline is the change students most need to hear about, and
+        // previously it happened in complete silence.
+        var deadlineMoved = oldDeadline != assignment.Deadline;
+        var marksChanged  = oldMaxMarks != assignment.MaxMarks;
+
+        if (deadlineMoved || marksChanged)
+        {
+            var what = deadlineMoved
+                ? $"New deadline: {assignment.Deadline:MMM dd, yyyy h:mm tt}."
+                : $"Now marked out of {assignment.MaxMarks}.";
+
+            var members = await uow.CourseMembers.GetByCourseAsync(cmd.CourseId, ct);
+            foreach (var m in members.Where(x => x.IsActive))
+            {
+                await sender.Send(new SendNotificationCommand(
+                    UserId: m.UserId,
+                    Title: $"Assignment updated in {course.Title}",
+                    Body: $"\"{assignment.Title}\" changed. {what}",
+                    Type: NotificationType.AssignmentUpdated,
+                    RedirectUrl: $"/courses/{course.Id}/assignments/{assignment.Id}"
+                ), ct);
+            }
+        }
 
         var subs = (await uow.GetRepository<AssignmentSubmission>()
             .FindAsync(s => s.AssignmentId == assignment.Id, ct)).ToList();

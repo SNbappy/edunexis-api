@@ -1,3 +1,4 @@
+using EduNexis.Application.Features.Notifications.Commands;
 using EduNexis.Application.Abstractions;
 using EduNexis.Application.DTOs;
 
@@ -32,7 +33,8 @@ public sealed class GradeSubmissionCommandValidator : AbstractValidator<GradeSub
 
 
 public sealed class GradeSubmissionCommandHandler(
-    IUnitOfWork uow
+    IUnitOfWork uow,
+    ISender sender
 ) : ICommandHandler<GradeSubmissionCommand, ApiResponse<SubmissionDto>>
 {
     public async ValueTask<ApiResponse<SubmissionDto>> Handle(
@@ -66,10 +68,21 @@ public sealed class GradeSubmissionCommandHandler(
         await uow.SaveChangesAsync(ct);
 
 
-        // ✅ Fetch student full name from UserProfile
+        // Fetch student full name from UserProfile
         var profile = await uow.UserProfiles
             .FirstOrDefaultAsync(p => p.UserId == submission.StudentId, ct);
         var studentName = profile?.FullName ?? "Unknown";
+
+        // Tell the student their work has been marked. Being graded and not
+        // knowing it is the single most-noticed gap: the mark exists, the
+        // student has no reason to go looking, and finds out days later.
+        await sender.Send(new SendNotificationCommand(
+            UserId: submission.StudentId,
+            Title: $"Your work was marked in {course.Title}",
+            Body: $"\"{assignment.Title}\": {command.Marks} out of {assignment.MaxMarks}.",
+            Type: NotificationType.AssignmentGraded,
+            RedirectUrl: $"/courses/{course.Id}/assignments/{assignment.Id}"
+        ), ct);
 
 
         return ApiResponse<SubmissionDto>.Ok(new SubmissionDto(

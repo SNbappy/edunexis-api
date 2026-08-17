@@ -72,6 +72,15 @@ public sealed class GetPresentationsQueryHandler(
         var events = await uow.GetRepository<PresentationEvent>()
             .FindAsync(e => e.CourseId == query.CourseId, ct);
 
+        // Students only see published events.
+        //
+        // Every draft used to be returned with only its *marks* withheld, so a
+        // test the teacher was still setting up appeared in the students' list —
+        // title, format and scheduled date included — before it was ready. CT
+        // already filtered this way; this brings presentations in line.
+        if (!isTeacher)
+            events = events.Where(e => e.IsPublished);
+
         var result = new List<PresentationEventDto>();
 
         foreach (var ev in events.OrderByDescending(e => e.ScheduledDate ?? e.CreatedAt))

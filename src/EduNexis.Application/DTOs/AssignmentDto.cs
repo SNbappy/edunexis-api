@@ -27,6 +27,14 @@ public record AssignmentDto(
     DateTime CreatedAt
 );
 
+public record SubmissionAttachmentDto(
+    Guid Id,
+    string Kind,
+    string Url,
+    string? FileName,
+    long? FileSizeBytes
+);
+
 public record SubmissionDto(
     Guid Id,
     Guid AssignmentId,
@@ -34,11 +42,15 @@ public record SubmissionDto(
     string StudentName,
     string SubmissionType,
     string? TextContent,
+    /// <summary>First file, kept so older readers of this DTO still work.</summary>
     string? FileUrl,
+    /// <summary>First link, kept for the same reason.</summary>
     string? LinkUrl,
     DateTime SubmittedAt,
     bool IsLate,
     decimal? Marks,
     string? Feedback,
-    bool IsGraded
+    bool IsGraded,
+    /// <summary>Everything turned in. Prefer this over FileUrl/LinkUrl.</summary>
+    IReadOnlyList<SubmissionAttachmentDto>? Attachments = null
 );

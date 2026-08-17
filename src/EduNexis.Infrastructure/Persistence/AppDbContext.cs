@@ -33,6 +33,8 @@ public class AppDbContext : DbContext
     public DbSet<AnnouncementComment> AnnouncementComments => Set<AnnouncementComment>();
     public DbSet<Notification> Notifications => Set<Notification>();
     public DbSet<NotificationPreference> NotificationPreferences => Set<NotificationPreference>();
+    public DbSet<SubmissionAttachment> SubmissionAttachments => Set<SubmissionAttachment>();
+    public DbSet<AssignmentComment> AssignmentComments => Set<AssignmentComment>();
     public DbSet<AuditLog> AuditLogs => Set<AuditLog>();
     public DbSet<UserEducation> UserEducations => Set<UserEducation>();
     public DbSet<UserPublication> UserPublications => Set<UserPublication>();
@@ -54,6 +56,11 @@ public class AppDbContext : DbContext
         // Stored by name, like every other enum here: an int column would remap
         // every saved preference the moment NotificationType is reordered.
         modelBuilder.Entity<NotificationPreference>().Property(p => p.Type).HasConversion<string>();
+        modelBuilder.Entity<SubmissionAttachment>().Property(a => a.Kind).HasConversion<string>();
+        modelBuilder.Entity<SubmissionAttachment>()
+            .HasIndex(a => a.SubmissionId);
+        modelBuilder.Entity<AssignmentComment>()
+            .HasIndex(c => c.AssignmentId);
         // One row per user per type — the upsert in
         // UpdateNotificationPreferencesCommand assumes it.
         modelBuilder.Entity<NotificationPreference>()
