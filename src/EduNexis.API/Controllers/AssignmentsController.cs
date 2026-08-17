@@ -74,6 +74,15 @@ public class AssignmentsController : BaseController
     /// so an older client keeps working.
     /// </param>
     /// <param name="linkUrls">Repeat for several links; `linkUrl` also accepted.</param>
+    /// <param name="keepAttachmentIds">
+    /// On an update, the ids of already-submitted attachments the student is
+    /// keeping. Only honoured when <paramref name="manageAttachments"/> is true.
+    /// </param>
+    /// <param name="manageAttachments">
+    /// Set by clients that show the existing attachments and let the student remove
+    /// them individually. Without it the previous set is kept untouched, so an
+    /// older client cannot wipe files it never displayed.
+    /// </param>
     public async Task<IActionResult> Submit(
         Guid assignmentId,
         [FromForm] SubmissionType submissionType,
@@ -82,6 +91,8 @@ public class AssignmentsController : BaseController
         IFormFile? file,
         [FromForm] string[]? linkUrls,
         [FromForm] string? linkUrl,
+        [FromForm] Guid[]? keepAttachmentIds,
+        [FromForm] bool manageAttachments,
         CancellationToken ct)
     {
         var incoming = new List<IncomingFile>();
@@ -99,7 +110,8 @@ public class AssignmentsController : BaseController
             SubmissionType: submissionType,
             TextContent: textContent,
             Files: incoming,
-            Links: links
+            Links: links,
+            KeepAttachmentIds: manageAttachments ? keepAttachmentIds ?? [] : null
         ), ct));
     }
 

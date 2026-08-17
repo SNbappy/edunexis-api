@@ -48,14 +48,16 @@ public async Task<Dictionary<Guid, int>> GetActiveCountsByTeacherIdsAsync(
     {
         var ids = teacherIds.ToList();
         return await DbSet.AsNoTracking()
-            .Where(c => ids.Contains(c.TeacherId) && !c.IsArchived)
+            .Where(c => ids.Contains(c.TeacherId) && !c.IsArchived
+                && !c.IsDeletedByOwner && !c.IsDeleted)
             .GroupBy(c => c.TeacherId)
             .Select(g => new { TeacherId = g.Key, Count = g.Count() })
             .ToDictionaryAsync(x => x.TeacherId, x => x.Count, ct);
     }
 
     public async Task<int> CountActiveAsync(CancellationToken ct = default) =>
-        await DbSet.AsNoTracking().CountAsync(c => !c.IsArchived, ct);
+        await DbSet.AsNoTracking().CountAsync(
+            c => !c.IsArchived && !c.IsDeletedByOwner && !c.IsDeleted, ct);
 
     public async Task<IEnumerable<Course>> GetDeletedByTeacherAsync(Guid teacherId, CancellationToken ct = default) =>
         await DbSet

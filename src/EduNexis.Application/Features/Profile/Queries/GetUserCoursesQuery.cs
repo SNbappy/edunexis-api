@@ -67,7 +67,7 @@ public sealed class GetUserCoursesQueryHandler(
 
         List<PublicCourseDto> ToDto(IEnumerable<Domain.Entities.Course> src) =>
             src.Select(c => new PublicCourseDto(
-                c.Id, c.Title, c.CourseCode, c.Department,
+                c.Id, c.Title, c.CourseCode, c.Department, c.AcademicSession,
                 c.Semester, c.CourseType.ToString(), c.IsArchived)).ToList();
 
         var running = ToDto(allList.Where(c => !c.IsArchived));

@@ -63,6 +63,7 @@ public record PublicCourseDto(
     string Title,
     string CourseCode,
     string Department,
+    string AcademicSession,
     string Semester,
     string CourseType,
     bool IsArchived

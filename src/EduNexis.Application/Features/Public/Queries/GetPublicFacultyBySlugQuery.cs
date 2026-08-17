@@ -45,9 +45,12 @@ public sealed class GetPublicFacultyBySlugQueryHandler(IUnitOfWork uow)
         // Courses via dedicated repo
         var courseRows = await uow.Courses.GetByTeacherAsync(user.Id, ct);
         var courses = courseRows
+            // Courses the teacher has deleted (30-day trash) or that were purged
+            // must never surface on a public profile.
+            .Where(c => !c.IsDeletedByOwner && !c.IsDeleted)
             .OrderByDescending(c => c.CreatedAt)
             .Select(c => new PublicCourseDto(
-                c.Id, c.Title, c.CourseCode, c.Department,
+                c.Id, c.Title, c.CourseCode, c.Department, c.AcademicSession,
                 c.Semester, c.CourseType.ToString(), c.IsArchived))
             .ToList();
 

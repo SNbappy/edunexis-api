@@ -6,7 +6,6 @@
     <Project Path="src/EduNexis.Infrastructure/EduNexis.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/tests/">
-    <Project Path="tests/EduNexis.IntegrationTests/EduNexis.IntegrationTests.csproj" />
     <Project Path="tests/EduNexis.UnitTests/EduNexis.UnitTests.csproj" />
   </Folder>
 </Solution>

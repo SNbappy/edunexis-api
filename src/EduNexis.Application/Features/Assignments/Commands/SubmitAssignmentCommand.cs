@@ -17,7 +17,14 @@ public record SubmitAssignmentCommand(
     /// <summary>Every file the student attached. May be empty.</summary>
     IReadOnlyList<IncomingFile> Files,
     /// <summary>Every link the student attached. May be empty.</summary>
-    IReadOnlyList<string> Links
+    IReadOnlyList<string> Links,
+    /// <summary>
+    /// Ids of attachments already on the submission that the student is keeping.
+    /// Anything on the submission but absent from this list is removed. Null means
+    /// "the client did not say" — treated as keep everything, so an older client
+    /// that knows nothing about this field cannot wipe a student's files.
+    /// </summary>
+    IReadOnlyList<Guid>? KeepAttachmentIds = null
 ) : ICommand<ApiResponse<SubmissionDto>>, ICourseScopedWrite
 {
     public async ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
@@ -32,14 +39,22 @@ public sealed class SubmitAssignmentCommandValidator : AbstractValidator<SubmitA
 {
     public SubmitAssignmentCommandValidator()
     {
+        // On an update the student may be keeping what is already turned in and
+        // uploading nothing new, so a kept attachment satisfies these rules too.
+        static bool KeepsSomething(SubmitAssignmentCommand x) =>
+            x.KeepAttachmentIds is { Count: > 0 };
+
         RuleFor(x => x.TextContent)
-            .NotEmpty().When(x => x.SubmissionType == SubmissionType.Text)
+            .NotEmpty()
+            .When(x => x.SubmissionType == SubmissionType.Text && !KeepsSomething(x))
             .WithMessage("Text content is required for text submissions.");
         RuleFor(x => x.Files)
-            .Must(f => f is { Count: > 0 }).When(x => x.SubmissionType == SubmissionType.File)
+            .Must(f => f is { Count: > 0 })
+            .When(x => x.SubmissionType == SubmissionType.File && !KeepsSomething(x))
             .WithMessage("At least one file is required for file submissions.");
         RuleFor(x => x.Links)
-            .Must(l => l is { Count: > 0 }).When(x => x.SubmissionType == SubmissionType.Link)
+            .Must(l => l is { Count: > 0 })
+            .When(x => x.SubmissionType == SubmissionType.Link && !KeepsSomething(x))
             .WithMessage("At least one link is required for link submissions.");
     }
 }
@@ -88,18 +103,38 @@ public sealed class SubmitAssignmentCommandHandler(
         var firstFileUrl = uploaded.FirstOrDefault().Url;
         var firstLinkUrl = links.FirstOrDefault();
 
+        // Attachments the student is keeping from a previous submission. An update
+        // adds to what is already turned in; only what the student explicitly
+        // removed is deleted. Replacing the whole set used to silently drop every
+        // file a student did not re-upload.
+        var kept = new List<SubmissionAttachment>();
+
         if (existing is not null)
         {
-            existing.Update(command.SubmissionType, command.TextContent, firstFileUrl, firstLinkUrl);
-            uow.GetRepository<AssignmentSubmission>().Update(existing);
+            var old = (await uow.GetRepository<SubmissionAttachment>()
+                .FindAsync(a => a.SubmissionId == existing.Id, ct))
+                .OrderBy(a => a.SortOrder)
+                .ToList();
 
-            // Resubmitting replaces the attachment set — otherwise a student who
-            // fixes one file ends up with both versions attached and the teacher
-            // cannot tell which is current.
-            var old = await uow.GetRepository<SubmissionAttachment>()
-                .FindAsync(a => a.SubmissionId == existing.Id, ct);
             foreach (var a in old)
-                uow.GetRepository<SubmissionAttachment>().Delete(a);
+            {
+                if (command.KeepAttachmentIds is null || command.KeepAttachmentIds.Contains(a.Id))
+                    kept.Add(a);
+                else
+                    uow.GetRepository<SubmissionAttachment>().Delete(a);
+            }
+
+            // The legacy single-value columns mirror the first of each across the
+            // final set, kept attachments included.
+            var keptFile = kept.FirstOrDefault(a => a.Kind == SubmissionAttachmentKind.File)?.Url;
+            var keptLink = kept.FirstOrDefault(a => a.Kind == SubmissionAttachmentKind.Link)?.Url;
+
+            existing.Update(
+                command.SubmissionType,
+                command.TextContent,
+                keptFile ?? firstFileUrl,
+                keptLink ?? firstLinkUrl);
+            uow.GetRepository<AssignmentSubmission>().Update(existing);
         }
         else
         {
@@ -112,7 +147,8 @@ public sealed class SubmitAssignmentCommandHandler(
 
         await uow.SaveChangesAsync(ct);
 
-        var order = 0;
+        // New attachments sort after whatever was kept.
+        var order = kept.Count == 0 ? 0 : kept.Max(a => a.SortOrder) + 1;
         foreach (var (url, name, size) in uploaded)
         {
             await uow.GetRepository<SubmissionAttachment>().AddAsync(
@@ -121,6 +157,8 @@ public sealed class SubmitAssignmentCommandHandler(
         }
         foreach (var link in links)
         {
+            // A link the student already has attached should not be duplicated.
+            if (kept.Any(a => a.Kind == SubmissionAttachmentKind.Link && a.Url == link)) continue;
             await uow.GetRepository<SubmissionAttachment>().AddAsync(
                 SubmissionAttachment.Create(
                     existing.Id, SubmissionAttachmentKind.Link, link, null, null, order++), ct);

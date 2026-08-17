@@ -94,7 +94,7 @@ public sealed class GetPublicProfileQueryHandler(
                 .ThenByDescending(c => c.CreatedAt)
                 .Take(6)
                 .Select(c => new PublicCourseDto(
-                    c.Id, c.Title, c.CourseCode, c.Department,
+                    c.Id, c.Title, c.CourseCode, c.Department, c.AcademicSession,
                     c.Semester, c.CourseType.ToString(), c.IsArchived))
                 .ToList();
         }
@@ -113,7 +113,7 @@ public sealed class GetPublicProfileQueryHandler(
                 .ThenByDescending(c => c.CreatedAt)
                 .Take(6)
                 .Select(c => new PublicCourseDto(
-                    c.Id, c.Title, c.CourseCode, c.Department,
+                    c.Id, c.Title, c.CourseCode, c.Department, c.AcademicSession,
                     c.Semester, c.CourseType.ToString(), c.IsArchived))
                 .ToList();
         }

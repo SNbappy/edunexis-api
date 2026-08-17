@@ -20,6 +20,9 @@
 .idea/
 *.sln.iml
 
+# Competitive Programming Helper cache
+**/.cph/
+
 # User-specific
 *.suo
 *.user
