@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EduNexis.API.Controllers;
 
-[Authorize(Roles = "SuperAdmin,DepartmentAdmin")]
+[Authorize(Roles = "SuperAdmin")]
 public class AdminController : BaseController
 {
     [HttpGet("settings")]

@@ -24,7 +24,7 @@ public sealed class UnarchiveCourseCommandHandler(
         UnarchiveCourseCommand cmd, CancellationToken ct)
     {
         var userId  = Guid.Parse(currentUser.UserId);
-        var isAdmin = currentUser.Role is "SuperAdmin" or "DepartmentAdmin";
+        var isAdmin = currentUser.Role is "SuperAdmin";
 
         var course = await uow.Courses.GetByIdAsync(cmd.CourseId, ct);
         if (course is null)

@@ -20,7 +20,7 @@ public sealed class GetCoursesQueryHandler(
     public async ValueTask<ApiResponse<List<CourseSummaryDto>>> Handle(
         GetCoursesQuery query, CancellationToken ct)
     {
-        var isAdmin = currentUser.Role is "SuperAdmin" or "DepartmentAdmin";
+        var isAdmin = currentUser.Role is "SuperAdmin";
         if (!isAdmin)
             return ApiResponse<List<CourseSummaryDto>>.Fail("Forbidden.");
 

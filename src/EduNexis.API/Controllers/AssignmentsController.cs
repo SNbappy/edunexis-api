@@ -13,7 +13,7 @@ public class AssignmentsController : BaseController
         Ok(await Mediator.Send(new GetAssignmentsQuery(courseId, CurrentUserId, IsTeacher), ct));
 
     [HttpPost("courses/{courseId:guid}/assignments")]
-    [Authorize(Roles = "Teacher,SuperAdmin,DepartmentAdmin")]
+    [Authorize(Roles = "Teacher,SuperAdmin")]
     public async Task<IActionResult> Create(
         Guid courseId,
         [FromForm] string title,
@@ -38,7 +38,7 @@ public class AssignmentsController : BaseController
         ), ct));
 
     [HttpPut("courses/{courseId:guid}/assignments/{id:guid}")]
-    [Authorize(Roles = "Teacher,SuperAdmin,DepartmentAdmin")]
+    [Authorize(Roles = "Teacher,SuperAdmin")]
     public async Task<IActionResult> Update(
         Guid courseId,
         Guid id,
@@ -62,7 +62,7 @@ public class AssignmentsController : BaseController
         ), ct));
 
     [HttpDelete("courses/{courseId:guid}/assignments/{id:guid}")]
-    [Authorize(Roles = "Teacher,SuperAdmin,DepartmentAdmin")]
+    [Authorize(Roles = "Teacher,SuperAdmin")]
     public async Task<IActionResult> Delete(
         Guid courseId, Guid id, CancellationToken ct) =>
         Ok(await Mediator.Send(new DeleteAssignmentCommand(courseId, id, CurrentUserId), ct));
@@ -146,7 +146,7 @@ public class AssignmentsController : BaseController
             courseId, commentId, CurrentUserId), ct));
 
     [HttpPost("submissions/{submissionId:guid}/grade")]
-    [Authorize(Roles = "Teacher,SuperAdmin,DepartmentAdmin")]
+    [Authorize(Roles = "Teacher,SuperAdmin")]
     public async Task<IActionResult> Grade(
         Guid submissionId,
         [FromBody] GradeSubmissionCommand command,
@@ -158,7 +158,7 @@ public class AssignmentsController : BaseController
         }, ct));
 
     [HttpGet("assignments/{assignmentId:guid}/submissions")]
-    [Authorize(Roles = "Teacher,SuperAdmin,DepartmentAdmin")]
+    [Authorize(Roles = "Teacher,SuperAdmin")]
     public async Task<IActionResult> GetSubmissions(
         Guid assignmentId, CancellationToken ct) =>
         Ok(await Mediator.Send(new GetSubmissionsQuery(assignmentId), ct));

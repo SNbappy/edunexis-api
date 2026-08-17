@@ -245,7 +245,8 @@ Interactive documentation is served at **`/swagger`**, with the bearer scheme wi
 - Passwords hashed with **BCrypt**.
 - Sign-up is gated to `@just.edu.bd` and `@student.just.edu.bd`; the domain determines whether the account becomes a `Teacher` or a `Student`.
 - Email ownership is proven by a **6-digit OTP** before the account can be used.
-- Role policies are declared per endpoint (`[Authorize(Roles = "Teacher,SuperAdmin,DepartmentAdmin")]`), with `ICurrentUserService` exposing the caller's id and role to handlers without threading `HttpContext` through the application layer.
+- There are exactly three roles — `Student`, `Teacher`, `SuperAdmin`. Role policies are declared per endpoint (`[Authorize(Roles = "Teacher,SuperAdmin")]`), with `ICurrentUserService` exposing the caller's id and role to handlers without threading `HttpContext` through the application layer.
+- `SuperAdmin` is not self-service: an address listed in `Auth:AdminEmails` is promoted on login, and a student address is refused promotion whatever the configuration says.
 
 ### Serialisation contract
 
