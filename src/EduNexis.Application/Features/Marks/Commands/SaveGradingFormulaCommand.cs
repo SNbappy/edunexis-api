@@ -53,6 +53,57 @@ public sealed class SaveGradingFormulaCommandHandler(
         if (publishedMarks.Any())
             return ApiResponse.Fail("Cannot change grading formula while final marks are published. Please unpublish final marks first.");
 
+        // Validate component prerequisites based on actual items in course
+        foreach (var comp in command.Components)
+        {
+            switch (comp.ComponentType)
+            {
+                case FormulaComponentType.CT:
+                    var ctEvents = await uow.GetRepository<CTEvent>()
+                        .FindAsync(e => e.CourseId == command.CourseId, ct);
+                    int ctCount = ctEvents.Count();
+                    if (ctCount == 0)
+                        return ApiResponse.Fail("Cannot include Class Tests in grading formula: no class tests exist in this course.");
+                    if (comp.SelectionRule == "Best3" && ctCount < 3)
+                        return ApiResponse.Fail($"Cannot select 'Best 3' for Class Tests: only {ctCount} CT(s) exist in this course.");
+                    if (comp.SelectionRule == "Best2" && ctCount < 2)
+                        return ApiResponse.Fail($"Cannot select 'Best 2' for Class Tests: only {ctCount} CT(s) exist in this course.");
+                    break;
+
+                case FormulaComponentType.Assignment:
+                    var assignments = await uow.GetRepository<Assignment>()
+                        .FindAsync(a => a.CourseId == command.CourseId, ct);
+                    int assignmentCount = assignments.Count();
+                    if (assignmentCount == 0)
+                        return ApiResponse.Fail("Cannot include Assignments in grading formula: no assignments exist in this course.");
+                    if (comp.SelectionRule == "Best3" && assignmentCount < 3)
+                        return ApiResponse.Fail($"Cannot select 'Best 3' for Assignments: only {assignmentCount} assignment(s) exist.");
+                    if (comp.SelectionRule == "Best2" && assignmentCount < 2)
+                        return ApiResponse.Fail($"Cannot select 'Best 2' for Assignments: only {assignmentCount} assignment(s) exist.");
+                    break;
+
+                case FormulaComponentType.Presentation:
+                    var presentations = await uow.GetRepository<PresentationEvent>()
+                        .FindAsync(p => p.CourseId == command.CourseId, ct);
+                    int presCount = presentations.Count();
+                    if (presCount == 0)
+                        return ApiResponse.Fail("Cannot include Other Tests in grading formula: no presentations exist in this course.");
+                    if (comp.SelectionRule == "Best3" && presCount < 3)
+                        return ApiResponse.Fail($"Cannot select 'Best 3' for Other Tests: only {presCount} presentation(s) exist.");
+                    if (comp.SelectionRule == "Best2" && presCount < 2)
+                        return ApiResponse.Fail($"Cannot select 'Best 2' for Other Tests: only {presCount} presentation(s) exist.");
+                    break;
+
+                case FormulaComponentType.Attendance:
+                    var sessions = await uow.GetRepository<AttendanceSession>()
+                        .FindAsync(s => s.CourseId == command.CourseId, ct);
+                    int sessionCount = sessions.Count();
+                    if (sessionCount == 0)
+                        return ApiResponse.Fail("Cannot include Attendance in grading formula: no attendance sessions recorded yet.");
+                    break;
+            }
+        }
+
         // Get or create formula
         var formula = await uow.GetRepository<GradingFormula>()
             .FirstOrDefaultAsync(f => f.CourseId == command.CourseId, ct);
