@@ -41,9 +41,23 @@ public sealed class UploadCTCopiesCommandHandler(
 
         var folder = $"ct/{command.CTEventId}/khata";
 
-        var bestUrl  = command.BestCopyStream  != null ? await storage.UploadAsync(command.BestCopyStream,  command.BestCopyFileName!,  folder, ct) : ctEvent.BestScriptUrl;
-        var worstUrl = command.WorstCopyStream != null ? await storage.UploadAsync(command.WorstCopyStream, command.WorstCopyFileName!, folder, ct) : ctEvent.WorstScriptUrl;
-        var avgUrl   = command.AvgCopyStream   != null ? await storage.UploadAsync(command.AvgCopyStream,   command.AvgCopyFileName!,   folder, ct) : ctEvent.AverageScriptUrl;
+        var bestTask = command.BestCopyStream != null
+            ? storage.UploadAsync(command.BestCopyStream, command.BestCopyFileName!, folder, ct)
+            : Task.FromResult(ctEvent.BestScriptUrl);
+
+        var worstTask = command.WorstCopyStream != null
+            ? storage.UploadAsync(command.WorstCopyStream, command.WorstCopyFileName!, folder, ct)
+            : Task.FromResult(ctEvent.WorstScriptUrl);
+
+        var avgTask = command.AvgCopyStream != null
+            ? storage.UploadAsync(command.AvgCopyStream, command.AvgCopyFileName!, folder, ct)
+            : Task.FromResult(ctEvent.AverageScriptUrl);
+
+        await Task.WhenAll(bestTask, worstTask, avgTask);
+
+        var bestUrl = await bestTask;
+        var worstUrl = await worstTask;
+        var avgUrl = await avgTask;
 
         ctEvent.UploadKhata(
             bestUrl ?? string.Empty,  command.BestCopyStream  != null ? command.BestStudentId  : ctEvent.BestStudentId,

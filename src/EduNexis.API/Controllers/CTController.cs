@@ -57,6 +57,8 @@ public class CTController : BaseController
     // POST api/ct/events/{ctEventId}/upload-khata
     [HttpPost("events/{ctEventId:guid}/upload-khata")]
     [Consumes("multipart/form-data")]
+    [DisableRequestSizeLimit]
+    [RequestFormLimits(MultipartBodyLengthLimit = 100 * 1024 * 1024)]
     public async Task<IActionResult> UploadKhata(
         Guid ctEventId,
         [FromForm] UploadCTCopiesRequest request,
