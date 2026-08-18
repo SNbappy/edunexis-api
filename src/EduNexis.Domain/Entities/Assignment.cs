@@ -25,6 +25,10 @@ public class Assignment : BaseEntity
 
     public DateTime? ClosedAt { get; private set; }
 
+    public bool IsPublished { get; private set; } = false;
+
+    public DateTime? PublishedAt { get; private set; }
+
     // Navigation
     public Course Course { get; private set; } = null!;
     public User CreatedBy { get; private set; } = null!;
@@ -76,6 +80,21 @@ public class Assignment : BaseEntity
     {
         IsClosed = false;
         ClosedAt = null;
+        SetUpdatedAt();
+    }
+
+    public void Publish()
+    {
+        IsPublished = true;
+        PublishedAt = DateTime.UtcNow;
+        IsClosed = true;
+        ClosedAt ??= DateTime.UtcNow;
+        SetUpdatedAt();
+    }
+
+    public void Unpublish()
+    {
+        IsPublished = false;
         SetUpdatedAt();
     }
 

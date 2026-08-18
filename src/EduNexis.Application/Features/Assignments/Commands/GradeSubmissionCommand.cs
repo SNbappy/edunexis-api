@@ -57,32 +57,33 @@ public sealed class GradeSubmissionCommandHandler(
         if (!await CourseAccess.IsTeacherAsync(uow, course, command.TeacherId, ct))
             throw new UnauthorizedException("Only the teacher can grade submissions.");
 
+        if (assignment.IsPublished)
+            return ApiResponse<SubmissionDto>.Fail(
+                "Marks cannot be modified while assignment is published. Please unpublish first to make changes.");
 
         if (command.Marks > assignment.MaxMarks)
             return ApiResponse<SubmissionDto>.Fail(
                 $"Marks cannot exceed max marks ({assignment.MaxMarks:0.##}).");
 
-
         submission.Grade(command.Marks, command.Feedback);
         uow.GetRepository<AssignmentSubmission>().Update(submission);
         await uow.SaveChangesAsync(ct);
-
 
         // Fetch student full name from UserProfile
         var profile = await uow.UserProfiles
             .FirstOrDefaultAsync(p => p.UserId == submission.StudentId, ct);
         var studentName = profile?.FullName ?? "Unknown";
 
-        // Tell the student their work has been marked. Being graded and not
-        // knowing it is the single most-noticed gap: the mark exists, the
-        // student has no reason to go looking, and finds out days later.
-        await sender.Send(new SendNotificationCommand(
-            UserId: submission.StudentId,
-            Title: $"Your work was marked in {course.Title}",
-            Body: $"\"{assignment.Title}\": {command.Marks:0.##} out of {assignment.MaxMarks:0.##}.",
-            Type: NotificationType.AssignmentGraded,
-            RedirectUrl: $"/courses/{course.Id}/assignments/{assignment.Id}"
-        ), ct);
+        if (assignment.IsPublished)
+        {
+            await sender.Send(new SendNotificationCommand(
+                UserId: submission.StudentId,
+                Title: $"Your work was marked in {course.Title}",
+                Body: $"\"{assignment.Title}\": {command.Marks:0.##} out of {assignment.MaxMarks:0.##}.",
+                Type: NotificationType.AssignmentGraded,
+                RedirectUrl: $"/courses/{course.Id}/assignments/{assignment.Id}"
+            ), ct);
+        }
 
 
         return ApiResponse<SubmissionDto>.Ok(new SubmissionDto(

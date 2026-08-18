@@ -160,6 +160,18 @@ public class AssignmentsController : BaseController
     public async Task<IActionResult> Unsubmit(Guid assignmentId, CancellationToken ct) =>
         Ok(await Mediator.Send(new UnsubmitAssignmentCommand(assignmentId, CurrentUserId), ct));
 
+    [HttpPost("courses/{courseId:guid}/assignments/{assignmentId:guid}/publish")]
+    [Authorize(Roles = "Teacher,SuperAdmin")]
+    public async Task<IActionResult> Publish(
+        Guid courseId, Guid assignmentId, CancellationToken ct) =>
+        Ok(await Mediator.Send(new PublishAssignmentCommand(courseId, assignmentId, CurrentUserId), ct));
+
+    [HttpPost("courses/{courseId:guid}/assignments/{assignmentId:guid}/unpublish")]
+    [Authorize(Roles = "Teacher,SuperAdmin")]
+    public async Task<IActionResult> Unpublish(
+        Guid courseId, Guid assignmentId, CancellationToken ct) =>
+        Ok(await Mediator.Send(new UnpublishAssignmentCommand(courseId, assignmentId, CurrentUserId), ct));
+
     /// <summary>
     /// Closes the assignment. By default every student who turned nothing in is
     /// marked 0; pass awardZeroToNonSubmitters=false to close without that.

@@ -1,4 +1,4 @@
-﻿namespace EduNexis.Application.DTOs;
+namespace EduNexis.Application.DTOs;
 
 public enum AssignmentMyStatus
 {
@@ -24,7 +24,11 @@ public record AssignmentDto(
     decimal? MyMarks,
     DateTime? MySubmittedAt,
     bool? MyIsLate,
-    DateTime CreatedAt
+    DateTime CreatedAt,
+    bool IsPublished = false,
+    DateTime? PublishedAt = null,
+    int TotalStudentsCount = 0,
+    bool IsMarksComplete = false
 );
 
 public record SubmissionAttachmentDto(

@@ -43,6 +43,19 @@ public sealed class GetAssignmentsQueryHandler(
                 .GroupBy(s => s.AssignmentId)
                 .ToDictionary(g => g.Key, g => g.OrderByDescending(s => s.SubmittedAt).First());
 
+        int totalActiveStudents = 0;
+        if (query.IsTeacher)
+        {
+            var course = await uow.Courses.GetByIdAsync(query.CourseId, ct);
+            if (course is not null)
+            {
+                var teacherIds = await CourseAccess.TeacherIdsAsync(uow, course, ct);
+                var members = await uow.CourseMembers
+                    .FindAsync(m => m.CourseId == query.CourseId && m.IsActive, ct);
+                totalActiveStudents = members.Count(m => !teacherIds.Contains(m.UserId));
+            }
+        }
+
         var dtos = new List<AssignmentDto>(assignments.Count);
         foreach (var a in assignments)
         {
@@ -52,6 +65,7 @@ public sealed class GetAssignmentsQueryHandler(
 
             var submissionCount = subs.Count;
             var gradedCount = subs.Count(s => s.IsGraded);
+            var isMarksComplete = query.IsTeacher && totalActiveStudents > 0 && gradedCount >= totalActiveStudents;
 
             AssignmentMyStatus? myStatus = null;
             decimal? myMarks = null;
@@ -62,10 +76,16 @@ public sealed class GetAssignmentsQueryHandler(
             {
                 if (myByAssignment.TryGetValue(a.Id, out var mine))
                 {
-                    myStatus = mine.IsGraded
-                        ? AssignmentMyStatus.Graded
-                        : AssignmentMyStatus.Submitted;
-                    myMarks = mine.Marks;
+                    if (a.IsPublished && mine.IsGraded)
+                    {
+                        myStatus = AssignmentMyStatus.Graded;
+                        myMarks = mine.Marks;
+                    }
+                    else
+                    {
+                        myStatus = AssignmentMyStatus.Submitted;
+                        myMarks = null;
+                    }
                     mySubmittedAt = mine.SubmittedAt;
                     myIsLate = mine.IsLate;
                 }
@@ -92,7 +112,11 @@ public sealed class GetAssignmentsQueryHandler(
                 MyMarks: myMarks,
                 MySubmittedAt: mySubmittedAt,
                 MyIsLate: myIsLate,
-                CreatedAt: a.CreatedAt
+                CreatedAt: a.CreatedAt,
+                IsPublished: a.IsPublished,
+                PublishedAt: a.PublishedAt,
+                TotalStudentsCount: totalActiveStudents,
+                IsMarksComplete: isMarksComplete
             ));
         }
 

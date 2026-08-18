@@ -39,6 +39,9 @@ public sealed class SavePresentationMarksCommandHandler(
         if (!await CourseAccess.IsTeacherAsync(uow, course, command.TeacherId, ct))
             throw new UnauthorizedException("Only the teacher can save marks.");
 
+        if (presentation.IsPublished)
+            return ApiResponse.Fail("Marks cannot be modified while this test is published. Please unpublish first to make changes.");
+
         foreach (var entry in command.Entries)
         {
             var marks = entry.IsAbsent ? 0 : (entry.ObtainedMarks ?? 0);

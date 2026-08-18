@@ -31,6 +31,14 @@ public sealed class GetMySubmissionQueryHandler(
                 a.Id, a.Kind.ToString(), a.Url, a.FileName, a.FileSizeBytes))
             .ToList();
 
+        var assignment = await uow.GetRepository<Assignment>()
+            .GetByIdAsync(query.AssignmentId, ct);
+        bool isPublished = assignment?.IsPublished == true;
+
+        var marks = isPublished ? submission.Marks : null;
+        var feedback = isPublished ? submission.Feedback : null;
+        var isGraded = isPublished && submission.IsGraded;
+
         return ApiResponse<SubmissionDto>.Ok(new SubmissionDto(
             submission.Id,
             submission.AssignmentId,
@@ -42,9 +50,9 @@ public sealed class GetMySubmissionQueryHandler(
             submission.LinkUrl,
             submission.SubmittedAt,
             submission.IsLate,
-            submission.Marks,
-            submission.Feedback,
-            submission.IsGraded,
+            marks,
+            feedback,
+            isGraded,
             attachments,
             submission.IsTurnedIn,
             submission.TurnedInAt,

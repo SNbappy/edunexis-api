@@ -44,6 +44,21 @@ public sealed class PublishPresentationCommandHandler(
             .OrderBy(m => m.StudentId)
             .ToList();
 
+        var teacherIds = await CourseAccess.TeacherIdsAsync(uow, course, ct);
+        var members = await uow.CourseMembers
+            .FindAsync(m => m.CourseId == presentation.CourseId && m.IsActive, ct);
+        var students = members.Where(m => !teacherIds.Contains(m.UserId)).ToList();
+
+        if (students.Count == 0)
+            return ApiResponse.Fail("No active students enrolled in this course.");
+
+        var marksMap = marks.ToDictionary(m => m.StudentId);
+        var unmarked = students.Where(s => !marksMap.ContainsKey(s.UserId)).ToList();
+        if (unmarked.Count > 0)
+        {
+            return ApiResponse.Fail($"Cannot publish: {unmarked.Count} student(s) do not have marks recorded. Please give marks or mark as absent for all students before publishing.");
+        }
+
         var hashSource = string.Join("|",
             marks.Select(m => $"{m.StudentId}:{m.Marks}:{m.IsAbsent}"));
         var hashBytes = SHA256.HashData(Encoding.UTF8.GetBytes(hashSource));
