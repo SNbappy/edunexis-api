@@ -224,8 +224,12 @@ public class CoursesController : BaseController
 
     [HttpPost("{id:guid}/leave")]
     [Authorize(Roles = "Student")]
-    public async Task<IActionResult> Leave(Guid id, CancellationToken ct) =>
-        Ok(await Mediator.Send(new LeaveCourseCommand(id), ct));
+    public async Task<IActionResult> Leave(
+        Guid id,
+        [FromBody] LeaveCourseRequest req,
+        CancellationToken ct) =>
+        Ok(await Mediator.Send(new LeaveCourseCommand(id, req.Password), ct));
 }
 
 public record InviteTeacherRequest(string Email, string? Message = null);
+public record LeaveCourseRequest(string Password);

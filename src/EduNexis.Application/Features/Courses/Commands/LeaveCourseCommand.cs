@@ -1,15 +1,26 @@
 using EduNexis.Application.Features.Notifications.Commands;
 using EduNexis.Application.Abstractions;
+using EduNexis.Domain.Interfaces.Services;
 namespace EduNexis.Application.Features.Courses.Commands;
 
-public record LeaveCourseCommand(Guid CourseId) : ICommand<ApiResponse>, IArchiveExempt
+public record LeaveCourseCommand(Guid CourseId, string Password) : ICommand<ApiResponse>, IArchiveExempt
 {
     public string ArchiveExemptionReason => "A student may always leave, including an archived course.";
+}
+
+public sealed class LeaveCourseCommandValidator : AbstractValidator<LeaveCourseCommand>
+{
+    public LeaveCourseCommandValidator()
+    {
+        RuleFor(x => x.Password)
+            .NotEmpty().WithMessage("Password confirmation is required to leave a course.");
+    }
 }
 
 public sealed class LeaveCourseCommandHandler(
     IUnitOfWork uow,
     ICurrentUserService currentUser,
+    IPasswordHasher passwordHasher,
     ISender sender
 ) : ICommandHandler<LeaveCourseCommand, ApiResponse>
 {
@@ -17,6 +28,13 @@ public sealed class LeaveCourseCommandHandler(
         LeaveCourseCommand cmd, CancellationToken ct)
     {
         var userId = Guid.Parse(currentUser.UserId);
+
+        // Verify the student's password before making any change.
+        var user = await uow.Users.GetByIdAsync(userId, ct)
+            ?? throw new NotFoundException("User", userId);
+
+        if (!passwordHasher.Verify(cmd.Password, user.PasswordHash))
+            return ApiResponse.Fail("Incorrect password. You have not been removed from the course.");
 
         var member = await uow.CourseMembers.GetMemberAsync(cmd.CourseId, userId, ct);
         if (member is null || !member.IsActive)
