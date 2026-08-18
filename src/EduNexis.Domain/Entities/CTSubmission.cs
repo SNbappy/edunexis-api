@@ -35,4 +35,13 @@ public class CTSubmission : BaseEntity
         MarkedAt = DateTime.UtcNow;
         SetUpdatedAt();
     }
+
+    public void ClearMarks(string? remarks = null)
+    {
+        ObtainedMarks = null;
+        IsAbsent = false;
+        Remarks = remarks;
+        MarkedAt = null;
+        SetUpdatedAt();
+    }
 }

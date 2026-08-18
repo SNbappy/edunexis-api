@@ -89,6 +89,8 @@ public sealed class BulkGradeCTCommandHandler(
                 submission.MarkAbsent(entry.Remarks);
             else if (entry.ObtainedMarks.HasValue)
                 submission.AssignMarks(entry.ObtainedMarks.Value, entry.Remarks);
+            else
+                submission.ClearMarks(entry.Remarks);
         }
 
         await uow.SaveChangesAsync(ct);
