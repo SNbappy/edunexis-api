@@ -7,7 +7,9 @@ public record CTEventDto(
     bool KhataUploaded, DateTime CreatedAt,
     string? BestScriptUrl, Guid? BestStudentId,
     string? WorstScriptUrl, Guid? WorstStudentId,
-    string? AverageScriptUrl, Guid? AverageStudentId
+    string? AverageScriptUrl, Guid? AverageStudentId,
+    decimal? MyObtainedMarks = null,
+    bool? MyIsAbsent = null
 );
 
 public record CreateCTEventCommand(
