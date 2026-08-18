@@ -63,8 +63,8 @@ public sealed class GetAssignmentsQueryHandler(
                 ? list
                 : new List<AssignmentSubmission>();
 
-            var submissionCount = subs.Count;
-            var gradedCount = subs.Count(s => s.IsGraded);
+            var submissionCount = subs.Count(s => s.IsTurnedIn);
+            var gradedCount = subs.Count(s => s.IsTurnedIn && s.IsGraded);
             var isMarksComplete = query.IsTeacher && totalActiveStudents > 0 && gradedCount >= totalActiveStudents;
 
             AssignmentMyStatus? myStatus = null;
@@ -74,7 +74,7 @@ public sealed class GetAssignmentsQueryHandler(
 
             if (!query.IsTeacher)
             {
-                if (myByAssignment.TryGetValue(a.Id, out var mine))
+                if (myByAssignment.TryGetValue(a.Id, out var mine) && mine.IsTurnedIn)
                 {
                     if (a.IsPublished && mine.IsGraded)
                     {
@@ -86,7 +86,7 @@ public sealed class GetAssignmentsQueryHandler(
                         myStatus = AssignmentMyStatus.Submitted;
                         myMarks = null;
                     }
-                    mySubmittedAt = mine.SubmittedAt;
+                    mySubmittedAt = mine.TurnedInAt ?? mine.SubmittedAt;
                     myIsLate = mine.IsLate;
                 }
                 else

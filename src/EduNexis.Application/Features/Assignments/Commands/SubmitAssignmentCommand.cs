@@ -111,6 +111,9 @@ public sealed class SubmitAssignmentCommandHandler(
 
         if (existing is not null)
         {
+            if (existing.IsTurnedIn)
+                return ApiResponse<SubmissionDto>.Fail("This assignment is already turned in. Please unsubmit it first to make changes.");
+
             var old = (await uow.GetRepository<SubmissionAttachment>()
                 .FindAsync(a => a.SubmissionId == existing.Id, ct))
                 .OrderBy(a => a.SortOrder)
