@@ -51,6 +51,9 @@ public sealed class BulkGradeCTCommandHandler(
         if (!await CourseAccess.IsTeacherAsync(uow, course, command.TeacherId, ct))
             return ApiResponse.Fail("Only the teacher can enter CT marks.");
 
+        if (ctEvent.Status == Domain.Enums.CTStatus.Published)
+            return ApiResponse.Fail("Marks cannot be modified while CT is published. Please unpublish first to make changes.");
+
         if (!ctEvent.KhataUploaded)
             return ApiResponse.Fail("All 3 khata must be uploaded before entering marks.");
 

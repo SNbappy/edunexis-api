@@ -9,7 +9,10 @@ public record CTEventDto(
     string? WorstScriptUrl, Guid? WorstStudentId,
     string? AverageScriptUrl, Guid? AverageStudentId,
     decimal? MyObtainedMarks = null,
-    bool? MyIsAbsent = null
+    bool? MyIsAbsent = null,
+    int GradedStudentsCount = 0,
+    int TotalStudentsCount = 0,
+    bool IsMarksComplete = false
 );
 
 public record CreateCTEventCommand(

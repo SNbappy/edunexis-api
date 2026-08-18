@@ -40,9 +40,34 @@ public sealed class GetCTEventsQueryHandler(
                 .ToDictionary(s => s.CTEventId)
             : new Dictionary<Guid, CTSubmission>();
 
+        int totalActiveStudents = 0;
+        Dictionary<Guid, int> gradedCountsByCT = new();
+
+        if (isTeacher)
+        {
+            var teacherIds = await CourseAccess.TeacherIdsAsync(uow, course, ct);
+            var courseMembers = await uow.CourseMembers
+                .FindAsync(m => m.CourseId == query.CourseId && m.IsActive, ct);
+            totalActiveStudents = courseMembers.Count(m => !teacherIds.Contains(m.UserId));
+
+            if (eventIds.Count > 0)
+            {
+                var allSubmissions = await uow.GetRepository<CTSubmission>()
+                    .FindAsync(s => eventIds.Contains(s.CTEventId), ct);
+
+                gradedCountsByCT = allSubmissions
+                    .Where(s => s.IsAbsent || s.ObtainedMarks.HasValue)
+                    .GroupBy(s => s.CTEventId)
+                    .ToDictionary(g => g.Key, g => g.Count());
+            }
+        }
+
         var result = eventList
             .Select(e => {
                 mySubmissions.TryGetValue(e.Id, out var mySub);
+                gradedCountsByCT.TryGetValue(e.Id, out var gradedCount);
+                bool isMarksComplete = isTeacher && totalActiveStudents > 0 && gradedCount >= totalActiveStudents;
+
                 return new CTEventDto(
                     e.Id, e.CourseId, e.CTNumber, e.Title,
                     e.MaxMarks, e.HeldOn, e.Status.ToString(),
@@ -51,7 +76,10 @@ public sealed class GetCTEventsQueryHandler(
                     isTeacher ? e.WorstScriptUrl : null, isTeacher ? e.WorstStudentId : null,
                     isTeacher ? e.AverageScriptUrl : null, isTeacher ? e.AverageStudentId : null,
                     mySub != null ? (mySub.IsAbsent ? 0 : mySub.ObtainedMarks) : null,
-                    mySub?.IsAbsent);
+                    mySub?.IsAbsent,
+                    gradedCount,
+                    totalActiveStudents,
+                    isMarksComplete);
             })
             .ToList();
 
