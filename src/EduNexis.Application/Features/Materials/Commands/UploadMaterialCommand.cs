@@ -52,7 +52,7 @@ public sealed class UploadMaterialCommandHandler(
         var course = await uow.Courses.GetByIdAsync(command.CourseId, ct)
             ?? throw new NotFoundException("Course", command.CourseId);
 
-        bool isTeacher = course.TeacherId == command.UploadedById;
+        bool isTeacher = await CourseAccess.IsTeacherAsync(uow, course, command.UploadedById, ct);
         var member = await uow.CourseMembers.GetMemberAsync(course.Id, command.UploadedById, ct);
         bool isCR = member?.IsCR ?? false;
 

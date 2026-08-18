@@ -138,10 +138,14 @@ public sealed class SubmitAssignmentCommandHandler(
         }
         else
         {
+            // Attaching work is not handing it in. A new submission starts as a
+            // draft that only the student can see; TurnInAssignmentCommand is
+            // what makes it visible to the teacher.
             existing = AssignmentSubmission.Create(
                 command.AssignmentId, command.StudentId,
                 command.SubmissionType, command.TextContent,
-                firstFileUrl, firstLinkUrl, isLate);
+                firstFileUrl, firstLinkUrl, isLate,
+                isTurnedIn: false);
             await uow.GetRepository<AssignmentSubmission>().AddAsync(existing, ct);
         }
 
@@ -178,10 +182,11 @@ public sealed class SubmitAssignmentCommandHandler(
             .FirstOrDefaultAsync(p => p.UserId == command.StudentId, ct);
         var studentName = profile?.FullName ?? "Unknown";
 
-        // Tell the teacher work has arrived. Without this the only way to know
-        // anyone has submitted is to keep opening the assignment and counting.
+        // Tell the teacher work has arrived — but only once it is actually
+        // handed in. Announcing every saved draft would notify the teacher
+        // repeatedly for work they still cannot see.
         var course = await uow.Courses.GetByIdAsync(assignment.CourseId, ct);
-        if (course is not null)
+        if (course is not null && existing.IsTurnedIn)
         {
             await sender.Send(new SendNotificationCommand(
                 UserId: course.TeacherId,
@@ -199,6 +204,7 @@ public sealed class SubmitAssignmentCommandHandler(
             studentName, existing.SubmissionType.ToString(),
             existing.TextContent, existing.FileUrl, existing.LinkUrl,
             existing.SubmittedAt, existing.IsLate, existing.Marks,
-            existing.Feedback, existing.IsGraded, attachments));
+            existing.Feedback, existing.IsGraded, attachments,
+            existing.IsTurnedIn, existing.TurnedInAt, existing.IsAutoZero));
     }
 }

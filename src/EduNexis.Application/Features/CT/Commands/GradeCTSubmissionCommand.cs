@@ -48,7 +48,7 @@ public sealed class BulkGradeCTCommandHandler(
         var course = await uow.Courses.GetByIdAsync(ctEvent.CourseId, ct)
             ?? throw new NotFoundException("Course", ctEvent.CourseId);
 
-        if (course.TeacherId != command.TeacherId)
+        if (!await CourseAccess.IsTeacherAsync(uow, course, command.TeacherId, ct))
             return ApiResponse.Fail("Only the teacher can enter CT marks.");
 
         if (!ctEvent.KhataUploaded)

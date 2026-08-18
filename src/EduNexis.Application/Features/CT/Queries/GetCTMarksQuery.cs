@@ -1,4 +1,6 @@
-﻿using EduNexis.Application.Features.CT.Commands;
+using EduNexis.Application.Features.CT.Commands;
+
+using EduNexis.Application.Abstractions;
 
 namespace EduNexis.Application.Features.CT.Queries;
 
@@ -46,7 +48,7 @@ public sealed class GetCTMarksQueryHandler(
         if (course is null)
             return ApiResponse<CTMarksResultDto>.Fail("Course not found.");
 
-        bool isTeacher = course.TeacherId == query.RequestedById;
+        bool isTeacher = await CourseAccess.IsTeacherAsync(uow, course, query.RequestedById, ct);
         var member = await uow.CourseMembers.GetMemberAsync(ctEvent.CourseId, query.RequestedById, ct);
         bool isCR = member?.IsCR ?? false;
 

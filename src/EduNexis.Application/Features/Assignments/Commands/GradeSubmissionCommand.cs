@@ -54,7 +54,7 @@ public sealed class GradeSubmissionCommandHandler(
             ?? throw new NotFoundException("Course", assignment.CourseId);
 
 
-        if (course.TeacherId != command.TeacherId)
+        if (!await CourseAccess.IsTeacherAsync(uow, course, command.TeacherId, ct))
             throw new UnauthorizedException("Only the teacher can grade submissions.");
 
 

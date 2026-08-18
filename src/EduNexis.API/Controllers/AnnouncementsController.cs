@@ -55,7 +55,8 @@ public class AnnouncementsController : BaseController
             CourseId: courseId,
             AnnouncementId: id,
             AuthorId: CurrentUserId,
-            Content: body.Content
+            Content: body.Content,
+            ParentCommentId: body.ParentCommentId
         ), ct));
 
     [HttpPut("courses/{courseId:guid}/comments/{commentId:guid}")]
@@ -72,4 +73,5 @@ public class AnnouncementsController : BaseController
         Ok(await Mediator.Send(new DeleteCommentCommand(courseId, commentId, CurrentUserId), ct));
 }
 
-public record AddCommentRequest(string Content);
+/// <summary>ParentCommentId is optional — set it to reply to a comment.</summary>
+public record AddCommentRequest(string Content, Guid? ParentCommentId = null);

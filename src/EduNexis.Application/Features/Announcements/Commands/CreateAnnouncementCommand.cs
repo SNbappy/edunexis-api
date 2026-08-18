@@ -41,7 +41,7 @@ public sealed class CreateAnnouncementCommandHandler(
         var course = await uow.Courses.GetByIdAsync(command.CourseId, ct)
             ?? throw new NotFoundException("Course", command.CourseId);
 
-        bool isTeacher = course.TeacherId == command.AuthorId;
+        bool isTeacher = await CourseAccess.IsTeacherAsync(uow, course, command.AuthorId, ct);
         var member = await uow.CourseMembers.GetMemberAsync(course.Id, command.AuthorId, ct);
         bool isCR = member?.IsCR ?? false;
 

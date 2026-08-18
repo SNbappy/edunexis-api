@@ -45,6 +45,9 @@ public sealed class GetMySubmissionQueryHandler(
             submission.Marks,
             submission.Feedback,
             submission.IsGraded,
-            attachments));
+            attachments,
+            submission.IsTurnedIn,
+            submission.TurnedInAt,
+            submission.IsAutoZero));
     }
 }

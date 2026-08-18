@@ -1,5 +1,7 @@
 using EduNexis.Application.Features.Presentations.Commands;
 
+using EduNexis.Application.Abstractions;
+
 namespace EduNexis.Application.Features.Presentations.Queries;
 
 public record PresentationResultDto(
@@ -63,7 +65,7 @@ public sealed class GetPresentationsQueryHandler(
         var course = await uow.Courses.GetByIdAsync(query.CourseId, ct)
             ?? throw new NotFoundException("Course", query.CourseId);
 
-        bool isTeacher = course.TeacherId == query.RequesterId;
+        bool isTeacher = await CourseAccess.IsTeacherAsync(uow, course, query.RequesterId, ct);
 
         var member = await uow.CourseMembers.GetMemberAsync(query.CourseId, query.RequesterId, ct);
         if (!isTeacher && (member is null || !member.IsActive))

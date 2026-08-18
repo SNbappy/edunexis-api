@@ -73,6 +73,7 @@ public sealed class EditCommentCommandHandler(
             comment.CreatedAt,
             CanDelete: true,
             CanEdit: true,
-            EditedAt: comment.UpdatedAt), "Comment updated.");
+            EditedAt: comment.UpdatedAt,
+            ParentCommentId: comment.ParentCommentId), "Comment updated.");
     }
 }

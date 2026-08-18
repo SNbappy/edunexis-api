@@ -123,14 +123,16 @@ public sealed class GetNotificationPreferencesQueryHandler(
             var supportsSms   = SmsEligible.Contains(c.Type);
             var has = saved.TryGetValue(c.Type, out var pref);
 
-            // Absent row = defaults. In-app on; email and SMS off, because
-            // neither should ever start sending without being asked for.
+            // Absent row = defaults, and these must match SendNotificationCommand
+            // exactly or the page shows a state the sender does not act on.
+            // In-app and email on; SMS off, since it costs money and needs a
+            // phone number the profile may not have.
             return new NotificationPreferenceDto(
                 c.Type.ToString(),
                 c.Label,
                 c.Description,
                 InApp: !has || pref!.InApp,
-                Email: supportsEmail && has && pref!.Email,
+                Email: supportsEmail && (!has || pref!.Email),
                 Sms:   supportsSms   && has && pref!.Sms,
                 SupportsEmail: supportsEmail,
                 SupportsSms:   supportsSms);

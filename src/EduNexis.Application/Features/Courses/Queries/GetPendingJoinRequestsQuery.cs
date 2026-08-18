@@ -1,4 +1,6 @@
-﻿using EduNexis.Application.DTOs;
+using EduNexis.Application.DTOs;
+
+using EduNexis.Application.Abstractions;
 
 namespace EduNexis.Application.Features.Courses.Queries;
 
@@ -29,7 +31,7 @@ public sealed class GetPendingJoinRequestsQueryHandler(
         var course = await uow.Courses.GetByIdAsync(query.CourseId, ct)
             ?? throw new NotFoundException("Course", query.CourseId);
 
-        bool isTeacher = course.TeacherId == query.RequesterId;
+        bool isTeacher = await CourseAccess.IsTeacherAsync(uow, course, query.RequesterId, ct);
         var reviewer = await uow.CourseMembers.GetMemberAsync(course.Id, query.RequesterId, ct);
         bool isCR = reviewer?.IsCR ?? false;
 

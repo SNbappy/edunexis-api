@@ -115,6 +115,31 @@ public class AssignmentsController : BaseController
         ), ct));
     }
 
+    /// <summary>Hands a saved draft in, making it visible to the teacher.</summary>
+    [HttpPost("assignments/{assignmentId:guid}/turn-in")]
+    [Authorize(Roles = "Student")]
+    public async Task<IActionResult> TurnIn(Guid assignmentId, CancellationToken ct) =>
+        Ok(await Mediator.Send(new TurnInAssignmentCommand(assignmentId, CurrentUserId), ct));
+
+    /// <summary>Takes work back for further editing while the assignment is open.</summary>
+    [HttpPost("assignments/{assignmentId:guid}/unsubmit")]
+    [Authorize(Roles = "Student")]
+    public async Task<IActionResult> Unsubmit(Guid assignmentId, CancellationToken ct) =>
+        Ok(await Mediator.Send(new UnsubmitAssignmentCommand(assignmentId, CurrentUserId), ct));
+
+    /// <summary>
+    /// Closes the assignment. By default every student who turned nothing in is
+    /// marked 0; pass awardZeroToNonSubmitters=false to close without that.
+    /// </summary>
+    [HttpPost("courses/{courseId:guid}/assignments/{assignmentId:guid}/close")]
+    [Authorize(Roles = "Teacher,SuperAdmin")]
+    public async Task<IActionResult> CloseAssignment(
+        Guid courseId, Guid assignmentId,
+        [FromQuery] bool awardZeroToNonSubmitters = true,
+        CancellationToken ct = default) =>
+        Ok(await Mediator.Send(new CloseAssignmentCommand(
+            courseId, assignmentId, CurrentUserId, awardZeroToNonSubmitters), ct));
+
     /* ── Class comments on an assignment ──────────────────────────── */
 
     [HttpGet("courses/{courseId:guid}/assignments/{assignmentId:guid}/comments")]
@@ -129,7 +154,7 @@ public class AssignmentsController : BaseController
         [FromBody] AssignmentCommentRequest body,
         CancellationToken ct) =>
         Ok(await Mediator.Send(new AddAssignmentCommentCommand(
-            courseId, assignmentId, CurrentUserId, body.Content), ct));
+            courseId, assignmentId, CurrentUserId, body.Content, body.ParentCommentId), ct));
 
     [HttpPut("courses/{courseId:guid}/comments/{commentId:guid}")]
     public async Task<IActionResult> EditComment(
@@ -170,4 +195,5 @@ public class AssignmentsController : BaseController
         Ok(await Mediator.Send(new GetMySubmissionQuery(assignmentId, CurrentUserId), ct));
 }
 
-public record AssignmentCommentRequest(string Content);
+/// <summary>ParentCommentId is optional — set it to reply to a comment.</summary>
+public record AssignmentCommentRequest(string Content, Guid? ParentCommentId = null);

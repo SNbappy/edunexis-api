@@ -38,7 +38,7 @@ public sealed class UpdateCTEventCommandHandler(
         var course = await uow.Courses.GetByIdAsync(ctEvent.CourseId, ct)
             ?? throw new NotFoundException("Course", ctEvent.CourseId);
 
-        if (course.TeacherId != command.TeacherId)
+        if (!await CourseAccess.IsTeacherAsync(uow, course, command.TeacherId, ct))
             return ApiResponse<CTEventDto>.Fail("Only the teacher can update CT events.");
 
         if (ctEvent.Status == CTStatus.Published)

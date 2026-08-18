@@ -27,7 +27,7 @@ public sealed class UnpublishPresentationCommandHandler(
         var course = await uow.Courses.GetByIdAsync(presentation.CourseId, ct)
             ?? throw new NotFoundException("Course", presentation.CourseId);
 
-        if (course.TeacherId != command.TeacherId)
+        if (!await CourseAccess.IsTeacherAsync(uow, course, command.TeacherId, ct))
             throw new UnauthorizedException("Only the teacher can unpublish.");
 
         presentation.Unpublish();

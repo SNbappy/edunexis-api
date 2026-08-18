@@ -1,5 +1,7 @@
 using EduNexis.Application.Features.CT.Commands;
 
+using EduNexis.Application.Abstractions;
+
 namespace EduNexis.Application.Features.CT.Queries;
 
 public record GetCTEventsQuery(
@@ -18,7 +20,7 @@ public sealed class GetCTEventsQueryHandler(
         if (course is null)
             return ApiResponse<List<CTEventDto>>.Fail("Course not found.");
 
-        bool isTeacher = course.TeacherId == query.RequestedById;
+        bool isTeacher = await CourseAccess.IsTeacherAsync(uow, course, query.RequestedById, ct);
         var member = await uow.CourseMembers.GetMemberAsync(query.CourseId, query.RequestedById, ct);
 
         if (!isTeacher && (member is null || !member.IsActive))

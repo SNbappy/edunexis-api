@@ -42,7 +42,7 @@ public sealed class UpdateAssignmentCommandHandler(
         var course = await uow.Courses.GetByIdAsync(cmd.CourseId, ct)
             ?? throw new NotFoundException("Course", cmd.CourseId);
 
-        if (course.TeacherId != cmd.RequestedById)
+        if (!await CourseAccess.IsTeacherAsync(uow, course, cmd.RequestedById, ct))
             throw new UnauthorizedException("Only the teacher can update assignments.");
 
         var assignment = await uow.GetRepository<Assignment>().GetByIdAsync(cmd.AssignmentId, ct)

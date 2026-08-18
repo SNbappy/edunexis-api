@@ -15,12 +15,19 @@ public class AssignmentComment : BaseEntity
     public Guid AuthorId { get; private set; }
     public string Content { get; private set; } = string.Empty;
 
+    /// <summary>
+    /// The comment this one answers, or null for a top-level comment. One level
+    /// only — see AnnouncementComment for why.
+    /// </summary>
+    public Guid? ParentCommentId { get; private set; }
+
     public Assignment Assignment { get; private set; } = null!;
     public User Author { get; private set; } = null!;
 
     protected AssignmentComment() { }
 
-    public static AssignmentComment Create(Guid assignmentId, Guid authorId, string content)
+    public static AssignmentComment Create(
+        Guid assignmentId, Guid authorId, string content, Guid? parentCommentId = null)
     {
         if (string.IsNullOrWhiteSpace(content))
             throw new DomainException("Comment cannot be empty.");
@@ -30,6 +37,7 @@ public class AssignmentComment : BaseEntity
             AssignmentId = assignmentId,
             AuthorId = authorId,
             Content = content,
+            ParentCommentId = parentCommentId,
         };
     }
 

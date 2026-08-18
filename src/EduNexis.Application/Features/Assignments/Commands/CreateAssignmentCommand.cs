@@ -44,7 +44,7 @@ public sealed class CreateAssignmentCommandHandler(
         var course = await uow.Courses.GetByIdAsync(command.CourseId, ct)
             ?? throw new NotFoundException("Course", command.CourseId);
 
-        if (course.TeacherId != command.CreatedById)
+        if (!await CourseAccess.IsTeacherAsync(uow, course, command.CreatedById, ct))
             throw new UnauthorizedException("Only the teacher can create assignments.");
 
         string? refFileUrl = null;

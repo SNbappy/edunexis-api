@@ -40,7 +40,7 @@ public sealed class DeleteCommentCommandHandler(
             return ApiResponse.Fail("Comment not found.");
 
         var course = await uow.GetRepository<Course>().GetByIdAsync(cmd.CourseId, ct);
-        var isTeacher = course?.TeacherId == cmd.RequestedById;
+        var isTeacher = await CourseAccess.IsTeacherAsync(uow, course, cmd.RequestedById, ct);
         var isAuthor  = comment.AuthorId == cmd.RequestedById;
 
         if (!isAuthor && !isTeacher)

@@ -41,7 +41,7 @@ public sealed class CreateCTEventCommandHandler(
         var course = await uow.Courses.GetByIdAsync(command.CourseId, ct)
             ?? throw new NotFoundException("Course", command.CourseId);
 
-        if (course.TeacherId != command.TeacherId)
+        if (!await CourseAccess.IsTeacherAsync(uow, course, command.TeacherId, ct))
             throw new UnauthorizedException("Only the teacher can create CT events.");
 
         var existing = await uow.GetRepository<CTEvent>()

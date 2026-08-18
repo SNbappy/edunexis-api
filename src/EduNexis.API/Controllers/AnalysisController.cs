@@ -35,8 +35,29 @@ public class AnalysisController : BaseController
                 new StringContent(body, Encoding.UTF8, "application/json"), ct);
             var json = await response.Content.ReadAsStringAsync(ct);
             var parsed = JsonSerializer.Deserialize<JsonElement>(json);
-            var isAi = parsed.GetProperty("data").GetProperty("isHuman").GetInt32() == 0;
-            var aiScore = parsed.GetProperty("data").GetProperty("fakePercentage").GetDouble();
+
+            // ZeroGPT answers 200 with success:false and a null `data` for
+            // account-level problems — an exhausted quota being the common one.
+            // Reaching straight for data.fakePercentage turned that into
+            // "requires an element of type 'Object'", which tells a teacher
+            // nothing. Report what the provider actually said.
+            if (!parsed.TryGetProperty("data", out var payload)
+                || payload.ValueKind != JsonValueKind.Object)
+            {
+                var providerMessage = parsed.TryGetProperty("message", out var m)
+                    ? m.GetString()
+                    : null;
+                return Ok(new
+                {
+                    success = false,
+                    message = string.IsNullOrWhiteSpace(providerMessage)
+                        ? "AI detection is unavailable right now."
+                        : $"AI detection unavailable: {providerMessage}.",
+                });
+            }
+
+            var isAi = payload.GetProperty("isHuman").GetInt32() == 0;
+            var aiScore = payload.GetProperty("fakePercentage").GetDouble();
             return Ok(new {
                 success = true,
                 data = new {
@@ -55,54 +76,11 @@ public class AnalysisController : BaseController
         }
     }
 
-    // ?? Web Plagiarism via Copyleaks ?????????????????????????????????????
-    [HttpPost("analysis/check-web-plagiarism")]
-    public async Task<IActionResult> CheckWebPlagiarism([FromBody] TextAnalysisRequest req, CancellationToken ct)
-    {
-        var email = _config["PlagiarismServices:CopyleaksEmail"];
-        var apiKey = _config["PlagiarismServices:CopyleaksApiKey"];
-        if (string.IsNullOrEmpty(apiKey) || apiKey == "YOUR_COPYLEAKS_API_KEY")
-            return Ok(new { success = false, message = "Copyleaks API key not configured." });
-
-        try
-        {
-            var client = _http.CreateClient();
-            // Step 1: Login to get token
-            var loginBody = JsonSerializer.Serialize(new { email, key = apiKey });
-            var loginRes = await client.PostAsync(
-                "https://id.copyleaks.com/v3/account/login/api",
-                new StringContent(loginBody, Encoding.UTF8, "application/json"), ct);
-            var loginJson = JsonSerializer.Deserialize<JsonElement>(await loginRes.Content.ReadAsStringAsync(ct));
-            var token = loginJson.GetProperty("access_token").GetString();
-
-            // Step 2: Submit scan
-            var scanId = Guid.NewGuid().ToString("N")[..12];
-            client.DefaultRequestHeaders.Authorization =
-                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-            var scanBody = JsonSerializer.Serialize(new {
-                base64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(req.Text)),
-                filename = "submission.txt",
-                properties = new { webhooks = new { status = "" } }
-            });
-            await client.PutAsync(
-                $"https://api.copyleaks.com/v3/education/submit/file/{scanId}",
-                new StringContent(scanBody, Encoding.UTF8, "application/json"), ct);
-
-            return Ok(new {
-                success = true,
-                data = new {
-                    scanId,
-                    status = "submitted",
-                    message = "Scan submitted to Copyleaks. Results take 20-60 seconds.",
-                    checkUrl = $"https://app.copyleaks.com"
-                }
-            });
-        }
-        catch (Exception ex)
-        {
-            return Ok(new { success = false, message = "Copyleaks error: " + ex.Message });
-        }
-    }
+    /* Web-plagiarism lookup via Copyleaks was removed: it is a paid product the
+       department is not licensing, so the endpoint could only ever return "not
+       configured" while implying the platform offered the capability. Submission
+       -to-submission similarity is unaffected — that runs client-side and needs
+       no third party. */
 }
 
 public record TextAnalysisRequest(string Text, string StudentName = "");

@@ -4,6 +4,7 @@ using EduNexis.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EduNexis.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260817172327_AddSubmissionTurnInAndAutoZero")]
+    partial class AddSubmissionTurnInAndAutoZero
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -90,9 +93,6 @@ namespace EduNexis.Infrastructure.Persistence.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<Guid?>("ParentCommentId")
-                        .HasColumnType("char(36)");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
@@ -101,8 +101,6 @@ namespace EduNexis.Infrastructure.Persistence.Migrations
                     b.HasIndex("AnnouncementId");
 
                     b.HasIndex("AuthorId");
-
-                    b.HasIndex("ParentCommentId");
 
                     b.ToTable("AnnouncementComments");
                 });
@@ -115,9 +113,6 @@ namespace EduNexis.Infrastructure.Persistence.Migrations
 
                     b.Property<bool>("AllowLateSubmission")
                         .HasColumnType("tinyint(1)");
-
-                    b.Property<DateTime?>("ClosedAt")
-                        .HasColumnType("datetime(6)");
 
                     b.Property<Guid>("CourseId")
                         .HasColumnType("char(36)");
@@ -136,9 +131,6 @@ namespace EduNexis.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("Instructions")
                         .HasColumnType("longtext");
-
-                    b.Property<bool>("IsClosed")
-                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
@@ -193,9 +185,6 @@ namespace EduNexis.Infrastructure.Persistence.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<Guid?>("ParentCommentId")
-                        .HasColumnType("char(36)");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
@@ -204,8 +193,6 @@ namespace EduNexis.Infrastructure.Persistence.Migrations
                     b.HasIndex("AssignmentId");
 
                     b.HasIndex("AuthorId");
-
-                    b.HasIndex("ParentCommentId");
 
                     b.ToTable("AssignmentComments");
                 });
@@ -604,52 +591,6 @@ namespace EduNexis.Infrastructure.Persistence.Migrations
                     b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("EduNexis.Domain.Entities.CourseInvitation", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("CourseId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<Guid>("InvitedById")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("InvitedUserId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("Message")
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime?>("RespondedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CourseId", "InvitedUserId");
-
-                    b.HasIndex("InvitedUserId", "Status");
-
-                    b.ToTable("CourseInvitations");
-                });
-
             modelBuilder.Entity("EduNexis.Domain.Entities.CourseMember", b =>
                 {
                     b.Property<Guid>("Id")
@@ -690,46 +631,6 @@ namespace EduNexis.Infrastructure.Persistence.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("CourseMembers");
-                });
-
-            modelBuilder.Entity("EduNexis.Domain.Entities.CourseTeacher", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime>("AddedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<Guid>("AddedById")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("CourseId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.HasIndex("CourseId", "UserId")
-                        .IsUnique();
-
-                    b.ToTable("CourseTeachers");
                 });
 
             modelBuilder.Entity("EduNexis.Domain.Entities.FinalMark", b =>
@@ -1932,17 +1833,6 @@ namespace EduNexis.Infrastructure.Persistence.Migrations
                     b.Navigation("Teacher");
                 });
 
-            modelBuilder.Entity("EduNexis.Domain.Entities.CourseInvitation", b =>
-                {
-                    b.HasOne("EduNexis.Domain.Entities.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Course");
-                });
-
             modelBuilder.Entity("EduNexis.Domain.Entities.CourseMember", b =>
                 {
                     b.HasOne("EduNexis.Domain.Entities.Course", "Course")
@@ -1953,25 +1843,6 @@ namespace EduNexis.Infrastructure.Persistence.Migrations
 
                     b.HasOne("EduNexis.Domain.Entities.User", "User")
                         .WithMany("CourseMembers")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Course");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("EduNexis.Domain.Entities.CourseTeacher", b =>
-                {
-                    b.HasOne("EduNexis.Domain.Entities.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EduNexis.Domain.Entities.User", "User")
-                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

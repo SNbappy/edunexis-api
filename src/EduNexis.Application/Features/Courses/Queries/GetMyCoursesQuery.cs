@@ -18,9 +18,33 @@ public sealed class GetMyCoursesQueryHandler(
         GetMyCoursesQuery query, CancellationToken ct)
     {
         // ── Enrolled courses ──
-        IEnumerable<Course> enrolledCourses = query.Role == UserRole.Teacher
-            ? await uow.Courses.GetByTeacherAsync(query.UserId, ct)
-            : await uow.Courses.GetByStudentAsync(query.UserId, ct);
+        IEnumerable<Course> enrolledCourses;
+
+        if (query.Role == UserRole.Student)
+        {
+            enrolledCourses = await uow.Courses.GetByStudentAsync(query.UserId, ct);
+        }
+        else
+        {
+            // Courses they own, plus any they have accepted an invitation to
+            // co-teach. Without the second half a shared course simply never
+            // appeared for the colleague who accepted.
+            var owned = await uow.Courses.GetByTeacherAsync(query.UserId, ct);
+
+            var sharedIds = (await uow.GetRepository<CourseTeacher>()
+                    .FindAsync(t => t.UserId == query.UserId, ct))
+                .Select(t => t.CourseId)
+                .ToHashSet();
+
+            var shared = sharedIds.Count == 0
+                ? []
+                : await uow.Courses.FindAsync(c => sharedIds.Contains(c.Id), ct);
+
+            enrolledCourses = owned
+                .Concat(shared)
+                .GroupBy(c => c.Id)
+                .Select(g => g.First());
+        }
 
         // Soft-deleted courses never appear in the active list; they live in
         // the teacher's Recently Deleted view (GetMyDeletedCoursesQuery).

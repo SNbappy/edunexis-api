@@ -6,6 +6,17 @@ public class AnnouncementComment : BaseEntity
     public Guid AuthorId { get; private set; }
     public string Content { get; private set; } = string.Empty;
 
+    /// <summary>
+    /// The comment this one answers, or null for a top-level comment.
+    ///
+    /// Exactly one level deep, enforced when the reply is created: a reply to a
+    /// reply attaches to the same root. A class thread is a question and its
+    /// answers, and unbounded nesting turns that into a tree nobody can read on
+    /// a phone — while still keeping "who is this aimed at" explicit, which a
+    /// flat list cannot.
+    /// </summary>
+    public Guid? ParentCommentId { get; private set; }
+
     // Navigation
     public Announcement Announcement { get; private set; } = null!;
     public User Author { get; private set; } = null!;
@@ -13,7 +24,7 @@ public class AnnouncementComment : BaseEntity
     protected AnnouncementComment() { }
 
     public static AnnouncementComment Create(
-        Guid announcementId, Guid authorId, string content)
+        Guid announcementId, Guid authorId, string content, Guid? parentCommentId = null)
     {
         if (string.IsNullOrWhiteSpace(content))
             throw new DomainException("Comment cannot be empty.");
@@ -22,7 +33,8 @@ public class AnnouncementComment : BaseEntity
         {
             AnnouncementId = announcementId,
             AuthorId = authorId,
-            Content = content
+            Content = content,
+            ParentCommentId = parentCommentId
         };
     }
 

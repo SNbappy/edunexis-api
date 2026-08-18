@@ -127,6 +127,70 @@ public class CoursesController : BaseController
         Ok(await Mediator.Send(new UnarchiveCourseCommand(id), ct));
 
     // ──────────────────────────────────────────────────────────────
+    // Co-teaching
+    // ──────────────────────────────────────────────────────────────
+
+    /// <summary>Everyone teaching this course — the owner first, then colleagues.</summary>
+    [HttpGet("{id:guid}/teachers")]
+    public async Task<IActionResult> GetTeachers(Guid id, CancellationToken ct) =>
+        Ok(await Mediator.Send(new GetCourseTeachersQuery(id), ct));
+
+    /// <summary>Pending co-teaching invitations for this course.</summary>
+    [HttpGet("{id:guid}/invitations")]
+    [Authorize(Roles = "Teacher,SuperAdmin")]
+    public async Task<IActionResult> GetCourseInvitations(Guid id, CancellationToken ct) =>
+        Ok(await Mediator.Send(new GetCourseInvitationsQuery(id), ct));
+
+    /// <summary>Invites another teacher, by email, to help run this course.</summary>
+    [HttpPost("{id:guid}/invitations")]
+    [Authorize(Roles = "Teacher,SuperAdmin")]
+    public async Task<IActionResult> InviteTeacher(
+        Guid id, [FromBody] InviteTeacherRequest body, CancellationToken ct) =>
+        Ok(await Mediator.Send(
+            new InviteTeacherCommand(id, CurrentUserId, body.Email, body.Message), ct));
+
+    /// <summary>Withdraws an invitation that has not been answered.</summary>
+    [HttpDelete("{id:guid}/invitations/{invitationId:guid}")]
+    [Authorize(Roles = "Teacher,SuperAdmin")]
+    public async Task<IActionResult> RevokeInvitation(
+        Guid id, Guid invitationId, CancellationToken ct) =>
+        Ok(await Mediator.Send(
+            new RevokeCourseInvitationCommand(id, invitationId, CurrentUserId), ct));
+
+    /// <summary>Removes a co-teacher. Owner only, or a co-teacher stepping down.</summary>
+    [HttpDelete("{id:guid}/teachers/{teacherId:guid}")]
+    [Authorize(Roles = "Teacher,SuperAdmin")]
+    public async Task<IActionResult> RemoveCoTeacher(
+        Guid id, Guid teacherId, CancellationToken ct) =>
+        Ok(await Mediator.Send(new RemoveCoTeacherCommand(id, teacherId, CurrentUserId), ct));
+
+    /// <summary>Co-teaching invitations addressed to the caller.</summary>
+    [HttpGet("invitations/mine")]
+    [Authorize(Roles = "Teacher,SuperAdmin")]
+    public async Task<IActionResult> GetMyInvitations(CancellationToken ct) =>
+        Ok(await Mediator.Send(new GetMyCourseInvitationsQuery(CurrentUserId), ct));
+
+    /// <summary>Accepts or declines an invitation addressed to the caller.</summary>
+    [HttpPost("invitations/{invitationId:guid}/respond")]
+    [Authorize(Roles = "Teacher,SuperAdmin")]
+    public async Task<IActionResult> RespondToInvitation(
+        Guid invitationId, [FromQuery] bool accept, CancellationToken ct) =>
+        Ok(await Mediator.Send(
+            new RespondToCourseInvitationCommand(invitationId, CurrentUserId, accept), ct));
+
+    /// <summary>
+    /// Appoints or removes a class representative. Teacher (or platform admin)
+    /// only; a course may have several CRs.
+    /// </summary>
+    [HttpPatch("{id:guid}/members/{studentId:guid}/cr")]
+    [Authorize(Roles = "Teacher,SuperAdmin")]
+    public async Task<IActionResult> SetClassRepresentative(
+        Guid id, Guid studentId,
+        [FromQuery] bool isCr,
+        CancellationToken ct) =>
+        Ok(await Mediator.Send(new SetClassRepresentativeCommand(id, studentId, isCr), ct));
+
+    // ──────────────────────────────────────────────────────────────
     // Join requests
     // ──────────────────────────────────────────────────────────────
 
@@ -164,3 +228,4 @@ public class CoursesController : BaseController
         Ok(await Mediator.Send(new LeaveCourseCommand(id), ct));
 }
 
+public record InviteTeacherRequest(string Email, string? Message = null);

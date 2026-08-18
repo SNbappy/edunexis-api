@@ -1,5 +1,7 @@
 using EduNexis.Application.Features.Presentations.Queries;
 
+using EduNexis.Application.Abstractions;
+
 namespace EduNexis.Application.Features.Presentations.Queries;
 
 public record GetPresentationResultsQuery(
@@ -21,7 +23,7 @@ public sealed class GetPresentationResultsQueryHandler(
         var course = await uow.Courses.GetByIdAsync(presentation.CourseId, ct)
             ?? throw new NotFoundException("Course", presentation.CourseId);
 
-        bool isTeacher = course.TeacherId == query.RequesterId;
+        bool isTeacher = await CourseAccess.IsTeacherAsync(uow, course, query.RequesterId, ct);
 
         // Students cannot see marks until the test is published.
         if (!isTeacher && !presentation.IsPublished)

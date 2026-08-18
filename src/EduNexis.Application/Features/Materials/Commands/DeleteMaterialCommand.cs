@@ -27,7 +27,7 @@ public sealed class DeleteMaterialCommandHandler(
         if (material is null || material.IsDeleted || material.CourseId != cmd.CourseId)
             return ApiResponse.Fail("Material not found.");
 
-        bool isTeacher = course.TeacherId == cmd.RequestedById;
+        bool isTeacher = await CourseAccess.IsTeacherAsync(uow, course, cmd.RequestedById, ct);
         var member = await uow.CourseMembers.GetMemberAsync(course.Id, cmd.RequestedById, ct);
         bool isCR = member?.IsCR ?? false;
 

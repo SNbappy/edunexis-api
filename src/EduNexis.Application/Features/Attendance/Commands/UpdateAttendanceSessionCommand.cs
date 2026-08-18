@@ -25,7 +25,7 @@ public sealed class UpdateAttendanceEntryCommandHandler(
         var course = await uow.Courses.GetByIdAsync(cmd.CourseId, ct)
             ?? throw new NotFoundException("Course", cmd.CourseId);
 
-        bool isTeacher = course.TeacherId == cmd.RequesterId;
+        bool isTeacher = await CourseAccess.IsTeacherAsync(uow, course, cmd.RequesterId, ct);
         var member = await uow.CourseMembers.GetMemberAsync(course.Id, cmd.RequesterId, ct);
         bool isCR = member?.IsCR ?? false;
 

@@ -39,6 +39,8 @@ public class AppDbContext : DbContext
     public DbSet<UserEducation> UserEducations => Set<UserEducation>();
     public DbSet<UserPublication> UserPublications => Set<UserPublication>();
     public DbSet<PasswordResetToken> PasswordResetTokens => Set<PasswordResetToken>();
+    public DbSet<CourseTeacher> CourseTeachers => Set<CourseTeacher>();
+    public DbSet<CourseInvitation> CourseInvitations => Set<CourseInvitation>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -61,6 +63,16 @@ public class AppDbContext : DbContext
             .HasIndex(a => a.SubmissionId);
         modelBuilder.Entity<AssignmentComment>()
             .HasIndex(c => c.AssignmentId);
+
+        // Replies. Indexed because every thread render groups on this column,
+        // and deliberately left without a database-level foreign key: deleting
+        // a comment here is a soft delete, so a cascade would be wrong and a
+        // restrict would block a teacher moderating a thread. The handlers
+        // validate the parent instead.
+        modelBuilder.Entity<AssignmentComment>()
+            .HasIndex(c => c.ParentCommentId);
+        modelBuilder.Entity<AnnouncementComment>()
+            .HasIndex(c => c.ParentCommentId);
         // One row per user per type — the upsert in
         // UpdateNotificationPreferencesCommand assumes it.
         modelBuilder.Entity<NotificationPreference>()
@@ -108,6 +120,29 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<FinalMark>()
             .HasOne(f => f.Course).WithMany()
             .HasForeignKey(f => f.CourseId).OnDelete(DeleteBehavior.Restrict);
+
+        // ── Co-teaching ──────────────────────────────────────────────
+        modelBuilder.Entity<CourseTeacher>(entity =>
+        {
+            entity.HasOne(t => t.Course).WithMany()
+                .HasForeignKey(t => t.CourseId).OnDelete(DeleteBehavior.Cascade);
+            entity.HasOne(t => t.User).WithMany()
+                .HasForeignKey(t => t.UserId).OnDelete(DeleteBehavior.Cascade);
+            // One row per teacher per course. The invitation-accept path checks
+            // for an existing row, but a unique index is what actually stops a
+            // double-accept from two tabs creating two.
+            entity.HasIndex(t => new { t.CourseId, t.UserId }).IsUnique();
+        });
+
+        modelBuilder.Entity<CourseInvitation>(entity =>
+        {
+            entity.Property(i => i.Status).HasConversion<string>();
+            entity.HasOne(i => i.Course).WithMany()
+                .HasForeignKey(i => i.CourseId).OnDelete(DeleteBehavior.Cascade);
+            entity.HasIndex(i => new { i.CourseId, i.InvitedUserId });
+            // Drives the invitee's own list.
+            entity.HasIndex(i => new { i.InvitedUserId, i.Status });
+        });
     }
 }
 

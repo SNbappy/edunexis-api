@@ -25,21 +25,16 @@ public sealed class SendNotificationCommandHandler(
 ) : ICommandHandler<SendNotificationCommand, ApiResponse>
 {
     /// <summary>
-    /// Notification types that may ALSO send an email.
-    /// Lower-noise types (announcements, generic) stay in-app only.
+    /// Notification types that may ALSO send an email — every type.
+    ///
+    /// This used to be a curated subset, which meant the settings page showed a
+    /// dash rather than a toggle for half the list: a user who wanted an email
+    /// for announcements simply could not ask for one. Whether a given email is
+    /// worth receiving is the user's judgement, and the per-type switch already
+    /// records it — the platform's job is only to honour that switch.
     /// </summary>
-    public static readonly HashSet<NotificationType> EmailEligibleTypes = new()
-    {
-        NotificationType.NewAssignment,
-        NotificationType.AssignmentUpdated,
-        NotificationType.AssignmentDeadlineReminder,
-        NotificationType.AssignmentGraded,
-        NotificationType.MarksPublished,
-        NotificationType.JoinRequestReceived,
-        NotificationType.CourseJoinApproved,
-        NotificationType.CourseJoinRejected,
-        NotificationType.GradeComplaint,
-    };
+    public static readonly HashSet<NotificationType> EmailEligibleTypes =
+        Enum.GetValues<NotificationType>().ToHashSet();
 
     /// <summary>
     /// Types worth an SMS.
@@ -72,10 +67,13 @@ public sealed class SendNotificationCommandHandler(
 
         // Defaults differ by channel, and deliberately so:
         //   in-app  on   — the product's own surface, costs nothing
-        //   email   off  — opt-in, or a new course reads as spam
+        //   email   on   — the address is a verified university one and course
+        //                  mail is expected; students were missing deadlines
+        //                  because email defaulted to off and nobody found the
+        //                  setting. Still one switch away from silence.
         //   sms     off  — opt-in, costs money and needs a phone number
         var wantsInApp = pref?.InApp ?? true;
-        var wantsEmail = pref?.Email ?? false;
+        var wantsEmail = pref?.Email ?? true;
         var wantsSms   = pref?.Sms   ?? false;
 
         // 1) Save in-app notification

@@ -28,7 +28,7 @@ public sealed class DeleteAnnouncementCommandHandler(
         if (announcement is null || announcement.IsDeleted || announcement.CourseId != cmd.CourseId)
             return ApiResponse.Fail("Announcement not found.");
 
-        bool isTeacher = course.TeacherId == requesterId;
+        bool isTeacher = await CourseAccess.IsTeacherAsync(uow, course, requesterId, ct);
         bool isAdmin   = currentUser.Role is "SuperAdmin";
         bool isAuthor  = announcement.AuthorId == requesterId;
 

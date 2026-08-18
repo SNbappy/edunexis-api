@@ -38,7 +38,19 @@ public sealed class ReviewJoinRequestCommandHandler(
         if (course is null)
             return ApiResponse.Fail("Course not found.");
 
-        if (course.TeacherId != reviewerId && currentUser.Role != "Admin")
+        /* Who may admit a student.
+           Two things were wrong here. "Admin" is not a role this app has — the
+           only admin role is SuperAdmin — so that arm could never be true and a
+           platform admin was refused. And a class representative could already
+           *see* pending requests (GetPendingJoinRequestsQuery honours IsCR) but
+           was refused when they tried to act on one, which is the single thing
+           the role exists to do. */
+        var reviewerMembership = await uow.CourseMembers.GetMemberAsync(cmd.CourseId, reviewerId, ct);
+        var isCR = reviewerMembership?.IsCR == true && reviewerMembership.IsActive;
+        var isOwner = course.TeacherId == reviewerId;
+        var isPlatformAdmin = currentUser.Role == "SuperAdmin";
+
+        if (!isOwner && !isCR && !isPlatformAdmin)
             return ApiResponse.Fail("You are not authorized to review join requests for this course.");
 
         var request = await uow.JoinRequests.GetByIdAsync(cmd.RequestId, ct);

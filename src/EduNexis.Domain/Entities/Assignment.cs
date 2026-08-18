@@ -12,6 +12,19 @@ public class Assignment : BaseEntity
     public string? ReferenceFileUrl { get; private set; }
     public Guid CreatedById { get; private set; }
 
+    /// <summary>
+    /// Explicitly closed by the teacher, as distinct from merely past its
+    /// deadline.
+    ///
+    /// The two are not the same thing: an assignment that still accepts late
+    /// work is past due but not finished with. Closing is the point at which
+    /// nothing more can arrive, and therefore the only point at which "turned
+    /// in nothing" is a final fact worth recording as a zero.
+    /// </summary>
+    public bool IsClosed { get; private set; } = false;
+
+    public DateTime? ClosedAt { get; private set; }
+
     // Navigation
     public Course Course { get; private set; } = null!;
     public User CreatedBy { get; private set; } = null!;
@@ -45,7 +58,26 @@ public class Assignment : BaseEntity
         };
     }
 
-    public bool IsOpen() => DateTime.UtcNow <= Deadline;
+    /// <summary>
+    /// Whether work can still arrive. Closing always wins; otherwise it is open
+    /// until the deadline, and beyond it when late submission is allowed.
+    /// </summary>
+    public bool IsOpen() =>
+        !IsClosed && (DateTime.UtcNow <= Deadline || AllowLateSubmission);
+
+    public void Close()
+    {
+        IsClosed = true;
+        ClosedAt = DateTime.UtcNow;
+        SetUpdatedAt();
+    }
+
+    public void Reopen()
+    {
+        IsClosed = false;
+        ClosedAt = null;
+        SetUpdatedAt();
+    }
 
     public void Update(string title, string? instructions,
         DateTime deadline, bool allowLate, decimal maxMarks, string? rubricNotes)

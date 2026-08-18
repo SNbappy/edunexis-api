@@ -30,7 +30,7 @@ public sealed class GetCourseQueryHandler(
 
         var viewerId    = Guid.Parse(currentUser.UserId);
         var isAdmin     = currentUser.Role is "SuperAdmin";
-        var isOwner     = course.TeacherId == viewerId;
+        var isOwner     = await CourseAccess.IsTeacherAsync(uow, course, viewerId, ct);
         var membership  = await uow.CourseMembers.GetMemberAsync(course.Id, viewerId, ct);
         var isMember    = membership is not null && membership.IsActive;
 

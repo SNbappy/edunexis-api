@@ -14,7 +14,9 @@ public record AddAssignmentCommentCommand(
     Guid CourseId,
     Guid AssignmentId,
     Guid AuthorId,
-    string Content
+    string Content,
+    /// <summary>Set to answer an existing comment in the same thread.</summary>
+    Guid? ParentCommentId = null
 ) : ICommand<ApiResponse<CommentDto>>, ICourseScopedWrite
 {
     public ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
@@ -54,36 +56,76 @@ public sealed class AddAssignmentCommentCommandHandler(
 
         var course = await uow.Courses.GetByIdAsync(cmd.CourseId, ct);
         var member = await uow.CourseMembers.GetMemberAsync(cmd.CourseId, cmd.AuthorId, ct);
-        var isTeacher = course?.TeacherId == cmd.AuthorId;
+        var isTeacher = await CourseAccess.IsTeacherAsync(uow, course, cmd.AuthorId, ct);
 
         if (member is null && !isTeacher)
             return ApiResponse<CommentDto>.Fail("You are not a member of this course.");
 
-        var comment = AssignmentComment.Create(cmd.AssignmentId, cmd.AuthorId, content);
+        // Same rules as the announcement thread: the parent must belong to this
+        // assignment, and a reply to a reply is flattened onto the root.
+        Guid? parentId = null;
+        AssignmentComment? parent = null;
+
+        if (cmd.ParentCommentId is Guid requestedParent)
+        {
+            parent = await uow.GetRepository<AssignmentComment>()
+                .GetByIdAsync(requestedParent, ct);
+
+            if (parent is null || parent.IsDeleted || parent.AssignmentId != cmd.AssignmentId)
+                return ApiResponse<CommentDto>.Fail("The comment you replied to no longer exists.");
+
+            parentId = parent.ParentCommentId ?? parent.Id;
+        }
+
+        var comment = AssignmentComment.Create(cmd.AssignmentId, cmd.AuthorId, content, parentId);
         await uow.GetRepository<AssignmentComment>().AddAsync(comment, ct);
         await uow.SaveChangesAsync(ct);
 
         var author = await uow.Users.GetWithProfileAsync(cmd.AuthorId, ct);
         var authorName = author?.Profile?.FullName ?? "Someone";
 
-        // A question under an assignment is usually for the teacher, so they are
-        // told; a student is told when the teacher replies on their thread.
-        if (!isTeacher && course is not null)
+        // The teacher and everyone already in the thread. The previous version
+        // notified the teacher only, and only when a student wrote — so when the
+        // teacher finally answered, the student who asked was never told. The
+        // comment above claimed otherwise; the code never did it.
+        if (course is not null)
         {
-            await sender.Send(new SendNotificationCommand(
-                UserId: course.TeacherId,
-                Title: $"New comment in {course.Title}",
-                Body: $"{authorName} on \"{assignment.Title}\": {Preview(content)}",
-                Type: NotificationType.NewComment,
-                RedirectUrl: $"/courses/{cmd.CourseId}/assignments/{cmd.AssignmentId}"
-            ), ct);
+            var priorAuthors = (await uow.GetRepository<AssignmentComment>()
+                    .FindAsync(c => c.AssignmentId == cmd.AssignmentId && !c.IsDeleted, ct))
+                .Select(c => c.AuthorId);
+
+            var notifyIds = new HashSet<Guid>(priorAuthors) { course.TeacherId };
+            if (parent is not null) notifyIds.Add(parent.AuthorId);
+            notifyIds.Remove(cmd.AuthorId);
+
+            var redirect =
+                $"/courses/{cmd.CourseId}/assignments/{cmd.AssignmentId}#comment-{comment.Id}";
+
+            foreach (var userId in notifyIds)
+            {
+                await sender.Send(new SendNotificationCommand(
+                    UserId: userId,
+                    Title: $"New comment in {course.Title}",
+                    Body: parent is not null && userId == parent.AuthorId
+                        ? $"{authorName} replied to you on \"{assignment.Title}\": {Preview(content)}"
+                        : $"{authorName} on \"{assignment.Title}\": {Preview(content)}",
+                    Type: NotificationType.NewComment,
+                    RedirectUrl: redirect
+                ), ct);
+            }
         }
 
         return ApiResponse<CommentDto>.Ok(new CommentDto(
             comment.Id, comment.AssignmentId, comment.AuthorId,
             authorName, author?.Profile?.ProfilePhotoUrl,
             comment.Content, comment.CreatedAt,
-            CanDelete: true, CanEdit: true), "Comment posted.");
+            CanDelete: true, CanEdit: true,
+            EditedAt: null,
+            ParentCommentId: comment.ParentCommentId,
+            ReplyToName: parent is null
+                ? null
+                : (await uow.Users.GetWithProfileAsync(parent.AuthorId, ct))?.Profile?.FullName),
+            "Comment posted.");
     }
 
     private static string Preview(string text) =>
@@ -140,7 +182,8 @@ public sealed class EditAssignmentCommentCommandHandler(
             comment.Id, comment.AssignmentId, comment.AuthorId,
             author?.Profile?.FullName ?? "Unknown", author?.Profile?.ProfilePhotoUrl,
             comment.Content, comment.CreatedAt,
-            CanDelete: true, CanEdit: true, EditedAt: comment.UpdatedAt), "Comment updated.");
+            CanDelete: true, CanEdit: true, EditedAt: comment.UpdatedAt,
+            ParentCommentId: comment.ParentCommentId), "Comment updated.");
     }
 }
 
@@ -176,7 +219,7 @@ public sealed class DeleteAssignmentCommentCommandHandler(
             return ApiResponse.Fail("Comment not found.");
 
         var course = await uow.Courses.GetByIdAsync(cmd.CourseId, ct);
-        var isTeacher = course?.TeacherId == cmd.RequestedById;
+        var isTeacher = await CourseAccess.IsTeacherAsync(uow, course, cmd.RequestedById, ct);
 
         // The teacher moderates their own class; everyone else, own comments only.
         if (comment.AuthorId != cmd.RequestedById && !isTeacher)
