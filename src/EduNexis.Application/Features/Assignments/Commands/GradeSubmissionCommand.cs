@@ -60,7 +60,7 @@ public sealed class GradeSubmissionCommandHandler(
 
         if (command.Marks > assignment.MaxMarks)
             return ApiResponse<SubmissionDto>.Fail(
-                $"Marks cannot exceed max marks ({assignment.MaxMarks}).");
+                $"Marks cannot exceed max marks ({assignment.MaxMarks:0.##}).");
 
 
         submission.Grade(command.Marks, command.Feedback);
@@ -79,7 +79,7 @@ public sealed class GradeSubmissionCommandHandler(
         await sender.Send(new SendNotificationCommand(
             UserId: submission.StudentId,
             Title: $"Your work was marked in {course.Title}",
-            Body: $"\"{assignment.Title}\": {command.Marks} out of {assignment.MaxMarks}.",
+            Body: $"\"{assignment.Title}\": {command.Marks:0.##} out of {assignment.MaxMarks:0.##}.",
             Type: NotificationType.AssignmentGraded,
             RedirectUrl: $"/courses/{course.Id}/assignments/{assignment.Id}"
         ), ct);

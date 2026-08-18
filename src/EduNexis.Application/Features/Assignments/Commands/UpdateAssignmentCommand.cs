@@ -117,7 +117,7 @@ public sealed class UpdateAssignmentCommandHandler(
         {
             var what = deadlineMoved
                 ? $"New deadline: {assignment.Deadline:MMM dd, yyyy h:mm tt}."
-                : $"Now marked out of {assignment.MaxMarks}.";
+                : $"Now marked out of {assignment.MaxMarks:0.##}.";
 
             var members = await uow.CourseMembers.GetByCourseAsync(cmd.CourseId, ct);
             foreach (var m in members.Where(x => x.IsActive))

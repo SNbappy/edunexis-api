@@ -73,10 +73,22 @@ public sealed class BulkGradeCTCommandHandler(
             .FindAsync(s => s.CTEventId == command.CTEventId, ct);
         var submissionMap = existingSubmissions.ToDictionary(s => s.StudentId);
 
+        var studentIds = command.Marks.Select(m => m.StudentId).Distinct().ToList();
+        var profiles = await uow.UserProfiles.FindAsync(p => studentIds.Contains(p.UserId), ct);
+        var profileMap = profiles.ToDictionary(p => p.UserId);
+
         foreach (var entry in command.Marks)
         {
             if (!entry.IsAbsent && entry.ObtainedMarks.HasValue && (entry.ObtainedMarks.Value < 0 || entry.ObtainedMarks > ctEvent.MaxMarks))
-                return ApiResponse.Fail($"Marks for student {entry.StudentId} must be between 0 and max marks ({ctEvent.MaxMarks}).");
+            {
+                var studentLabel = profileMap.TryGetValue(entry.StudentId, out var prof) && !string.IsNullOrWhiteSpace(prof.StudentId)
+                    ? $"{prof.StudentId} ({prof.FullName})"
+                    : profileMap.TryGetValue(entry.StudentId, out var prof2) && !string.IsNullOrWhiteSpace(prof2.FullName)
+                        ? prof2.FullName
+                        : entry.StudentId.ToString();
+
+                return ApiResponse.Fail($"Marks for student {studentLabel} must be between 0 and max marks ({ctEvent.MaxMarks:0.##}).");
+            }
 
             if (!submissionMap.TryGetValue(entry.StudentId, out var submission))
             {

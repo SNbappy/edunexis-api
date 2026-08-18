@@ -42,7 +42,7 @@ public sealed class GradePresentationCommandHandler(
             throw new UnauthorizedException("Only the teacher can grade presentations.");
 
         if (command.Marks > presentation.MaxMarks)
-            return ApiResponse.Fail($"Marks cannot exceed max marks ({presentation.MaxMarks}).");
+            return ApiResponse.Fail($"Marks cannot exceed max marks ({presentation.MaxMarks:0.##}).");
 
         var existing = await uow.GetRepository<PresentationMark>()
             .FirstOrDefaultAsync(m =>
