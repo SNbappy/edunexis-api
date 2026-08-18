@@ -47,6 +47,12 @@ public sealed class SaveGradingFormulaCommandHandler(
         if (!await CourseAccess.IsTeacherAsync(uow, course, command.TeacherId, ct))
             throw new UnauthorizedException("Only the teacher can define the grading formula.");
 
+        var publishedMarks = await uow.GetRepository<FinalMark>()
+            .FindAsync(fm => fm.CourseId == command.CourseId && fm.IsPublished, ct);
+
+        if (publishedMarks.Any())
+            return ApiResponse.Fail("Cannot change grading formula while final marks are published. Please unpublish final marks first.");
+
         // Get or create formula
         var formula = await uow.GetRepository<GradingFormula>()
             .FirstOrDefaultAsync(f => f.CourseId == command.CourseId, ct);

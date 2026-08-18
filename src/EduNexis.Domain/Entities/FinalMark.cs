@@ -44,4 +44,11 @@ public class FinalMark : BaseEntity
         PublishedAt = DateTime.UtcNow;
         SetUpdatedAt();
     }
+
+    public void Unpublish()
+    {
+        IsPublished = false;
+        PublishedAt = null;
+        SetUpdatedAt();
+    }
 }
