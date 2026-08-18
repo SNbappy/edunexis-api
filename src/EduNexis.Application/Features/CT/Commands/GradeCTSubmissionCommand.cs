@@ -54,14 +54,29 @@ public sealed class BulkGradeCTCommandHandler(
         if (!ctEvent.KhataUploaded)
             return ApiResponse.Fail("All 3 khata must be uploaded before entering marks.");
 
+        // Check that all enrolled active students have been provided with marks or marked absent
+        var members = await uow.CourseMembers.GetByCourseAsync(ctEvent.CourseId, ct);
+        var studentMembers = members.Where(m => m.IsActive).ToList();
+
+        if (studentMembers.Count > 0)
+        {
+            var commandMarkMap = command.Marks.ToDictionary(m => m.StudentId);
+            var unmarkedCount = studentMembers.Count(s =>
+                !commandMarkMap.TryGetValue(s.UserId, out var entry) ||
+                (!entry.IsAbsent && !entry.ObtainedMarks.HasValue));
+
+            if (unmarkedCount > 0)
+                return ApiResponse.Fail($"Cannot save marks: {unmarkedCount} student(s) have not been marked yet. All students must have marks entered or be marked absent.");
+        }
+
         var existingSubmissions = await uow.GetRepository<CTSubmission>()
             .FindAsync(s => s.CTEventId == command.CTEventId, ct);
         var submissionMap = existingSubmissions.ToDictionary(s => s.StudentId);
 
         foreach (var entry in command.Marks)
         {
-            if (!entry.IsAbsent && entry.ObtainedMarks.HasValue && entry.ObtainedMarks > ctEvent.MaxMarks)
-                return ApiResponse.Fail($"Marks for student {entry.StudentId} exceed max marks ({ctEvent.MaxMarks}).");
+            if (!entry.IsAbsent && entry.ObtainedMarks.HasValue && (entry.ObtainedMarks.Value < 0 || entry.ObtainedMarks > ctEvent.MaxMarks))
+                return ApiResponse.Fail($"Marks for student {entry.StudentId} must be between 0 and max marks ({ctEvent.MaxMarks}).");
 
             if (!submissionMap.TryGetValue(entry.StudentId, out var submission))
             {
