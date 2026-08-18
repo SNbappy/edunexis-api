@@ -35,7 +35,7 @@ public sealed class PublishCTCommandHandler(
         if (!ctEvent.KhataUploaded)
             return ApiResponse.Fail("All 3 khata must be uploaded before publishing.");
 
-        // Check if all enrolled active students have been marked
+        // Check if all enrolled active students have been marked and saved in the database
         var members = await uow.CourseMembers.GetByCourseAsync(ctEvent.CourseId, ct);
         var studentMembers = members.Where(m => m.IsActive).ToList();
 
@@ -49,7 +49,20 @@ public sealed class PublishCTCommandHandler(
                 !submissionMap.TryGetValue(s.UserId, out var sub) || (!sub.IsAbsent && !sub.ObtainedMarks.HasValue));
 
             if (unmarkedCount > 0)
-                return ApiResponse.Fail($"Cannot publish CT: {unmarkedCount} student(s) have not been marked yet. All students must have marks entered or be marked absent.");
+                return ApiResponse.Fail($"Cannot publish CT: {unmarkedCount} student(s) have not been marked yet. All students must have marks saved or be marked absent.");
+
+            var invalidCount = studentMembers.Count(s =>
+                submissionMap.TryGetValue(s.UserId, out var sub) &&
+                !sub.IsAbsent &&
+                sub.ObtainedMarks.HasValue &&
+                (sub.ObtainedMarks.Value < 0 || sub.ObtainedMarks.Value > ctEvent.MaxMarks));
+
+            if (invalidCount > 0)
+                return ApiResponse.Fail($"Cannot publish CT: Some student marks are invalid or exceed max marks ({ctEvent.MaxMarks:0.##}).");
+        }
+        else
+        {
+            return ApiResponse.Fail("Cannot publish CT: No students are enrolled in this course.");
         }
 
         ctEvent.Publish();
