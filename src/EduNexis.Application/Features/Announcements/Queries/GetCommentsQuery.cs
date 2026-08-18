@@ -46,8 +46,12 @@ public sealed class GetCommentsQueryHandler(
         if (ids.Count == 0)
             return ApiResponse<List<CommentDto>>.Ok([]);
 
-        var comments = await uow.GetRepository<AnnouncementComment>()
+        var rawComments = await uow.GetRepository<AnnouncementComment>()
             .FindAsync(c => ids.Contains(c.AnnouncementId) && !c.IsDeleted, ct);
+
+        // Filter out any orphan replies whose parent is deleted/missing
+        var activeIds = rawComments.Select(c => c.Id).ToHashSet();
+        var comments = rawComments.Where(c => c.ParentCommentId is null || activeIds.Contains(c.ParentCommentId.Value)).ToList();
 
         // One profile lookup per distinct author rather than per comment: a
         // lively thread is mostly the same few people.

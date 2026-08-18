@@ -36,8 +36,12 @@ public sealed class GetAssignmentCommentsQueryHandler(
                 return ApiResponse<List<CommentDto>>.Fail("You are not a member of this course.");
         }
 
-        var comments = await uow.GetRepository<AssignmentComment>()
+        var rawComments = await uow.GetRepository<AssignmentComment>()
             .FindAsync(c => c.AssignmentId == query.AssignmentId && !c.IsDeleted, ct);
+
+        // Filter out any orphan replies whose parent is deleted/missing
+        var activeIds = rawComments.Select(c => c.Id).ToHashSet();
+        var comments = rawComments.Where(c => c.ParentCommentId is null || activeIds.Contains(c.ParentCommentId.Value)).ToList();
 
         // One profile lookup per distinct author, not per comment.
         var authors = new Dictionary<Guid, (string Name, string? Photo)>();

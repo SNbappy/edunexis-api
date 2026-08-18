@@ -227,6 +227,16 @@ public sealed class DeleteAssignmentCommentCommandHandler(
 
         comment.Delete();
         uow.GetRepository<AssignmentComment>().Update(comment);
+
+        // Cascade delete all replies to this comment
+        var replies = await uow.GetRepository<AssignmentComment>()
+            .FindAsync(r => r.ParentCommentId == comment.Id && !r.IsDeleted, ct);
+        foreach (var reply in replies)
+        {
+            reply.Delete();
+            uow.GetRepository<AssignmentComment>().Update(reply);
+        }
+
         await uow.SaveChangesAsync(ct);
 
         return ApiResponse.Ok("Comment deleted.");
