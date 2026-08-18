@@ -80,7 +80,8 @@ public class Assignment : BaseEntity
     }
 
     public void Update(string title, string? instructions,
-        DateTime deadline, bool allowLate, decimal maxMarks, string? rubricNotes)
+        DateTime deadline, bool allowLate, decimal maxMarks, string? rubricNotes,
+        string? referenceFileUrl = null, bool updateReferenceFile = false)
     {
         Title = title;
         Instructions = instructions;
@@ -88,6 +89,10 @@ public class Assignment : BaseEntity
         AllowLateSubmission = allowLate;
         MaxMarks = maxMarks;
         RubricNotes = rubricNotes;
+        if (updateReferenceFile)
+        {
+            ReferenceFileUrl = referenceFileUrl;
+        }
         SetUpdatedAt();
     }
 }

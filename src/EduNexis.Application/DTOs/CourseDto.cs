@@ -1,4 +1,4 @@
-﻿namespace EduNexis.Application.DTOs;
+namespace EduNexis.Application.DTOs;
 
 public record CourseDto(
     Guid Id,
@@ -31,6 +31,7 @@ public record CourseSummaryDto(
     string Semester,
     string CourseType,
     string CoverImageUrl,
+    Guid TeacherId,
     string TeacherName,
     string? TeacherProfilePhotoUrl,
     bool IsArchived,

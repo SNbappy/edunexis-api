@@ -24,6 +24,7 @@ public sealed class GetAnnouncementsQueryHandler(
             dtos.Add(new AnnouncementDto(
                 a.Id, a.CourseId, a.AuthorId,
                 author?.Profile?.FullName ?? "Unknown",
+                author?.Profile?.ProfilePhotoUrl,
                 a.Content, a.AttachmentUrl,
                 a.IsPinned, a.CreatedAt));
         }

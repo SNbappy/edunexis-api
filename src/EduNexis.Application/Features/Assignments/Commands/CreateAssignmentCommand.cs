@@ -13,8 +13,9 @@ public record CreateAssignmentCommand(
     bool AllowLateSubmission,
     decimal MaxMarks,
     string? RubricNotes,
-    Stream? ReferenceFileStream,
-    string? ReferenceFileName
+    List<(Stream Stream, string FileName)>? ReferenceFiles = null,
+    Stream? ReferenceFileStream = null,
+    string? ReferenceFileName = null
 ) : ICommand<ApiResponse<AssignmentDto>>, ICourseScopedWrite
 {
     public ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
@@ -47,13 +48,32 @@ public sealed class CreateAssignmentCommandHandler(
         if (!await CourseAccess.IsTeacherAsync(uow, course, command.CreatedById, ct))
             throw new UnauthorizedException("Only the teacher can create assignments.");
 
-        string? refFileUrl = null;
-        if (command.ReferenceFileStream is not null && command.ReferenceFileName is not null)
+        var refFileUrls = new List<string>();
+
+        if (command.ReferenceFiles is { Count: > 0 })
         {
-            refFileUrl = await storage.UploadAsync(
+            foreach (var file in command.ReferenceFiles)
+            {
+                var url = await storage.UploadAsync(
+                    file.Stream, file.FileName,
+                    $"assignments/{command.CourseId}", ct);
+                refFileUrls.Add(url);
+            }
+        }
+        else if (command.ReferenceFileStream is not null && command.ReferenceFileName is not null)
+        {
+            var url = await storage.UploadAsync(
                 command.ReferenceFileStream, command.ReferenceFileName,
                 $"assignments/{command.CourseId}", ct);
+            refFileUrls.Add(url);
         }
+
+        string? refFileUrl = refFileUrls.Count switch
+        {
+            0 => null,
+            1 => refFileUrls[0],
+            _ => System.Text.Json.JsonSerializer.Serialize(refFileUrls)
+        };
 
         var assignment = Assignment.Create(
             command.CourseId, command.Title, command.Instructions,

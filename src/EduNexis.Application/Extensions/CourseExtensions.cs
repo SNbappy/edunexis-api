@@ -1,4 +1,4 @@
-﻿using EduNexis.Application.DTOs;
+using EduNexis.Application.DTOs;
 using EduNexis.Domain.Entities;
 
 namespace EduNexis.Application.Extensions;
@@ -51,6 +51,7 @@ public static class CourseExtensions
             course.Semester,
             course.CourseType.ToString(),
             course.CoverImageUrl,
+            course.TeacherId,
             teacherName,
             teacherProfilePhotoUrl,
             course.IsArchived,

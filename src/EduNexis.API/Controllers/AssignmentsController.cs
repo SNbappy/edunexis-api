@@ -23,8 +23,21 @@ public class AssignmentsController : BaseController
         [FromForm] decimal maxMarks,
         [FromForm] string? rubricNotes,
         IFormFile? referenceFile,
-        CancellationToken ct) =>
-        Ok(await Mediator.Send(new CreateAssignmentCommand(
+        List<IFormFile>? referenceFiles,
+        CancellationToken ct)
+    {
+        var filesToUpload = new List<(Stream Stream, string FileName)>();
+        if (referenceFile is not null)
+            filesToUpload.Add((referenceFile.OpenReadStream(), referenceFile.FileName));
+        if (referenceFiles is not null)
+        {
+            foreach (var f in referenceFiles)
+            {
+                filesToUpload.Add((f.OpenReadStream(), f.FileName));
+            }
+        }
+
+        return Ok(await Mediator.Send(new CreateAssignmentCommand(
             CourseId: courseId,
             CreatedById: CurrentUserId,
             Title: title,
@@ -33,9 +46,9 @@ public class AssignmentsController : BaseController
             AllowLateSubmission: allowLateSubmission,
             MaxMarks: maxMarks,
             RubricNotes: rubricNotes,
-            ReferenceFileStream: referenceFile?.OpenReadStream(),
-            ReferenceFileName: referenceFile?.FileName
+            ReferenceFiles: filesToUpload.Count > 0 ? filesToUpload : null
         ), ct));
+    }
 
     [HttpPut("courses/{courseId:guid}/assignments/{id:guid}")]
     [Authorize(Roles = "Teacher,SuperAdmin")]
@@ -48,8 +61,24 @@ public class AssignmentsController : BaseController
         [FromForm] bool allowLateSubmission,
         [FromForm] decimal maxMarks,
         [FromForm] string? rubricNotes,
-        CancellationToken ct) =>
-        Ok(await Mediator.Send(new UpdateAssignmentCommand(
+        [FromForm] bool manageReferenceFiles,
+        [FromForm] List<string>? keepReferenceFileUrls,
+        IFormFile? referenceFile,
+        List<IFormFile>? referenceFiles,
+        CancellationToken ct)
+    {
+        var filesToUpload = new List<(Stream Stream, string FileName)>();
+        if (referenceFile is not null)
+            filesToUpload.Add((referenceFile.OpenReadStream(), referenceFile.FileName));
+        if (referenceFiles is not null)
+        {
+            foreach (var f in referenceFiles)
+            {
+                filesToUpload.Add((f.OpenReadStream(), f.FileName));
+            }
+        }
+
+        return Ok(await Mediator.Send(new UpdateAssignmentCommand(
             AssignmentId: id,
             CourseId: courseId,
             RequestedById: CurrentUserId,
@@ -58,8 +87,12 @@ public class AssignmentsController : BaseController
             Deadline: deadline,
             AllowLateSubmission: allowLateSubmission,
             MaxMarks: maxMarks,
-            RubricNotes: rubricNotes
+            RubricNotes: rubricNotes,
+            ManageReferenceFiles: manageReferenceFiles,
+            KeepReferenceFileUrls: keepReferenceFileUrls,
+            NewReferenceFiles: filesToUpload.Count > 0 ? filesToUpload : null
         ), ct));
+    }
 
     [HttpDelete("courses/{courseId:guid}/assignments/{id:guid}")]
     [Authorize(Roles = "Teacher,SuperAdmin")]

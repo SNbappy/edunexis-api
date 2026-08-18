@@ -5,7 +5,7 @@ namespace EduNexis.Application.Features.Announcements.Commands;
 
 public record AnnouncementDto(
     Guid Id, Guid CourseId, Guid AuthorId,
-    string AuthorName, string Content,
+    string AuthorName, string? AuthorPhotoUrl, string Content,
     string? AttachmentUrl, bool IsPinned, DateTime CreatedAt
 );
 
@@ -64,6 +64,7 @@ public sealed class CreateAnnouncementCommandHandler(
 
         var author = await uow.Users.GetWithProfileAsync(command.AuthorId, ct);
         var authorName = author?.Profile?.FullName ?? "Someone";
+        var authorPhotoUrl = author?.Profile?.ProfilePhotoUrl;
 
         var members = await uow.CourseMembers.GetByCourseAsync(command.CourseId, ct);
         foreach (var m in members.Where(x => x.IsActive && x.UserId != command.AuthorId))
@@ -79,7 +80,7 @@ public sealed class CreateAnnouncementCommandHandler(
 
         return ApiResponse<AnnouncementDto>.Ok(new AnnouncementDto(
             announcement.Id, announcement.CourseId, announcement.AuthorId,
-            authorName, announcement.Content, announcement.AttachmentUrl,
+            authorName, authorPhotoUrl, announcement.Content, announcement.AttachmentUrl,
             announcement.IsPinned, announcement.CreatedAt));
     }
 }

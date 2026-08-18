@@ -13,7 +13,10 @@ public record UpdateAssignmentCommand(
     DateTime Deadline,
     bool AllowLateSubmission,
     decimal MaxMarks,
-    string? RubricNotes
+    string? RubricNotes,
+    bool ManageReferenceFiles = false,
+    List<string>? KeepReferenceFileUrls = null,
+    List<(Stream Stream, string FileName)>? NewReferenceFiles = null
 ) : ICommand<ApiResponse<AssignmentDto>>, ICourseScopedWrite
 {
     public ValueTask<Guid?> ResolveCourseIdAsync(IUnitOfWork uow, CancellationToken ct)
@@ -33,6 +36,7 @@ public sealed class UpdateAssignmentCommandValidator : AbstractValidator<UpdateA
 
 public sealed class UpdateAssignmentCommandHandler(
     IUnitOfWork uow,
+    IFileStorageService storage,
     ISender sender
 ) : ICommandHandler<UpdateAssignmentCommand, ApiResponse<AssignmentDto>>
 {
@@ -52,8 +56,54 @@ public sealed class UpdateAssignmentCommandHandler(
         var oldDeadline = assignment.Deadline;
         var oldMaxMarks = assignment.MaxMarks;
 
+        string? newRefFileUrl = assignment.ReferenceFileUrl;
+        bool shouldUpdateRefFile = false;
+
+        if (cmd.ManageReferenceFiles || (cmd.NewReferenceFiles is { Count: > 0 }))
+        {
+            shouldUpdateRefFile = true;
+            var finalUrls = new List<string>();
+
+            if (cmd.KeepReferenceFileUrls is { Count: > 0 })
+            {
+                finalUrls.AddRange(cmd.KeepReferenceFileUrls.Where(u => !string.IsNullOrWhiteSpace(u)));
+            }
+            else if (!cmd.ManageReferenceFiles && assignment.ReferenceFileUrl is not null)
+            {
+                try
+                {
+                    var parsed = System.Text.Json.JsonSerializer.Deserialize<List<string>>(assignment.ReferenceFileUrl);
+                    if (parsed != null) finalUrls.AddRange(parsed);
+                    else finalUrls.Add(assignment.ReferenceFileUrl);
+                }
+                catch
+                {
+                    finalUrls.Add(assignment.ReferenceFileUrl);
+                }
+            }
+
+            if (cmd.NewReferenceFiles is { Count: > 0 })
+            {
+                foreach (var file in cmd.NewReferenceFiles)
+                {
+                    var url = await storage.UploadAsync(
+                        file.Stream, file.FileName,
+                        $"assignments/{cmd.CourseId}", ct);
+                    finalUrls.Add(url);
+                }
+            }
+
+            newRefFileUrl = finalUrls.Count switch
+            {
+                0 => null,
+                1 => finalUrls[0],
+                _ => System.Text.Json.JsonSerializer.Serialize(finalUrls)
+            };
+        }
+
         assignment.Update(cmd.Title, cmd.Instructions, cmd.Deadline,
-            cmd.AllowLateSubmission, cmd.MaxMarks, cmd.RubricNotes);
+            cmd.AllowLateSubmission, cmd.MaxMarks, cmd.RubricNotes,
+            newRefFileUrl, shouldUpdateRefFile);
 
         uow.GetRepository<Assignment>().Update(assignment);
         await uow.SaveChangesAsync(ct);
