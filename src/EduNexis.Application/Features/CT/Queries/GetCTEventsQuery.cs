@@ -38,9 +38,9 @@ public sealed class GetCTEventsQueryHandler(
                 e.Id, e.CourseId, e.CTNumber, e.Title,
                 e.MaxMarks, e.HeldOn, e.Status.ToString(),
                 e.KhataUploaded, e.CreatedAt,
-                e.BestScriptUrl, e.BestStudentId,
-                e.WorstScriptUrl, e.WorstStudentId,
-                e.AverageScriptUrl, e.AverageStudentId))
+                isTeacher ? e.BestScriptUrl : null, isTeacher ? e.BestStudentId : null,
+                isTeacher ? e.WorstScriptUrl : null, isTeacher ? e.WorstStudentId : null,
+                isTeacher ? e.AverageScriptUrl : null, isTeacher ? e.AverageStudentId : null))
             .ToList();
 
         return ApiResponse<List<CTEventDto>>.Ok(result);

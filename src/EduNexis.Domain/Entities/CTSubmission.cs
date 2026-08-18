@@ -1,4 +1,4 @@
-﻿namespace EduNexis.Domain.Entities;
+namespace EduNexis.Domain.Entities;
 
 public class CTSubmission : BaseEntity
 {
@@ -29,7 +29,7 @@ public class CTSubmission : BaseEntity
 
     public void MarkAbsent(string? remarks)
     {
-        ObtainedMarks = null;
+        ObtainedMarks = 0;
         IsAbsent = true;
         Remarks = remarks;
         MarkedAt = DateTime.UtcNow;

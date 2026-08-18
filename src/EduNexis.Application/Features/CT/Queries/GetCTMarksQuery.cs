@@ -67,7 +67,7 @@ public sealed class GetCTMarksQueryHandler(
         var markDtos = submissions.Select(s => new CTMarkDto(
             s.StudentId,
             s.Student?.Email ?? s.StudentId.ToString(),
-            s.ObtainedMarks,
+            s.IsAbsent ? 0 : s.ObtainedMarks,
             s.IsAbsent,
             s.Remarks,
             s.MarkedAt
@@ -85,7 +85,9 @@ public sealed class GetCTMarksQueryHandler(
         return ApiResponse<CTMarksResultDto>.Ok(new CTMarksResultDto(
             ctEvent.Id, ctEvent.CTNumber, ctEvent.Title, ctEvent.MaxMarks,
             ctEvent.Status.ToString(),
-            ctEvent.BestScriptUrl, ctEvent.WorstScriptUrl, ctEvent.AverageScriptUrl,
+            isTeacher ? ctEvent.BestScriptUrl : null,
+            isTeacher ? ctEvent.WorstScriptUrl : null,
+            isTeacher ? ctEvent.AverageScriptUrl : null,
             markDtos, avg, highest, lowest));
     }
 }

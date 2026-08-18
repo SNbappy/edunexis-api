@@ -35,12 +35,28 @@ public sealed class PublishCTCommandHandler(
         if (!ctEvent.KhataUploaded)
             return ApiResponse.Fail("All 3 khata must be uploaded before publishing.");
 
+        // Check if all enrolled active students have been marked
+        var members = await uow.CourseMembers.GetByCourseAsync(ctEvent.CourseId, ct);
+        var studentMembers = members.Where(m => m.IsActive).ToList();
+
+        if (studentMembers.Count > 0)
+        {
+            var submissions = await uow.GetRepository<CTSubmission>()
+                .FindAsync(s => s.CTEventId == command.CTEventId, ct);
+            var submissionMap = submissions.ToDictionary(s => s.StudentId);
+
+            var unmarkedCount = studentMembers.Count(s =>
+                !submissionMap.TryGetValue(s.UserId, out var sub) || (!sub.IsAbsent && !sub.ObtainedMarks.HasValue));
+
+            if (unmarkedCount > 0)
+                return ApiResponse.Fail($"Cannot publish CT: {unmarkedCount} student(s) have not been marked yet. All students must have marks entered or be marked absent.");
+        }
+
         ctEvent.Publish();
         uow.GetRepository<CTEvent>().Update(ctEvent);
         await uow.SaveChangesAsync(ct);
 
         // Notify all active students that results are published
-        var members = await uow.CourseMembers.GetByCourseAsync(ctEvent.CourseId, ct);
         foreach (var m in members.Where(x => x.IsActive))
         {
             await sender.Send(new SendNotificationCommand(
