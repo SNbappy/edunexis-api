@@ -24,8 +24,24 @@ public sealed class RemoveCourseMemberCommandHandler(
         if (course is null)
             return ApiResponse.Fail("Course not found.");
 
-        if (course.TeacherId != requesterId && currentUser.Role != "Admin")
+        var isTeacher = await CourseAccess.IsTeacherAsync(uow, course, requesterId, ct);
+        var requesterMembership = await uow.CourseMembers.GetMemberAsync(cmd.CourseId, requesterId, ct);
+        var isCR = requesterMembership?.IsCR == true && requesterMembership.IsActive;
+        var isPlatformAdmin = currentUser.Role == "SuperAdmin";
+
+        if (!isTeacher && !isCR && !isPlatformAdmin)
             return ApiResponse.Fail("You are not authorized to remove members from this course.");
+
+        if (isCR && !isTeacher && !isPlatformAdmin)
+        {
+            var isTargetTeacher = await CourseAccess.IsTeacherAsync(uow, course, cmd.StudentId, ct);
+            if (isTargetTeacher)
+                return ApiResponse.Fail("Class representatives cannot remove teachers from the course.");
+
+            var targetMembership = await uow.CourseMembers.GetMemberAsync(cmd.CourseId, cmd.StudentId, ct);
+            if (targetMembership?.IsCR == true)
+                return ApiResponse.Fail("Class representatives cannot remove another class representative.");
+        }
 
         var member = await uow.CourseMembers.GetMemberAsync(cmd.CourseId, cmd.StudentId, ct);
         if (member is null || !member.IsActive)

@@ -66,7 +66,6 @@ public class CoursesController : BaseController
         Ok(await Mediator.Send(new GetCourseMembersQuery(id), ct));
 
     [HttpGet("{id:guid}/join-requests")]
-    [Authorize(Roles = "Teacher,SuperAdmin")]
     public async Task<IActionResult> GetJoinRequests(Guid id, CancellationToken ct) =>
         Ok(await Mediator.Send(
             new GetPendingJoinRequestsQuery(id, Guid.Parse(_currentUser.UserId)), ct));
@@ -196,12 +195,11 @@ public class CoursesController : BaseController
 
     
     [HttpDelete("{id:guid}/members/{studentId:guid}")]
-    [Authorize(Roles = "Teacher,SuperAdmin")]
     public async Task<IActionResult> RemoveMember(
         Guid id, Guid studentId, CancellationToken ct) =>
         Ok(await Mediator.Send(new RemoveCourseMemberCommand(id, studentId), ct));
+
     [HttpPost("{id:guid}/join-requests/{requestId:guid}/review")]
-    [Authorize(Roles = "Teacher,SuperAdmin")]
     public async Task<IActionResult> ReviewJoinRequest(
         Guid id, Guid requestId,
         [FromBody] ReviewJoinRequestBody body, CancellationToken ct) =>

@@ -45,12 +45,12 @@ public sealed class ReviewJoinRequestCommandHandler(
            *see* pending requests (GetPendingJoinRequestsQuery honours IsCR) but
            was refused when they tried to act on one, which is the single thing
            the role exists to do. */
+        var isTeacher = await CourseAccess.IsTeacherAsync(uow, course, reviewerId, ct);
         var reviewerMembership = await uow.CourseMembers.GetMemberAsync(cmd.CourseId, reviewerId, ct);
         var isCR = reviewerMembership?.IsCR == true && reviewerMembership.IsActive;
-        var isOwner = course.TeacherId == reviewerId;
         var isPlatformAdmin = currentUser.Role == "SuperAdmin";
 
-        if (!isOwner && !isCR && !isPlatformAdmin)
+        if (!isTeacher && !isCR && !isPlatformAdmin)
             return ApiResponse.Fail("You are not authorized to review join requests for this course.");
 
         var request = await uow.JoinRequests.GetByIdAsync(cmd.RequestId, ct);

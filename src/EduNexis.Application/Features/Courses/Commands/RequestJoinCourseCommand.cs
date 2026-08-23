@@ -68,13 +68,21 @@ public sealed class RequestJoinCourseCommandHandler(
         var student = await uow.Users.GetWithProfileAsync(userId, ct);
         var studentName = student?.Profile?.FullName ?? "A student";
 
-        await sender.Send(new SendNotificationCommand(
-            UserId: course.TeacherId,
-            Title: "New Join Request",
-            Body: $"{studentName} has requested to join {course.Title}.",
-            Type: NotificationType.JoinRequestReceived,
-            RedirectUrl: $"/courses/{course.Id}/members?view=requests"
-        ), ct);
+        var teacherIds = await CourseAccess.TeacherIdsAsync(uow, course, ct);
+        var crMembers = await uow.CourseMembers.FindAsync(
+            m => m.CourseId == course.Id && m.IsActive && m.IsCR, ct);
+        var recipientIds = teacherIds.Concat(crMembers.Select(m => m.UserId)).ToHashSet();
+
+        foreach (var recipientId in recipientIds)
+        {
+            await sender.Send(new SendNotificationCommand(
+                UserId: recipientId,
+                Title: "New Join Request",
+                Body: $"{studentName} has requested to join {course.Title}.",
+                Type: NotificationType.JoinRequestReceived,
+                RedirectUrl: $"/courses/{course.Id}/members?view=requests"
+            ), ct);
+        }
 
         return ApiResponse.Ok("Join request sent successfully.");
     }
